@@ -68,39 +68,11 @@ export default async function handler(req, res) {
 
     }
 
-    if (req.method === "DELETE") {
-
-      const tieneCondicion =
-        allowedParams.some(
-          key =>
-            ![
-              "select",
-              "order",
-              "limit",
-              "offset"
-            ].includes(key) &&
-            req.query[key] !== undefined
-        );
-
-      if (!tieneCondicion) {
-
-        return res.status(400).json({
-          error:
-            "Para borrar información debes indicar qué registro se va a borrar."
-        });
-
-      }
-
-    }
-
     const headers = {
       apikey: supabaseKey,
-      Authorization:
-        `Bearer ${supabaseKey}`,
-      "Content-Type":
-        "application/json",
-      Prefer:
-        "return=representation"
+      Authorization: `Bearer ${supabaseKey}`,
+      "Content-Type": "application/json",
+      Prefer: "return=representation"
     };
 
     const options = {
@@ -113,41 +85,31 @@ export default async function handler(req, res) {
       req.method !== "HEAD"
     ) {
 
-      options.body =
-        JSON.stringify(
-          req.body
-        );
+      options.body = JSON.stringify(req.body);
 
     }
 
-    const response =
-      await fetch(
-        url.toString(),
-        options
-      );
+    const response = await fetch(
+      url.toString(),
+      options
+    );
 
-    const text =
-      await response.text();
+    const text = await response.text();
 
     let data;
 
     try {
 
-      data =
-        text
-          ? JSON.parse(text)
-          : null;
+      data = text
+        ? JSON.parse(text)
+        : null;
 
     } catch {
 
-      return res
-        .status(response.status)
-        .json({
-          error:
-            "Supabase no devolvió JSON.",
-          detalle:
-            text
-        });
+      return res.status(response.status).json({
+        error: "Supabase no devolvió JSON.",
+        detalle: text
+      });
 
     }
 
@@ -157,14 +119,10 @@ export default async function handler(req, res) {
 
   } catch (error) {
 
-    return res
-      .status(500)
-      .json({
-        error:
-          "Error de conexión con Supabase.",
-        detalle:
-          error.message
-      });
+    return res.status(500).json({
+      error: "Error de conexión con Supabase.",
+      detalle: error.message
+    });
 
   }
 
