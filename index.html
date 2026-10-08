@@ -3,268 +3,642 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elotemanía</title>
+
+<title>Elotemanía | Punto de venta</title>
 
 <style>
+
 *{
   box-sizing:border-box;
+}
+
+:root{
+  --gold:#d4af37;
+  --gold-light:#f0d875;
+  --black:#080808;
+  --card:#111111;
+  --card2:#181818;
+  --border:#2d2d2d;
+  --text:#ffffff;
+  --muted:#a7a7a7;
+  --green:#25d366;
+  --red:#c62828;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
   margin:0;
   min-height:100vh;
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
   background:
-    linear-gradient(
-      rgba(0,0,0,.84),
-      rgba(0,0,0,.84)
-    ),
-    url("assets/logo.jpg") center center / cover fixed no-repeat;
-  color:#fff;
+    radial-gradient(
+      circle at top,
+      #292929 0%,
+      #0b0b0b 42%,
+      #050505 100%
+    );
+  color:var(--text);
 }
 
-header{
-  text-align:center;
-  padding:22px 15px 15px;
-  border-bottom:1px solid #d4af37;
-  background:rgba(0,0,0,.65);
+button,
+input{
+  font-family:inherit;
 }
 
-header img{
-  width:115px;
-  height:115px;
-  object-fit:cover;
-  border-radius:50%;
-  border:3px solid #d4af37;
+button{
+  cursor:pointer;
 }
 
-header h1{
-  margin:10px 0 4px;
-  color:#d4af37;
-  font-size:30px;
-}
-
-header p{
-  margin:0;
-  color:#fff;
-}
-
-.container{
+.app{
   width:100%;
-  max-width:900px;
+  max-width:1100px;
   margin:auto;
-  padding:15px;
+  padding:0 15px 40px;
 }
+
+/* HEADER */
+
+.topbar{
+  padding:24px 0 18px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:18px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.brand-title{
+  margin:0;
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+
+.brand-title span{
+  color:var(--gold);
+}
+
+.brand-subtitle{
+  margin:5px 0 0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:#b8b8b8;
+  font-size:12px;
+}
+
+.status-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#25d366;
+  box-shadow:0 0 10px rgba(37,211,102,.5);
+}
+
+/* STATS */
 
 .stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin-bottom:15px;
+  gap:10px;
+  margin-bottom:18px;
 }
 
 .stat{
-  background:rgba(0,0,0,.75);
-  border:1px solid #d4af37;
-  border-radius:12px;
-  padding:12px 5px;
+  background:linear-gradient(
+    145deg,
+    #191919,
+    #0d0d0d
+  );
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:15px;
   text-align:center;
 }
 
 .stat strong{
   display:block;
-  font-size:22px;
-  color:#d4af37;
+  color:var(--gold);
+  font-size:25px;
 }
 
 .stat span{
+  display:block;
+  color:var(--muted);
   font-size:12px;
+  margin-top:4px;
 }
 
-nav{
-  display:flex;
+/* NAV */
+
+.nav{
+  display:grid;
+  grid-template-columns:1fr 1fr;
   gap:8px;
+  margin-bottom:18px;
+}
+
+.nav button{
+  min-height:48px;
+  border-radius:11px;
+  font-weight:800;
+  border:1px solid var(--border);
+  background:#151515;
+  color:white;
+}
+
+.nav button.active{
+  background:var(--gold);
+  color:#050505;
+  border-color:var(--gold);
+}
+
+/* SECTIONS */
+
+.section{
+  background:rgba(14,14,14,.96);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:16px;
+}
+
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
   margin-bottom:15px;
 }
 
-nav button{
-  flex:1;
+.section-title h2{
+  margin:0;
+  font-size:20px;
 }
 
-button{
-  border:0;
-  border-radius:10px;
-  padding:13px;
-  font-weight:bold;
-  cursor:pointer;
-  font-size:15px;
+.section-title small{
+  color:var(--muted);
 }
 
-.btn-gold{
-  background:#d4af37;
-  color:#000;
-}
-
-.btn-dark{
-  background:#222;
-  color:#fff;
-  border:1px solid #d4af37;
-}
-
-.danger{
-  background:#9b1c1c;
-  color:#fff;
-  border:1px solid #ff5555;
-}
-
-section{
-  background:rgba(0,0,0,.78);
-  border:1px solid rgba(212,175,55,.7);
-  border-radius:15px;
-  padding:15px;
-  margin-bottom:15px;
-}
-
-h2{
-  color:#d4af37;
-  margin-top:0;
-}
-
-h3{
-  margin-bottom:8px;
-}
+/* PRODUCTS */
 
 .menu-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
   gap:10px;
 }
 
 .product{
-  background:rgba(30,30,30,.92);
-  border:1px solid #555;
-  border-radius:12px;
-  padding:12px;
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:145px;
+}
+
+.product:hover{
+  border-color:#6b5920;
+}
+
+.product-category{
+  color:var(--gold);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-bottom:8px;
 }
 
 .product-name{
-  font-weight:bold;
-  min-height:40px;
+  font-weight:800;
+  line-height:1.2;
+  margin-bottom:10px;
 }
 
-.price{
-  color:#d4af37;
-  font-size:20px;
-  font-weight:bold;
-  margin:8px 0;
+.product-price{
+  font-size:22px;
+  font-weight:900;
+  color:white;
+  margin-bottom:12px;
 }
 
-.product button{
+.gold-button{
+  background:var(--gold);
+  color:#050505;
+  border:0;
+  border-radius:9px;
+  padding:11px;
+  font-weight:900;
   width:100%;
 }
 
+.gold-button:hover{
+  background:var(--gold-light);
+}
+
+.dark-button{
+  background:#191919;
+  color:white;
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:11px;
+  font-weight:800;
+}
+
+.danger-button{
+  background:#351313;
+  color:#ffb0b0;
+  border:1px solid #652020;
+  border-radius:9px;
+  padding:11px;
+  font-weight:800;
+}
+
+.green-button{
+  background:#12351f;
+  color:#75f09b;
+  border:1px solid #1e6b39;
+  border-radius:9px;
+  padding:11px;
+  font-weight:800;
+}
+
+/* CART */
+
+.cart-empty{
+  text-align:center;
+  color:var(--muted);
+  padding:25px 10px;
+}
+
 .cart-item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  padding:13px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.cart-name{
+  font-weight:800;
+}
+
+.cart-price{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+.cart-controls{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.qty{
+  min-width:28px;
+  text-align:center;
+  font-weight:900;
+}
+
+.small-button{
+  width:34px;
+  height:34px;
+  padding:0;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:#1b1b1b;
+  color:white;
+  font-size:18px;
+}
+
+.total-box{
+  margin-top:16px;
+  padding-top:15px;
+  border-top:1px solid var(--border);
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:8px;
-  padding:10px 0;
-  border-bottom:1px solid #444;
 }
 
-.cart-item small{
-  color:#ccc;
-}
-
-.qty-buttons{
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
-
-.qty-buttons button{
-  padding:7px 10px;
+.total-label{
+  color:var(--muted);
 }
 
 .total{
-  text-align:right;
-  font-size:25px;
-  color:#d4af37;
-  font-weight:bold;
-  margin:15px 0;
+  color:var(--gold);
+  font-size:27px;
+  font-weight:900;
+}
+
+/* INPUTS */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.field{
+  margin-bottom:10px;
+}
+
+.field label{
+  display:block;
+  color:#c7c7c7;
+  font-size:12px;
+  margin-bottom:6px;
 }
 
 input{
   width:100%;
-  padding:13px;
-  margin:6px 0 10px;
+  min-height:46px;
+  padding:12px;
+  background:#090909;
+  color:white;
+  border:1px solid var(--border);
   border-radius:9px;
-  border:1px solid #777;
-  background:#111;
-  color:#fff;
+  outline:none;
   font-size:16px;
 }
 
-.admin-product{
-  border:1px solid #555;
-  border-radius:12px;
-  padding:12px;
+input:focus{
+  border-color:var(--gold);
+}
+
+.full{
+  grid-column:1 / -1;
+}
+
+/* POINTS */
+
+.points-card{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(212,175,55,.16),
+      rgba(212,175,55,.03)
+    );
+  border:1px solid #604f1c;
+  border-radius:13px;
+  padding:15px;
+  margin-bottom:15px;
+}
+
+.points-title{
+  color:var(--gold);
+  font-weight:900;
+  font-size:16px;
+}
+
+.points-message{
+  margin-top:6px;
+  color:#ddd;
+  line-height:1.4;
+}
+
+/* ADMIN */
+
+.admin-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.admin-card{
+  background:#111;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:15px;
+}
+
+.admin-card h3{
+  margin-top:0;
   margin-bottom:12px;
-  background:rgba(25,25,25,.95);
+}
+
+.admin-product{
+  border:1px solid var(--border);
+  background:#141414;
+  border-radius:12px;
+  padding:13px;
+  margin-bottom:10px;
+}
+
+.admin-product-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.admin-product-name{
+  font-weight:900;
+}
+
+.admin-product-status{
+  font-size:11px;
+  color:#777;
 }
 
 .admin-actions{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
+  gap:7px;
 }
 
-.empty{
-  color:#aaa;
-  text-align:center;
-  padding:15px;
+.redeem-result{
+  margin-top:12px;
 }
+
+/* BADGES */
+
+.badge{
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.badge-ready{
+  background:#173c23;
+  color:#7cff9f;
+}
+
+.badge-wait{
+  background:#272727;
+  color:#bbb;
+}
+
+/* NOTICE */
+
+.notice{
+  border:1px solid #604f1c;
+  background:rgba(212,175,55,.07);
+  color:#ddd;
+  border-radius:10px;
+  padding:12px;
+  font-size:13px;
+  line-height:1.45;
+  margin-bottom:14px;
+}
+
+/* HIDDEN */
 
 .hidden{
   display:none!important;
 }
 
-.notice{
-  background:rgba(212,175,55,.12);
-  border:1px solid #d4af37;
-  padding:10px;
-  border-radius:10px;
-  margin-bottom:12px;
-  font-size:14px;
+.empty{
+  color:var(--muted);
+  text-align:center;
+  padding:20px 10px;
 }
 
-@media(max-width:600px){
+/* MOBILE */
+
+@media(max-width:800px){
+
   .menu-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .admin-grid{
     grid-template-columns:1fr;
   }
 
+}
+
+@media(max-width:520px){
+
+  .app{
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .brand{
+    align-items:flex-start;
+  }
+
+  .brand-title{
+    font-size:23px;
+  }
+
+  .status{
+    display:none;
+  }
+
   .stats{
-    grid-template-columns:repeat(3,1fr);
+    gap:6px;
+  }
+
+  .stat{
+    padding:11px 5px;
+  }
+
+  .stat strong{
+    font-size:20px;
+  }
+
+  .stat span{
+    font-size:10px;
+  }
+
+  .section{
+    padding:13px;
+  }
+
+  .menu-grid{
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+
+  .product{
+    padding:10px;
+    min-height:135px;
+  }
+
+  .product-name{
+    font-size:14px;
+  }
+
+  .product-price{
+    font-size:19px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
   }
 
   .admin-actions{
     grid-template-columns:1fr;
   }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<header>
-  <img src="assets/logo.jpg" alt="Logo Elotemanía">
-  <h1>🌽 ELOTEMANÍA</h1>
-  <p>Entre compas sabe mejor</p>
-</header>
+<div class="app">
 
-<div class="container">
+  <!-- HEADER -->
+
+  <header class="topbar">
+
+    <div class="brand">
+
+      <div>
+
+        <h1 class="brand-title">
+          🌽 <span>ELOTEMANÍA</span>
+        </h1>
+
+        <p class="brand-subtitle">
+          Entre compas sabe mejor
+        </p>
+
+      </div>
+
+      <div class="status">
+        <span class="status-dot"></span>
+        Sistema activo
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- ESTADÍSTICAS -->
 
   <div class="stats">
+
     <div class="stat">
       <strong id="statVentas">0</strong>
       <span>Ventas</span>
@@ -279,49 +653,173 @@ input{
       <strong id="statClientes">0</strong>
       <span>Clientes</span>
     </div>
+
   </div>
 
-  <nav>
-    <button class="btn-gold" onclick="showSale()">🌽 Venta</button>
-    <button class="btn-dark" onclick="showAdmin()">⚙️ Administrador</button>
-  </nav>
 
-  <!-- VENTA -->
-  <section id="saleSection">
+  <!-- NAVEGACIÓN -->
 
-    <h2>🌽 Menú</h2>
-
-    <div id="menu" class="menu-grid">
-      <div class="empty">Cargando menú...</div>
-    </div>
-
-    <h2>🛒 Pedido</h2>
-
-    <div id="cart">
-      <div class="empty">No hay productos agregados.</div>
-    </div>
-
-    <div class="total">
-      Total: $<span id="total">0</span>
-    </div>
-
-    <h2>👤 Cliente</h2>
-
-    <input
-      id="customerName"
-      type="text"
-      placeholder="Nombre del cliente"
-    >
-
-    <input
-      id="customerWhatsapp"
-      type="tel"
-      placeholder="WhatsApp"
-    >
+  <div class="nav">
 
     <button
-      class="btn-gold"
-      style="width:100%;"
+      id="saleTab"
+      class="active"
+      onclick="showSale()"
+    >
+      🌽 Venta
+    </button>
+
+    <button
+      id="adminTab"
+      onclick="showAdminLogin()"
+    >
+      ⚙️ Administrador
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       VENTA
+  ========================== -->
+
+  <section
+    id="saleSection"
+    class="section"
+  >
+
+    <div class="section-title">
+
+      <h2>Menú</h2>
+
+      <small>
+        Selecciona tus productos
+      </small>
+
+    </div>
+
+
+    <div
+      id="menu"
+      class="menu-grid"
+    >
+
+      <div class="empty">
+        Cargando menú...
+      </div>
+
+    </div>
+
+
+    <div
+      class="section-title"
+      style="margin-top:25px;"
+    >
+
+      <h2>🛒 Pedido</h2>
+
+      <small id="cartCount">
+        0 productos
+      </small>
+
+    </div>
+
+
+    <div id="cart">
+
+      <div class="cart-empty">
+        Agrega productos al pedido.
+      </div>
+
+    </div>
+
+
+    <div class="total-box">
+
+      <span class="total-label">
+        Total
+      </span>
+
+      <span class="total">
+        $<span id="total">0.00</span>
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- CLIENTE -->
+
+  <section
+    id="customerSection"
+    class="section"
+  >
+
+    <div class="section-title">
+
+      <h2>👤 Cliente</h2>
+
+      <small>
+        Para acumular puntos
+      </small>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="field">
+
+        <label>
+          Nombre
+        </label>
+
+        <input
+          id="customerName"
+          type="text"
+          placeholder="Nombre del cliente"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          WhatsApp
+        </label>
+
+        <input
+          id="customerWhatsapp"
+          type="tel"
+          placeholder="10 dígitos"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="customerPointsPreview"
+      class="points-card hidden"
+    >
+
+      <div class="points-title">
+        ⭐ Programa de puntos
+      </div>
+
+      <div
+        id="customerPointsText"
+        class="points-message"
+      ></div>
+
+    </div>
+
+
+    <button
+      class="gold-button"
       onclick="charge()"
     >
       💰 Cobrar pedido
@@ -330,100 +828,265 @@ input{
   </section>
 
 
-  <!-- ADMIN -->
-  <section id="adminLogin">
+  <!-- LOGIN ADMIN -->
 
-    <h2>🔐 Administrador</h2>
+  <section
+    id="adminLogin"
+    class="section hidden"
+  >
 
-    <input
-      id="adminPin"
-      type="password"
-      placeholder="PIN de administrador"
-    >
+    <div class="section-title">
+
+      <h2>🔐 Administrador</h2>
+
+    </div>
+
+
+    <div class="notice">
+      Ingresa tu PIN para administrar el menú,
+      premios y clientes.
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        PIN
+      </label>
+
+      <input
+        id="adminPin"
+        type="password"
+        inputmode="numeric"
+        placeholder="PIN de administrador"
+      >
+
+    </div>
+
 
     <button
-      class="btn-gold"
-      style="width:100%;"
+      class="gold-button"
       onclick="login()"
     >
-      Entrar
+      Entrar al administrador
     </button>
 
   </section>
 
 
-  <section id="adminSection" class="hidden">
+  <!-- ADMIN -->
 
-    <div class="notice">
-      Aquí puedes agregar, modificar o quitar productos del menú.
+  <section
+    id="adminSection"
+    class="section hidden"
+  >
+
+    <div class="section-title">
+
+      <h2>⚙️ Administrador</h2>
+
+      <button
+        class="dark-button"
+        onclick="logout()"
+      >
+        Salir
+      </button>
+
     </div>
 
-    <h2>🎁 Configuración de premio</h2>
 
-    <input
-      id="pointsPrize"
-      type="number"
-      placeholder="Puntos para premio"
-    >
-
-    <input
-      id="prizeText"
-      type="text"
-      placeholder="Premio"
-    >
-
-    <button
-      class="btn-gold"
-      style="width:100%;"
-      onclick="saveConfig()"
-    >
-      💾 Guardar premio
-    </button>
+    <div class="admin-grid">
 
 
-    <h2>➕ Agregar producto</h2>
+      <!-- PREMIO -->
 
-    <input
-      id="newProductName"
-      type="text"
-      placeholder="Nombre del producto"
-    >
+      <div class="admin-card">
 
-    <input
-      id="newProductCategory"
-      type="text"
-      placeholder="Categoría"
-    >
+        <h3>
+          🎁 Programa de puntos
+        </h3>
 
-    <input
-      id="newProductPrice"
-      type="number"
-      step="0.01"
-      placeholder="Precio"
-    >
+        <div class="field">
 
-    <button
-      class="btn-gold"
-      style="width:100%;"
-      onclick="addProduct()"
-    >
-      ➕ Agregar producto
-    </button>
+          <label>
+            Puntos para obtener premio
+          </label>
+
+          <input
+            id="pointsPrize"
+            type="number"
+            min="1"
+            placeholder="10"
+          >
+
+        </div>
 
 
-    <h2>📝 Productos del menú</h2>
+        <div class="field">
 
-    <div id="adminProducts">
-      <div class="empty">Cargando productos...</div>
+          <label>
+            Premio
+          </label>
+
+          <input
+            id="prizeText"
+            type="text"
+            placeholder="Ej. Elote gratis"
+          >
+
+        </div>
+
+
+        <button
+          class="gold-button"
+          onclick="saveConfig()"
+        >
+          💾 Guardar configuración
+        </button>
+
+      </div>
+
+
+      <!-- AGREGAR -->
+
+      <div class="admin-card">
+
+        <h3>
+          ➕ Nuevo producto
+        </h3>
+
+        <div class="field">
+
+          <label>
+            Producto
+          </label>
+
+          <input
+            id="newProductName"
+            type="text"
+            placeholder="Nombre"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Categoría
+          </label>
+
+          <input
+            id="newProductCategory"
+            type="text"
+            placeholder="Ej. Elotes"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Precio
+          </label>
+
+          <input
+            id="newProductPrice"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="0.00"
+          >
+
+        </div>
+
+
+        <button
+          class="gold-button"
+          onclick="addProduct()"
+        >
+          Agregar producto
+        </button>
+
+      </div>
+
+
+      <!-- CANJES -->
+
+      <div class="admin-card">
+
+        <h3>
+          🎁 Autorizar premio
+        </h3>
+
+        <div class="notice">
+          Busca al cliente por su WhatsApp.
+          Solo podrás autorizar el premio cuando
+          tenga los puntos necesarios.
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            WhatsApp del cliente
+          </label>
+
+          <input
+            id="redeemWhatsapp"
+            type="tel"
+            placeholder="10 dígitos"
+          >
+
+        </div>
+
+
+        <button
+          class="gold-button"
+          onclick="findCustomerForRedeem()"
+        >
+          🔎 Buscar cliente
+        </button>
+
+
+        <div
+          id="redeemResult"
+          class="redeem-result"
+        ></div>
+
+      </div>
+
+
+      <!-- PRODUCTOS -->
+
+      <div class="admin-card">
+
+        <h3>
+          📝 Administrar menú
+        </h3>
+
+        <div class="notice">
+          Puedes cambiar nombres y precios.
+          Si quitas un producto, no se borra
+          del historial de ventas.
+        </div>
+
+      </div>
+
     </div>
 
-    <button
-      class="btn-dark"
-      style="width:100%;"
-      onclick="logout()"
+
+    <div
+      id="adminProducts"
+      style="margin-top:15px;"
     >
-      Cerrar sesión
-    </button>
+
+      <div class="empty">
+        Cargando productos...
+      </div>
+
+    </div>
 
   </section>
 
@@ -432,81 +1095,119 @@ input{
 
 <script>
 
+/* =====================================================
+   VARIABLES
+===================================================== */
+
 let products = [];
+
 let cart = [];
+
 let config = {
   points:10,
   prize:"Premio"
 };
 
 
-/* =========================
+/* =====================================================
    API
-========================= */
+===================================================== */
 
-async function api(t,m='GET',b=null,q=''){
+async function api(
+  table,
+  method='GET',
+  body=null,
+  query=''
+){
 
-  const r = await fetch(
-    '/api/supabase?table=' + t + q,
-    {
-      method:m,
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:b ? JSON.stringify(b) : undefined
-    }
-  );
+  const response =
+    await fetch(
+      '/api/supabase?table=' +
+      table +
+      query,
+      {
+        method:method,
+        headers:{
+          'Content-Type':
+            'application/json'
+        },
+        body:
+          body
+          ?
+          JSON.stringify(body)
+          :
+          undefined
+      }
+    );
 
-  let j;
+
+  let data;
+
 
   try{
-    j = await r.json();
+
+    data =
+      await response.json();
+
   }catch{
-    throw Error(
+
+    throw new Error(
       'El servidor no devolvió una respuesta válida.'
     );
+
   }
 
-  if(!r.ok){
 
-    throw Error(
-      j.error ||
-      j.message ||
-      j.details ||
-      j.detalle ||
-      JSON.stringify(j)
+  if(!response.ok){
+
+    throw new Error(
+      data.error ||
+      data.message ||
+      data.details ||
+      data.detalle ||
+      JSON.stringify(data)
     );
 
   }
 
-  return j;
+
+  return data;
+
 }
 
 
-/* =========================
-   CARGAR APP
-========================= */
+/* =====================================================
+   INICIAR
+===================================================== */
 
 async function load(){
 
   try{
 
-    products = await api(
-      'productos',
-      'GET',
-      null,
-      '&select=*&activo=eq.true&order=id.asc'
-    );
+    products =
+      await api(
+        'productos',
+        'GET',
+        null,
+        '&select=*&activo=eq.true&order=id.asc'
+      );
+
 
     renderMenu();
 
     await loadStats();
 
+    await loadConfig();
+
   }catch(error){
 
-    document.getElementById('menu').innerHTML =
-      '<div class="empty">❌ No se pudo cargar el menú.<br><br>' +
-      error.message +
+    document.getElementById(
+      'menu'
+    ).innerHTML =
+
+      '<div class="empty">' +
+      '❌ No se pudo cargar el menú.<br><br>' +
+      escapeHtml(error.message) +
       '</div>';
 
   }
@@ -514,65 +1215,95 @@ async function load(){
 }
 
 
-/* =========================
+/* =====================================================
    MENÚ
-========================= */
+===================================================== */
 
 function renderMenu(){
 
-  const menu = document.getElementById('menu');
+  const menu =
+    document.getElementById(
+      'menu'
+    );
+
 
   if(!products.length){
 
     menu.innerHTML =
-      '<div class="empty">No hay productos disponibles.</div>';
+      '<div class="empty">' +
+      'No hay productos disponibles.' +
+      '</div>';
 
     return;
+
   }
 
-  menu.innerHTML = products.map(p => {
 
-    return `
+  menu.innerHTML =
+    products.map(product => `
+
       <div class="product">
 
-        <div class="product-name">
-          ${escapeHtml(p.nombre)}
-        </div>
+        <div>
 
-        <div class="price">
-          $${Number(p.precio).toFixed(2)}
+          <div class="product-category">
+            ${escapeHtml(
+              product.categoria || 'Producto'
+            )}
+          </div>
+
+          <div class="product-name">
+            ${escapeHtml(
+              product.nombre
+            )}
+          </div>
+
+          <div class="product-price">
+            $${Number(
+              product.precio
+            ).toFixed(2)}
+          </div>
+
         </div>
 
         <button
-          class="btn-gold"
-          onclick="addToCart(${p.id})"
+          class="gold-button"
+          onclick="addToCart(${product.id})"
         >
-          ➕ Agregar
+          Agregar
         </button>
 
       </div>
-    `;
 
-  }).join('');
+    `).join('');
 
 }
 
 
-/* =========================
+/* =====================================================
    CARRITO
-========================= */
+===================================================== */
 
 function addToCart(id){
 
-  const product = products.find(
-    p => Number(p.id) === Number(id)
-  );
+  const product =
+    products.find(
+      p =>
+        Number(p.id) ===
+        Number(id)
+    );
+
 
   if(!product)return;
 
-  const existing = cart.find(
-    p => Number(p.id) === Number(id)
-  );
+
+  const existing =
+    cart.find(
+      p =>
+        Number(p.id) ===
+        Number(id)
+    );
+
 
   if(existing){
 
@@ -581,13 +1312,20 @@ function addToCart(id){
   }else{
 
     cart.push({
+
       id:product.id,
+
       nombre:product.nombre,
-      precio:Number(product.precio),
+
+      precio:
+        Number(product.precio),
+
       cantidad:1
+
     });
 
   }
+
 
   renderCart();
 
@@ -596,21 +1334,31 @@ function addToCart(id){
 
 function removeFromCart(id){
 
-  const item = cart.find(
-    p => Number(p.id) === Number(id)
-  );
+  const item =
+    cart.find(
+      p =>
+        Number(p.id) ===
+        Number(id)
+    );
+
 
   if(!item)return;
 
+
   item.cantidad--;
+
 
   if(item.cantidad <= 0){
 
-    cart = cart.filter(
-      p => Number(p.id) !== Number(id)
-    );
+    cart =
+      cart.filter(
+        p =>
+          Number(p.id) !==
+          Number(id)
+      );
 
   }
+
 
   renderCart();
 
@@ -620,261 +1368,448 @@ function removeFromCart(id){
 function renderCart(){
 
   const cartElement =
-    document.getElementById('cart');
+    document.getElementById(
+      'cart'
+    );
+
+
+  const countElement =
+    document.getElementById(
+      'cartCount'
+    );
+
 
   if(!cart.length){
 
     cartElement.innerHTML =
-      '<div class="empty">No hay productos agregados.</div>';
+      '<div class="cart-empty">' +
+      'Agrega productos al pedido.' +
+      '</div>';
 
-    document.getElementById('total').textContent='0';
+    document.getElementById(
+      'total'
+    ).textContent =
+      '0.00';
+
+    countElement.textContent =
+      '0 productos';
 
     return;
+
   }
+
 
   let total = 0;
 
-  cartElement.innerHTML = cart.map(item => {
+  let quantity = 0;
 
-    const subtotal =
-      item.precio * item.cantidad;
 
-    total += subtotal;
+  cartElement.innerHTML =
+    cart.map(item => {
 
-    return `
-      <div class="cart-item">
+      const subtotal =
+        item.precio *
+        item.cantidad;
 
-        <div>
-          <strong>${escapeHtml(item.nombre)}</strong>
-          <br>
-          <small>
-            $${item.precio.toFixed(2)} c/u
-          </small>
+
+      total += subtotal;
+
+      quantity += item.cantidad;
+
+
+      return `
+
+        <div class="cart-item">
+
+          <div>
+
+            <div class="cart-name">
+              ${escapeHtml(
+                item.nombre
+              )}
+            </div>
+
+            <div class="cart-price">
+              $${item.precio.toFixed(2)}
+              cada uno
+            </div>
+
+          </div>
+
+
+          <div class="cart-controls">
+
+            <button
+              class="small-button"
+              onclick="removeFromCart(${item.id})"
+            >
+              −
+            </button>
+
+            <span class="qty">
+              ${item.cantidad}
+            </span>
+
+            <button
+              class="small-button"
+              onclick="addToCart(${item.id})"
+            >
+              +
+            </button>
+
+          </div>
+
         </div>
 
-        <div class="qty-buttons">
+      `;
 
-          <button
-            class="btn-dark"
-            onclick="removeFromCart(${item.id})"
-          >
-            −
-          </button>
+    }).join('');
 
-          <strong>${item.cantidad}</strong>
 
-          <button
-            class="btn-gold"
-            onclick="addToCart(${item.id})"
-          >
-            +
-          </button>
-
-        </div>
-
-      </div>
-    `;
-
-  }).join('');
-
-  document.getElementById('total').textContent =
+  document.getElementById(
+    'total'
+  ).textContent =
     total.toFixed(2);
+
+
+  countElement.textContent =
+    quantity +
+    (
+      quantity === 1
+      ? ' producto'
+      : ' productos'
+    );
 
 }
 
 
-/* =========================
+/* =====================================================
    COBRAR
-========================= */
+===================================================== */
 
 async function charge(){
 
   if(!cart.length){
 
-    alert('Agrega productos al pedido.');
+    alert(
+      'Agrega al menos un producto al pedido.'
+    );
 
     return;
+
   }
 
+
   const name =
-    document.getElementById('customerName').value.trim();
+    document.getElementById(
+      'customerName'
+    ).value.trim();
+
 
   const whatsapp =
-    document.getElementById('customerWhatsapp').value.trim();
+    document.getElementById(
+      'customerWhatsapp'
+    ).value.trim();
+
 
   if(!name){
 
-    alert('Escribe el nombre del cliente.');
+    alert(
+      'Escribe el nombre del cliente.'
+    );
 
     return;
+
   }
+
 
   if(!whatsapp){
 
-    alert('Escribe el WhatsApp del cliente.');
+    alert(
+      'Escribe el WhatsApp del cliente.'
+    );
 
     return;
+
   }
+
 
   try{
 
     let total = 0;
 
+
     cart.forEach(item => {
 
       total +=
-        item.precio * item.cantidad;
+        item.precio *
+        item.cantidad;
 
     });
 
-    let clientes = await api(
-      'clientes',
-      'GET',
-      null,
-      '&select=*&whatsapp=eq.' +
-      encodeURIComponent(whatsapp)
-    );
+
+    /* BUSCAR CLIENTE */
+
+    let clientes =
+      await api(
+        'clientes',
+        'GET',
+        null,
+        '&select=*&whatsapp=eq.' +
+        encodeURIComponent(
+          whatsapp
+        )
+      );
+
 
     let cliente;
 
+
+    /* CREAR CLIENTE */
+
     if(clientes.length){
 
-      cliente = clientes[0];
+      cliente =
+        clientes[0];
 
     }else{
 
-      const nuevos = await api(
-        'clientes',
-        'POST',
-        {
-          nombre:name,
-          whatsapp:whatsapp,
-          puntos:0,
-          premios_obtenidos:0
-        }
+      const nuevos =
+        await api(
+          'clientes',
+          'POST',
+          {
+            nombre:name,
+            whatsapp:whatsapp,
+            puntos:0,
+            premios_obtenidos:0
+          }
+        );
+
+
+      cliente =
+        nuevos[0];
+
+    }
+
+
+    /* PUNTOS */
+
+    let puntosActuales =
+      Number(
+        cliente.puntos || 0
       );
 
-      cliente = nuevos[0];
+
+    let puntosNuevos =
+      puntosActuales;
+
+
+    /*
+      Si ya llegó al premio,
+      no seguimos aumentando.
+      Primero debe canjear.
+    */
+
+    if(
+      puntosActuales <
+      Number(config.points)
+    ){
+
+      puntosNuevos =
+        puntosActuales + 1;
 
     }
 
 
-    let puntos =
-      Number(cliente.puntos || 0) + 1;
-
-    let premios =
-      Number(cliente.premios_obtenidos || 0);
-
-    let premioMensaje = '';
-
-
-    if(puntos >= Number(config.points)){
-
-      premios++;
-
-      puntos = 0;
-
-      premioMensaje =
-        '\n🎁 ¡Felicidades! Ganaste: ' +
-        config.prize;
-
-    }
-
+    /* ACTUALIZAR CLIENTE */
 
     await api(
       'clientes',
       'PATCH',
       {
         nombre:name,
-        puntos:puntos,
-        premios_obtenidos:premios
+        puntos:puntosNuevos
       },
-      '&id=eq.' + cliente.id
+      '&id=eq.' +
+      cliente.id
     );
 
 
-    const ventas = await api(
-      'ventas',
-      'POST',
-      {
-        cliente_id:cliente.id,
-        total:total,
-        puntos_ganados:1
-      }
-    );
+    /* REGISTRAR VENTA */
 
-    const venta = ventas[0];
+    const ventas =
+      await api(
+        'ventas',
+        'POST',
+        {
+          cliente_id:
+            cliente.id,
+
+          total:
+            total,
+
+          puntos_ganados:
+            puntosNuevos >
+            puntosActuales
+            ? 1
+            : 0
+        }
+      );
 
 
-    for(const item of cart){
+    const venta =
+      ventas[0];
+
+
+    /* DETALLE */
+
+    for(
+      const item of cart
+    ){
 
       await api(
         'detalle_ventas',
         'POST',
         {
-          venta_id:venta.id,
-          producto_id:item.id,
-          nombre_producto:item.nombre,
-          cantidad:item.cantidad,
-          precio:item.precio
+          venta_id:
+            venta.id,
+
+          producto_id:
+            item.id,
+
+          nombre_producto:
+            item.nombre,
+
+          cantidad:
+            item.cantidad,
+
+          precio:
+            item.precio
         }
       );
 
     }
 
 
-    let numero =
-      whatsapp.replace(/\D/g,'');
+    /* MENSAJE */
 
-    if(numero.length === 10){
+    let mensaje = '';
 
-      numero = '52' + numero;
+
+    if(
+      puntosNuevos >=
+      Number(config.points)
+    ){
+
+      mensaje =
+        '🎁 ¡Felicidades! ' +
+        'Ya puedes ir a canjear tu premio.';
+
+    }else{
+
+      const faltan =
+        Number(config.points) -
+        puntosNuevos;
+
+
+      mensaje =
+        '⭐ Llevas ' +
+        puntosNuevos +
+        (
+          puntosNuevos === 1
+          ? ' punto'
+          : ' puntos'
+        ) +
+        ', te faltan ' +
+        faltan +
+        (
+          faltan === 1
+          ? ' para tu premio.'
+          : ' para tu premio.'
+        );
 
     }
 
 
-    const mensaje =
-      '🌽 *ELOTEMANÍA* 🌽%0A%0A' +
-      'Hola ' + encodeURIComponent(name) + '!%0A' +
-      'Gracias por tu compra.%0A%0A' +
-      '💰 Total: $' + total.toFixed(2) + '%0A' +
-      '⭐ Puntos actuales: ' + puntos +
-      '%0A' +
+    /* WHATSAPP */
+
+    let numero =
+      whatsapp.replace(
+        /\D/g,
+        ''
+      );
+
+
+    if(
+      numero.length === 10
+    ){
+
+      numero =
+        '52' +
+        numero;
+
+    }
+
+
+    const textoWhatsapp =
+      '🌽 ELOTEMANÍA\n\n' +
+      'Hola ' +
+      name +
+      '!\n\n' +
+      'Gracias por tu compra. 💛\n\n' +
+      '💰 Total: $' +
+      total.toFixed(2) +
+      '\n\n' +
+      mensaje +
+      '\n\n' +
       '🎁 Premio: ' +
-      encodeURIComponent(config.prize) +
-      premioMensaje;
+      config.prize;
 
 
     window.open(
       'https://wa.me/' +
       numero +
       '?text=' +
-      mensaje,
+      encodeURIComponent(
+        textoWhatsapp
+      ),
       '_blank'
     );
 
 
     alert(
-      '✅ Venta registrada correctamente.\n\n' +
-      'Puntos actuales: ' +
-      puntos +
-      premioMensaje
+      '✅ Venta registrada.\n\n' +
+      mensaje
     );
 
 
+    /* LIMPIAR */
+
     cart = [];
+
 
     document.getElementById(
       'customerName'
-    ).value='';
+    ).value = '';
+
 
     document.getElementById(
       'customerWhatsapp'
-    ).value='';
+    ).value = '';
+
+
+    document.getElementById(
+      'customerPointsPreview'
+    ).classList.add(
+      'hidden'
+    );
+
 
     renderCart();
 
     await loadStats();
+
 
   }catch(error){
 
@@ -888,83 +1823,157 @@ async function charge(){
 }
 
 
-/* =========================
+/* =====================================================
    ESTADÍSTICAS
-========================= */
+===================================================== */
 
 async function loadStats(){
 
   try{
 
-    const ventas = await api(
-      'ventas',
-      'GET',
-      null,
-      '&select=id'
-    );
+    const ventas =
+      await api(
+        'ventas',
+        'GET',
+        null,
+        '&select=id'
+      );
 
-    const clientes = await api(
-      'clientes',
-      'GET',
-      null,
-      '&select=id'
-    );
+
+    const clientes =
+      await api(
+        'clientes',
+        'GET',
+        null,
+        '&select=id'
+      );
+
 
     document.getElementById(
       'statVentas'
-    ).textContent = ventas.length;
+    ).textContent =
+      ventas.length;
+
 
     document.getElementById(
       'statPedidos'
-    ).textContent = ventas.length;
+    ).textContent =
+      ventas.length;
+
 
     document.getElementById(
       'statClientes'
-    ).textContent = clientes.length;
+    ).textContent =
+      clientes.length;
 
   }catch(error){
 
-    console.log(error);
+    console.log(
+      'Error estadísticas:',
+      error
+    );
 
   }
 
 }
 
 
-/* =========================
-   ADMIN
-========================= */
+/* =====================================================
+   VISTA VENTA
+===================================================== */
 
 function showSale(){
 
   document.getElementById(
     'saleSection'
-  ).classList.remove('hidden');
+  ).classList.remove(
+    'hidden'
+  );
+
+
+  document.getElementById(
+    'customerSection'
+  ).classList.remove(
+    'hidden'
+  );
+
 
   document.getElementById(
     'adminLogin'
-  ).classList.add('hidden');
+  ).classList.add(
+    'hidden'
+  );
+
 
   document.getElementById(
     'adminSection'
-  ).classList.add('hidden');
+  ).classList.add(
+    'hidden'
+  );
+
+
+  document.getElementById(
+    'saleTab'
+  ).classList.add(
+    'active'
+  );
+
+
+  document.getElementById(
+    'adminTab'
+  ).classList.remove(
+    'active'
+  );
 
 }
 
 
-function showAdmin(){
+/* =====================================================
+   LOGIN ADMIN
+===================================================== */
+
+function showAdminLogin(){
 
   document.getElementById(
     'saleSection'
-  ).classList.add('hidden');
+  ).classList.add(
+    'hidden'
+  );
+
 
   document.getElementById(
-    'adminLogin'
-  ).classList.remove('hidden');
+    'customerSection'
+  ).classList.add(
+    'hidden'
+  );
+
 
   document.getElementById(
     'adminSection'
-  ).classList.add('hidden');
+  ).classList.add(
+    'hidden'
+  );
+
+
+  document.getElementById(
+    'adminLogin'
+  ).classList.remove(
+    'hidden'
+  );
+
+
+  document.getElementById(
+    'saleTab'
+  ).classList.remove(
+    'active'
+  );
+
+
+  document.getElementById(
+    'adminTab'
+  ).classList.add(
+    'active'
+  );
 
 }
 
@@ -972,137 +1981,508 @@ function showAdmin(){
 function login(){
 
   const pin =
-    document.getElementById('adminPin').value;
+    document.getElementById(
+      'adminPin'
+    ).value;
 
-  if(pin !== '1234'){
 
-    alert('❌ PIN incorrecto.');
+  if(
+    pin !== '1234'
+  ){
+
+    alert(
+      '❌ PIN incorrecto.'
+    );
 
     return;
 
   }
 
+
   document.getElementById(
     'adminLogin'
-  ).classList.add('hidden');
+  ).classList.add(
+    'hidden'
+  );
+
 
   document.getElementById(
     'adminSection'
-  ).classList.remove('hidden');
+  ).classList.remove(
+    'hidden'
+  );
+
 
   renderAdmin();
 
-  loadConfig();
-
 }
 
-
-/* =========================
-   CERRAR ADMIN
-========================= */
 
 function logout(){
 
   document.getElementById(
     'adminSection'
-  ).classList.add('hidden');
+  ).classList.add(
+    'hidden'
+  );
+
 
   document.getElementById(
     'adminLogin'
-  ).classList.remove('hidden');
+  ).classList.remove(
+    'hidden'
+  );
+
 
   document.getElementById(
     'adminPin'
-  ).value='';
+  ).value = '';
 
 }
 
 
-/* =========================
-   PRODUCTOS ADMIN
-========================= */
+/* =====================================================
+   CONFIGURACIÓN
+===================================================== */
+
+async function loadConfig(){
+
+  try{
+
+    const data =
+      await api(
+        'configuracion',
+        'GET',
+        null,
+        '&select=*&limit=1'
+      );
+
+
+    if(
+      data.length
+    ){
+
+      config.points =
+        Number(
+          data[0]
+            .puntos_para_premio
+        ) || 10;
+
+
+      config.prize =
+        data[0].premio ||
+        'Premio';
+
+
+      document.getElementById(
+        'pointsPrize'
+      ).value =
+        config.points;
+
+
+      document.getElementById(
+        'prizeText'
+      ).value =
+        config.prize;
+
+    }
+
+  }catch(error){
+
+    console.log(
+      'Error configuración:',
+      error
+    );
+
+  }
+
+}
+
+
+async function saveConfig(){
+
+  const points =
+    Number(
+      document.getElementById(
+        'pointsPrize'
+      ).value
+    );
+
+
+  const prize =
+    document.getElementById(
+      'prizeText'
+    ).value.trim();
+
+
+  if(
+    !Number.isFinite(points) ||
+    points <= 0
+  ){
+
+    alert(
+      'Escribe una cantidad válida de puntos.'
+    );
+
+    return;
+
+  }
+
+
+  if(!prize){
+
+    alert(
+      'Escribe cuál será el premio.'
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const current =
+      await api(
+        'configuracion',
+        'GET',
+        null,
+        '&select=*&limit=1'
+      );
+
+
+    if(
+      current.length
+    ){
+
+      await api(
+        'configuracion',
+        'PATCH',
+        {
+          puntos_para_premio:
+            points,
+
+          premio:
+            prize
+        },
+        '&id=eq.' +
+        current[0].id
+      );
+
+    }else{
+
+      await api(
+        'configuracion',
+        'POST',
+        {
+          puntos_para_premio:
+            points,
+
+          premio:
+            prize
+        }
+      );
+
+    }
+
+
+    config.points =
+      points;
+
+
+    config.prize =
+      prize;
+
+
+    alert(
+      '✅ Configuración guardada.'
+    );
+
+  }catch(error){
+
+    alert(
+      '❌ No se pudo guardar:\n\n' +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   AGREGAR PRODUCTO
+===================================================== */
+
+async function addProduct(){
+
+  const nombre =
+    document.getElementById(
+      'newProductName'
+    ).value.trim();
+
+
+  const categoria =
+    document.getElementById(
+      'newProductCategory'
+    ).value.trim();
+
+
+  const precio =
+    Number(
+      document.getElementById(
+        'newProductPrice'
+      ).value
+    );
+
+
+  if(!nombre){
+
+    alert(
+      'Escribe el nombre del producto.'
+    );
+
+    return;
+
+  }
+
+
+  if(!categoria){
+
+    alert(
+      'Escribe la categoría.'
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !Number.isFinite(precio) ||
+    precio < 0
+  ){
+
+    alert(
+      'Escribe un precio válido.'
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await api(
+      'productos',
+      'POST',
+      {
+        nombre:
+          nombre,
+
+        categoria:
+          categoria,
+
+        precio:
+          precio,
+
+        activo:
+          true
+      }
+    );
+
+
+    alert(
+      '✅ Producto agregado.'
+    );
+
+
+    document.getElementById(
+      'newProductName'
+    ).value = '';
+
+
+    document.getElementById(
+      'newProductCategory'
+    ).value = '';
+
+
+    document.getElementById(
+      'newProductPrice'
+    ).value = '';
+
+
+    await load();
+
+    await renderAdmin();
+
+  }catch(error){
+
+    alert(
+      '❌ No se pudo agregar:\n\n' +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   ADMIN PRODUCTOS
+===================================================== */
 
 async function renderAdmin(){
 
   const box =
-    document.getElementById('adminProducts');
+    document.getElementById(
+      'adminProducts'
+    );
+
 
   try{
 
-    const allProducts = await api(
-      'productos',
-      'GET',
-      null,
-      '&select=*&order=id.asc'
-    );
+    const allProducts =
+      await api(
+        'productos',
+        'GET',
+        null,
+        '&select=*&order=id.asc'
+      );
 
-    if(!allProducts.length){
+
+    if(
+      !allProducts.length
+    ){
 
       box.innerHTML =
-        '<div class="empty">No hay productos.</div>';
+        '<div class="empty">' +
+        'No hay productos.' +
+        '</div>';
 
       return;
+
     }
 
 
-    box.innerHTML = allProducts.map(p => {
+    box.innerHTML =
+      allProducts.map(
+        product => {
 
-      return `
-        <div class="admin-product">
+          const active =
+            product.activo;
 
-          <input
-            id="name-${p.id}"
-            value="${escapeAttr(p.nombre)}"
-            placeholder="Nombre"
-          >
 
-          <input
-            id="price-${p.id}"
-            type="number"
-            step="0.01"
-            value="${Number(p.precio)}"
-            placeholder="Precio"
-          >
+          return `
 
-          <div class="admin-actions">
+            <div class="admin-product">
 
-            <button
-              class="btn-gold"
-              onclick="updateProduct(${p.id})"
-            >
-              💾 Guardar
-            </button>
+              <div class="admin-product-top">
 
-            ${
-              p.activo
-              ?
-              `<button
-                class="danger"
-                onclick="deleteProduct(${p.id})"
-              >
-                🗑️ Borrar del menú
-              </button>`
-              :
-              `<button
-                class="btn-dark"
-                onclick="restoreProduct(${p.id})"
-              >
-                ♻️ Volver al menú
-              </button>`
-            }
+                <div class="admin-product-name">
+                  ${escapeHtml(
+                    product.nombre
+                  )}
+                </div>
 
-          </div>
+                <div class="admin-product-status">
 
-        </div>
-      `;
+                  ${
+                    active
+                    ? 'ACTIVO'
+                    : 'OCULTO'
+                  }
 
-    }).join('');
+                </div>
+
+              </div>
+
+
+              <div class="field">
+
+                <label>
+                  Nombre
+                </label>
+
+                <input
+                  id="name-${product.id}"
+                  value="${escapeAttr(
+                    product.nombre
+                  )}"
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label>
+                  Precio
+                </label>
+
+                <input
+                  id="price-${product.id}"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value="${Number(
+                    product.precio
+                  )}"
+                >
+
+              </div>
+
+
+              <div class="admin-actions">
+
+                <button
+                  class="gold-button"
+                  onclick="updateProduct(${product.id})"
+                >
+                  💾 Guardar
+                </button>
+
+
+                ${
+                  active
+
+                  ?
+
+                  `<button
+                    class="danger-button"
+                    onclick="deleteProduct(${product.id})"
+                  >
+                    🗑️ Quitar del menú
+                  </button>`
+
+                  :
+
+                  `<button
+                    class="green-button"
+                    onclick="restoreProduct(${product.id})"
+                  >
+                    ♻️ Volver al menú
+                  </button>`
+                }
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      ).join('');
 
   }catch(error){
 
     box.innerHTML =
-      '<div class="empty">❌ ' +
-      error.message +
+      '<div class="empty">' +
+      '❌ ' +
+      escapeHtml(
+        error.message
+      ) +
       '</div>';
 
   }
@@ -1110,9 +2490,9 @@ async function renderAdmin(){
 }
 
 
-/* =========================
-   EDITAR PRODUCTO
-========================= */
+/* =====================================================
+   ACTUALIZAR PRODUCTO
+===================================================== */
 
 async function updateProduct(id){
 
@@ -1120,6 +2500,7 @@ async function updateProduct(id){
     document.getElementById(
       'name-' + id
     ).value.trim();
+
 
   const price =
     Number(
@@ -1131,16 +2512,26 @@ async function updateProduct(id){
 
   if(!name){
 
-    alert('Escribe el nombre del producto.');
+    alert(
+      'Escribe el nombre.'
+    );
 
     return;
+
   }
 
-  if(!Number.isFinite(price) || price < 0){
 
-    alert('Escribe un precio válido.');
+  if(
+    !Number.isFinite(price) ||
+    price < 0
+  ){
+
+    alert(
+      'Escribe un precio válido.'
+    );
 
     return;
+
   }
 
 
@@ -1153,10 +2544,15 @@ async function updateProduct(id){
         nombre:name,
         precio:price
       },
-      '&id=eq.' + id
+      '&id=eq.' +
+      id
     );
 
-    alert('✅ Producto actualizado.');
+
+    alert(
+      '✅ Producto actualizado.'
+    );
+
 
     await load();
 
@@ -1174,40 +2570,38 @@ async function updateProduct(id){
 }
 
 
-/* =========================
-   BORRAR DEL MENÚ
-========================= */
+/* =====================================================
+   QUITAR PRODUCTO
+===================================================== */
 
 async function deleteProduct(id){
 
-  const product =
-    products.find(
-      p => Number(p.id) === Number(id)
+  const allProducts =
+    await api(
+      'productos',
+      'GET',
+      null,
+      '&select=*&id=eq.' +
+      id
     );
 
 
-  let nombre = '';
-
-  if(product){
-
-    nombre = product.nombre;
-
-  }else{
-
-    nombre = 'este producto';
-
-  }
+  const product =
+    allProducts[0];
 
 
-  const confirmar =
+  if(!product)return;
+
+
+  const confirmacion =
     confirm(
       '¿Quieres quitar "' +
-      nombre +
+      product.nombre +
       '" del menú?'
     );
 
 
-  if(!confirmar)return;
+  if(!confirmacion)return;
 
 
   try{
@@ -1218,7 +2612,8 @@ async function deleteProduct(id){
       {
         activo:false
       },
-      '&id=eq.' + id
+      '&id=eq.' +
+      id
     );
 
 
@@ -1234,7 +2629,7 @@ async function deleteProduct(id){
   }catch(error){
 
     alert(
-      '❌ No se pudo quitar el producto:\n\n' +
+      '❌ No se pudo quitar:\n\n' +
       error.message
     );
 
@@ -1243,9 +2638,9 @@ async function deleteProduct(id){
 }
 
 
-/* =========================
-   VOLVER A MOSTRAR PRODUCTO
-========================= */
+/* =====================================================
+   RESTAURAR PRODUCTO
+===================================================== */
 
 async function restoreProduct(id){
 
@@ -1257,7 +2652,8 @@ async function restoreProduct(id){
       {
         activo:true
       },
-      '&id=eq.' + id
+      '&id=eq.' +
+      id
     );
 
 
@@ -1282,229 +2678,317 @@ async function restoreProduct(id){
 }
 
 
-/* =========================
-   AGREGAR PRODUCTO
-========================= */
+/* =====================================================
+   BUSCAR CLIENTE PARA CANJE
+===================================================== */
 
-async function addProduct(){
+async function findCustomerForRedeem(){
 
-  const nombre =
+  const whatsapp =
     document.getElementById(
-      'newProductName'
+      'redeemWhatsapp'
     ).value.trim();
 
-  const categoria =
-    document.getElementById(
-      'newProductCategory'
-    ).value.trim();
 
-  const precio =
-    Number(
-      document.getElementById(
-        'newProductPrice'
-      ).value
+  const result =
+    document.getElementById(
+      'redeemResult'
     );
 
 
-  if(!nombre){
+  if(!whatsapp){
 
-    alert('Escribe el nombre del producto.');
-
-    return;
-  }
-
-  if(!categoria){
-
-    alert('Escribe la categoría.');
+    alert(
+      'Escribe el WhatsApp del cliente.'
+    );
 
     return;
+
   }
 
-  if(!Number.isFinite(precio) || precio < 0){
 
-    alert('Escribe un precio válido.');
-
-    return;
-  }
+  result.innerHTML =
+    '<div class="notice">' +
+    'Buscando cliente...' +
+    '</div>';
 
 
   try{
 
-    await api(
-      'productos',
-      'POST',
-      {
-        nombre:nombre,
-        categoria:categoria,
-        precio:precio,
-        activo:true
-      }
-    );
+    const clientes =
+      await api(
+        'clientes',
+        'GET',
+        null,
+        '&select=*&whatsapp=eq.' +
+        encodeURIComponent(
+          whatsapp
+        )
+      );
 
 
-    alert(
-      '✅ Producto agregado al menú.'
-    );
+    if(
+      !clientes.length
+    ){
 
+      result.innerHTML =
+        '<div class="notice">' +
+        '❌ No encontramos un cliente con ese WhatsApp.' +
+        '</div>';
 
-    document.getElementById(
-      'newProductName'
-    ).value='';
-
-    document.getElementById(
-      'newProductCategory'
-    ).value='';
-
-    document.getElementById(
-      'newProductPrice'
-    ).value='';
-
-
-    await load();
-
-    await renderAdmin();
-
-  }catch(error){
-
-    alert(
-      '❌ No se pudo agregar:\n\n' +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================
-   CONFIGURACIÓN
-========================= */
-
-async function loadConfig(){
-
-  try{
-
-    const data = await api(
-      'configuracion',
-      'GET',
-      null,
-      '&select=*&limit=1'
-    );
-
-
-    if(data.length){
-
-      config.points =
-        Number(
-          data[0].puntos_para_premio || 10
-        );
-
-      config.prize =
-        data[0].premio || 'Premio';
-
-
-      document.getElementById(
-        'pointsPrize'
-      ).value = config.points;
-
-
-      document.getElementById(
-        'prizeText'
-      ).value = config.prize;
+      return;
 
     }
 
-  }catch(error){
 
-    console.log(error);
-
-  }
-
-}
+    const cliente =
+      clientes[0];
 
 
-async function saveConfig(){
-
-  const points =
-    Number(
-      document.getElementById(
-        'pointsPrize'
-      ).value
-    );
-
-  const prize =
-    document.getElementById(
-      'prizeText'
-    ).value.trim();
-
-
-  if(!Number.isFinite(points) || points <= 0){
-
-    alert(
-      'Escribe una cantidad válida de puntos.'
-    );
-
-    return;
-  }
-
-
-  if(!prize){
-
-    alert('Escribe cuál será el premio.');
-
-    return;
-  }
-
-
-  try{
-
-    const current = await api(
-      'configuracion',
-      'GET',
-      null,
-      '&select=*&limit=1'
-    );
-
-
-    if(current.length){
-
-      await api(
-        'configuracion',
-        'PATCH',
-        {
-          puntos_para_premio:points,
-          premio:prize
-        },
-        '&id=eq.' + current[0].id
+    const puntos =
+      Number(
+        cliente.puntos || 0
       );
+
+
+    const necesarios =
+      Number(
+        config.points
+      );
+
+
+    if(
+      puntos >= necesarios
+    ){
+
+      result.innerHTML = `
+
+        <div class="points-card">
+
+          <div class="points-title">
+            🎁 Premio disponible
+          </div>
+
+          <div class="points-message">
+
+            <strong>
+              ${escapeHtml(
+                cliente.nombre
+              )}
+            </strong>
+
+            <br><br>
+
+            Tiene
+            <strong>
+              ${puntos} puntos
+            </strong>.
+
+            <br><br>
+
+            Puede canjear:
+            <strong>
+              ${escapeHtml(
+                config.prize
+              )}
+            </strong>
+
+            <br><br>
+
+            <span class="badge badge-ready">
+              PREMIO DISPONIBLE
+            </span>
+
+          </div>
+
+          <br>
+
+          <button
+            class="green-button"
+            style="width:100%;"
+            onclick="redeemPrize(${cliente.id})"
+          >
+            🎁 Autorizar canje
+          </button>
+
+        </div>
+
+      `;
 
     }else{
 
+      const faltan =
+        necesarios -
+        puntos;
+
+
+      result.innerHTML = `
+
+        <div class="points-card">
+
+          <div class="points-title">
+            ⭐ Cliente
+          </div>
+
+          <div class="points-message">
+
+            <strong>
+              ${escapeHtml(
+                cliente.nombre
+              )}
+            </strong>
+
+            <br><br>
+
+            Lleva
+            <strong>
+              ${puntos} puntos
+            </strong>.
+
+            <br>
+
+            Le faltan
+            <strong>
+              ${faltan} puntos
+            </strong>
+            para su premio.
+
+            <br><br>
+
+            <span class="badge badge-wait">
+              AÚN NO PUEDE CANJEAR
+            </span>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+  }catch(error){
+
+    result.innerHTML =
+      '<div class="notice">' +
+      '❌ ' +
+      escapeHtml(
+        error.message
+      ) +
+      '</div>';
+
+  }
+
+}
+
+
+/* =====================================================
+   AUTORIZAR CANJE
+===================================================== */
+
+async function redeemPrize(id){
+
+  const confirmacion =
+    confirm(
+      '¿Confirmas que el cliente recibió su premio?\n\n' +
+      'Premio: ' +
+      config.prize +
+      '\n\n' +
+      'Sus puntos se reiniciarán a 0.'
+    );
+
+
+  if(!confirmacion)return;
+
+
+  try{
+
+    const clientes =
       await api(
-        'configuracion',
-        'POST',
-        {
-          puntos_para_premio:points,
-          premio:prize
-        }
+        'clientes',
+        'GET',
+        null,
+        '&select=*&id=eq.' +
+        id
       );
+
+
+    if(
+      !clientes.length
+    ){
+
+      alert(
+        '❌ Cliente no encontrado.'
+      );
+
+      return;
 
     }
 
 
-    config.points = points;
+    const cliente =
+      clientes[0];
 
-    config.prize = prize;
+
+    const puntos =
+      Number(
+        cliente.puntos || 0
+      );
+
+
+    if(
+      puntos <
+      Number(config.points)
+    ){
+
+      alert(
+        '❌ Este cliente todavía no tiene los puntos necesarios.'
+      );
+
+      return;
+
+    }
+
+
+    const premios =
+      Number(
+        cliente.premios_obtenidos || 0
+      ) + 1;
+
+
+    await api(
+      'clientes',
+      'PATCH',
+      {
+        puntos:0,
+        premios_obtenidos:premios
+      },
+      '&id=eq.' +
+      id
+    );
 
 
     alert(
-      '✅ Configuración guardada.'
+      '🎁 ¡Canje autorizado!\n\n' +
+      'Premio entregado:\n' +
+      config.prize +
+      '\n\n' +
+      'Los puntos del cliente volvieron a 0.'
     );
+
+
+    document.getElementById(
+      'redeemResult'
+    ).innerHTML =
+      '<div class="notice">' +
+      '✅ Canje realizado correctamente.' +
+      '</div>';
+
 
   }catch(error){
 
     alert(
-      '❌ No se pudo guardar:\n\n' +
+      '❌ No se pudo autorizar el canje:\n\n' +
       error.message
     );
 
@@ -1513,18 +2997,178 @@ async function saveConfig(){
 }
 
 
-/* =========================
+/* =====================================================
+   PREVISUALIZAR PUNTOS DEL CLIENTE
+===================================================== */
+
+async function previewCustomerPoints(){
+
+  const whatsapp =
+    document.getElementById(
+      'customerWhatsapp'
+    ).value.trim();
+
+
+  const preview =
+    document.getElementById(
+      'customerPointsPreview'
+    );
+
+
+  const text =
+    document.getElementById(
+      'customerPointsText'
+    );
+
+
+  if(!whatsapp){
+
+    preview.classList.add(
+      'hidden'
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const clientes =
+      await api(
+        'clientes',
+        'GET',
+        null,
+        '&select=*&whatsapp=eq.' +
+        encodeURIComponent(
+          whatsapp
+        )
+      );
+
+
+    if(!clientes.length){
+
+      preview.classList.remove(
+        'hidden'
+      );
+
+      text.textContent =
+        'Este será un cliente nuevo. Su primera compra le dará 1 punto.';
+
+      return;
+
+    }
+
+
+    const puntos =
+      Number(
+        clientes[0].puntos || 0
+      );
+
+
+    if(
+      puntos >=
+      Number(config.points)
+    ){
+
+      preview.classList.remove(
+        'hidden'
+      );
+
+      text.innerHTML =
+        '🎁 Este cliente ya tiene su premio disponible.';
+
+      return;
+
+    }
+
+
+    const despues =
+      puntos + 1;
+
+
+    const faltan =
+      Math.max(
+        0,
+        Number(config.points) -
+        despues
+      );
+
+
+    preview.classList.remove(
+      'hidden'
+    );
+
+
+    text.textContent =
+      'Después de esta compra llevará ' +
+      despues +
+      (
+        despues === 1
+        ? ' punto'
+        : ' puntos'
+      ) +
+      ' y le faltarán ' +
+      faltan +
+      ' para su premio.';
+
+  }catch(error){
+
+    preview.classList.add(
+      'hidden'
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   ESCUCHAR WHATSAPP
+===================================================== */
+
+document
+  .getElementById(
+    'customerWhatsapp'
+  )
+  .addEventListener(
+    'blur',
+    previewCustomerPoints
+  );
+
+
+/* =====================================================
    SEGURIDAD HTML
-========================= */
+===================================================== */
 
 function escapeHtml(value){
 
   return String(value)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;')
-    .replace(/'/g,'&#039;');
+
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+
+    .replace(
+      /</g,
+      '&lt;'
+    )
+
+    .replace(
+      />/g,
+      '&gt;'
+    )
+
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+
+    .replace(
+      /'/g,
+      '&#039;'
+    );
 
 }
 
@@ -1536,11 +3180,13 @@ function escapeAttr(value){
 }
 
 
-/* =========================
+/* =====================================================
    INICIAR
-========================= */
+===================================================== */
 
 showSale();
+
+renderCart();
 
 load();
 
