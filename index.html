@@ -32,7 +32,6 @@ header h1{
 
 header p{
   margin:5px 0 0;
-  color:#fff;
 }
 
 .container{
@@ -77,7 +76,6 @@ header p{
   background:#292929;
   color:#fff;
   font-size:16px;
-  cursor:pointer;
 }
 
 .tabs button.active{
@@ -165,7 +163,6 @@ button{
 
 .product h3{
   margin:0 0 8px;
-  color:#fff;
 }
 
 .product .price{
@@ -209,14 +206,6 @@ button{
   margin-top:15px;
 }
 
-.role-box{
-  display:none;
-}
-
-.role-box.active{
-  display:block;
-}
-
 .user-card{
   background:#242424;
   border:1px solid #555;
@@ -233,7 +222,7 @@ button{
 }
 
 .user-card .crown{
-  font-size:25px;
+  font-size:28px;
 }
 
 .history-item{
@@ -248,14 +237,15 @@ button{
   color:#d4af37;
 }
 
-.hidden{
-  display:none!important;
+.role-panel{
+  display:none;
+}
+
+.role-panel.active{
+  display:block;
 }
 
 .product-admin{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:8px;
   background:#242424;
   padding:12px;
   border-radius:10px;
@@ -283,317 +273,323 @@ button{
 
 <div class="container">
 
-  <div class="stats">
-    <div class="stat">
-      Ventas
-      <strong id="statVentas">0</strong>
-    </div>
-
-    <div class="stat">
-      Clientes
-      <strong id="statClientes">0</strong>
-    </div>
-
-    <div class="stat">
-      Turno
-      <strong id="statTurno">Turno 1</strong>
-    </div>
-  </div>
-
-  <div class="tabs">
-    <button id="tabVenta" class="active" onclick="showSection('venta')">
-      🛒 Venta
-    </button>
-
-    <button id="tabAcceso" onclick="showSection('acceso')">
-      👑 Acceso
-    </button>
-  </div>
-
-  <!-- ================= VENTA ================= -->
-
-  <section id="venta" class="section active">
-
-    <div class="card">
-      <h2>🌽 Menú</h2>
-
-      <div id="menu" class="menu">
-        Cargando productos...
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>🛒 Carrito</h2>
-
-      <div id="cart">
-        El carrito está vacío.
-      </div>
-
-      <div class="total">
-        Total: $<span id="total">0.00</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>👤 Cliente</h2>
-
-      <input
-        type="text"
-        id="clienteNombre"
-        placeholder="Nombre del cliente"
-      >
-
-      <input
-        type="text"
-        id="clienteWhatsapp"
-        placeholder="WhatsApp"
-      >
-
-      <button class="btn" onclick="registerSale()">
-        💰 Registrar venta
-      </button>
-    </div>
-
-    <div class="card">
-      <h2>⭐ Puntos</h2>
-
-      <input
-        type="text"
-        id="buscarWhatsapp"
-        placeholder="WhatsApp del cliente"
-      >
-
-      <button class="btn-secondary btn" onclick="buscarCliente()">
-        🔎 Buscar cliente
-      </button>
-
-      <div id="clientePuntos"></div>
-    </div>
-
-  </section>
-
-  <!-- ================= ACCESO ================= -->
-
-  <section id="acceso" class="section">
-
-    <div class="card">
-
-      <h2>👑 Acceso</h2>
-
-      <div class="user-card">
-        <div class="crown">👑</div>
-        <div class="name">Christian</div>
-        <small>Acceso completo</small>
-      </div>
-
-      <div class="user-card">
-        <div class="crown">👑</div>
-        <div class="name">Andrid</div>
-        <small>Acceso vendedor</small>
-      </div>
-
-      <select id="usuario">
-        <option value="christian">👑 Christian</option>
-        <option value="andrid">👑 Andrid</option>
-      </select>
-
-      <input
-        type="password"
-        id="pin"
-        placeholder="PIN"
-      >
-
-      <button class="btn" onclick="login()">
-        🔐 Entrar
-      </button>
-
-      <div id="loginMensaje"></div>
-
-    </div>
-
-    <!-- ================= PANEL CHRISTIAN ================= -->
-
-    <div id="panelChristian" class="role-box">
-
-      <div class="card">
-
-        <h2>👑 Panel de Christian</h2>
-
-        <button class="btn-secondary btn" onclick="showSection('venta')">
-          ↩️ Regresar a venta
-        </button>
-
-      </div>
-
-      <div class="card">
-
-        <h2>💰 Cerrar turno</h2>
-
-        <input
-          type="number"
-          id="efectivoContado"
-          step="0.01"
-          placeholder="Efectivo contado"
-        >
-
-        <button class="btn" onclick="closeTurn()">
-          🔒 Cerrar turno
-        </button>
-
-      </div>
-
-      <div class="card">
-
-        <h2>📋 Historial de cortes</h2>
-
-        <div id="historial">
-          Cargando historial...
-        </div>
-
-        <button
-          id="btnBorrarTodo"
-          class="btn btn-danger"
-          onclick="deleteCloseHistory()"
-        >
-          🗑️ Borrar todo el historial
-        </button>
-
-        <button
-          class="btn btn-secondary"
-          onclick="showSection('venta')"
-        >
-          ↩️ Regresar a venta
-        </button>
-
-      </div>
-
-      <div class="card">
-
-        <h2>⚙️ Configuración</h2>
-
-        <input
-          type="number"
-          id="puntosPremio"
-          placeholder="Puntos para premio"
-        >
-
-        <input
-          type="text"
-          id="nombrePremio"
-          placeholder="Nombre del premio"
-        >
-
-        <button class="btn" onclick="saveConfig()">
-          💾 Guardar configuración
-        </button>
-
-      </div>
-
-      <div class="card">
-
-        <h2>🎁 Premios</h2>
-
-        <input
-          type="text"
-          id="premioWhatsapp"
-          placeholder="WhatsApp del cliente"
-        >
-
-        <button class="btn" onclick="redeemPoints()">
-          🎁 Canjear premio
-        </button>
-
-      </div>
-
-      <div class="card">
-
-        <h2>🌽 Productos</h2>
-
-        <div id="adminProductos">
-          Cargando productos...
-        </div>
-
-        <button class="btn" onclick="addProduct()">
-          ➕ Agregar producto
-        </button>
-
-      </div>
-
-    </div>
-
-    <!-- ================= PANEL ANDRID ================= -->
-
-    <div id="panelAndrid" class="role-box">
-
-      <div class="card">
-
-        <h2>👑 Panel de Andrid</h2>
-
-        <button class="btn-secondary btn" onclick="showSection('venta')">
-          ↩️ Regresar a venta
-        </button>
-
-      </div>
-
-      <div class="card">
-
-        <h2>💰 Cerrar turno</h2>
-
-        <input
-          type="number"
-          id="efectivoContadoAndrid"
-          step="0.01"
-          placeholder="Efectivo contado"
-        >
-
-        <button class="btn" onclick="closeTurn()">
-          🔒 Cerrar turno
-        </button>
-
-      </div>
-
-      <div class="card">
-
-        <h2>📋 Historial</h2>
-
-        <div id="historialAndrid">
-          Cargando historial...
-        </div>
-
-        <p style="color:#aaa;text-align:center;">
-          🔒 Andrid no tiene permiso para eliminar cortes.
-        </p>
-
-        <button class="btn btn-secondary" onclick="showSection('venta')">
-          ↩️ Regresar a venta
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
+<div class="stats">
+
+<div class="stat">
+Ventas
+<strong id="statVentas">0</strong>
+</div>
+
+<div class="stat">
+Clientes
+<strong id="statClientes">0</strong>
+</div>
+
+<div class="stat">
+Turno
+<strong>Turno 1</strong>
+</div>
 
 </div>
 
+<div class="tabs">
+
+<button id="tabVenta"
+class="active"
+onclick="showSection('venta')">
+🛒 Venta
+</button>
+
+<button id="tabAcceso"
+onclick="showSection('acceso')">
+👑 Acceso
+</button>
+
+</div>
+
+
+<!-- ================= VENTA ================= -->
+
+<section id="venta" class="section active">
+
+<div class="card">
+
+<h2>🌽 Menú</h2>
+
+<div id="menu">
+Cargando productos...
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🛒 Carrito</h2>
+
+<div id="cart">
+El carrito está vacío.
+</div>
+
+<div class="total">
+Total: $<span id="total">0.00</span>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>👤 Cliente</h2>
+
+<input
+id="clienteNombre"
+placeholder="Nombre del cliente">
+
+<input
+id="clienteWhatsapp"
+placeholder="WhatsApp">
+
+<button
+class="btn"
+onclick="registerSale()">
+💰 Registrar venta
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>⭐ Puntos</h2>
+
+<input
+id="buscarWhatsapp"
+placeholder="WhatsApp del cliente">
+
+<button
+class="btn btn-secondary"
+onclick="buscarCliente()">
+🔎 Buscar cliente
+</button>
+
+<div id="clientePuntos"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= ACCESO ================= -->
+
+<section id="acceso" class="section">
+
+<div class="card">
+
+<h2>👑 Acceso</h2>
+
+<div class="user-card">
+
+<div class="crown">👑</div>
+
+<div class="name">
+Christian
+</div>
+
+</div>
+
+
+<div class="user-card">
+
+<div class="crown">👑</div>
+
+<div class="name">
+Andrid
+</div>
+
+</div>
+
+
+<select id="usuario">
+
+<option value="christian">
+👑 Christian
+</option>
+
+<option value="andrid">
+👑 Andrid
+</option>
+
+</select>
+
+
+<input
+type="password"
+id="pin"
+placeholder="PIN">
+
+
+<button
+class="btn"
+onclick="login()">
+🔐 Entrar
+</button>
+
+<div id="loginMensaje"></div>
+
+</div>
+
+
+<!-- ================= PANEL IGUAL ================= -->
+
+<div id="panelUsuario" class="role-panel">
+
+<div class="card">
+
+<h2>👑 Panel</h2>
+
+<button
+class="btn btn-secondary"
+onclick="showSection('venta')">
+↩️ Regresar a venta
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>💰 Cerrar turno</h2>
+
+<input
+type="number"
+id="efectivoContado"
+step="0.01"
+placeholder="Efectivo contado">
+
+<button
+class="btn"
+onclick="closeTurn()">
+🔒 Cerrar turno
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>📋 Historial</h2>
+
+<div id="historial">
+Cargando historial...
+</div>
+
+<button
+class="btn btn-danger"
+onclick="deleteCloseHistory()">
+🗑️ Borrar todo el historial
+</button>
+
+<button
+class="btn btn-secondary"
+onclick="showSection('venta')">
+↩️ Regresar a venta
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>⚙️ Configuración</h2>
+
+<input
+type="number"
+id="puntosPremio"
+placeholder="Puntos para premio">
+
+<input
+id="nombrePremio"
+placeholder="Nombre del premio">
+
+<button
+class="btn"
+onclick="saveConfig()">
+💾 Guardar
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>🎁 Premios</h2>
+
+<input
+id="premioWhatsapp"
+placeholder="WhatsApp del cliente">
+
+<button
+class="btn"
+onclick="redeemPoints()">
+🎁 Canjear premio
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>🌽 Productos</h2>
+
+<div id="adminProductos">
+Cargando...
+</div>
+
+<button
+class="btn"
+onclick="addProduct()">
+➕ Agregar producto
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
 <script>
 
-const GERENTE_PIN = "0204";
-const VENDEDOR_PIN = "1234";
+const CHRISTIAN_PIN = "0204";
+const ANDRID_PIN = "1234";
 
-let currentRole = null;
+let currentUser = null;
+
 let productos = [];
+
 let carrito = [];
+
 let config = {
-  puntos_para_premio: 10,
-  premio: "Premio"
+  puntos_para_premio:10,
+  premio:"Premio"
 };
+
 
 /* ================= API ================= */
 
-async function api(table, method="GET", body=null, extra=""){
+async function api(
+  table,
+  method="GET",
+  body=null,
+  extra=""
+){
 
-  let url = "/api/supabase?table=" + encodeURIComponent(table);
+  let url =
+    "/api/supabase?table=" +
+    encodeURIComponent(table);
 
   if(extra){
     url += extra;
@@ -607,114 +603,140 @@ async function api(table, method="GET", body=null, extra=""){
   };
 
   if(body !== null){
-    options.body = JSON.stringify(body);
+    options.body =
+      JSON.stringify(body);
   }
 
-  const response = await fetch(url, options);
+  const response =
+    await fetch(url,options);
 
-  const text = await response.text();
+  const text =
+    await response.text();
 
   let data;
 
   try{
-    data = JSON.parse(text);
+
+    data =
+      JSON.parse(text);
+
   }catch{
-    throw new Error(text || "Respuesta inválida del servidor.");
+
+    throw new Error(
+      text ||
+      "Respuesta inválida."
+    );
   }
 
   if(!response.ok){
 
-    let mensaje =
+    throw new Error(
       data?.error ||
       data?.message ||
       data?.detalle ||
-      "Error en la solicitud.";
-
-    throw new Error(mensaje);
+      "Error de Supabase."
+    );
   }
 
   return data;
 }
 
+
 /* ================= SECCIONES ================= */
 
 function showSection(section){
 
-  document.querySelectorAll(".section").forEach(el=>{
-    el.classList.remove("active");
-  });
+  document
+    .querySelectorAll(".section")
+    .forEach(x=>{
+      x.classList.remove("active");
+    });
 
-  document.querySelectorAll(".tabs button").forEach(el=>{
-    el.classList.remove("active");
-  });
+  document
+    .querySelectorAll(".tabs button")
+    .forEach(x=>{
+      x.classList.remove("active");
+    });
 
-  document.getElementById(section).classList.add("active");
+  document
+    .getElementById(section)
+    .classList.add("active");
 
-  if(section === "venta"){
-    document.getElementById("tabVenta").classList.add("active");
+  if(section==="venta"){
+
+    document
+      .getElementById("tabVenta")
+      .classList.add("active");
+
   }
 
-  if(section === "acceso"){
-    document.getElementById("tabAcceso").classList.add("active");
+  if(section==="acceso"){
+
+    document
+      .getElementById("tabAcceso")
+      .classList.add("active");
+
   }
 }
+
 
 /* ================= LOGIN ================= */
 
 function login(){
 
   const usuario =
-    document.getElementById("usuario").value;
+    document.getElementById("usuario")
+    .value;
 
   const pin =
-    document.getElementById("pin").value.trim();
+    document.getElementById("pin")
+    .value.trim();
 
   const mensaje =
     document.getElementById("loginMensaje");
 
-  document.getElementById("panelChristian")
-    .classList.remove("active");
 
-  document.getElementById("panelAndrid")
-    .classList.remove("active");
+  if(
+    usuario==="christian" &&
+    pin===CHRISTIAN_PIN
+  ){
 
-  if(usuario === "christian" && pin === GERENTE_PIN){
+    currentUser = "christian";
 
-    currentRole = "christian";
+  }else if(
+    usuario==="andrid" &&
+    pin===ANDRID_PIN
+  ){
+
+    currentUser = "andrid";
+
+  }else{
+
+    currentUser = null;
 
     mensaje.innerHTML =
-      '<p style="color:#55d66b;text-align:center;">✅ Bienvenido Christian 👑</p>';
-
-    document.getElementById("panelChristian")
-      .classList.add("active");
-
-    loadCloseHistory();
-    loadConfig();
-    loadAdminProducts();
+      '<p style="color:#ff5555;text-align:center;">❌ PIN incorrecto</p>';
 
     return;
   }
 
-  if(usuario === "andrid" && pin === VENDEDOR_PIN){
-
-    currentRole = "andrid";
-
-    mensaje.innerHTML =
-      '<p style="color:#55d66b;text-align:center;">✅ Bienvenido Andrid 👑</p>';
-
-    document.getElementById("panelAndrid")
-      .classList.add("active");
-
-    loadCloseHistoryAndrid();
-
-    return;
-  }
-
-  currentRole = null;
 
   mensaje.innerHTML =
-    '<p style="color:#ff5555;text-align:center;">❌ PIN incorrecto</p>';
+    '<p style="color:#55d66b;text-align:center;">✅ Acceso correcto 👑</p>';
+
+
+  document
+    .getElementById("panelUsuario")
+    .classList.add("active");
+
+
+  loadCloseHistory();
+
+  loadConfig();
+
+  loadAdminProducts();
 }
+
 
 /* ================= PRODUCTOS ================= */
 
@@ -722,23 +744,27 @@ async function loadProducts(){
 
   try{
 
-    productos = await api(
-      "productos",
-      "GET",
-      null,
-      "&select=*&order=id.asc"
-    );
+    productos =
+      await api(
+        "productos",
+        "GET",
+        null,
+        "&select=*&order=id.asc"
+      );
 
     renderMenu();
 
   }catch(error){
 
-    document.getElementById("menu").innerHTML =
-      "<p>Error cargando productos.</p>";
-
     console.error(error);
+
+    document
+      .getElementById("menu")
+      .innerHTML =
+      "Error cargando productos.";
   }
 }
+
 
 function renderMenu(){
 
@@ -746,15 +772,9 @@ function renderMenu(){
     document.getElementById("menu");
 
   const activos =
-    productos.filter(p=>p.activo !== false);
-
-  if(!activos.length){
-
-    menu.innerHTML =
-      "<p>No hay productos activos.</p>";
-
-    return;
-  }
+    productos.filter(
+      p=>p.activo!==false
+    );
 
   menu.innerHTML = "";
 
@@ -763,33 +783,47 @@ function renderMenu(){
     const div =
       document.createElement("div");
 
-    div.className = "product";
+    div.className =
+      "product";
 
     div.innerHTML = `
-      <h3>${escapeHtml(producto.nombre)}</h3>
+
+      <h3>
+        ${escapeHtml(producto.nombre)}
+      </h3>
 
       <div class="price">
         $${Number(producto.precio).toFixed(2)}
       </div>
 
-      <button onclick="addToCart(${producto.id})">
+      <button
+        onclick="addToCart(${producto.id})">
         ➕ Agregar
       </button>
+
     `;
 
     menu.appendChild(div);
+
   });
 }
+
 
 function addToCart(id){
 
   const producto =
-    productos.find(p=>Number(p.id) === Number(id));
+    productos.find(
+      p=>Number(p.id)===Number(id)
+    );
 
   if(!producto)return;
 
+
   const existente =
-    carrito.find(item=>Number(item.id) === Number(id));
+    carrito.find(
+      p=>Number(p.id)===Number(id)
+    );
+
 
   if(existente){
 
@@ -798,33 +832,46 @@ function addToCart(id){
   }else{
 
     carrito.push({
+
       id:producto.id,
+
       nombre:producto.nombre,
+
       precio:Number(producto.precio),
+
       cantidad:1
+
     });
+
   }
 
   renderCart();
 }
 
+
 function removeFromCart(id){
 
   const item =
-    carrito.find(x=>Number(x.id) === Number(id));
+    carrito.find(
+      p=>Number(p.id)===Number(id)
+    );
 
   if(!item)return;
 
   item.cantidad--;
 
-  if(item.cantidad <= 0){
+  if(item.cantidad<=0){
 
     carrito =
-      carrito.filter(x=>Number(x.id) !== Number(id));
+      carrito.filter(
+        p=>Number(p.id)!==Number(id)
+      );
+
   }
 
   renderCart();
 }
+
 
 function renderCart(){
 
@@ -836,114 +883,152 @@ function renderCart(){
     cart.innerHTML =
       "El carrito está vacío.";
 
-    document.getElementById("total").textContent =
-      "0.00";
+    document.getElementById("total")
+      .textContent="0.00";
 
     return;
   }
 
-  let total = 0;
 
-  cart.innerHTML = "";
+  let total=0;
+
+  cart.innerHTML="";
+
 
   carrito.forEach(item=>{
 
     const subtotal =
-      item.precio * item.cantidad;
+      item.precio *
+      item.cantidad;
 
     total += subtotal;
+
 
     const div =
       document.createElement("div");
 
-    div.className = "cart-item";
+    div.className =
+      "cart-item";
+
 
     div.innerHTML = `
+
       <div>
-        <strong>${escapeHtml(item.nombre)}</strong><br>
-        ${item.cantidad} x $${item.precio.toFixed(2)}
+
+        <strong>
+          ${escapeHtml(item.nombre)}
+        </strong>
+
+        <br>
+
+        ${item.cantidad}
+        x
+        $${item.precio.toFixed(2)}
+
       </div>
 
       <div>
+
         $${subtotal.toFixed(2)}
+
         <br>
-        <button onclick="removeFromCart(${item.id})">
+
+        <button
+          onclick="removeFromCart(${item.id})">
           −
         </button>
+
       </div>
+
     `;
 
     cart.appendChild(div);
+
   });
 
-  document.getElementById("total").textContent =
+
+  document.getElementById("total")
+    .textContent =
     total.toFixed(2);
 }
 
+
 /* ================= CLIENTES ================= */
 
-async function findClientByWhatsapp(whatsapp){
+async function findClient(whatsapp){
 
   const data =
     await api(
       "clientes",
       "GET",
       null,
-      "&select=*&whatsapp=eq." +
-      encodeURIComponent(whatsapp) +
+      "&select=*&whatsapp=eq."+
+      encodeURIComponent(whatsapp)+
       "&limit=1"
     );
 
-  return data && data.length ? data[0] : null;
+  return data.length
+    ? data[0]
+    : null;
 }
+
 
 async function buscarCliente(){
 
   const whatsapp =
-    document.getElementById("buscarWhatsapp")
-      .value.trim();
-
-  const contenedor =
-    document.getElementById("clientePuntos");
+    document.getElementById(
+      "buscarWhatsapp"
+    ).value.trim();
 
   if(!whatsapp){
 
-    contenedor.innerHTML =
-      "<p>Escribe un WhatsApp.</p>";
-
+    alert("Escribe un WhatsApp.");
     return;
   }
+
 
   try{
 
     const cliente =
-      await findClientByWhatsapp(whatsapp);
+      await findClient(whatsapp);
 
     if(!cliente){
 
-      contenedor.innerHTML =
-        "<p>Cliente no encontrado.</p>";
+      document.getElementById(
+        "clientePuntos"
+      ).innerHTML =
+      "<p>Cliente no encontrado.</p>";
 
       return;
     }
 
-    contenedor.innerHTML = `
+
+    document.getElementById(
+      "clientePuntos"
+    ).innerHTML = `
+
       <div class="history-item">
-        <strong>${escapeHtml(cliente.nombre)}</strong><br>
-        WhatsApp: ${escapeHtml(cliente.whatsapp)}<br>
-        ⭐ Puntos: ${cliente.puntos || 0}<br>
-        🎁 Premios obtenidos: ${cliente.premios_obtenidos || 0}
+
+        <strong>
+          ${escapeHtml(cliente.nombre)}
+        </strong>
+
+        <br>
+
+        ⭐ Puntos:
+        ${cliente.puntos || 0}
+
       </div>
+
     `;
 
   }catch(error){
 
-    contenedor.innerHTML =
-      "<p>Error buscando cliente.</p>";
+    alert(error.message);
 
-    console.error(error);
   }
 }
+
 
 /* ================= VENTA ================= */
 
@@ -955,30 +1040,37 @@ async function registerSale(){
     return;
   }
 
+
   const nombre =
-    document.getElementById("clienteNombre")
-      .value.trim();
+    document.getElementById(
+      "clienteNombre"
+    ).value.trim();
 
   const whatsapp =
-    document.getElementById("clienteWhatsapp")
-      .value.trim();
+    document.getElementById(
+      "clienteWhatsapp"
+    ).value.trim();
+
 
   if(!nombre){
 
-    alert("❌ Escribe el nombre del cliente.");
+    alert("Escribe el nombre.");
     return;
   }
+
 
   if(!whatsapp){
 
-    alert("❌ Escribe el WhatsApp del cliente.");
+    alert("Escribe el WhatsApp.");
     return;
   }
+
 
   try{
 
     let cliente =
-      await findClientByWhatsapp(whatsapp);
+      await findClient(whatsapp);
+
 
     if(!cliente){
 
@@ -995,27 +1087,35 @@ async function registerSale(){
         );
 
       cliente =
-        Array.isArray(nuevo) ? nuevo[0] : nuevo;
+        Array.isArray(nuevo)
+        ? nuevo[0]
+        : nuevo;
 
-    }else{
-
-      await api(
-        "clientes",
-        "PATCH",
-        {
-          nombre
-        },
-        "&id=eq." + cliente.id
-      );
     }
 
-    let total = 0;
+
+    let total=0;
 
     carrito.forEach(item=>{
-      total += item.precio * item.cantidad;
+
+      total +=
+        item.precio *
+        item.cantidad;
+
     });
 
-    const puntosGanados = 1;
+
+    const puntosGanados=1;
+
+
+    /*
+      La venta se crea inicialmente
+      sin corte_id.
+
+      Cuando se cierre el turno,
+      todas las ventas que aún estén
+      sin corte se asignarán al nuevo corte.
+    */
 
     const ventaResponse =
       await api(
@@ -1024,16 +1124,21 @@ async function registerSale(){
         {
           cliente_id:cliente.id,
           total,
-          puntos_ganados:puntosGanados
+          puntos_ganados:puntosGanados,
+          corte_id:null
         }
       );
 
+
     const venta =
       Array.isArray(ventaResponse)
-        ? ventaResponse[0]
-        : ventaResponse;
+      ? ventaResponse[0]
+      : ventaResponse;
 
-    for(const item of carrito){
+
+    for(
+      const item of carrito
+    ){
 
       await api(
         "detalle_ventas",
@@ -1046,49 +1151,53 @@ async function registerSale(){
           precio:item.precio
         }
       );
+
     }
 
-    const puntosActuales =
-      Number(cliente.puntos || 0);
-
-    const nuevosPuntos =
-      puntosActuales + puntosGanados;
 
     await api(
       "clientes",
       "PATCH",
       {
-        puntos:nuevosPuntos
+        puntos:
+          Number(cliente.puntos||0)
+          + puntosGanados
       },
-      "&id=eq." + cliente.id
+      "&id=eq."+cliente.id
     );
+
 
     alert(
-      "✅ Venta registrada.\n\n" +
-      "Total: $" + total.toFixed(2) +
-      "\n⭐ Puntos ganados: " +
-      puntosGanados
+      "✅ Venta registrada."
     );
 
-    carrito = [];
+
+    carrito=[];
 
     renderCart();
 
-    document.getElementById("clienteNombre").value = "";
-    document.getElementById("clienteWhatsapp").value = "";
+    document.getElementById(
+      "clienteNombre"
+    ).value="";
+
+    document.getElementById(
+      "clienteWhatsapp"
+    ).value="";
 
     await loadStats();
+
 
   }catch(error){
 
     alert(
-      "❌ No se pudo registrar la venta:\n\n" +
+      "❌ Error:\n\n"+
       error.message
     );
 
-    console.error(error);
   }
+
 }
+
 
 /* ================= STATS ================= */
 
@@ -1112,43 +1221,58 @@ async function loadStats(){
         "&select=id"
       );
 
-    document.getElementById("statVentas")
-      .textContent = ventas.length;
 
-    document.getElementById("statClientes")
-      .textContent = clientes.length;
+    document.getElementById(
+      "statVentas"
+    ).textContent =
+      ventas.length;
+
+
+    document.getElementById(
+      "statClientes"
+    ).textContent =
+      clientes.length;
+
 
   }catch(error){
 
     console.error(error);
+
   }
 }
 
-/* ================= CIERRES ================= */
+
+/* ================= CERRAR TURNO ================= */
 
 async function closeTurn(){
 
-  if(!currentRole){
+  if(!currentUser){
 
-    alert("❌ Primero debes iniciar sesión.");
+    alert(
+      "❌ Primero inicia sesión."
+    );
+
     return;
   }
 
-  const inputId =
-    currentRole === "andrid"
-      ? "efectivoContadoAndrid"
-      : "efectivoContado";
 
   const contado =
     Number(
-      document.getElementById(inputId).value
+      document.getElementById(
+        "efectivoContado"
+      ).value
     );
+
 
   if(!Number.isFinite(contado)){
 
-    alert("❌ Escribe el efectivo contado.");
+    alert(
+      "❌ Escribe el efectivo contado."
+    );
+
     return;
   }
+
 
   try{
 
@@ -1157,66 +1281,150 @@ async function closeTurn(){
         "ventas",
         "GET",
         null,
-        "&select=id,total"
+        "&select=id,total,corte_id"
       );
 
-    const clientes =
-      await api(
-        "clientes",
-        "GET",
-        null,
-        "&select=id"
+
+    const pendientes =
+      ventas.filter(
+        venta =>
+          venta.corte_id === null ||
+          venta.corte_id === undefined
       );
 
-    let esperado = 0;
 
-    ventas.forEach(v=>{
-      esperado += Number(v.total || 0);
+    let esperado=0;
+
+
+    pendientes.forEach(venta=>{
+
+      esperado +=
+        Number(venta.total||0);
+
     });
+
 
     const diferencia =
       contado - esperado;
 
+
+    /*
+      Primero creamos el corte.
+    */
+
+    const corteResponse =
+      await api(
+        "cierres_turno",
+        "POST",
+        {
+          ventas:pendientes.length,
+          clientes:0,
+          efectivo_esperado:esperado,
+          efectivo_contado:contado,
+          diferencia
+        }
+      );
+
+
+    const corte =
+      Array.isArray(corteResponse)
+      ? corteResponse[0]
+      : corteResponse;
+
+
+    /*
+      Ahora asignamos las ventas
+      pendientes a este corte.
+    */
+
+    for(
+      const venta of pendientes
+    ){
+
+      await api(
+        "ventas",
+        "PATCH",
+        {
+          corte_id:corte.id
+        },
+        "&id=eq."+venta.id
+      );
+
+    }
+
+
+    /*
+      Contamos clientes únicos
+      de esas ventas.
+    */
+
+    const ventasActualizadas =
+      await api(
+        "ventas",
+        "GET",
+        null,
+        "&select=cliente_id&corte_id=eq."+corte.id
+      );
+
+
+    const clientesUnicos =
+      [
+        ...new Set(
+          ventasActualizadas
+            .map(v=>v.cliente_id)
+            .filter(Boolean)
+        )
+      ];
+
+
     await api(
       "cierres_turno",
-      "POST",
+      "PATCH",
       {
-        ventas:ventas.length,
-        clientes:clientes.length,
-        efectivo_esperado:esperado,
-        efectivo_contado:contado,
-        diferencia
-      }
+        clientes:
+          clientesUnicos.length
+      },
+      "&id=eq."+corte.id
     );
+
+
+    document.getElementById(
+      "efectivoContado"
+    ).value="";
+
 
     alert(
       "✅ Corte guardado correctamente."
     );
 
-    document.getElementById(inputId).value = "";
 
     await loadCloseHistory();
-    await loadCloseHistoryAndrid();
-    await loadTurn();
-    await loadStats();
 
   }catch(error){
 
     alert(
-      "❌ No se pudo cerrar el turno:\n\n" +
+      "❌ No se pudo cerrar el turno:\n\n"+
       error.message
     );
 
     console.error(error);
+
   }
+
 }
+
+
+/* ================= HISTORIAL ================= */
 
 async function loadCloseHistory(){
 
   const contenedor =
-    document.getElementById("historial");
+    document.getElementById(
+      "historial"
+    );
 
   if(!contenedor)return;
+
 
   try{
 
@@ -1228,6 +1436,7 @@ async function loadCloseHistory(){
         "&select=*&order=id.desc"
       );
 
+
     if(!cierres.length){
 
       contenedor.innerHTML =
@@ -1236,36 +1445,69 @@ async function loadCloseHistory(){
       return;
     }
 
-    contenedor.innerHTML = "";
+
+    contenedor.innerHTML="";
+
 
     cierres.forEach(corte=>{
 
       const div =
         document.createElement("div");
 
-      div.className = "history-item";
+      div.className =
+        "history-item";
+
 
       div.innerHTML = `
-        <strong>📅 ${formatDate(corte.fecha)}</strong><br>
-        Ventas: ${corte.ventas || 0}<br>
-        Clientes: ${corte.clientes || 0}<br>
-        Efectivo esperado:
-        $${Number(corte.efectivo_esperado || 0).toFixed(2)}<br>
-        Efectivo contado:
-        $${Number(corte.efectivo_contado || 0).toFixed(2)}<br>
+
+        <strong>
+          📅 ${formatDate(corte.fecha)}
+        </strong>
+
+        <br>
+
+        Ventas:
+        ${corte.ventas||0}
+
+        <br>
+
+        Clientes:
+        ${corte.clientes||0}
+
+        <br>
+
+        Esperado:
+        $${Number(
+          corte.efectivo_esperado||0
+        ).toFixed(2)}
+
+        <br>
+
+        Contado:
+        $${Number(
+          corte.efectivo_contado||0
+        ).toFixed(2)}
+
+        <br>
+
         Diferencia:
-        $${Number(corte.diferencia || 0).toFixed(2)}
+        $${Number(
+          corte.diferencia||0
+        ).toFixed(2)}
 
         <button
           class="btn btn-danger"
-          onclick="deleteClose(${corte.id})"
-        >
+          onclick="deleteClose(${corte.id})">
           🗑️ Eliminar corte
         </button>
+
       `;
 
+
       contenedor.appendChild(div);
+
     });
+
 
   }catch(error){
 
@@ -1273,157 +1515,315 @@ async function loadCloseHistory(){
       "<p>Error cargando historial.</p>";
 
     console.error(error);
+
   }
+
 }
 
-async function loadCloseHistoryAndrid(){
 
-  const contenedor =
-    document.getElementById("historialAndrid");
-
-  if(!contenedor)return;
-
-  try{
-
-    const cierres =
-      await api(
-        "cierres_turno",
-        "GET",
-        null,
-        "&select=*&order=id.desc"
-      );
-
-    if(!cierres.length){
-
-      contenedor.innerHTML =
-        "<p>No hay cortes registrados.</p>";
-
-      return;
-    }
-
-    contenedor.innerHTML = "";
-
-    cierres.forEach(corte=>{
-
-      const div =
-        document.createElement("div");
-
-      div.className = "history-item";
-
-      div.innerHTML = `
-        <strong>📅 ${formatDate(corte.fecha)}</strong><br>
-        Ventas: ${corte.ventas || 0}<br>
-        Clientes: ${corte.clientes || 0}<br>
-        Efectivo esperado:
-        $${Number(corte.efectivo_esperado || 0).toFixed(2)}<br>
-        Efectivo contado:
-        $${Number(corte.efectivo_contado || 0).toFixed(2)}<br>
-        Diferencia:
-        $${Number(corte.diferencia || 0).toFixed(2)}
-      `;
-
-      contenedor.appendChild(div);
-    });
-
-  }catch(error){
-
-    contenedor.innerHTML =
-      "<p>Error cargando historial.</p>";
-
-    console.error(error);
-  }
-}
-
-/* ================= ELIMINAR UN CORTE ================= */
+/* ================= ELIMINAR CORTE ================= */
 
 async function deleteClose(id){
 
-  if(currentRole !== "christian"){
+  /*
+    Visualmente Christian y Andrid
+    tienen el mismo acceso.
+
+    Internamente solamente Christian
+    puede ejecutar esta acción.
+  */
+
+  if(currentUser!=="christian"){
 
     alert(
-      "❌ Solo Christian puede eliminar cortes."
+      "❌ No tienes permiso para realizar esta acción."
     );
 
     return;
   }
 
+
   const confirmar =
     confirm(
-      "⚠️ ¿Seguro que quieres eliminar este corte?\n\n" +
-      "El registro será eliminado completamente de Supabase.\n\n" +
-      "Las ventas NO serán eliminadas.\n\n" +
-      "Esta acción no se puede deshacer."
+      "⚠️ ELIMINAR CORTE\n\n"+
+      "Se eliminará:\n\n"+
+      "• El corte\n"+
+      "• Sus ventas\n"+
+      "• Los detalles de las ventas\n"+
+      "• Los clientes relacionados\n\n"+
+      "Esta acción NO se puede deshacer.\n\n"+
+      "¿Continuar?"
     );
+
 
   if(!confirmar)return;
 
+
   try{
+
+    /*
+      1. Obtener las ventas del corte.
+    */
+
+    const ventas =
+      await api(
+        "ventas",
+        "GET",
+        null,
+        "&select=id,cliente_id&corte_id=eq."+id
+      );
+
+
+    /*
+      2. Obtener clientes relacionados.
+    */
+
+    const clientes =
+      [
+        ...new Set(
+          ventas
+            .map(v=>v.cliente_id)
+            .filter(Boolean)
+        )
+      ];
+
+
+    /*
+      3. Eliminar detalles.
+    */
+
+    for(
+      const venta of ventas
+    ){
+
+      await api(
+        "detalle_ventas",
+        "DELETE",
+        null,
+        "&venta_id=eq."+venta.id
+      );
+
+    }
+
+
+    /*
+      4. Eliminar ventas.
+    */
+
+    await api(
+      "ventas",
+      "DELETE",
+      null,
+      "&corte_id=eq."+id
+    );
+
+
+    /*
+      5. Eliminar clientes relacionados
+      solamente si ya no tienen ventas.
+    */
+
+    for(
+      const clienteId of clientes
+    ){
+
+      const ventasRestantes =
+        await api(
+          "ventas",
+          "GET",
+          null,
+          "&select=id&cliente_id=eq."+clienteId+
+          "&limit=1"
+        );
+
+
+      if(!ventasRestantes.length){
+
+        await api(
+          "clientes",
+          "DELETE",
+          null,
+          "&id=eq."+clienteId
+        );
+
+      }
+
+    }
+
+
+    /*
+      6. Finalmente eliminar el corte.
+    */
 
     await api(
       "cierres_turno",
       "DELETE",
       null,
-      "&id=eq." + encodeURIComponent(id)
+      "&id=eq."+id
     );
+
 
     alert(
-      "✅ El corte fue eliminado completamente."
+      "✅ El corte y sus registros relacionados fueron eliminados completamente."
     );
 
+
     /*
-      IMPORTANTE:
-      Aquí NO hacemos showSection('venta').
-      El usuario permanece en historial.
+      NO regresamos a Venta.
     */
 
     await loadCloseHistory();
-    await loadTurn();
+
     await loadStats();
+
 
   }catch(error){
 
     alert(
-      "❌ No se pudo eliminar el corte:\n\n" +
+      "❌ No se pudo eliminar:\n\n"+
       error.message
     );
 
     console.error(error);
+
   }
+
 }
 
-/* ================= ELIMINAR TODO ================= */
+
+/* ================= BORRAR TODO ================= */
 
 async function deleteCloseHistory(){
 
-  if(currentRole !== "christian"){
+  if(currentUser!=="christian"){
 
     alert(
-      "❌ Solo Christian puede borrar el historial."
+      "❌ No tienes permiso para realizar esta acción."
     );
 
     return;
   }
 
+
   const confirmar =
     confirm(
-      "⚠️ ATENCIÓN\n\n" +
-      "Vas a eliminar TODOS los cortes registrados.\n\n" +
-      "Los registros desaparecerán completamente de Supabase.\n\n" +
-      "Las ventas NO serán eliminadas.\n\n" +
-      "¿Quieres continuar?"
+      "🚨 BORRAR TODO EL HISTORIAL\n\n"+
+      "Se eliminarán todos los cortes,\n"+
+      "ventas, detalles y clientes relacionados.\n\n"+
+      "Esta acción NO se puede deshacer.\n\n"+
+      "¿Continuar?"
     );
+
 
   if(!confirmar)return;
 
+
   const confirmar2 =
     confirm(
-      "🚨 ÚLTIMA CONFIRMACIÓN\n\n" +
-      "¿REALMENTE quieres borrar todo el historial de cortes?"
+      "⚠️ ÚLTIMA CONFIRMACIÓN\n\n"+
+      "¿REALMENTE quieres borrar todo?"
     );
+
 
   if(!confirmar2)return;
 
+
   try{
+
+    const ventas =
+      await api(
+        "ventas",
+        "GET",
+        null,
+        "&select=id,cliente_id,corte_id"
+      );
+
+
+    const clientes =
+      [
+        ...new Set(
+          ventas
+            .map(v=>v.cliente_id)
+            .filter(Boolean)
+        )
+      ];
+
+
+    /*
+      Eliminar detalles de todas
+      las ventas que tienen corte.
+    */
+
+    for(
+      const venta of ventas
+    ){
+
+      if(
+        venta.corte_id !== null &&
+        venta.corte_id !== undefined
+      ){
+
+        await api(
+          "detalle_ventas",
+          "DELETE",
+          null,
+          "&venta_id=eq."+venta.id
+        );
+
+      }
+
+    }
+
+
+    /*
+      Eliminar ventas relacionadas
+      con cortes.
+    */
+
+    await api(
+      "ventas",
+      "DELETE",
+      null,
+      "&corte_id=not.is.null"
+    );
+
+
+    /*
+      Eliminar clientes que ya no
+      tengan ventas.
+    */
+
+    for(
+      const clienteId of clientes
+    ){
+
+      const restantes =
+        await api(
+          "ventas",
+          "GET",
+          null,
+          "&select=id&cliente_id=eq."+clienteId+
+          "&limit=1"
+        );
+
+
+      if(!restantes.length){
+
+        await api(
+          "clientes",
+          "DELETE",
+          null,
+          "&id=eq."+clienteId
+        );
+
+      }
+
+    }
+
+
+    /*
+      Eliminar todos los cortes.
+    */
 
     await api(
       "cierres_turno",
@@ -1432,44 +1832,32 @@ async function deleteCloseHistory(){
       "&id=gte.0"
     );
 
+
     alert(
-      "✅ Todo el historial de cortes fue eliminado completamente."
+      "✅ Todo el historial y sus registros relacionados fueron eliminados."
     );
 
-    /*
-      Permanece en historial.
-      NO regresa automáticamente a Venta.
-    */
 
     await loadCloseHistory();
-    await loadTurn();
+
     await loadStats();
+
 
   }catch(error){
 
     alert(
-      "❌ No se pudo borrar el historial:\n\n" +
+      "❌ No se pudo borrar todo:\n\n"+
       error.message
     );
 
     console.error(error);
+
   }
+
 }
 
-/* ================= TURNO ================= */
 
-async function loadTurn(){
-
-  /*
-    El usuario pidió que siempre se muestre:
-    Turno 1
-  */
-
-  document.getElementById("statTurno")
-    .textContent = "Turno 1";
-}
-
-/* ================= CONFIGURACIÓN ================= */
+/* ================= CONFIG ================= */
 
 async function loadConfig(){
 
@@ -1483,56 +1871,67 @@ async function loadConfig(){
         "&select=*&limit=1"
       );
 
-    if(data && data.length){
 
-      config = data[0];
+    if(data.length){
 
-      document.getElementById("puntosPremio")
-        .value =
-        config.puntos_para_premio || 10;
+      config=data[0];
 
-      document.getElementById("nombrePremio")
-        .value =
-        config.premio || "Premio";
+      document.getElementById(
+        "puntosPremio"
+      ).value =
+        config.puntos_para_premio||10;
+
+      document.getElementById(
+        "nombrePremio"
+      ).value =
+        config.premio||"Premio";
+
     }
 
   }catch(error){
 
     console.error(error);
+
   }
+
 }
+
 
 async function saveConfig(){
 
-  if(currentRole !== "christian"){
+  if(currentUser!=="christian"){
 
     alert(
-      "❌ Solo Christian puede cambiar la configuración."
+      "❌ No tienes permiso para cambiar esto."
     );
 
     return;
   }
+
 
   const puntos =
     Number(
-      document.getElementById("puntosPremio").value
+      document.getElementById(
+        "puntosPremio"
+      ).value
     );
 
+
   const premio =
-    document.getElementById("nombrePremio")
-      .value.trim();
+    document.getElementById(
+      "nombrePremio"
+    ).value.trim();
 
-  if(!Number.isFinite(puntos) || puntos <= 0){
 
-    alert("❌ Escribe una cantidad válida de puntos.");
+  if(!puntos || puntos<=0){
+
+    alert(
+      "❌ Puntos inválidos."
+    );
+
     return;
   }
 
-  if(!premio){
-
-    alert("❌ Escribe el nombre del premio.");
-    return;
-  }
 
   try{
 
@@ -1544,7 +1943,8 @@ async function saveConfig(){
         "&select=*&limit=1"
       );
 
-    if(actual && actual.length){
+
+    if(actual.length){
 
       await api(
         "configuracion",
@@ -1553,7 +1953,7 @@ async function saveConfig(){
           puntos_para_premio:puntos,
           premio
         },
-        "&id=eq." + actual[0].id
+        "&id=eq."+actual[0].id
       );
 
     }else{
@@ -1566,108 +1966,136 @@ async function saveConfig(){
           premio
         }
       );
+
     }
 
-    config.puntos_para_premio = puntos;
-    config.premio = premio;
 
-    alert("✅ Configuración guardada.");
+    alert(
+      "✅ Configuración guardada."
+    );
+
 
   }catch(error){
 
     alert(
-      "❌ No se pudo guardar:\n\n" +
+      "❌ Error:\n\n"+
       error.message
     );
+
   }
+
 }
 
-/* ================= CANJEAR PREMIO ================= */
+
+/* ================= PREMIOS ================= */
 
 async function redeemPoints(){
 
-  if(currentRole !== "christian"){
+  if(currentUser!=="christian"){
 
     alert(
-      "❌ Solo Christian puede canjear premios."
+      "❌ No tienes permiso para esta acción."
     );
 
     return;
   }
 
+
   const whatsapp =
-    document.getElementById("premioWhatsapp")
-      .value.trim();
+    document.getElementById(
+      "premioWhatsapp"
+    ).value.trim();
+
 
   if(!whatsapp){
 
-    alert("❌ Escribe el WhatsApp.");
+    alert(
+      "Escribe el WhatsApp."
+    );
+
     return;
   }
+
 
   try{
 
     const cliente =
-      await findClientByWhatsapp(whatsapp);
+      await findClient(whatsapp);
+
 
     if(!cliente){
 
-      alert("❌ Cliente no encontrado.");
-      return;
-    }
-
-    const puntos =
-      Number(cliente.puntos || 0);
-
-    const necesarios =
-      Number(config.puntos_para_premio || 10);
-
-    if(puntos < necesarios){
-
       alert(
-        "❌ No tiene suficientes puntos.\n\n" +
-        "Tiene: " + puntos +
-        "\nNecesita: " + necesarios
+        "Cliente no encontrado."
       );
 
       return;
     }
 
+
+    const necesarios =
+      Number(
+        config.puntos_para_premio||10
+      );
+
+
+    const puntos =
+      Number(cliente.puntos||0);
+
+
+    if(puntos<necesarios){
+
+      alert(
+        "❌ No tiene suficientes puntos."
+      );
+
+      return;
+    }
+
+
     await api(
       "clientes",
       "PATCH",
       {
-        puntos:puntos - necesarios,
+        puntos:
+          puntos-necesarios,
+
         premios_obtenidos:
-          Number(cliente.premios_obtenidos || 0) + 1
+          Number(
+            cliente.premios_obtenidos||0
+          )+1
       },
-      "&id=eq." + cliente.id
+      "&id=eq."+cliente.id
     );
+
 
     alert(
-      "🎁 Premio canjeado correctamente.\n\n" +
-      "Premio: " + config.premio
+      "🎁 Premio canjeado."
     );
 
-    document.getElementById("premioWhatsapp").value = "";
 
   }catch(error){
 
     alert(
-      "❌ No se pudo canjear el premio:\n\n" +
       error.message
     );
+
   }
+
 }
+
 
 /* ================= ADMIN PRODUCTOS ================= */
 
 async function loadAdminProducts(){
 
   const contenedor =
-    document.getElementById("adminProductos");
+    document.getElementById(
+      "adminProductos"
+    );
 
   if(!contenedor)return;
+
 
   try{
 
@@ -1679,88 +2107,98 @@ async function loadAdminProducts(){
         "&select=*&order=id.asc"
       );
 
-    contenedor.innerHTML = "";
+
+    contenedor.innerHTML="";
+
 
     data.forEach(producto=>{
 
       const div =
         document.createElement("div");
 
-      div.className = "product-admin";
+      div.className =
+        "product-admin";
+
 
       div.innerHTML = `
+
         <input
           id="nombre-${producto.id}"
-          value="${escapeAttribute(producto.nombre)}"
-          placeholder="Nombre"
-        >
+          value="${escapeAttribute(producto.nombre)}">
 
         <input
           id="precio-${producto.id}"
           type="number"
           step="0.01"
-          value="${Number(producto.precio)}"
-          placeholder="Precio"
-        >
+          value="${producto.precio}">
 
         <button
           class="btn"
-          onclick="updateProduct(${producto.id})"
-        >
+          onclick="updateProduct(${producto.id})">
           💾 Guardar
         </button>
 
         <button
-          class="btn ${producto.activo ? "btn-danger" : "btn-green"}"
-          onclick="toggleProduct(${producto.id}, ${producto.activo ? "false" : "true"})"
-        >
-          ${producto.activo ? "🙈 Ocultar" : "👁️ Restaurar"}
+          class="btn ${
+            producto.activo
+            ? "btn-danger"
+            : "btn-green"
+          }"
+          onclick="toggleProduct(
+            ${producto.id},
+            ${producto.activo ? "false":"true"}
+          )">
+
+          ${
+            producto.activo
+            ? "🙈 Ocultar"
+            : "👁️ Restaurar"
+          }
+
         </button>
+
       `;
 
+
       contenedor.appendChild(div);
+
     });
+
 
   }catch(error){
 
-    contenedor.innerHTML =
-      "<p>Error cargando productos.</p>";
-
     console.error(error);
+
   }
+
 }
+
 
 async function updateProduct(id){
 
-  if(currentRole !== "christian"){
+  if(currentUser!=="christian"){
 
     alert(
-      "❌ Solo Christian puede modificar productos."
+      "❌ No tienes permiso."
     );
 
     return;
   }
 
+
   const nombre =
-    document.getElementById("nombre-" + id)
-      .value.trim();
+    document.getElementById(
+      "nombre-"+id
+    ).value.trim();
+
 
   const precio =
     Number(
-      document.getElementById("precio-" + id).value
+      document.getElementById(
+        "precio-"+id
+      ).value
     );
 
-  if(!nombre){
-
-    alert("❌ Escribe un nombre.");
-    return;
-  }
-
-  if(!Number.isFinite(precio) || precio < 0){
-
-    alert("❌ Escribe un precio válido.");
-    return;
-  }
 
   try{
 
@@ -1771,33 +2209,42 @@ async function updateProduct(id){
         nombre,
         precio
       },
-      "&id=eq." + id
+      "&id=eq."+id
     );
 
-    alert("✅ Producto actualizado.");
+
+    alert(
+      "✅ Producto actualizado."
+    );
+
 
     await loadProducts();
+
     await loadAdminProducts();
+
 
   }catch(error){
 
     alert(
-      "❌ No se pudo actualizar:\n\n" +
       error.message
     );
+
   }
+
 }
 
-async function toggleProduct(id, activo){
 
-  if(currentRole !== "christian"){
+async function toggleProduct(id,activo){
+
+  if(currentUser!=="christian"){
 
     alert(
-      "❌ Solo Christian puede modificar productos."
+      "❌ No tienes permiso."
     );
 
     return;
   }
+
 
   try{
 
@@ -1807,50 +2254,64 @@ async function toggleProduct(id, activo){
       {
         activo
       },
-      "&id=eq." + id
+      "&id=eq."+id
     );
 
+
     await loadProducts();
+
     await loadAdminProducts();
+
 
   }catch(error){
 
     alert(
-      "❌ No se pudo modificar el producto:\n\n" +
       error.message
     );
+
   }
+
 }
+
 
 async function addProduct(){
 
-  if(currentRole !== "christian"){
+  if(currentUser!=="christian"){
 
     alert(
-      "❌ Solo Christian puede agregar productos."
+      "❌ No tienes permiso."
     );
 
     return;
   }
 
+
   const nombre =
-    prompt("Nombre del producto:");
+    prompt(
+      "Nombre del producto:"
+    );
+
 
   if(!nombre)return;
 
-  const precioTexto =
-    prompt("Precio del producto:");
-
-  if(precioTexto === null)return;
 
   const precio =
-    Number(precioTexto);
+    Number(
+      prompt(
+        "Precio:"
+      )
+    );
 
-  if(!Number.isFinite(precio) || precio < 0){
 
-    alert("❌ Precio inválido.");
+  if(!Number.isFinite(precio)){
+
+    alert(
+      "Precio inválido."
+    );
+
     return;
   }
+
 
   try{
 
@@ -1865,29 +2326,36 @@ async function addProduct(){
       }
     );
 
-    alert("✅ Producto agregado.");
+
+    alert(
+      "✅ Producto agregado."
+    );
+
 
     await loadProducts();
+
     await loadAdminProducts();
+
 
   }catch(error){
 
     alert(
-      "❌ No se pudo agregar:\n\n" +
       error.message
     );
+
   }
+
 }
+
 
 /* ================= UTILIDADES ================= */
 
 function formatDate(fecha){
 
-  if(!fecha)return "Sin fecha";
+  if(!fecha)return "";
 
-  try{
-
-    return new Date(fecha).toLocaleString(
+  return new Date(fecha)
+    .toLocaleString(
       "es-MX",
       {
         dateStyle:"short",
@@ -1895,34 +2363,35 @@ function formatDate(fecha){
       }
     );
 
-  }catch{
-
-    return fecha;
-  }
 }
+
 
 function escapeHtml(text){
 
-  return String(text ?? "")
+  return String(text??"")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+
 }
 
+
 function escapeAttribute(text){
+
   return escapeHtml(text);
+
 }
+
 
 /* ================= INICIO ================= */
 
 async function init(){
 
   await loadProducts();
+
   await loadStats();
-  await loadTurn();
-  await loadConfig();
 
 }
 
@@ -1932,3530 +2401,3 @@ init();
 
 </body>
 </html>
-
-
-      <div
-        id="menu"
-        class="menu-grid"
-      >
-
-        <div class="loading">
-          Cargando menú...
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>
-        🛒 Pedido
-      </h2>
-
-      <div id="cart">
-
-        <div class="cart-empty">
-          Agrega productos al pedido.
-        </div>
-
-      </div>
-
-
-      <div class="total">
-
-        <span>
-          Total
-        </span>
-
-        <strong id="total">
-          $0
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>
-        👤 Cliente
-      </h2>
-
-
-      <div class="field">
-
-        <label>
-          Nombre
-        </label>
-
-        <input
-          id="customerName"
-          type="text"
-          placeholder="Nombre del cliente"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          WhatsApp
-        </label>
-
-        <input
-          id="customerWhatsapp"
-          type="tel"
-          inputmode="numeric"
-          maxlength="10"
-          placeholder="10 dígitos"
-        >
-
-      </div>
-
-
-      <div
-        id="pointsPreview"
-        class="notice hidden"
-      ></div>
-
-
-      <button
-        class="primary-button"
-        onclick="registerSale()"
-      >
-        💰 Registrar venta
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- ============================= -->
-  <!-- ACCESO -->
-  <!-- ============================= -->
-
-  <section
-    id="admin"
-    class="section"
-  >
-
-    <div
-      id="adminLogin"
-      class="card admin-login"
-    >
-
-      <h2>
-        🔐 Acceso
-      </h2>
-
-      <div class="notice">
-        Selecciona tu tipo de acceso.
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Tipo de usuario
-        </label>
-
-        <select id="loginRole">
-
-          <option value="vendedor">
-            👨‍💼 Vendedor
-          </option>
-
-          <option value="gerente">
-            👑 Gerente
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          PIN
-        </label>
-
-        <input
-          id="adminPin"
-          type="password"
-          inputmode="numeric"
-          placeholder="PIN"
-        >
-
-      </div>
-
-
-      <button
-        class="primary-button"
-        onclick="loginAdmin()"
-      >
-        Entrar
-      </button>
-
-    </div>
-
-
-    <div
-      id="adminContent"
-      class="admin-content"
-    >
-
-
-      <!-- ============================= -->
-      <!-- CIERRE DE TURNO -->
-      <!-- ============================= -->
-
-      <div class="card">
-
-        <h2>
-          🔒 Cierre de turno
-        </h2>
-
-
-        <div id="roleNotice"></div>
-
-
-        <div class="notice">
-
-          Aquí puedes revisar cuánto debe haber
-          en efectivo y cuánto tienes físicamente.
-
-          <br><br>
-
-          Al cerrar el turno, los contadores
-          comenzarán nuevamente desde 0.
-
-        </div>
-
-
-        <div class="close-stats">
-
-          <div class="close-stat">
-
-            <div class="close-stat-label">
-              Ventas
-            </div>
-
-            <div
-              class="close-stat-value"
-              id="closeVentas"
-            >
-              0
-            </div>
-
-          </div>
-
-
-          <div class="close-stat">
-
-            <div class="close-stat-label">
-              Clientes
-            </div>
-
-            <div
-              class="close-stat-value"
-              id="closeClientes"
-            >
-              0
-            </div>
-
-          </div>
-
-
-          <div class="close-stat">
-
-            <div class="close-stat-label">
-              Efectivo esperado
-            </div>
-
-            <div
-              class="close-stat-value"
-              id="closeEsperado"
-            >
-              $0.00
-            </div>
-
-          </div>
-
-
-          <div class="close-stat">
-
-            <div class="close-stat-label">
-              Turno
-            </div>
-
-            <div
-              class="close-stat-value"
-              id="closeNumero"
-            >
-              Turno 1
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            💵 Cantidad de efectivo contado
-          </label>
-
-          <input
-            id="cashCounted"
-            type="number"
-            min="0"
-            step="0.01"
-            placeholder="Ej. 2500"
-          >
-
-        </div>
-
-
-        <button
-          class="secondary-button"
-          onclick="calculateDifference()"
-        >
-          🧮 Calcular diferencia
-        </button>
-
-
-        <div
-          id="cashResult"
-          class="cash-result hidden"
-        ></div>
-
-
-        <button
-          class="primary-button"
-          style="margin-top:12px;"
-          onclick="closeTurn()"
-        >
-          🔒 Cerrar turno
-        </button>
-
-      </div>
-
-
-      <!-- ============================= -->
-      <!-- HISTORIAL -->
-      <!-- ============================= -->
-
-      <div class="card">
-
-        <h2>
-          📋 Historial de cierres
-        </h2>
-
-
-        <div
-          id="historyManagerNotice"
-          class="notice"
-        ></div>
-
-
-        <div id="closeHistory">
-          Cargando...
-        </div>
-
-      </div>
-
-
-      <!-- ============================= -->
-      <!-- OPCIONES SOLO GERENTE -->
-      <!-- ============================= -->
-
-      <div
-        id="gerenteOptions"
-        class="hidden"
-      >
-
-        <div class="admin-grid">
-
-
-          <!-- CONFIGURACIÓN -->
-
-          <div class="card">
-
-            <h2>
-              🎁 Configuración
-            </h2>
-
-
-            <div class="field">
-
-              <label>
-                Puntos para obtener Premio
-              </label>
-
-              <input
-                id="pointsRequired"
-                type="number"
-                min="1"
-                value="10"
-              >
-
-            </div>
-
-
-            <div class="field">
-
-              <label>
-                Beneficio
-              </label>
-
-              <input
-                id="prizeName"
-                type="text"
-                value="Premio"
-              >
-
-            </div>
-
-
-            <button
-              class="primary-button"
-              onclick="saveConfig()"
-            >
-              💾 Guardar configuración
-            </button>
-
-          </div>
-
-
-          <!-- PREMIO -->
-
-          <div class="card">
-
-            <h2>
-              🎁 Premio
-            </h2>
-
-
-            <div class="notice">
-              Busca al cliente por WhatsApp
-              para autorizar su Premio.
-            </div>
-
-
-            <div class="field">
-
-              <label>
-                WhatsApp
-              </label>
-
-              <input
-                id="redeemWhatsapp"
-                type="tel"
-                inputmode="numeric"
-                maxlength="10"
-                placeholder="10 dígitos"
-              >
-
-            </div>
-
-
-            <button
-              class="secondary-button"
-              onclick="findCustomerForPrize()"
-            >
-              🔎 Buscar cliente
-            </button>
-
-
-            <div
-              id="redeemResult"
-              class="customer-result"
-            ></div>
-
-          </div>
-
-
-          <!-- REINICIAR PUNTOS -->
-
-          <div class="card">
-
-            <h2>
-              🔄 Reiniciar puntos
-            </h2>
-
-
-            <div class="notice">
-              Esta opción pone los puntos
-              del cliente en 0.
-              Sus compras e historial permanecen.
-            </div>
-
-
-            <div class="field">
-
-              <label>
-                WhatsApp del cliente
-              </label>
-
-              <input
-                id="resetWhatsapp"
-                type="tel"
-                inputmode="numeric"
-                maxlength="10"
-                placeholder="10 dígitos"
-              >
-
-            </div>
-
-
-            <button
-              class="danger-button"
-              onclick="resetCustomerPoints()"
-            >
-              🗑️ Poner puntos en 0
-            </button>
-
-          </div>
-
-
-          <!-- AGREGAR PRODUCTO -->
-
-          <div class="card">
-
-            <h2>
-              ➕ Agregar producto
-            </h2>
-
-
-            <div class="field">
-
-              <label>
-                Nombre
-              </label>
-
-              <input
-                id="newProductName"
-                type="text"
-                placeholder="Ej. Elote especial"
-              >
-
-            </div>
-
-
-            <div class="field">
-
-              <label>
-                Categoría
-              </label>
-
-              <input
-                id="newProductCategory"
-                type="text"
-                placeholder="Ej. Elotes"
-              >
-
-            </div>
-
-
-            <div class="field">
-
-              <label>
-                Precio
-              </label>
-
-              <input
-                id="newProductPrice"
-                type="number"
-                min="0"
-                step="0.01"
-                placeholder="0"
-              >
-
-            </div>
-
-
-            <button
-              class="primary-button"
-              onclick="addProduct()"
-            >
-              ➕ Agregar al menú
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- PRODUCTOS -->
-
-        <div class="card">
-
-          <h2>
-            📋 Administrar productos
-          </h2>
-
-          <div id="adminProducts">
-            Cargando productos...
-          </div>
-
-        </div>
-
-
-        <!-- BORRAR HISTORIAL -->
-
-        <div class="card">
-
-          <h2>
-            🗑️ Administración del historial
-          </h2>
-
-          <div class="notice warning">
-
-            ⚠️ Esta opción solamente está disponible
-            para el Gerente.
-
-            <br><br>
-
-            Al borrar el historial de cierres,
-            los registros de cortes se eliminarán
-            permanentemente.
-
-          </div>
-
-
-          <button
-            class="danger-button"
-            onclick="deleteCloseHistory()"
-          >
-            🗑️ Borrar historial de cortes
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- ============================= -->
-      <!-- SALIR -->
-      <!-- ============================= -->
-
-      <div class="card">
-
-        <button
-          class="danger-button"
-          onclick="logoutUser()"
-        >
-          🔒 Cerrar sesión
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <div class="footer">
-    🌽 Elotemanía · Entre compas sabe mejor
-  </div>
-
-</main>
-
-
-<script>
-
-/* =========================================
-   CONFIGURACIÓN DE ACCESOS
-========================================= */
-
-const GERENTE_PIN = "0204";
-
-const VENDEDOR_PIN = "1234";
-
-let currentRole = null;
-
-let cart = [];
-
-let products = [];
-
-let config = {
-  puntos_para_premio:10,
-  premio:"Premio"
-};
-
-let turnoActual = {
-  ventas:0,
-  clientes:0,
-  efectivo:0,
-  numero:1
-};
-
-
-/* =========================================
-   API
-========================================= */
-
-async function api(
-  table,
-  method = "GET",
-  body = null,
-  query = ""
-){
-
-  const url =
-    "/api/supabase?table=" +
-    encodeURIComponent(table) +
-    query;
-
-
-  const options = {
-
-    method,
-
-    headers:{
-      "Content-Type":"application/json"
-    }
-
-  };
-
-
-  if(body !== null){
-
-    options.body =
-      JSON.stringify(body);
-
-  }
-
-
-  const response =
-    await fetch(
-      url,
-      options
-    );
-
-
-  const text =
-    await response.text();
-
-
-  let data;
-
-
-  try{
-
-    data =
-      text
-        ? JSON.parse(text)
-        : null;
-
-  }catch{
-
-    throw new Error(
-      "El servidor devolvió una respuesta inválida."
-    );
-
-  }
-
-
-  if(!response.ok){
-
-    let message =
-      data?.message ||
-      data?.error ||
-      data?.hint ||
-      "Error desconocido.";
-
-    throw new Error(message);
-
-  }
-
-
-  return data;
-
-}
-
-
-/* =========================================
-   INICIO
-========================================= */
-
-window.addEventListener(
-  "DOMContentLoaded",
-  async function(){
-
-    await loadConfig();
-
-    await loadProducts();
-
-    await loadTurn();
-
-    await loadStats();
-
-    await loadCloseHistory();
-
-  }
-);
-
-
-/* =========================================
-   SECCIONES
-========================================= */
-
-function showSection(section){
-
-  document
-    .querySelectorAll(".section")
-    .forEach(
-      item =>
-        item.classList.remove("active")
-    );
-
-
-  document
-    .querySelectorAll(".tab")
-    .forEach(
-      item =>
-        item.classList.remove("active")
-    );
-
-
-  document
-    .getElementById(section)
-    .classList.add("active");
-
-
-  if(section === "venta"){
-
-    document
-      .getElementById("tabVenta")
-      .classList.add("active");
-
-  }
-
-
-  if(section === "admin"){
-
-    document
-      .getElementById("tabAdmin")
-      .classList.add("active");
-
-  }
-
-}
-
-
-/* =========================================
-   PRODUCTOS
-========================================= */
-
-async function loadProducts(){
-
-  const menu =
-    document.getElementById("menu");
-
-
-  menu.innerHTML =
-    `<div class="loading">
-      Cargando menú...
-    </div>`;
-
-
-  try{
-
-    products =
-      await api(
-        "productos",
-        "GET",
-        null,
-        "&select=*&activo=eq.true&order=id.asc"
-      );
-
-
-    renderMenu();
-
-    if(currentRole === "gerente"){
-
-      renderAdminProducts();
-
-    }
-
-  }catch(error){
-
-    menu.innerHTML =
-      `<div class="notice">
-        ❌ No se pudo cargar el menú.
-        <br><br>
-        ${escapeHtml(error.message)}
-      </div>`;
-
-  }
-
-}
-
-
-function renderMenu(){
-
-  const menu =
-    document.getElementById("menu");
-
-
-  if(!products.length){
-
-    menu.innerHTML =
-      `<div class="notice">
-        No hay productos activos.
-      </div>`;
-
-    return;
-
-  }
-
-
-  menu.innerHTML =
-    products
-      .map(product => `
-
-        <div class="product">
-
-          <div>
-
-            <div class="product-name">
-              ${escapeHtml(product.nombre)}
-            </div>
-
-            <div class="product-category">
-              ${escapeHtml(product.categoria || "")}
-            </div>
-
-          </div>
-
-          <div class="product-bottom">
-
-            <div class="price">
-              $${money(product.precio)}
-            </div>
-
-            <button
-              class="add-btn"
-              onclick="addToCart(${product.id})"
-            >
-              +
-            </button>
-
-          </div>
-
-        </div>
-
-      `)
-      .join("");
-
-}
-
-
-function addToCart(id){
-
-  const product =
-    products.find(
-      p => Number(p.id) === Number(id)
-    );
-
-
-  if(!product)return;
-
-
-  const existing =
-    cart.find(
-      item =>
-        Number(item.id) === Number(id)
-    );
-
-
-  if(existing){
-
-    existing.cantidad++;
-
-  }else{
-
-    cart.push({
-
-      id:product.id,
-
-      nombre:product.nombre,
-
-      precio:Number(product.precio),
-
-      cantidad:1
-
-    });
-
-  }
-
-
-  renderCart();
-
-}
-
-
-function changeQuantity(id,change){
-
-  const item =
-    cart.find(
-      x => Number(x.id) === Number(id)
-    );
-
-
-  if(!item)return;
-
-
-  item.cantidad += change;
-
-
-  if(item.cantidad <= 0){
-
-    cart =
-      cart.filter(
-        x => Number(x.id) !== Number(id)
-      );
-
-  }
-
-
-  renderCart();
-
-}
-
-
-function renderCart(){
-
-  const container =
-    document.getElementById("cart");
-
-
-  if(!cart.length){
-
-    container.innerHTML =
-      `<div class="cart-empty">
-        Agrega productos al pedido.
-      </div>`;
-
-
-    document.getElementById("total").textContent =
-      "$0";
-
-
-    return;
-
-  }
-
-
-  let total = 0;
-
-
-  container.innerHTML =
-    cart
-      .map(item => {
-
-        const subtotal =
-          item.precio *
-          item.cantidad;
-
-
-        total += subtotal;
-
-
-        return `
-
-          <div class="cart-item">
-
-            <div>
-
-              <div class="cart-name">
-                ${escapeHtml(item.nombre)}
-              </div>
-
-              <div class="cart-price">
-                $${money(item.precio)}
-                ×
-                ${item.cantidad}
-                =
-                $${money(subtotal)}
-              </div>
-
-            </div>
-
-            <div class="quantity">
-
-              <button
-                onclick="changeQuantity(${item.id},-1)"
-              >
-                −
-              </button>
-
-              <span>
-                ${item.cantidad}
-              </span>
-
-              <button
-                onclick="changeQuantity(${item.id},1)"
-              >
-                +
-              </button>
-
-            </div>
-
-          </div>
-
-        `;
-
-      })
-      .join("");
-
-
-  document.getElementById("total").textContent =
-    "$" + money(total);
-
-}
-
-
-/* =========================================
-   CONFIGURACIÓN PREMIO
-========================================= */
-
-async function loadConfig(){
-
-  try{
-
-    const rows =
-      await api(
-        "configuracion",
-        "GET",
-        null,
-        "&select=*&limit=1"
-      );
-
-
-    if(rows && rows.length){
-
-      config =
-        rows[0];
-
-    }
-
-
-    const pointsInput =
-      document.getElementById("pointsRequired");
-
-    const prizeInput =
-      document.getElementById("prizeName");
-
-
-    if(pointsInput){
-
-      pointsInput.value =
-        config.puntos_para_premio || 10;
-
-    }
-
-
-    if(prizeInput){
-
-      prizeInput.value =
-        config.premio || "Premio";
-
-    }
-
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
-}
-
-
-async function saveConfig(){
-
-  if(currentRole !== "gerente"){
-
-    alert(
-      "❌ Solo el Gerente puede modificar la configuración."
-    );
-
-    return;
-
-  }
-
-
-  const points =
-    Number(
-      document.getElementById(
-        "pointsRequired"
-      ).value
-    );
-
-
-  const prize =
-    document.getElementById(
-      "prizeName"
-    ).value.trim();
-
-
-  if(!Number.isFinite(points) || points < 1){
-
-    alert(
-      "Los puntos deben ser mayores a 0."
-    );
-
-    return;
-
-  }
-
-
-  if(!prize){
-
-    alert(
-      "Escribe el nombre del beneficio."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    const rows =
-      await api(
-        "configuracion",
-        "GET",
-        null,
-        "&select=*&limit=1"
-      );
-
-
-    const data = {
-
-      puntos_para_premio:
-        Math.floor(points),
-
-      premio:
-        prize
-
-    };
-
-
-    if(rows.length){
-
-      await api(
-        "configuracion",
-        "PATCH",
-        data,
-        "&id=eq." + rows[0].id
-      );
-
-    }else{
-
-      await api(
-        "configuracion",
-        "POST",
-        data
-      );
-
-    }
-
-
-    config =
-      data;
-
-
-    alert(
-      "✅ Configuración guardada."
-    );
-
-
-  }catch(error){
-
-    alert(
-      "❌ No se pudo guardar:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   VENTA
-========================================= */
-
-async function registerSale(){
-
-  if(!cart.length){
-
-    alert(
-      "Agrega al menos un producto."
-    );
-
-    return;
-
-  }
-
-
-  const name =
-    document
-      .getElementById("customerName")
-      .value
-      .trim();
-
-
-  const whatsapp =
-    document
-      .getElementById("customerWhatsapp")
-      .value
-      .trim();
-
-
-  if(!name){
-
-    alert(
-      "Escribe el nombre del cliente."
-    );
-
-    return;
-
-  }
-
-
-  if(!/^\d{10}$/.test(whatsapp)){
-
-    alert(
-      "El WhatsApp debe tener 10 dígitos."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    let clientes =
-      await api(
-        "clientes",
-        "GET",
-        null,
-        "&select=*&whatsapp=eq." +
-        encodeURIComponent(whatsapp)
-      );
-
-
-    let cliente;
-
-
-    if(clientes.length){
-
-      cliente =
-        clientes[0];
-
-    }else{
-
-      const nuevos =
-        await api(
-          "clientes",
-          "POST",
-          {
-
-            nombre:name,
-
-            whatsapp:whatsapp,
-
-            puntos:0,
-
-            premios_obtenidos:0
-
-          }
-        );
-
-
-      cliente =
-        nuevos[0];
-
-    }
-
-
-    if(cliente.nombre !== name){
-
-      await api(
-        "clientes",
-        "PATCH",
-        {
-          nombre:name
-        },
-        "&id=eq." + cliente.id
-      );
-
-    }
-
-
-    const threshold =
-      Number(
-        config.puntos_para_premio || 10
-      );
-
-
-    const currentPoints =
-      Number(cliente.puntos || 0);
-
-
-    let newPoints =
-      currentPoints;
-
-
-    if(currentPoints < threshold){
-
-      newPoints =
-        Math.min(
-          currentPoints + 1,
-          threshold
-        );
-
-    }
-
-
-    const total =
-      cart.reduce(
-        (sum,item) =>
-          sum +
-          (
-            Number(item.precio) *
-            Number(item.cantidad)
-          ),
-        0
-      );
-
-
-    const ventas =
-      await api(
-        "ventas",
-        "POST",
-        {
-
-          cliente_id:
-            cliente.id,
-
-          total:
-            total,
-
-          puntos_ganados:
-            newPoints - currentPoints
-
-        }
-      );
-
-
-    const venta =
-      ventas[0];
-
-
-    for(const item of cart){
-
-      await api(
-        "detalle_ventas",
-        "POST",
-        {
-
-          venta_id:
-            venta.id,
-
-          producto_id:
-            item.id,
-
-          nombre_producto:
-            item.nombre,
-
-          cantidad:
-            item.cantidad,
-
-          precio:
-            item.precio
-
-        }
-      );
-
-    }
-
-
-    if(newPoints !== currentPoints){
-
-      await api(
-        "clientes",
-        "PATCH",
-        {
-          puntos:newPoints
-        },
-        "&id=eq." + cliente.id
-      );
-
-    }
-
-
-    let message =
-      "🌽 ELOTEMANÍA\n\n" +
-      "¡Gracias por tu compra, " +
-      name +
-      "! ❤️\n\n" +
-      "Total: $" +
-      money(total) +
-      "\n\n";
-
-
-    if(newPoints >= threshold){
-
-      message +=
-        "🎁 ¡Felicidades!\n" +
-        "Ya tienes tu Premio disponible.";
-
-    }else{
-
-      const faltan =
-        threshold -
-        newPoints;
-
-
-      message +=
-        "⭐ Tienes " +
-        newPoints +
-        " punto" +
-        (newPoints === 1 ? "" : "s") +
-        ".\n" +
-        "Te faltan " +
-        faltan +
-        " para tu Premio.";
-
-    }
-
-
-    cart = [];
-
-    renderCart();
-
-
-    document.getElementById(
-      "customerName"
-    ).value = "";
-
-
-    document.getElementById(
-      "customerWhatsapp"
-    ).value = "";
-
-
-    document.getElementById(
-      "pointsPreview"
-    ).classList.add("hidden");
-
-
-    await loadTurn();
-
-    await loadStats();
-
-
-    const whatsappUrl =
-      "https://wa.me/52" +
-      whatsapp +
-      "?text=" +
-      encodeURIComponent(message);
-
-
-    window.open(
-      whatsappUrl,
-      "_blank"
-    );
-
-
-    alert(
-      "✅ Venta registrada correctamente."
-    );
-
-
-  }catch(error){
-
-    alert(
-      "❌ No se pudo registrar la venta:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   PUNTOS
-========================================= */
-
-document
-  .getElementById("customerWhatsapp")
-  .addEventListener(
-    "blur",
-    updatePointsPreview
-  );
-
-
-async function updatePointsPreview(){
-
-  const whatsapp =
-    document
-      .getElementById("customerWhatsapp")
-      .value
-      .trim();
-
-
-  const box =
-    document.getElementById(
-      "pointsPreview"
-    );
-
-
-  if(!/^\d{10}$/.test(whatsapp)){
-
-    box.classList.add("hidden");
-
-    return;
-
-  }
-
-
-  try{
-
-    const clientes =
-      await api(
-        "clientes",
-        "GET",
-        null,
-        "&select=*&whatsapp=eq." +
-        encodeURIComponent(whatsapp)
-      );
-
-
-    if(!clientes.length){
-
-      box.textContent =
-        "⭐ Cliente nuevo. Después de esta compra tendrá 1 punto.";
-
-      box.classList.remove("hidden");
-
-      return;
-
-    }
-
-
-    const points =
-      Number(clientes[0].puntos || 0);
-
-
-    const threshold =
-      Number(
-        config.puntos_para_premio || 10
-      );
-
-
-    if(points >= threshold){
-
-      box.textContent =
-        "🎁 Este cliente ya tiene un Premio disponible.";
-
-    }else{
-
-      box.textContent =
-        "⭐ Actualmente tiene " +
-        points +
-        " punto" +
-        (points === 1 ? "" : "s") +
-        ".";
-
-    }
-
-
-    box.classList.remove("hidden");
-
-
-  }catch(error){
-
-    box.classList.add("hidden");
-
-  }
-
-}
-
-
-/* =========================================
-   LOGIN
-========================================= */
-
-function loginAdmin(){
-
-  const role =
-    document.getElementById(
-      "loginRole"
-    ).value;
-
-
-  const pin =
-    document
-      .getElementById("adminPin")
-      .value;
-
-
-  if(
-    role === "gerente" &&
-    pin !== GERENTE_PIN
-  ){
-
-    alert(
-      "❌ PIN de Gerente incorrecto."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    role === "vendedor" &&
-    pin !== VENDEDOR_PIN
-  ){
-
-    alert(
-      "❌ PIN de Vendedor incorrecto."
-    );
-
-    return;
-
-  }
-
-
-  currentRole =
-    role;
-
-
-  document
-    .getElementById("adminLogin")
-    .style.display = "none";
-
-
-  document
-    .getElementById("adminContent")
-    .classList.add("show");
-
-
-  document
-    .getElementById("adminPin")
-    .value = "";
-
-
-  document
-    .getElementById("userBar")
-    .classList.remove("hidden");
-
-
-  const roleText =
-    document.getElementById(
-      "userRoleText"
-    );
-
-
-  if(role === "gerente"){
-
-    roleText.innerHTML =
-      `<span class="role-badge role-gerente">
-        👑 GERENTE
-      </span>`;
-
-  }else{
-
-    roleText.innerHTML =
-      `<span class="role-badge role-vendedor">
-        👨‍💼 VENDEDOR
-      </span>`;
-
-  }
-
-
-  applyRolePermissions();
-
-
-  loadTurn();
-
-  loadCloseHistory();
-
-}
-
-
-function applyRolePermissions(){
-
-  const gerenteOptions =
-    document.getElementById(
-      "gerenteOptions"
-    );
-
-
-  const historyNotice =
-    document.getElementById(
-      "historyManagerNotice"
-    );
-
-
-  const roleNotice =
-    document.getElementById(
-      "roleNotice"
-    );
-
-
-  if(currentRole === "gerente"){
-
-    gerenteOptions
-      .classList.remove("hidden");
-
-
-    historyNotice.innerHTML =
-      "👑 El Gerente puede eliminar el historial de cortes.";
-
-
-    roleNotice.innerHTML =
-      `<div class="role-badge role-gerente">
-        👑 Sesión de Gerente
-      </div>`;
-
-
-    renderAdminProducts();
-
-  }else{
-
-    gerenteOptions
-      .classList.add("hidden");
-
-
-    historyNotice.innerHTML =
-      "👨‍💼 El Vendedor puede consultar el historial, pero no puede eliminarlo.";
-
-
-    roleNotice.innerHTML =
-      `<div class="role-badge role-vendedor">
-        👨‍💼 Sesión de Vendedor
-      </div>`;
-
-  }
-
-}
-
-
-function logoutAdmin(){
-
-  logoutUser();
-
-}
-
-
-function logoutUser(){
-
-  currentRole =
-    null;
-
-
-  document
-    .getElementById("adminContent")
-    .classList.remove("show");
-
-
-  document
-    .getElementById("adminLogin")
-    .style.display = "block";
-
-
-  document
-    .getElementById("userBar")
-    .classList.add("hidden");
-
-
-  document
-    .getElementById("adminPin")
-    .value = "";
-
-
-  showSection("venta");
-
-}
-
-
-/* =========================================
-   AGREGAR PRODUCTO
-========================================= */
-
-async function addProduct(){
-
-  if(currentRole !== "gerente"){
-
-    alert(
-      "❌ Solo el Gerente puede agregar productos."
-    );
-
-    return;
-
-  }
-
-
-  const name =
-    document
-      .getElementById("newProductName")
-      .value
-      .trim();
-
-
-  const category =
-    document
-      .getElementById("newProductCategory")
-      .value
-      .trim();
-
-
-  const price =
-    Number(
-      document
-        .getElementById("newProductPrice")
-        .value
-    );
-
-
-  if(!name){
-
-    alert(
-      "Escribe el nombre del producto."
-    );
-
-    return;
-
-  }
-
-
-  if(!Number.isFinite(price) || price < 0){
-
-    alert(
-      "Escribe un precio válido."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    await api(
-      "productos",
-      "POST",
-      {
-
-        nombre:name,
-
-        categoria:category,
-
-        precio:price,
-
-        activo:true
-
-      }
-    );
-
-
-    document.getElementById(
-      "newProductName"
-    ).value = "";
-
-
-    document.getElementById(
-      "newProductCategory"
-    ).value = "";
-
-
-    document.getElementById(
-      "newProductPrice"
-    ).value = "";
-
-
-    alert(
-      "✅ Producto agregado."
-    );
-
-
-    await loadProducts();
-
-
-  }catch(error){
-
-    alert(
-      "❌ No se pudo agregar:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   ADMINISTRAR PRODUCTOS
-========================================= */
-
-async function renderAdminProducts(){
-
-  if(currentRole !== "gerente"){
-
-    return;
-
-  }
-
-
-  const container =
-    document.getElementById(
-      "adminProducts"
-    );
-
-
-  try{
-
-    const allProducts =
-      await api(
-        "productos",
-        "GET",
-        null,
-        "&select=*&order=id.asc"
-      );
-
-
-    if(!allProducts.length){
-
-      container.innerHTML =
-        `<div class="notice">
-          No hay productos.
-        </div>`;
-
-      return;
-
-    }
-
-
-    container.innerHTML =
-      allProducts
-        .map(product => `
-
-          <div class="product-admin">
-
-            <div class="product-info">
-
-              <strong>
-                ${escapeHtml(product.nombre)}
-              </strong>
-
-              <small>
-                ${escapeHtml(product.categoria || "")}
-                ·
-                $${money(product.precio)}
-                ·
-                ${
-                  product.activo
-                  ? "🟢 Visible"
-                  : "🔴 Oculto"
-                }
-              </small>
-
-            </div>
-
-            <div class="admin-actions">
-
-              <button
-                class="small-button gold"
-                onclick="editProduct(${product.id})"
-              >
-                ✏️ Editar
-              </button>
-
-              ${
-                product.activo
-                ?
-
-                `<button
-                  class="small-button red"
-                  onclick="hideProduct(${product.id})"
-                >
-                  Ocultar
-                </button>`
-
-                :
-
-                `<button
-                  class="small-button"
-                  onclick="restoreProduct(${product.id})"
-                >
-                  Restaurar
-                </button>`
-              }
-
-            </div>
-
-          </div>
-
-        `)
-        .join("");
-
-
-  }catch(error){
-
-    container.innerHTML =
-      `<div class="notice">
-        ❌ ${escapeHtml(error.message)}
-      </div>`;
-
-  }
-
-}
-
-
-/* =========================================
-   EDITAR PRODUCTO
-========================================= */
-
-async function editProduct(id){
-
-  if(currentRole !== "gerente"){
-
-    alert(
-      "❌ Solo el Gerente puede editar productos."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    const rows =
-      await api(
-        "productos",
-        "GET",
-        null,
-        "&select=*&id=eq." + id
-      );
-
-
-    if(!rows.length){
-
-      alert(
-        "Producto no encontrado."
-      );
-
-      return;
-
-    }
-
-
-    const product =
-      rows[0];
-
-
-    const name =
-      prompt(
-        "Nombre del producto:",
-        product.nombre
-      );
-
-
-    if(name === null)return;
-
-
-    const price =
-      prompt(
-        "Precio:",
-        product.precio
-      );
-
-
-    if(price === null)return;
-
-
-    const numericPrice =
-      Number(price);
-
-
-    if(
-      !name.trim() ||
-      !Number.isFinite(numericPrice) ||
-      numericPrice < 0
-    ){
-
-      alert(
-        "Datos inválidos."
-      );
-
-      return;
-
-    }
-
-
-    await api(
-      "productos",
-      "PATCH",
-      {
-
-        nombre:name.trim(),
-
-        precio:numericPrice
-
-      },
-      "&id=eq." + id
-    );
-
-
-    alert(
-      "✅ Producto actualizado."
-    );
-
-
-    await loadProducts();
-
-
-  }catch(error){
-
-    alert(
-      "❌ No se pudo editar:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   OCULTAR
-========================================= */
-
-async function hideProduct(id){
-
-  if(currentRole !== "gerente"){
-
-    alert(
-      "❌ Solo el Gerente puede modificar productos."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    !confirm(
-      "¿Quieres quitar este producto del menú?"
-    )
-  )return;
-
-
-  try{
-
-    await api(
-      "productos",
-      "PATCH",
-      {
-        activo:false
-      },
-      "&id=eq." + id
-    );
-
-
-    alert(
-      "✅ Producto retirado del menú."
-    );
-
-
-    await loadProducts();
-
-
-  }catch(error){
-
-    alert(
-      "❌ No se pudo retirar:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   RESTAURAR
-========================================= */
-
-async function restoreProduct(id){
-
-  if(currentRole !== "gerente"){
-
-    alert(
-      "❌ Solo el Gerente puede modificar productos."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    await api(
-      "productos",
-      "PATCH",
-      {
-        activo:true
-      },
-      "&id=eq." + id
-    );
-
-
-    alert(
-      "✅ Producto restaurado."
-    );
-
-
-    await loadProducts();
-
-
-  }catch(error){
-
-    alert(
-      "❌ No se pudo restaurar:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   PREMIO
-========================================= */
-
-async function findCustomerForPrize(){
-
-  if(currentRole !== "gerente"){
-
-    alert(
-      "❌ Solo el Gerente puede autorizar premios."
-    );
-
-    return;
-
-  }
-
-
-  const whatsapp =
-    document
-      .getElementById("redeemWhatsapp")
-      .value
-      .trim();
-
-
-  const result =
-    document.getElementById(
-      "redeemResult"
-    );
-
-
-  if(!/^\d{10}$/.test(whatsapp)){
-
-    result.innerHTML =
-      `<div class="notice">
-        Escribe un WhatsApp de 10 dígitos.
-      </div>`;
-
-    return;
-
-  }
-
-
-  try{
-
-    const clientes =
-      await api(
-        "clientes",
-        "GET",
-        null,
-        "&select=*&whatsapp=eq." +
-        encodeURIComponent(whatsapp)
-      );
-
-
-    if(!clientes.length){
-
-      result.innerHTML =
-        `<div class="notice">
-          ❌ No encontramos ese cliente.
-        </div>`;
-
-      return;
-
-    }
-
-
-    const cliente =
-      clientes[0];
-
-
-    const points =
-      Number(cliente.puntos || 0);
-
-
-    const threshold =
-      Number(
-        config.puntos_para_premio || 10
-      );
-
-
-    if(points >= threshold){
-
-      result.innerHTML = `
-
-        <div class="customer-box">
-
-          <div>
-            Cliente:
-            <strong>
-              ${escapeHtml(cliente.nombre)}
-            </strong>
-          </div>
-
-          <div class="customer-points">
-            ${points} puntos
-          </div>
-
-          <div class="prize-box">
-
-            <div class="prize-title">
-              🎁 PREMIO DISPONIBLE
-            </div>
-
-            <div>
-              Este cliente puede canjear su Premio.
-            </div>
-
-            <button
-              class="primary-button"
-              style="margin-top:12px;"
-              onclick="redeemPrize(${cliente.id})"
-            >
-              🎁 Autorizar Premio
-            </button>
-
-          </div>
-
-        </div>
-
-      `;
-
-    }else{
-
-      result.innerHTML = `
-
-        <div class="customer-box">
-
-          <div>
-            Cliente:
-            <strong>
-              ${escapeHtml(cliente.nombre)}
-            </strong>
-          </div>
-
-          <div class="customer-points">
-            ${points} puntos
-          </div>
-
-          <div class="notice">
-            Le faltan
-            <strong>
-              ${threshold - points}
-            </strong>
-            puntos para su Premio.
-          </div>
-
-        </div>
-
-      `;
-
-    }
-
-
-  }catch(error){
-
-    result.innerHTML =
-      `<div class="notice">
-        ❌ ${escapeHtml(error.message)}
-      </div>`;
-
-  }
-
-}
-
-
-async function redeemPrize(id){
-
-  if(currentRole !== "gerente"){
-
-    alert(
-      "❌ Solo el Gerente puede autorizar premios."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    !confirm(
-      "¿Confirmas que este cliente recibió su Premio?\n\n" +
-      "Sus puntos volverán a 0."
-    )
-  )return;
-
-
-  try{
-
-    const rows =
-      await api(
-        "clientes",
-        "GET",
-        null,
-        "&select=*&id=eq." + id
-      );
-
-
-    if(!rows.length){
-
-      alert(
-        "Cliente no encontrado."
-      );
-
-      return;
-
-    }
-
-
-    const cliente =
-      rows[0];
-
-
-    await api(
-      "clientes",
-      "PATCH",
-      {
-
-        puntos:0,
-
-        premios_obtenidos:
-          Number(
-            cliente.premios_obtenidos || 0
-          ) + 1
-
-      },
-      "&id=eq." + id
-    );
-
-
-    alert(
-      "🎁 Premio autorizado.\n\n" +
-      "Los puntos volvieron a 0."
-    );
-
-
-    document.getElementById(
-      "redeemWhatsapp"
-    ).value = "";
-
-
-    document.getElementById(
-      "redeemResult"
-    ).innerHTML = "";
-
-
-  }catch(error){
-
-    alert(
-      "❌ No se pudo autorizar:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   REINICIAR PUNTOS
-========================================= */
-
-async function resetCustomerPoints(){
-
-  if(currentRole !== "gerente"){
-
-    alert(
-      "❌ Solo el Gerente puede reiniciar puntos."
-    );
-
-    return;
-
-  }
-
-
-  const whatsapp =
-    document
-      .getElementById("resetWhatsapp")
-      .value
-      .trim();
-
-
-  if(!/^\d{10}$/.test(whatsapp)){
-
-    alert(
-      "Escribe un WhatsApp válido."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    const clientes =
-      await api(
-        "clientes",
-        "GET",
-        null,
-        "&select=*&whatsapp=eq." +
-        encodeURIComponent(whatsapp)
-      );
-
-
-    if(!clientes.length){
-
-      alert(
-        "❌ No encontramos ese cliente."
-      );
-
-      return;
-
-    }
-
-
-    const cliente =
-      clientes[0];
-
-
-    if(
-      !confirm(
-        "¿Seguro que quieres poner los puntos de " +
-        cliente.nombre +
-        " en 0?\n\n" +
-        "Actualmente tiene " +
-        (cliente.puntos || 0) +
-        " puntos.\n\n" +
-        "Sus compras e historial NO se borrarán."
-      )
-    )return;
-
-
-    await api(
-      "clientes",
-      "PATCH",
-      {
-        puntos:0
-      },
-      "&id=eq." + cliente.id
-    );
-
-
-    alert(
-      "✅ Los puntos fueron reiniciados a 0."
-    );
-
-
-    document.getElementById(
-      "resetWhatsapp"
-    ).value = "";
-
-
-  }catch(error){
-
-    alert(
-      "❌ No se pudieron reiniciar:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   OBTENER ÚLTIMO CIERRE
-========================================= */
-
-async function getLastClose(){
-
-  try{
-
-    const rows =
-      await api(
-        "cierres_turno",
-        "GET",
-        null,
-        "&select=*&order=id.desc&limit=1"
-      );
-
-
-    if(rows && rows.length){
-
-      return rows[0];
-
-    }
-
-
-    return null;
-
-
-  }catch(error){
-
-    console.error(error);
-
-    return null;
-
-  }
-
-}
-
-
-/* =========================================
-   CARGAR TURNO
-========================================= */
-
-async function loadTurn(){
-
-  try{
-
-    const ventas =
-      await api(
-        "ventas",
-        "GET",
-        null,
-        "&select=id,cliente_id,total&order=id.asc"
-      );
-
-
-    const lastClose =
-      await getLastClose();
-
-
-    let startIndex = 0;
-
-
-    if(lastClose){
-
-      startIndex =
-        Number(lastClose.ventas || 0);
-
-    }
-
-
-    const turnoVentas =
-      ventas.slice(startIndex);
-
-
-    const efectivo =
-      turnoVentas.reduce(
-        (sum,venta) =>
-          sum +
-          Number(venta.total || 0),
-        0
-      );
-
-
-    const clientesSet =
-      new Set();
-
-
-    turnoVentas.forEach(
-      venta => {
-
-        if(venta.cliente_id){
-
-          clientesSet.add(
-            String(venta.cliente_id)
-          );
-
-        }
-
-      }
-    );
-
-
-    const clientes =
-      clientesSet.size;
-
-
-    const totalVentas =
-      turnoVentas.length;
-
-
-    turnoActual = {
-
-      ventas:
-        totalVentas,
-
-      clientes:
-        clientes,
-
-      efectivo:
-        efectivo,
-
-      numero:
-        1
-
-    };
-
-
-    document.getElementById(
-      "closeVentas"
-    ).textContent =
-      totalVentas;
-
-
-    document.getElementById(
-      "closeClientes"
-    ).textContent =
-      clientes;
-
-
-    document.getElementById(
-      "closeEsperado"
-    ).textContent =
-      "$" + money(efectivo);
-
-
-    document.getElementById(
-      "closeNumero"
-    ).textContent =
-      "Turno 1";
-
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
-}
-
-
-/* =========================================
-   ESTADÍSTICAS
-========================================= */
-
-async function loadStats(){
-
-  await loadTurn();
-
-
-  document.getElementById(
-    "statVentas"
-  ).textContent =
-    turnoActual.ventas;
-
-
-  document.getElementById(
-    "statPedidos"
-  ).textContent =
-    turnoActual.clientes;
-
-
-  document.getElementById(
-    "statEfectivo"
-  ).textContent =
-    "$" +
-    money(turnoActual.efectivo);
-
-}
-
-
-/* =========================================
-   CALCULAR DIFERENCIA
-========================================= */
-
-function calculateDifference(){
-
-  const counted =
-    Number(
-      document
-        .getElementById("cashCounted")
-        .value
-    );
-
-
-  if(!Number.isFinite(counted) || counted < 0){
-
-    alert(
-      "Escribe una cantidad de efectivo válida."
-    );
-
-    return;
-
-  }
-
-
-  const expected =
-    Number(
-      turnoActual.efectivo || 0
-    );
-
-
-  const difference =
-    counted - expected;
-
-
-  let message = "";
-
-
-  if(difference === 0){
-
-    message =
-      `<div class="notice success">
-        ✅ El efectivo coincide exactamente.
-      </div>`;
-
-  }else if(difference > 0){
-
-    message =
-      `<div class="notice success">
-        🟢 Hay $${money(difference)}
-        de más.
-      </div>`;
-
-  }else{
-
-    message =
-      `<div class="notice warning">
-        🔴 Faltan $${money(Math.abs(difference))}.
-      </div>`;
-
-  }
-
-
-  document.getElementById(
-    "cashResult"
-  ).innerHTML = `
-
-    <div class="cash-line">
-
-      <span>
-        Efectivo esperado
-      </span>
-
-      <strong>
-        $${money(expected)}
-      </strong>
-
-    </div>
-
-
-    <div class="cash-line">
-
-      <span>
-        Efectivo contado
-      </span>
-
-      <strong>
-        $${money(counted)}
-      </strong>
-
-    </div>
-
-
-    <div class="cash-line">
-
-      <span>
-        Diferencia
-      </span>
-
-      <strong class="cash-difference">
-        ${
-          difference >= 0
-          ? "+"
-          : "-"
-        }$${money(Math.abs(difference))}
-      </strong>
-
-    </div>
-
-    <br>
-
-    ${message}
-
-  `;
-
-
-  document.getElementById(
-    "cashResult"
-  ).classList.remove("hidden");
-
-}
-
-
-/* =========================================
-   CERRAR TURNO
-========================================= */
-
-async function closeTurn(){
-
-  if(
-    currentRole !== "gerente" &&
-    currentRole !== "vendedor"
-  ){
-
-    alert(
-      "Primero inicia sesión."
-    );
-
-    return;
-
-  }
-
-
-  const counted =
-    Number(
-      document
-        .getElementById("cashCounted")
-        .value
-    );
-
-
-  if(!Number.isFinite(counted) || counted < 0){
-
-    alert(
-      "Primero escribe cuánto efectivo tienes contado."
-    );
-
-    return;
-
-  }
-
-
-  await loadTurn();
-
-
-  const expected =
-    Number(
-      turnoActual.efectivo || 0
-    );
-
-
-  const difference =
-    counted - expected;
-
-
-  const confirmar =
-    confirm(
-
-      "¿Quieres cerrar este turno?\n\n" +
-
-      "Turno: 1\n" +
-
-      "Ventas: " +
-      turnoActual.ventas +
-      "\n" +
-
-      "Clientes: " +
-      turnoActual.clientes +
-      "\n" +
-
-      "Efectivo esperado: $" +
-      money(expected) +
-      "\n" +
-
-      "Efectivo contado: $" +
-      money(counted) +
-      "\n" +
-
-      "Diferencia: " +
-      (
-        difference >= 0
-        ? "+"
-        : "-"
-      ) +
-      "$" +
-      money(Math.abs(difference)) +
-
-      "\n\n" +
-
-      "Después del cierre comenzará nuevamente desde 0."
-
-    );
-
-
-  if(!confirmar)return;
-
-
-  try{
-
-    await api(
-      "cierres_turno",
-      "POST",
-      {
-
-        ventas:
-          turnoActual.ventas,
-
-        clientes:
-          turnoActual.clientes,
-
-        efectivo_esperado:
-          expected,
-
-        efectivo_contado:
-          counted,
-
-        diferencia:
-          difference
-
-      }
-    );
-
-
-    alert(
-      "🔒 Turno cerrado correctamente.\n\n" +
-      "El siguiente turno comienza desde 0."
-    );
-
-
-    document.getElementById(
-      "cashCounted"
-    ).value = "";
-
-
-    document.getElementById(
-      "cashResult"
-    ).classList.add("hidden");
-
-
-    await loadTurn();
-
-    await loadStats();
-
-    await loadCloseHistory();
-
-
-  }catch(error){
-
-    alert(
-      "❌ No se pudo cerrar el turno:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   HISTORIAL DE CIERRES
-========================================= */
-
-async function loadCloseHistory(){
-
-  const container =
-    document.getElementById(
-      "closeHistory"
-    );
-
-
-  try{
-
-    const rows =
-      await api(
-        "cierres_turno",
-        "GET",
-        null,
-        "&select=*&order=id.desc&limit=20"
-      );
-
-
-    if(!rows.length){
-
-      container.innerHTML =
-        `<div class="notice">
-          Todavía no hay cierres registrados.
-        </div>`;
-
-      return;
-
-    }
-
-
-    container.innerHTML =
-      rows
-        .map(row => {
-
-          const difference =
-            Number(
-              row.diferencia || 0
-            );
-
-
-          const deleteButton =
-            currentRole === "gerente"
-
-            ?
-
-            `
-
-              <button
-                class="danger-button history-delete"
-                onclick="deleteClose(${row.id})"
-              >
-                🗑️ Eliminar este corte
-              </button>
-
-            `
-
-            :
-
-            "";
-
-
-          return `
-
-            <div class="history-item">
-
-              <div class="history-date">
-
-                ${formatDate(row.fecha)}
-
-              </div>
-
-
-              <div>
-
-                <strong>
-                  Turno 1
-                </strong>
-
-              </div>
-
-
-              <div style="margin-top:6px;">
-
-                🧾 ${row.ventas || 0}
-                ventas
-
-                ·
-
-                👥 ${row.clientes || 0}
-                clientes
-
-              </div>
-
-
-              <div style="margin-top:6px;">
-
-                Esperado:
-                <strong>
-                  $${money(row.efectivo_esperado)}
-                </strong>
-
-                <br>
-
-                Contado:
-                <strong>
-                  $${money(row.efectivo_contado)}
-                </strong>
-
-              </div>
-
-
-              <div
-                style="
-                  margin-top:6px;
-                  color:${
-                    difference < 0
-                    ? "#e66"
-                    : "#8fe0a1"
-                  };
-                  font-weight:bold;
-                "
-              >
-
-                ${
-                  difference === 0
-                  ? "✅ Cuadrado"
-                  : difference > 0
-                    ? "🟢 Sobraron $" +
-                      money(difference)
-                    : "🔴 Faltaron $" +
-                      money(Math.abs(difference))
-                }
-
-              </div>
-
-
-              ${deleteButton}
-
-            </div>
-
-          `;
-
-        })
-        .join("");
-
-
-  }catch(error){
-
-    container.innerHTML =
-      `<div class="notice">
-        ❌ ${escapeHtml(error.message)}
-      </div>`;
-
-  }
-
-}
-
-
-/* =========================================
-   ELIMINAR UN CORTE
-========================================= */
-
-async function deleteClose(id){
-
-  if(currentRole !== "gerente"){
-
-    alert(
-      "❌ Solo el Gerente puede eliminar cortes."
-    );
-
-    return;
-
-  }
-
-
-  const confirmar =
-    confirm(
-      "⚠️ ¿Seguro que quieres eliminar este corte?\n\n" +
-      "Esta acción no se puede deshacer."
-    );
-
-
-  if(!confirmar)return;
-
-
-  try{
-
-    await api(
-      "cierres_turno",
-      "DELETE",
-      null,
-      "&id=eq." + id
-    );
-
-
-    alert(
-      "✅ Corte eliminado correctamente."
-    );
-
-
-    await loadCloseHistory();
-
-    await loadTurn();
-
-    await loadStats();
-
-
-  }catch(error){
-
-    alert(
-      "❌ No se pudo eliminar el corte:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   BORRAR TODO EL HISTORIAL
-========================================= */
-
-async function deleteCloseHistory(){
-
-  if(currentRole !== "gerente"){
-
-    alert(
-      "❌ Solo el Gerente puede borrar el historial."
-    );
-
-    return;
-
-  }
-
-
-  const confirmar =
-    confirm(
-      "⚠️ ATENCIÓN\n\n" +
-      "Vas a borrar TODO el historial de cortes.\n\n" +
-      "Esta acción no se puede deshacer.\n\n" +
-      "¿Quieres continuar?"
-    );
-
-
-  if(!confirmar)return;
-
-
-  const confirmar2 =
-    confirm(
-      "Última confirmación.\n\n" +
-      "¿REALMENTE quieres borrar todos los cortes?"
-    );
-
-
-  if(!confirmar2)return;
-
-
-  try{
-
-    await api(
-      "cierres_turno",
-      "DELETE",
-      null,
-      "&id=gte.0"
-    );
-
-
-    alert(
-      "✅ Todo el historial de cortes fue eliminado."
-    );
-
-
-    await loadCloseHistory();
-
-    await loadTurn();
-
-    await loadStats();
-
-
-  }catch(error){
-
-    alert(
-      "❌ No se pudo borrar el historial:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   UTILIDADES
-========================================= */
-
-function money(value){
-
-  const number =
-    Number(value);
-
-
-  if(!Number.isFinite(number)){
-
-    return "0.00";
-
-  }
-
-
-  return number.toLocaleString(
-    "es-MX",
-    {
-
-      minimumFractionDigits:2,
-
-      maximumFractionDigits:2
-
-    }
-
-  );
-
-}
-
-
-function formatDate(value){
-
-  if(!value){
-
-    return "Sin fecha";
-
-  }
-
-
-  try{
-
-    return new Date(value)
-      .toLocaleString(
-        "es-MX",
-        {
-
-          dateStyle:"short",
-
-          timeStyle:"short"
-
-        }
-      );
-
-  }catch{
-
-    return value;
-
-  }
-
-}
-
-
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
-</script>
-
-</body>
-  </html> 
