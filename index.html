@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Elotemanía POS</title>
+
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#d4af37">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Elotemanía">
 
 <style>
 *{box-sizing:border-box}
@@ -225,6 +233,7 @@ input,select{
 }
 
 @media(max-width:600px){
+
  .stats{
   grid-template-columns:1fr;
  }
@@ -232,6 +241,7 @@ input,select{
  .tabs{
   flex-direction:column;
  }
+
 }
 </style>
 </head>
@@ -239,8 +249,8 @@ input,select{
 <body>
 
 <header>
- <h1>🌽 ELOTEMANÍA</h1>
- <p>Entre compas sabe mejor</p>
+<h1>🌽 ELOTEMANÍA</h1>
+<p>Entre compas sabe mejor</p>
 </header>
 
 <div class="container">
@@ -276,7 +286,6 @@ input,select{
 
 </div>
 
-
 <section id="ventaSection">
 
 <div class="card">
@@ -288,7 +297,6 @@ Cargando productos...
 </div>
 
 </div>
-
 
 <div class="card">
 
@@ -304,7 +312,6 @@ $<span id="total">0.00</span>
 </div>
 
 </div>
-
 
 <div class="card">
 
@@ -348,7 +355,6 @@ onclick="registrarVenta()"
 
 </section>
 
-
 <section id="accesoSection" class="hidden">
 
 <div class="card">
@@ -378,9 +384,7 @@ Entrar
 
 </div>
 
-
 <div id="adminSection" class="hidden">
-
 
 <div class="card">
 
@@ -402,7 +406,6 @@ onclick="buscarClienteAdmin()"
 <div id="adminClienteResultado"></div>
 
 </div>
-
 
 <div class="card">
 
@@ -444,7 +447,6 @@ onclick="agregarProductoNuevo()"
 
 </div>
 
-
 <div class="card">
 
 <h2>📊 Cortes</h2>
@@ -460,7 +462,6 @@ onclick="verCortes()"
 <div id="listaCortes"></div>
 
 </div>
-
 
 <div class="card">
 
@@ -498,7 +499,6 @@ onclick="borrarHistorial()"
 
 </div>
 
-
 <script>
 
 const API="/api/supabase";
@@ -517,7 +517,7 @@ let clienteSeleccionado=null;
 
 
 /* =========================
-   API
+API
 ========================= */
 
 async function api(
@@ -610,7 +610,7 @@ async function api(
 
 
 /* =========================
-   INICIO
+INICIO
 ========================= */
 
 async function iniciar(){
@@ -642,7 +642,7 @@ iniciar();
 
 
 /* =========================
-   NAVEGACIÓN
+NAVEGACIÓN
 ========================= */
 
 function mostrarVenta(){
@@ -656,7 +656,6 @@ function mostrarVenta(){
   .classList.add("hidden");
 
 }
-
 
 function mostrarAcceso(){
 
@@ -672,7 +671,7 @@ function mostrarAcceso(){
 
 
 /* =========================
-   CONFIGURACIÓN
+CONFIGURACIÓN
 ========================= */
 
 async function cargarConfiguracion(){
@@ -714,7 +713,7 @@ async function cargarConfiguracion(){
 
 
 /* =========================
-   PRODUCTOS
+PRODUCTOS
 ========================= */
 
 async function cargarProductos(){
@@ -734,7 +733,6 @@ async function cargarProductos(){
  renderProductos();
 
 }
-
 
 function renderProductos(){
 
@@ -786,7 +784,7 @@ function renderProductos(){
 
 
 /* =========================
-   CARRITO
+CARRITO
 ========================= */
 
 function agregarProducto(id){
@@ -822,7 +820,6 @@ function agregarProducto(id){
 
 }
 
-
 function quitarProducto(id){
 
  const index=
@@ -847,7 +844,6 @@ function quitarProducto(id){
  renderCarrito();
 
 }
-
 
 function renderCarrito(){
 
@@ -917,7 +913,6 @@ function renderCarrito(){
 
 }
 
-
 function obtenerTotal(){
 
  return carrito.reduce(
@@ -932,7 +927,7 @@ function obtenerTotal(){
 
 
 /* =========================
-   CLIENTES
+CLIENTES
 ========================= */
 
 async function cargarClientes(){
@@ -950,14 +945,12 @@ async function cargarClientes(){
 
 }
 
-
 function normalizarWhatsapp(numero){
 
  return String(numero||"")
   .replace(/\D/g,"");
 
 }
-
 
 function numeroWhatsapp(numero){
 
@@ -976,7 +969,7 @@ function numeroWhatsapp(numero){
 
 
 /* =========================
-   BUSCAR CLIENTE
+BUSCAR CLIENTE
 ========================= */
 
 async function buscarCliente(){
@@ -1056,7 +1049,6 @@ async function buscarCliente(){
 
 }
 
-
 function mostrarClienteResultado(cliente){
 
  const puntos=
@@ -1111,7 +1103,7 @@ function mostrarClienteResultado(cliente){
 
 
 /* =========================
-   REGISTRAR VENTA
+REGISTRAR VENTA
 ========================= */
 
 async function registrarVenta(){
@@ -1181,7 +1173,6 @@ async function registrarVenta(){
 
   }
 
-
   let puntosAntes;
   let puntosDespues;
 
@@ -1218,7 +1209,6 @@ async function registrarVenta(){
     );
 
   }
-
 
   if(clienteActual){
 
@@ -1280,7 +1270,6 @@ async function registrarVenta(){
 
   }
 
-
   const total=
    obtenerTotal();
 
@@ -1310,7 +1299,6 @@ async function registrarVenta(){
   const ventaId=
    venta[0].id;
 
-
   for(
    const item of carrito
   ){
@@ -1328,7 +1316,6 @@ async function registrarVenta(){
    );
 
   }
-
 
   let mensaje=
 `🌽 *ELOTEMANÍA* 🌽
@@ -1348,7 +1335,6 @@ Gracias por tu compra.
 `\n🎉 ¡Ya puedes solicitar tu Premio!`;
 
   }
-
 
   let botonWhatsApp="";
 
@@ -1385,7 +1371,6 @@ Gracias por tu compra.
    `;
 
   }
-
 
   document.getElementById(
    "clienteResultado"
@@ -1426,7 +1411,6 @@ Gracias por tu compra.
    </div>
   `;
 
-
   carrito=[];
 
   renderCarrito();
@@ -1434,7 +1418,6 @@ Gracias por tu compra.
   await cargarClientes();
 
   await actualizarEstadisticas();
-
 
  }catch(error){
 
@@ -1451,7 +1434,7 @@ Gracias por tu compra.
 
 
 /* =========================
-   LOGIN
+LOGIN
 ========================= */
 
 function login(){
@@ -1467,7 +1450,6 @@ function login(){
   document.getElementById(
    "pin"
   ).value.trim();
-
 
  if(
   usuario==="christian"&&
@@ -1493,7 +1475,6 @@ function login(){
 
  }
 
-
  if(
   usuario==="andrid"&&
   pin==="1234"
@@ -1518,7 +1499,6 @@ function login(){
 
  }
 
-
  document.getElementById(
   "accesoResultado"
  ).innerHTML=
@@ -1532,7 +1512,7 @@ function login(){
 
 
 /* =========================
-   BUSCAR CLIENTE ADMIN
+BUSCAR CLIENTE ADMIN
 ========================= */
 
 async function buscarClienteAdmin(){
@@ -1611,7 +1591,6 @@ async function buscarClienteAdmin(){
 
 }
 
-
 function renderAdminCliente(cliente){
 
  const puntos=
@@ -1649,7 +1628,6 @@ function renderAdminCliente(cliente){
     ${configuracion.puntos_para_premio}
    </button>
  `;
-
 
  if(puntos<=0){
 
@@ -1689,7 +1667,7 @@ function renderAdminCliente(cliente){
 
 
 /* =========================
-   RESTAURAR CLIENTE
+RESTAURAR CLIENTE
 ========================= */
 
 async function restaurarCliente(id){
@@ -1766,7 +1744,7 @@ async function restaurarCliente(id){
 
 
 /* =========================
-   CANJEAR PREMIO
+CANJEAR PREMIO
 ========================= */
 
 async function canjearPremio(id){
@@ -1873,7 +1851,7 @@ async function canjearPremio(id){
 
 
 /* =========================
-   AGREGAR PRODUCTO
+AGREGAR PRODUCTO
 ========================= */
 
 async function agregarProductoNuevo(){
@@ -1997,7 +1975,7 @@ async function agregarProductoNuevo(){
 
 
 /* =========================
-   CERRAR TURNO
+CERRAR TURNO
 ========================= */
 
 async function hacerCorte(){
@@ -2161,7 +2139,7 @@ async function hacerCorte(){
 
 
 /* =========================
-   VER CORTES
+VER CORTES
 ========================= */
 
 async function verCortes(){
@@ -2329,7 +2307,7 @@ async function verCortes(){
 
 
 /* =========================
-   MOSTRAR VENTAS DEL CORTE
+MOSTRAR VENTAS DEL CORTE
 ========================= */
 
 async function mostrarVentasCorte(corteId){
@@ -2450,7 +2428,7 @@ async function mostrarVentasCorte(corteId){
 
 
 /* =========================
-   BORRAR ÚLTIMO CORTE
+BORRAR ÚLTIMO CORTE
 ========================= */
 
 async function borrarUltimoCorte(){
@@ -2500,11 +2478,6 @@ async function borrarUltimoCorte(){
   const corte=
    cortes[0];
 
-  /*
-   * IMPORTANTE:
-   * Primero buscamos las ventas de ese corte.
-   */
-
   const ventas=
    await api(
     "ventas",
@@ -2515,11 +2488,6 @@ async function borrarUltimoCorte(){
      corte_id:"eq."+corte.id
     }
    );
-
-  /*
-   * Primero eliminamos los detalles
-   * de cada venta.
-   */
 
   for(
    const venta of ventas
@@ -2537,11 +2505,6 @@ async function borrarUltimoCorte(){
 
   }
 
-  /*
-   * Después eliminamos las ventas.
-   * Cada DELETE lleva WHERE por ID.
-   */
-
   for(
    const venta of ventas
   ){
@@ -2557,10 +2520,6 @@ async function borrarUltimoCorte(){
    );
 
   }
-
-  /*
-   * Finalmente eliminamos el corte.
-   */
 
   await api(
    "cierres_turno",
@@ -2600,7 +2559,7 @@ async function borrarUltimoCorte(){
 
 
 /* =========================
-   BORRAR TODO HISTORIAL
+BORRAR TODO HISTORIAL
 ========================= */
 
 async function borrarHistorial(){
@@ -2628,10 +2587,6 @@ async function borrarHistorial(){
 
  try{
 
-  /*
-   * BUSCAR TODAS LAS VENTAS
-   */
-
   const ventas=
    await api(
     "ventas",
@@ -2641,10 +2596,6 @@ async function borrarHistorial(){
      select:"id"
     }
    );
-
-  /*
-   * ELIMINAR DETALLES
-   */
 
   for(
    const venta of ventas
@@ -2662,10 +2613,6 @@ async function borrarHistorial(){
 
   }
 
-  /*
-   * ELIMINAR CADA VENTA
-   */
-
   for(
    const venta of ventas
   ){
@@ -2682,22 +2629,31 @@ async function borrarHistorial(){
 
   }
 
-  /*
-   * ELIMINAR TODOS LOS CORTES
-   *
-   * IMPORTANTE:
-   * id=not.is.null evita el DELETE
-   * sin WHERE.
-   */
+  const cortes=
+   await api(
+    "cierres_turno",
+    "GET",
+    null,
+    {
+     select:"id"
+    }
+   );
 
-  await api(
-   "cierres_turno",
-   "DELETE",
-   null,
-   {
-    id:"not.is.null"
-   }
-  );
+  for(
+   const corte of cortes
+  ){
+
+   await api(
+    "cierres_turno",
+    "DELETE",
+    null,
+    {
+     id:
+      "eq."+corte.id
+    }
+   );
+
+  }
 
   alert(
    "✅ Historial eliminado correctamente.\n\n"+
@@ -2726,7 +2682,7 @@ async function borrarHistorial(){
 
 
 /* =========================
-   ESTADÍSTICAS
+ESTADÍSTICAS
 ========================= */
 
 async function actualizarEstadisticas(){
@@ -2770,7 +2726,7 @@ async function actualizarEstadisticas(){
 
 
 /* =========================
-   UTILIDADES
+UTILIDADES
 ========================= */
 
 function dinero(valor){
@@ -2779,7 +2735,6 @@ function dinero(valor){
   .toFixed(2);
 
 }
-
 
 function formatearFecha(fecha){
 
@@ -2812,7 +2767,6 @@ function formatearFecha(fecha){
 
 }
 
-
 function escapeHtml(text){
 
  return String(text||"")
@@ -2821,6 +2775,40 @@ function escapeHtml(text){
   .replace(/>/g,"&gt;")
   .replace(/"/g,"&quot;")
   .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+SERVICE WORKER
+========================= */
+
+if("serviceWorker" in navigator){
+
+ window.addEventListener(
+  "load",
+  function(){
+
+   navigator.serviceWorker
+    .register("/sw.js")
+    .then(function(){
+
+     console.log(
+      "Elotemanía POS listo para instalar."
+     );
+
+    })
+    .catch(function(error){
+
+     console.error(
+      "Error al registrar la aplicación:",
+      error
+     );
+
+    });
+
+  }
+ );
 
 }
 
