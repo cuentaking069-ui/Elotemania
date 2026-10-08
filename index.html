@@ -2969,6 +2969,20 @@ async function cargarProductosAdmin(){
 
         <br><br>
 
+        <input
+          type="file"
+          id="fotoProducto-${p.id}"
+          accept="image/jpeg,image/png,image/webp"
+          style="display:none"
+          onchange="cambiarFotoProducto(${p.id}, this)">
+
+        <button
+          class="btn-gold"
+          style="width:100%;margin-top:8px"
+          onclick="document.getElementById('fotoProducto-${p.id}').click()">
+          📸 Subir o cambiar foto
+        </button>
+
         <button
           class="btn-blue"
           style="width:100%"
@@ -3283,6 +3297,62 @@ async function subirFotoProducto(archivo){
 
   return resultado.foto_url;
 
+}
+
+
+async function cambiarFotoProducto(id, input) {
+
+  const esAdmin =
+    currentRole === "superadmin" ||
+    currentRole === "admin" ||
+    String(currentUser || "").toLowerCase() === "christian";
+
+  if (!esAdmin) {
+    alert("No tienes permiso para cambiar fotos.");
+    input.value = "";
+    return;
+  }
+
+  const archivo = input.files && input.files[0];
+  if (!archivo) return;
+
+  if (!["image/jpeg", "image/png", "image/webp"].includes(archivo.type)) {
+    alert("Selecciona una imagen JPG, PNG o WEBP.");
+    input.value = "";
+    return;
+  }
+
+  if (archivo.size > 8 * 1024 * 1024) {
+    alert("La foto debe pesar máximo 8 MB.");
+    input.value = "";
+    return;
+  }
+
+  try {
+    const foto_url = await subirFotoProducto(archivo);
+
+    if (!foto_url) {
+      throw new Error("No se recibió la dirección de la foto.");
+    }
+
+    await api(
+      "productos",
+      "PATCH",
+      { foto_url: foto_url },
+      { id: "eq." + id }
+    );
+
+    await cargarProductos();
+    await cargarProductosAdmin();
+    alert("✅ Foto actualizada correctamente.");
+
+  } catch (error) {
+    console.error("Error al cambiar la foto:", error);
+    alert("No se pudo cambiar la foto: " + error.message);
+
+  } finally {
+    input.value = "";
+  }
 }
 
 
