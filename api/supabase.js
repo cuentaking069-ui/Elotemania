@@ -10,10 +10,8 @@ export default async function handler(req, res) {
   if(!supabaseUrl || !supabaseKey){
 
     return res.status(500).json({
-
       error:
         "Faltan las variables de Supabase en Vercel."
-
     });
 
   }
@@ -28,10 +26,8 @@ export default async function handler(req, res) {
     if(!table){
 
       return res.status(400).json({
-
         error:
           "Falta indicar la tabla."
-
       });
 
     }
@@ -43,12 +39,7 @@ export default async function handler(req, res) {
       );
 
 
-    /*
-      Parámetros permitidos
-    */
-
     const allowedParams = [
-
       "select",
       "order",
       "limit",
@@ -56,15 +47,12 @@ export default async function handler(req, res) {
       "id",
       "activo",
       "whatsapp"
-
     ];
 
 
     for(const key of allowedParams){
 
-      if(
-        req.query[key] !== undefined
-      ){
+      if(req.query[key] !== undefined){
 
         url.searchParams.set(
           key,
@@ -100,11 +88,6 @@ export default async function handler(req, res) {
 
     };
 
-
-    /*
-      GET no necesita body.
-      PATCH y POST sí.
-    */
 
     if(
       req.method !== "GET" &&
@@ -143,13 +126,10 @@ export default async function handler(req, res) {
       return res
         .status(response.status)
         .json({
-
           error:
             "Supabase no devolvió JSON.",
-
           detalle:
             text
-
         });
 
     }
@@ -165,13 +145,10 @@ export default async function handler(req, res) {
     return res
       .status(500)
       .json({
-
         error:
           "Error de conexión con Supabase.",
-
         detalle:
           error.message
-
       });
 
   }
