@@ -1,11 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1">
+
 <title>Elotemanía</title>
 
+<!-- PWA ELOTEMANÍA -->
+<link
+  rel="manifest"
+  href="/manifest.json">
+
+<meta
+  name="theme-color"
+  content="#d4af37">
+
+<meta
+  name="mobile-web-app-capable"
+  content="yes">
+
+<meta
+  name="apple-mobile-web-app-capable"
+  content="yes">
+
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="black">
+
+<meta
+  name="apple-mobile-web-app-title"
+  content="Elotemanía">
+
+
 <style>
+
 *{
   box-sizing:border-box
 }
@@ -324,6 +356,7 @@ select{
   }
 
 }
+
 </style>
 
 </head>
@@ -331,53 +364,93 @@ select{
 <body>
 
 <header>
+
 <h1>🌽 ELOTEMANÍA</h1>
+
 <p>Entre compas sabe mejor</p>
+
 </header>
 
+
 <div class="container">
+
 
 <div class="stats">
 
 <div class="stat">
+
 <span>Ventas</span>
+
 <b id="ventasHoy">0</b>
+
 </div>
 
+
 <div class="stat">
+
 <span>Clientes</span>
+
 <b id="clientesHoy">0</b>
+
 </div>
 
-<div class="stat hidden" id="utilidadStat">
+
+<div
+class="stat hidden"
+id="utilidadStat">
+
 <span>Utilidad</span>
+
 <b id="utilidadHoy">$0</b>
+
 </div>
+
 
 <div class="stat">
+
 <span>Turno</span>
+
 <b>1</b>
+
 </div>
 
 </div>
+
 
 <div class="tabs">
 
 <button
 class="btn-gold"
 onclick="mostrarVenta()">
+
 🛒 Venta
+
 </button>
+
 
 <button
 class="btn-dark"
 onclick="mostrarAcceso()">
+
 🔐 Acceso
+
+</button>
+
+
+<button
+id="botonInstalar"
+class="btn-green hidden"
+onclick="instalarApp()">
+
+📲 Instalar Elotemanía
+
 </button>
 
 </div>
 
+
 <section id="ventaSection">
+
 
 <div class="card">
 
@@ -386,7 +459,9 @@ onclick="mostrarAcceso()">
 <div
 id="productos"
 class="grid">
+
 Cargando productos...
+
 </div>
 
 </div>
@@ -397,11 +472,15 @@ Cargando productos...
 <h2>🧾 Venta</h2>
 
 <div id="carrito">
+
 No hay productos.
+
 </div>
 
 <div class="total">
+
 Total: $<span id="total">0.00</span>
+
 </div>
 
 </div>
@@ -411,29 +490,38 @@ Total: $<span id="total">0.00</span>
 
 <h2>👤 Cliente</h2>
 
+
 <input
 id="nombreCliente"
 placeholder="Nombre del cliente">
+
 
 <input
 id="whatsappCliente"
 type="tel"
 placeholder="10 dígitos">
 
+
 <button
 class="btn-blue"
 style="width:100%"
 onclick="buscarCliente()">
+
 🔎 Buscar cliente
+
 </button>
 
+
 <div id="clienteResultado"></div>
+
 
 <button
 class="btn-gold"
 style="width:100%;margin-top:10px"
 onclick="registrarVenta()">
+
 💰 Registrar venta
+
 </button>
 
 </div>
@@ -445,25 +533,32 @@ onclick="registrarVenta()">
 id="accesoSection"
 class="hidden">
 
+
 <div class="card">
 
 <h2>🔐 Acceso</h2>
 
+
 <input
 id="usuario"
 placeholder="Usuario">
+
 
 <input
 id="pin"
 type="password"
 placeholder="PIN">
 
+
 <button
 class="btn-gold"
 style="width:100%"
 onclick="login()">
+
 Entrar
+
 </button>
+
 
 <div id="accesoResultado"></div>
 
@@ -474,6 +569,7 @@ Entrar
 id="adminSection"
 class="hidden">
 
+
 <div class="card">
 
 <h2>👑 Administrador de Christian</h2>
@@ -482,48 +578,67 @@ class="hidden">
 
 <hr class="separador">
 
+
 <div class="menu-admin">
+
 
 <button
 id="botonProductos"
 class="boton-admin"
 onclick="togglePanel('productosAdmin','botonProductos')">
+
 <span>📦</span>Productos
+
 </button>
+
 
 <button
 id="botonGanancias"
 class="boton-admin hidden"
 onclick="togglePanel('gananciasAdmin','botonGanancias')">
+
 <span>📈</span>Margen y ganancias
+
 </button>
+
 
 <button
 id="botonUsuarios"
 class="boton-admin hidden"
 onclick="togglePanel('usuariosAdmin','botonUsuarios')">
+
 <span>👥</span>Usuarios
+
 </button>
+
 
 <button
 id="botonClientes"
 class="boton-admin"
 onclick="togglePanel('clientesAdmin','botonClientes')">
+
 <span>🎁</span>Clientes y premios
+
 </button>
+
 
 <button
 id="botonCortes"
 class="boton-admin"
 onclick="togglePanel('cortesAdmin','botonCortes')">
+
 <span>📊</span>Cortes
+
 </button>
+
 
 <button
 id="botonTurno"
 class="boton-admin"
 onclick="togglePanel('turnoAdmin','botonTurno')">
+
 <span>⚙️</span>Turno
+
 </button>
 
 </div>
@@ -535,7 +650,9 @@ onclick="togglePanel('turnoAdmin','botonTurno')">
 id="productosAdmin"
 class="card panel-admin hidden">
 
+
 <h2>📦 Productos</h2>
+
 
 <p class="info-pequena">
 
@@ -550,9 +667,12 @@ automáticamente en el menú digital.
 
 </p>
 
+
 <hr class="separador">
 
+
 <h3>➕ Nuevo producto</h3>
+
 
 <label>Nombre del producto</label>
 
@@ -560,11 +680,13 @@ automáticamente en el menú digital.
 id="nuevoProductoNombre"
 placeholder="Ej. Elote con Takis">
 
+
 <label>Categoría</label>
 
 <input
 id="nuevoProductoCategoria"
 placeholder="Ej. Elotes">
+
 
 <label>Costo para Elotemanía</label>
 
@@ -575,6 +697,7 @@ step="0.01"
 min="0"
 placeholder="Ej. 25">
 
+
 <label>Precio de venta</label>
 
 <input
@@ -584,21 +707,30 @@ step="0.01"
 min="0"
 placeholder="Ej. 60">
 
+
 <button
 class="btn-gold"
 style="width:100%"
 onclick="agregarProductoNuevo()">
+
 ➕ Guardar producto
+
 </button>
+
 
 <div id="productoResultado"></div>
 
+
 <hr class="separador">
+
 
 <h3>📋 Productos actuales</h3>
 
+
 <div id="listaProductosAdmin">
+
 Cargando...
+
 </div>
 
 </div>
@@ -608,42 +740,68 @@ Cargando...
 id="gananciasAdmin"
 class="card panel-admin hidden">
 
+
 <h2>📈 Margen y ganancias</h2>
 
+
 <p class="info-pequena">
+
 Esta información solamente está disponible para Christian.
+
 </p>
+
 
 <div class="grid">
 
+
 <div class="stat">
+
 <span>Ventas</span>
+
 <b id="gananciasVentas">$0</b>
+
 </div>
 
+
 <div class="stat">
+
 <span>Costos</span>
+
 <b id="gananciasCostos">$0</b>
+
 </div>
 
+
 <div class="stat">
+
 <span>Ganancia</span>
+
 <b id="gananciasUtilidad">$0</b>
+
 </div>
+
 
 <div class="stat">
+
 <span>Margen</span>
+
 <b id="gananciasMargen">0%</b>
+
 </div>
 
 </div>
+
 
 <hr class="separador">
 
+
 <h3>📦 Ganancia por producto</h3>
 
+
 <div id="gananciasProductos">
+
 Cargando...
+
 </div>
 
 </div>
@@ -653,29 +811,38 @@ Cargando...
 id="usuariosAdmin"
 class="card panel-admin hidden">
 
+
 <h2>👥 Usuarios</h2>
 
+
 <p class="info-pequena">
+
 Solo Christian puede crear, activar, desactivar o eliminar usuarios.
+
 </p>
+
 
 <input
 id="nuevoUsuario"
 placeholder="Nuevo usuario">
 
+
 <input
 id="nuevoUsuarioNombre"
 placeholder="Nombre">
+
 
 <input
 id="nuevoUsuarioCorreo"
 type="email"
 placeholder="Correo electrónico">
 
+
 <input
 id="nuevoUsuarioPin"
 type="password"
 placeholder="PIN">
+
 
 <select id="nuevoUsuarioRol">
 
@@ -689,18 +856,25 @@ Administrador
 
 </select>
 
+
 <button
 class="btn-gold"
 style="width:100%"
 onclick="crearUsuario()">
+
 ➕ Crear usuario
+
 </button>
+
 
 <div id="usuarioResultado"></div>
 
+
 <hr class="separador">
 
+
 <h3>📋 Usuarios actuales</h3>
+
 
 <div id="listaUsuarios"></div>
 
@@ -711,18 +885,24 @@ onclick="crearUsuario()">
 id="clientesAdmin"
 class="card panel-admin hidden">
 
+
 <h2>🎁 Clientes y premios</h2>
+
 
 <input
 id="buscarAdmin"
 placeholder="WhatsApp del cliente">
 
+
 <button
 class="btn-blue"
 style="width:100%"
 onclick="buscarClienteAdmin()">
+
 🔎 Buscar cliente
+
 </button>
+
 
 <div id="adminClienteResultado"></div>
 
@@ -733,14 +913,19 @@ onclick="buscarClienteAdmin()">
 id="cortesAdmin"
 class="card panel-admin hidden">
 
+
 <h2>📊 Cortes</h2>
+
 
 <button
 class="btn-purple"
 style="width:100%"
 onclick="verCortes()">
+
 📊 Ver cortes
+
 </button>
+
 
 <div id="listaCortes"></div>
 
@@ -751,27 +936,37 @@ onclick="verCortes()">
 id="turnoAdmin"
 class="card panel-admin hidden">
 
+
 <h2>⚙️ Turno</h2>
+
 
 <button
 class="btn-gold"
 style="width:100%"
 onclick="hacerCorte()">
+
 💰 Cerrar turno
+
 </button>
+
 
 <button
 class="btn-red"
 style="width:100%;margin-top:10px"
 onclick="borrarUltimoCorte()">
+
 🗑️ Borrar último corte
+
 </button>
+
 
 <button
 class="btn-red"
 style="width:100%;margin-top:10px"
 onclick="borrarHistorial()">
+
 🗑️ Borrar todo el historial
+
 </button>
 
 </div>
@@ -782,20 +977,31 @@ onclick="borrarHistorial()">
 
 </div>
 
+
 <script>
 
 const API="/api/supabase";
 
+
 let productos=[];
+
 let carrito=[];
+
 let clientes=[];
+
 let currentUser=null;
+
 let currentRole=null;
+
 let clienteSeleccionado=null;
 
+
 let configuracion={
+
   puntos_para_premio:10,
+
   premio:"Premio"
+
 };
 
 
@@ -811,10 +1017,12 @@ async function api(
     window.location.origin
   );
 
+
   url.searchParams.set(
     "table",
     tabla
   );
+
 
   Object.keys(params).forEach(k=>{
 
@@ -834,10 +1042,13 @@ async function api(
 
 
   const opciones={
+
     method:metodo,
+
     headers:{
       "Content-Type":"application/json"
     }
+
   };
 
 
@@ -922,6 +1133,7 @@ async function iniciar(){
 
 }
 
+
 iniciar();
 
 
@@ -930,6 +1142,7 @@ function mostrarVenta(){
   document
     .getElementById("ventaSection")
     .classList.remove("hidden");
+
 
   document
     .getElementById("accesoSection")
@@ -943,6 +1156,7 @@ function mostrarAcceso(){
   document
     .getElementById("ventaSection")
     .classList.add("hidden");
+
 
   document
     .getElementById("accesoSection")
@@ -959,6 +1173,7 @@ function togglePanel(
   const panel=
     document.getElementById(id);
 
+
   if(!panel)return;
 
 
@@ -967,12 +1182,19 @@ function togglePanel(
 
 
   const paneles=[
+
     "productosAdmin",
+
     "gananciasAdmin",
+
     "usuariosAdmin",
+
     "clientesAdmin",
+
     "cortesAdmin",
+
     "turnoAdmin"
+
   ];
 
 
@@ -980,6 +1202,7 @@ function togglePanel(
 
     const elemento=
       document.getElementById(panelId);
+
 
     if(elemento){
 
@@ -1016,8 +1239,11 @@ function togglePanel(
 
 
     panel.scrollIntoView({
+
       behavior:"smooth",
+
       block:"start"
+
     });
 
   }
@@ -1125,7 +1351,9 @@ function renderProductos(){
       <button
         class="btn-gold"
         onclick="agregarProducto(${producto.id})">
+
         Agregar
+
       </button>
 
     `;
@@ -1232,9 +1460,11 @@ function renderCarrito(){
     contenedor.innerHTML=
       "No hay productos.";
 
+
     document
       .getElementById("total")
       .textContent="0.00";
+
 
     return;
 
@@ -1286,7 +1516,9 @@ function renderCarrito(){
       <button
         class="btn-red"
         onclick="quitarProducto(${item.id})">
+
         −
+
       </button>
 
     `;
@@ -1308,11 +1540,14 @@ function renderCarrito(){
 function obtenerTotal(){
 
   return carrito.reduce(
+
     (total,item)=>
       total+
       item.precio*
       item.cantidad,
+
     0
+
   );
 
 }
@@ -1321,6 +1556,7 @@ function obtenerTotal(){
 function obtenerUtilidad(){
 
   return carrito.reduce(
+
     (total,item)=>
       total+
       (
@@ -1328,7 +1564,9 @@ function obtenerUtilidad(){
         item.costo
       )*
       item.cantidad,
+
     0
+
   );
 
 }
@@ -1644,6 +1882,7 @@ async function registrarVenta(){
 
 
     let puntosAntes;
+
     let puntosDespues;
 
 
@@ -1907,9 +2146,12 @@ Gracias por tu compra.
 
     carrito=[];
 
+
     renderCarrito();
 
+
     await cargarClientes();
+
 
     await actualizarEstadisticas();
 
@@ -1954,7 +2196,9 @@ async function login(){
       .innerHTML=`
 
         <div class="alerta">
+
           ⚠️ Escribe usuario y PIN.
+
         </div>
 
       `;
@@ -1980,7 +2224,9 @@ async function login(){
 
     const user=
       usuarios.find(
+
         u=>
+
           String(
             u.usuario||""
           )
@@ -1994,6 +2240,7 @@ async function login(){
           ===pin&&
 
           u.activo===true
+
       );
 
 
@@ -2006,7 +2253,9 @@ async function login(){
         .innerHTML=`
 
           <div class="alerta">
+
             ❌ Usuario o PIN incorrecto.
+
           </div>
 
         `;
@@ -2267,6 +2516,7 @@ async function cargarGanancias(){
 
 
     let ventasTotal=0;
+
     let utilidadTotal=0;
 
 
@@ -2457,6 +2707,7 @@ async function cargarGanancias(){
 
     console.error(error);
 
+
     document
       .getElementById(
         "gananciasProductos"
@@ -2464,7 +2715,9 @@ async function cargarGanancias(){
       .innerHTML=`
 
         <div class="alerta">
+
           ❌ No se pudieron cargar las ganancias.
+
         </div>
 
       `;
@@ -2773,11 +3026,15 @@ async function agregarProductoNuevo(){
       "POST",
       {
         nombre:nombre,
+
         categoria:
           categoria||
           "General",
+
         costo:costo,
+
         precio:precio,
+
         activo:true
       }
     );
@@ -2961,6 +3218,7 @@ async function editarCostoPrecio(id){
       {
         costo:
           nuevoCosto,
+
         precio:
           nuevoPrecio
       },
@@ -3679,7 +3937,9 @@ async function eliminarUsuario(id){
   }
 
 }
-  async function buscarClienteAdmin(){
+
+
+async function buscarClienteAdmin(){
 
   if(!currentUser){
 
@@ -4319,7 +4579,9 @@ async function verCortes(){
   contenedor.innerHTML=`
 
     <div class="alerta">
+
       Cargando...
+
     </div>
 
   `;
@@ -4344,7 +4606,9 @@ async function verCortes(){
       contenedor.innerHTML=`
 
         <div class="alerta">
+
           No hay cortes registrados.
+
         </div>
 
       `;
@@ -4437,14 +4701,18 @@ async function verCortes(){
           ?
           `
           <span class="ganancia">
+
             ✅ Diferencia: $0.00
+
           </span>
           `
           :
           `
           <span class="perdida">
+
             ⚠️ Diferencia:
             $${dinero(diferencia)}
+
           </span>
           `
         }
@@ -4467,6 +4735,7 @@ async function verCortes(){
         <div
           id="ventasCorte${corte.id}"
           class="hidden">
+
         </div>
 
       `;
@@ -4536,7 +4805,9 @@ async function mostrarVentasCorte(
   contenedor.innerHTML=`
 
     <div class="alerta">
+
       Cargando ventas...
+
     </div>
 
   `;
@@ -4630,9 +4901,11 @@ async function mostrarVentasCorte(
           📈 Utilidad:
 
           <strong class="ganancia">
+
             $${dinero(
               venta.utilidad
             )}
+
           </strong>
           `
           :
@@ -5100,6 +5373,138 @@ function escapeHtml(
 }
 
 
+/* ==================================================
+   INSTALACIÓN DE ELOTEMANÍA COMO APP
+================================================== */
+
+let deferredPrompt=null;
+
+
+window.addEventListener(
+  "beforeinstallprompt",
+  event=>{
+
+    event.preventDefault();
+
+    deferredPrompt=event;
+
+
+    const boton=
+      document.getElementById(
+        "botonInstalar"
+      );
+
+
+    if(boton){
+
+      boton.classList.remove(
+        "hidden"
+      );
+
+    }
+
+  }
+);
+
+
+async function instalarApp(){
+
+  const boton=
+    document.getElementById(
+      "botonInstalar"
+    );
+
+
+  if(!deferredPrompt){
+
+    alert(
+      "La instalación todavía no está disponible.\n\n"+
+      "Abre Elotemanía desde Chrome y asegúrate de que "+
+      "la página esté funcionando con HTTPS."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    deferredPrompt.prompt();
+
+
+    const resultado=
+      await deferredPrompt.userChoice;
+
+
+    if(
+      resultado.outcome==="accepted"
+    ){
+
+      console.log(
+        "🌽 El usuario instaló Elotemanía."
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Error al instalar:",
+      error
+    );
+
+  }
+
+
+  deferredPrompt=null;
+
+
+  if(boton){
+
+    boton.classList.add(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+window.addEventListener(
+  "appinstalled",
+  ()=>{
+
+    console.log(
+      "🌽 Elotemanía fue instalada."
+    );
+
+
+    deferredPrompt=null;
+
+
+    const boton=
+      document.getElementById(
+        "botonInstalar"
+      );
+
+
+    if(boton){
+
+      boton.classList.add(
+        "hidden"
+      );
+
+    }
+
+  }
+);
+
+
+/* ==================================================
+   SERVICE WORKER
+================================================== */
+
 if(
   "serviceWorker"
   in navigator
@@ -5113,11 +5518,25 @@ if(
         .register(
           "/sw.js"
         )
+        .then(
+          registro=>{
+
+            console.log(
+              "🌽 Service Worker de Elotemanía activo.",
+              registro
+            );
+
+          }
+        )
         .catch(
-          error=>
+          error=>{
+
             console.error(
+              "Error con Service Worker:",
               error
-            )
+            );
+
+          }
         );
 
     }
@@ -5128,4 +5547,4 @@ if(
 </script>
 
 </body>
-</html>
+  </html> 
