@@ -105,6 +105,11 @@ button{
  color:white;
 }
 
+.btn-purple{
+ background:#7b1fa2;
+ color:white;
+}
+
 .card{
  background:#1b1b1b;
  border:1px solid #333;
@@ -195,9 +200,31 @@ input,select{
  margin-top:12px;
 }
 
+.corte{
+ background:#242424;
+ border:1px solid #444;
+ border-radius:12px;
+ padding:15px;
+ margin-top:10px;
+}
+
+.corte strong{
+ color:#d4af37;
+}
+
+.separador{
+ border:0;
+ border-top:1px solid #333;
+ margin:18px 0;
+}
+
 @media(max-width:600px){
  .stats{
   grid-template-columns:1fr;
+ }
+
+ .tabs{
+  flex-direction:column;
  }
 }
 </style>
@@ -213,6 +240,7 @@ input,select{
 <div class="container">
 
  <div class="stats">
+
   <div class="stat">
    <span>Ventas</span>
    <b id="ventasHoy">0</b>
@@ -227,23 +255,50 @@ input,select{
    <span>Turno</span>
    <b>1</b>
   </div>
+
  </div>
 
  <div class="tabs">
-  <button class="btn-gold" onclick="mostrarVenta()">Venta</button>
-  <button class="btn-dark" onclick="mostrarAcceso()">Acceso</button>
+
+  <button
+   class="btn-gold"
+   onclick="mostrarVenta()"
+  >
+   🛒 Venta
+  </button>
+
+  <button
+   class="btn-dark"
+   onclick="mostrarAcceso()"
+  >
+   🔐 Acceso
+  </button>
+
  </div>
+
+
+ <!-- =========================
+      VENTA
+ ========================== -->
 
  <section id="ventaSection">
 
   <div class="card">
+
    <h2>🛒 Productos</h2>
-   <div id="productos" class="grid">
+
+   <div
+    id="productos"
+    class="grid"
+   >
     Cargando productos...
    </div>
+
   </div>
 
+
   <div class="card">
+
    <h2>🧾 Venta</h2>
 
    <div id="carrito">
@@ -251,36 +306,46 @@ input,select{
    </div>
 
    <div class="total">
-    Total: $<span id="total">0.00</span>
+    Total:
+    $<span id="total">0.00</span>
    </div>
+
   </div>
+
 
   <div class="card">
 
    <h2>👤 Cliente</h2>
 
    <label>Nombre</label>
+
    <input
     id="nombreCliente"
     type="text"
     placeholder="Nombre del cliente"
    >
 
+
    <label>WhatsApp</label>
+
    <input
     id="whatsappCliente"
     type="tel"
     placeholder="10 dígitos"
    >
 
+
    <button
     class="btn-blue"
+    style="width:100%"
     onclick="buscarCliente()"
    >
     🔎 Buscar cliente
    </button>
 
+
    <div id="clienteResultado"></div>
+
 
    <button
     class="btn-gold"
@@ -295,9 +360,17 @@ input,select{
  </section>
 
 
- <section id="accesoSection" class="hidden">
+ <!-- =========================
+      ACCESO
+ ========================== -->
+
+ <section
+  id="accesoSection"
+  class="hidden"
+ >
 
   <div class="card">
+
    <h2>🔐 Acceso</h2>
 
    <input
@@ -313,17 +386,29 @@ input,select{
 
    <button
     class="btn-gold"
+    style="width:100%"
     onclick="login()"
    >
     Entrar
    </button>
 
    <div id="accesoResultado"></div>
+
   </div>
 
-  <div id="adminSection" class="hidden">
+
+  <div
+   id="adminSection"
+   class="hidden"
+  >
+
+
+   <!-- =========================
+        CLIENTE
+   ========================== -->
 
    <div class="card">
+
     <h2>🎁 Cliente / Premio</h2>
 
     <input
@@ -333,39 +418,120 @@ input,select{
 
     <button
      class="btn-blue"
+     style="width:100%"
      onclick="buscarClienteAdmin()"
     >
      🔎 Buscar cliente
     </button>
 
     <div id="adminClienteResultado"></div>
+
    </div>
 
+
+   <!-- =========================
+        PRODUCTOS
+   ========================== -->
+
    <div class="card">
+
+    <h2>➕ Agregar producto</h2>
+
+    <label>Nombre del producto</label>
+
+    <input
+     id="nuevoProductoNombre"
+     placeholder="Ej. Elote chorreado"
+    >
+
+
+    <label>Categoría</label>
+
+    <input
+     id="nuevoProductoCategoria"
+     placeholder="Ej. Elotes"
+    >
+
+
+    <label>Precio</label>
+
+    <input
+     id="nuevoProductoPrecio"
+     type="number"
+     step="0.01"
+     min="0"
+     placeholder="Ej. 60"
+    >
+
+
+    <button
+     class="btn-gold"
+     style="width:100%"
+     onclick="agregarProductoNuevo()"
+    >
+     ➕ Guardar producto
+    </button>
+
+    <div id="productoResultado"></div>
+
+   </div>
+
+
+   <!-- =========================
+        CORTES
+   ========================== -->
+
+   <div class="card">
+
+    <h2>📊 Cortes</h2>
+
+    <button
+     class="btn-purple"
+     style="width:100%"
+     onclick="verCortes()"
+    >
+     📊 Ver cortes
+    </button>
+
+    <div id="listaCortes"></div>
+
+   </div>
+
+
+   <!-- =========================
+        TURNO
+   ========================== -->
+
+   <div class="card">
+
     <h2>⚙️ Turno</h2>
 
     <button
      class="btn-gold"
+     style="width:100%"
      onclick="hacerCorte()"
     >
-     Cerrar turno
+     💰 Cerrar turno
     </button>
+
 
     <button
      class="btn-red"
-     style="margin-top:10px"
+     style="width:100%;margin-top:10px"
      onclick="borrarUltimoCorte()"
     >
-     Borrar último corte
+     🗑️ Borrar último corte
     </button>
+
 
     <button
      class="btn-red"
-     style="margin-top:10px"
+     style="width:100%;margin-top:10px"
      onclick="borrarHistorial()"
     >
-     Borrar todo el historial
+     🗑️ Borrar todo el historial
     </button>
+
    </div>
 
   </div>
@@ -382,6 +548,7 @@ const API="/api/supabase";
 let productos=[];
 let carrito=[];
 let clientes=[];
+
 let configuracion={
  puntos_para_premio:10,
  premio:"Premio"
@@ -402,14 +569,30 @@ async function api(
  params={}
 ){
 
- let url=new URL(API,window.location.origin);
+ let url=new URL(
+  API,
+  window.location.origin
+ );
 
- url.searchParams.set("table",tabla);
+ url.searchParams.set(
+  "table",
+  tabla
+ );
 
  Object.keys(params).forEach(k=>{
-  if(params[k]!==undefined && params[k]!==null){
-   url.searchParams.set(k,params[k]);
+
+  if(
+   params[k]!==undefined &&
+   params[k]!==null
+  ){
+
+   url.searchParams.set(
+    k,
+    params[k]
+   );
+
   }
+
  });
 
  let opciones={
@@ -420,37 +603,51 @@ async function api(
  };
 
  if(cuerpo!==null){
-  opciones.body=JSON.stringify(cuerpo);
+
+  opciones.body=
+   JSON.stringify(cuerpo);
+
  }
 
- const respuesta=await fetch(
-  url.toString(),
-  opciones
- );
+ const respuesta=
+  await fetch(
+   url.toString(),
+   opciones
+  );
 
- const texto=await respuesta.text();
+ const texto=
+  await respuesta.text();
 
  let datos;
 
  try{
-  datos=texto ? JSON.parse(texto):null;
+
+  datos=
+   texto
+    ? JSON.parse(texto)
+    : null;
+
  }catch{
-  throw new Error(texto||"Respuesta inválida");
+
+  throw new Error(
+   texto||"Respuesta inválida"
+  );
+
  }
 
  if(!respuesta.ok){
 
-  let mensaje=
+  throw new Error(
    datos?.message||
    datos?.error||
    datos?.details||
-   datos?.hint||
-   "Error en Supabase";
+   "Error en Supabase"
+  );
 
-  throw new Error(mensaje);
  }
 
  return datos;
+
 }
 
 
@@ -463,11 +660,16 @@ async function iniciar(){
  try{
 
   await cargarConfiguracion();
+
   await cargarProductos();
+
   await cargarClientes();
+
   await actualizarEstadisticas();
 
  }catch(error){
+
+  console.error(error);
 
   alert(
    "Error al iniciar:\n"+
@@ -530,10 +732,15 @@ async function cargarConfiguracion(){
     }
    );
 
-  if(datos && datos.length){
+  if(
+   datos &&
+   datos.length
+  ){
 
    configuracion.puntos_para_premio=
-    Number(datos[0].puntos_para_premio)||10;
+    Number(
+     datos[0].puntos_para_premio
+    )||10;
 
    configuracion.premio="Premio";
 
@@ -567,13 +774,16 @@ async function cargarProductos(){
   );
 
  renderProductos();
+
 }
 
 
 function renderProductos(){
 
  const contenedor=
-  document.getElementById("productos");
+  document.getElementById(
+   "productos"
+  );
 
  if(!productos.length){
 
@@ -594,8 +804,14 @@ function renderProductos(){
   div.className="producto";
 
   div.innerHTML=`
-   <strong>${escapeHtml(producto.nombre)}</strong>
-   <div>$${dinero(producto.precio)}</div>
+   <strong>
+    ${escapeHtml(producto.nombre)}
+   </strong>
+
+   <div>
+    $${dinero(producto.precio)}
+   </div>
+
    <button
     class="btn-gold"
     onclick="agregarProducto(${producto.id})"
@@ -612,8 +828,8 @@ function renderProductos(){
 
 
 /* =========================
-   CARRITO
-========================= */
+   AGREGAR PRODUCTO A VENTA
+ ========================== */
 
 function agregarProducto(id){
 
@@ -658,7 +874,9 @@ function quitarProducto(id){
 
  if(index===-1)return;
 
- if(carrito[index].cantidad>1){
+ if(
+  carrito[index].cantidad>1
+ ){
 
   carrito[index].cantidad--;
 
@@ -676,15 +894,18 @@ function quitarProducto(id){
 function renderCarrito(){
 
  const contenedor=
-  document.getElementById("carrito");
+  document.getElementById(
+   "carrito"
+  );
 
  if(!carrito.length){
 
   contenedor.innerHTML=
    "No hay productos.";
 
-  document.getElementById("total")
-   .textContent="0.00";
+  document.getElementById(
+   "total"
+  ).textContent="0.00";
 
   return;
 
@@ -697,7 +918,8 @@ function renderCarrito(){
  carrito.forEach(item=>{
 
   const subtotal=
-   item.precio*item.cantidad;
+   item.precio*
+   item.cantidad;
 
   total+=subtotal;
 
@@ -708,9 +930,14 @@ function renderCarrito(){
 
   div.innerHTML=`
    <div>
-    <strong>${escapeHtml(item.nombre)}</strong>
+    <strong>
+     ${escapeHtml(item.nombre)}
+    </strong>
+
     <br>
-    ${item.cantidad} × $${dinero(item.precio)}
+
+    ${item.cantidad}
+    × $${dinero(item.precio)}
    </div>
 
    <button
@@ -725,8 +952,10 @@ function renderCarrito(){
 
  });
 
- document.getElementById("total")
-  .textContent=dinero(total);
+ document.getElementById(
+  "total"
+ ).textContent=
+  dinero(total);
 
 }
 
@@ -735,7 +964,9 @@ function obtenerTotal(){
 
  return carrito.reduce(
   (total,item)=>
-   total+(item.precio*item.cantidad),
+   total+
+   item.precio*
+   item.cantidad,
   0
  );
 
@@ -785,6 +1016,10 @@ function numeroWhatsapp(numero){
 
 }
 
+
+/* =========================
+   BUSCAR CLIENTE
+========================= */
 
 async function buscarCliente(){
 
@@ -841,10 +1076,12 @@ async function buscarCliente(){
     "clienteResultado"
    ).innerHTML=`
     <div class="alerta">
-     👤 Cliente nuevo.<br>
-     Al registrarse tendrá
-     <strong>${configuracion.puntos_para_premio}</strong>
-     compras restantes para su Premio.
+     👤 Cliente nuevo.<br><br>
+     Empezará con
+     <strong>
+      ${configuracion.puntos_para_premio}
+     </strong>
+     compras restantes.
     </div>
    `;
 
@@ -853,7 +1090,7 @@ async function buscarCliente(){
  }catch(error){
 
   alert(
-   "No se pudo buscar el cliente:\n"+
+   "No se pudo buscar:\n"+
    error.message
   );
 
@@ -965,11 +1202,6 @@ async function registrarVenta(){
 
  try{
 
-  /* =====================
-     BUSCAR CLIENTE POR
-     WHATSAPP EXACTO
-  ===================== */
-
   let clienteActual=null;
 
   const encontrados=
@@ -992,10 +1224,6 @@ async function registrarVenta(){
   }
 
 
-  /* =====================
-     CONTADOR INDIVIDUAL
-  ===================== */
-
   let puntosAntes;
   let puntosDespues;
 
@@ -1004,13 +1232,8 @@ async function registrarVenta(){
    puntosAntes=
     Number(clienteActual.puntos);
 
-   /*
-    Si el cliente ya existe,
-    SOLO se modifica ese cliente.
-   */
-
    if(
-    !Number.isFinite(puntosAntes) ||
+    !Number.isFinite(puntosAntes)||
     puntosAntes<0
    ){
 
@@ -1027,12 +1250,6 @@ async function registrarVenta(){
 
   }else{
 
-   /*
-    Cliente nuevo:
-    empieza en 10 y esta compra
-    cuenta como la primera.
-   */
-
    puntosAntes=
     configuracion.puntos_para_premio;
 
@@ -1045,10 +1262,7 @@ async function registrarVenta(){
   }
 
 
-  /* =====================
-     CREAR / ACTUALIZAR
-     CLIENTE
-  ===================== */
+  /* ACTUALIZAR CLIENTE */
 
   if(clienteActual){
 
@@ -1067,12 +1281,12 @@ async function registrarVenta(){
     );
 
    if(
-    !actualizado ||
+    !actualizado||
     !actualizado.length
    ){
 
     throw new Error(
-     "No se pudo actualizar el contador del cliente."
+     "No se pudo actualizar el cliente."
     );
 
    }
@@ -1095,7 +1309,7 @@ async function registrarVenta(){
     );
 
    if(
-    !nuevo ||
+    !nuevo||
     !nuevo.length
    ){
 
@@ -1111,9 +1325,7 @@ async function registrarVenta(){
   }
 
 
-  /* =====================
-     VENTA
-  ===================== */
+  /* REGISTRAR VENTA */
 
   const total=
    obtenerTotal();
@@ -1130,7 +1342,7 @@ async function registrarVenta(){
    );
 
   if(
-   !venta ||
+   !venta||
    !venta.length
   ){
 
@@ -1144,11 +1356,11 @@ async function registrarVenta(){
    venta[0].id;
 
 
-  /* =====================
-     DETALLE
-  ===================== */
+  /* DETALLE */
 
-  for(const item of carrito){
+  for(
+   const item of carrito
+  ){
 
    await api(
     "detalle_ventas",
@@ -1165,9 +1377,7 @@ async function registrarVenta(){
   }
 
 
-  /* =====================
-     WHATSAPP
-  ===================== */
+  /* WHATSAPP */
 
   let mensaje=
 `🌽 *ELOTEMANÍA* 🌽
@@ -1226,10 +1436,6 @@ Gracias por tu compra.
   }
 
 
-  /* =====================
-     RESULTADO
-  ===================== */
-
   document.getElementById(
    "clienteResultado"
   ).innerHTML=`
@@ -1242,21 +1448,26 @@ Gracias por tu compra.
     <br><br>
 
     💰 Total:
-    <strong>$${dinero(total)}</strong>
+    <strong>
+     $${dinero(total)}
+    </strong>
 
     <br><br>
 
     ⭐ Compras restantes:
-    <strong>${puntosDespues}</strong>
+    <strong>
+     ${puntosDespues}
+    </strong>
 
     ${
      puntosDespues===0
-      ? `
-       <div class="premio">
-        🎉 ¡Ya puede solicitar su Premio!
-       </div>
-      `
-      : ""
+     ?
+     `
+      <div class="premio">
+       🎉 ¡Ya puede solicitar su Premio!
+      </div>
+     `
+     :""
     }
 
     ${botonWhatsApp}
@@ -1297,15 +1508,18 @@ function login(){
  const usuario=
   document.getElementById(
    "usuario"
-  ).value.trim().toLowerCase();
+  ).value
+  .trim()
+  .toLowerCase();
 
  const pin=
   document.getElementById(
    "pin"
   ).value.trim();
 
+
  if(
-  usuario==="christian" &&
+  usuario==="christian"&&
   pin==="0204"
  ){
 
@@ -1318,16 +1532,19 @@ function login(){
   document.getElementById(
    "accesoResultado"
   ).innerHTML=
-   `<div class="premio">
-    👑 Bienvenido Christian
-   </div>`;
+   `
+    <div class="premio">
+     👑 Bienvenido Christian
+    </div>
+   `;
 
   return;
 
  }
 
+
  if(
-  usuario==="andrid" &&
+  usuario==="andrid"&&
   pin==="1234"
  ){
 
@@ -1340,20 +1557,25 @@ function login(){
   document.getElementById(
    "accesoResultado"
   ).innerHTML=
-   `<div class="premio">
-    👤 Bienvenido Andrid
-   </div>`;
+   `
+    <div class="premio">
+     👤 Bienvenido Andrid
+    </div>
+   `;
 
   return;
 
  }
 
+
  document.getElementById(
   "accesoResultado"
  ).innerHTML=
-  `<div class="alerta">
+ `
+  <div class="alerta">
    ❌ Usuario o PIN incorrecto.
-  </div>`;
+  </div>
+ `;
 
 }
 
@@ -1365,7 +1587,7 @@ function login(){
 async function buscarClienteAdmin(){
 
  if(
-  currentUser!=="christian" &&
+  currentUser!=="christian"&&
   currentUser!=="andrid"
  ){
 
@@ -1387,7 +1609,7 @@ async function buscarClienteAdmin(){
  if(!whatsapp){
 
   alert(
-   "Escribe el WhatsApp del cliente."
+   "Escribe el WhatsApp."
   );
 
   return;
@@ -1413,18 +1635,19 @@ async function buscarClienteAdmin(){
    document.getElementById(
     "adminClienteResultado"
    ).innerHTML=
-    `<div class="alerta">
+   `
+    <div class="alerta">
      ❌ Cliente no encontrado.
-    </div>`;
+    </div>
+   `;
 
    return;
 
   }
 
-  const cliente=
-   encontrados[0];
-
-  renderAdminCliente(cliente);
+  renderAdminCliente(
+   encontrados[0]
+  );
 
  }catch(error){
 
@@ -1459,34 +1682,23 @@ function renderAdminCliente(cliente){
 
    <br><br>
 
-   🎁 Premio obtenidos:
+   🎁 Premios obtenidos:
    <strong>
     ${Number(cliente.premios_obtenidos)||0}
    </strong>
 
+   <br><br>
+
+   <button
+    class="btn-blue"
+    style="width:100%"
+    onclick="restaurarCliente(${cliente.id})"
+   >
+    🔄 Restaurar a
+    ${configuracion.puntos_para_premio}
+   </button>
  `;
 
-
- /* =====================
-    RESTAURAR A 10
- ===================== */
-
- html+=`
-  <br><br>
-
-  <button
-   class="btn-blue"
-   style="width:100%"
-   onclick="restaurarCliente(${cliente.id})"
-  >
-   🔄 Restaurar a ${configuracion.puntos_para_premio}
-  </button>
- `;
-
-
- /* =====================
-    CANJEAR PREMIO
- ===================== */
 
  if(puntos<=0){
 
@@ -1506,7 +1718,7 @@ function renderAdminCliente(cliente){
 
   html+=`
    <div class="alerta">
-    El cliente todavía necesita
+    Todavía necesita
     <strong>${puntos}</strong>
     compras.
    </div>
@@ -1532,7 +1744,7 @@ function renderAdminCliente(cliente){
 async function restaurarCliente(id){
 
  if(
-  currentUser!=="christian" &&
+  currentUser!=="christian"&&
   currentUser!=="andrid"
  ){
 
@@ -1544,14 +1756,13 @@ async function restaurarCliente(id){
 
  }
 
- const confirmar=
-  confirm(
+ if(
+  !confirm(
    "¿Restaurar este cliente a "+
    configuracion.puntos_para_premio+
-   " compras restantes?"
-  );
-
- if(!confirmar)return;
+   " compras?"
+  )
+ )return;
 
  try{
 
@@ -1569,12 +1780,12 @@ async function restaurarCliente(id){
    );
 
   if(
-   !actualizado ||
+   !actualizado||
    !actualizado.length
   ){
 
    throw new Error(
-    "No se pudo restaurar el cliente."
+    "No se pudo restaurar."
    );
 
   }
@@ -1610,7 +1821,7 @@ async function restaurarCliente(id){
 async function canjearPremio(id){
 
  if(
-  currentUser!=="christian" &&
+  currentUser!=="christian"&&
   currentUser!=="andrid"
  ){
 
@@ -1652,22 +1863,23 @@ async function canjearPremio(id){
   if(Number(cliente.puntos)>0){
 
    alert(
-    "Este cliente todavía no puede canjear el Premio."
+    "Todavía no puede canjear el Premio."
    );
 
    return;
 
   }
 
-  const confirmar=
-   confirm(
+  if(
+   !confirm(
     "¿Confirmar canje del Premio?"
-   );
-
-  if(!confirmar)return;
+   )
+  )return;
 
   const premios=
-   (Number(cliente.premios_obtenidos)||0)+1;
+   (Number(
+    cliente.premios_obtenidos
+   )||0)+1;
 
   const actualizado=
    await api(
@@ -1684,17 +1896,6 @@ async function canjearPremio(id){
      id:"eq."+id
     }
    );
-
-  if(
-   !actualizado ||
-   !actualizado.length
-  ){
-
-   throw new Error(
-    "No se pudo registrar el canje."
-   );
-
-  }
 
   renderAdminCliente(
    actualizado[0]
@@ -1721,57 +1922,13 @@ async function canjearPremio(id){
 
 
 /* =========================
-   ESTADÍSTICAS
+   AGREGAR PRODUCTO NUEVO
 ========================= */
 
-async function actualizarEstadisticas(){
-
- try{
-
-  const ventas=
-   await api(
-    "ventas",
-    "GET",
-    null,
-    {
-     select:"*"
-    }
-   );
-
-  document.getElementById(
-   "ventasHoy"
-  ).textContent=
-   ventas.length;
-
-  const clientesUnicos=
-   new Set(
-    ventas
-     .map(v=>v.cliente_id)
-     .filter(Boolean)
-   );
-
-  document.getElementById(
-   "clientesHoy"
-  ).textContent=
-   clientesUnicos.size;
-
- }catch(error){
-
-  console.log(error);
-
- }
-
-}
-
-
-/* =========================
-   CORTE
-========================= */
-
-async function hacerCorte(){
+async function agregarProductoNuevo(){
 
  if(
-  currentUser!=="christian" &&
+  currentUser!=="christian"&&
   currentUser!=="andrid"
  ){
 
@@ -1783,6 +1940,137 @@ async function hacerCorte(){
 
  }
 
+
+ const nombre=
+  document.getElementById(
+   "nuevoProductoNombre"
+  ).value.trim();
+
+ const categoria=
+  document.getElementById(
+   "nuevoProductoCategoria"
+  ).value.trim();
+
+ const precio=
+  Number(
+   document.getElementById(
+    "nuevoProductoPrecio"
+   ).value
+  );
+
+
+ if(!nombre){
+
+  alert(
+   "Escribe el nombre del producto."
+  );
+
+  return;
+
+ }
+
+
+ if(!Number.isFinite(precio)||precio<0){
+
+  alert(
+   "Escribe un precio válido."
+  );
+
+  return;
+
+ }
+
+
+ try{
+
+  const nuevo=
+   await api(
+    "productos",
+    "POST",
+    {
+     nombre:nombre,
+     categoria:categoria||"General",
+     precio:precio,
+     activo:true
+    }
+   );
+
+
+  if(
+   !nuevo||
+   !nuevo.length
+  ){
+
+   throw new Error(
+    "No se pudo guardar el producto."
+   );
+
+  }
+
+
+  document.getElementById(
+   "nuevoProductoNombre"
+  ).value="";
+
+  document.getElementById(
+   "nuevoProductoCategoria"
+  ).value="";
+
+  document.getElementById(
+   "nuevoProductoPrecio"
+  ).value="";
+
+
+  document.getElementById(
+   "productoResultado"
+  ).innerHTML=
+  `
+   <div class="premio">
+    ✅ Producto agregado:
+    <strong>
+     ${escapeHtml(nombre)}
+    </strong>
+   </div>
+  `;
+
+
+  await cargarProductos();
+
+
+ }catch(error){
+
+  console.error(error);
+
+  alert(
+   "No se pudo agregar el producto:\n"+
+   error.message
+  );
+
+ }
+
+}
+
+
+/* =========================
+   HACER CORTE
+========================= */
+
+async function hacerCorte(){
+
+ if(
+  currentUser!=="christian"&&
+  currentUser!=="andrid"
+ ){
+
+  alert(
+   "Debes iniciar sesión."
+  );
+
+  return;
+
+ }
+
+
  try{
 
   const ventas=
@@ -1795,12 +2083,14 @@ async function hacerCorte(){
     }
    );
 
+
   const pendientes=
    ventas.filter(
     v=>
-     v.corte_id===null ||
+     v.corte_id===null||
      v.corte_id===undefined
    );
+
 
   const total=
    pendientes.reduce(
@@ -1809,12 +2099,60 @@ async function hacerCorte(){
     0
    );
 
+
   const clientesCorte=
    new Set(
     pendientes
      .map(v=>v.cliente_id)
      .filter(Boolean)
    );
+
+
+  if(!pendientes.length){
+
+   alert(
+    "No hay ventas pendientes para cerrar."
+   );
+
+   return;
+
+  }
+
+
+  const contado=
+   prompt(
+    "Efectivo contado:\n\n"+
+    "Esperado: $"+
+    dinero(total)
+   );
+
+
+  if(contado===null)return;
+
+
+  const efectivoContado=
+   Number(contado);
+
+
+  if(
+   !Number.isFinite(
+    efectivoContado
+   )||
+   efectivoContado<0
+  ){
+
+   alert(
+    "Cantidad inválida."
+   );
+
+   return;
+
+  }
+
+
+  const diferencia=
+   efectivoContado-total;
+
 
   const corte=
    await api(
@@ -1824,12 +2162,16 @@ async function hacerCorte(){
      ventas:pendientes.length,
      clientes:clientesCorte.size,
      efectivo_esperado:total,
-     efectivo_contado:total,
-     diferencia:0
+     efectivo_contado:efectivoContado,
+     diferencia:diferencia
     }
    );
 
-  if(!corte.length){
+
+  if(
+   !corte||
+   !corte.length
+  ){
 
    throw new Error(
     "No se pudo crear el corte."
@@ -1837,10 +2179,14 @@ async function hacerCorte(){
 
   }
 
+
   const corteId=
    corte[0].id;
 
-  for(const venta of pendientes){
+
+  for(
+   const venta of pendientes
+  ){
 
    await api(
     "ventas",
@@ -1855,13 +2201,24 @@ async function hacerCorte(){
 
   }
 
+
   alert(
    "✅ Turno cerrado.\n\n"+
-   "Ventas: "+pendientes.length+
-   "\nTotal: $"+dinero(total)
+   "Ventas: "+
+   pendientes.length+
+   "\nEsperado: $"+
+   dinero(total)+
+   "\nContado: $"+
+   dinero(efectivoContado)+
+   "\nDiferencia: $"+
+   dinero(diferencia)
   );
 
+
   await actualizarEstadisticas();
+
+  await verCortes();
+
 
  }catch(error){
 
@@ -1876,12 +2233,176 @@ async function hacerCorte(){
 
 
 /* =========================
+   VER CORTES
+========================= */
+
+async function verCortes(){
+
+ if(
+  currentUser!=="christian"&&
+  currentUser!=="andrid"
+ ){
+
+  alert(
+   "Debes iniciar sesión."
+  );
+
+  return;
+
+ }
+
+
+ const contenedor=
+  document.getElementById(
+   "listaCortes"
+  );
+
+
+ contenedor.innerHTML=
+  `
+   <div class="alerta">
+    Cargando cortes...
+   </div>
+  `;
+
+
+ try{
+
+  const cortes=
+   await api(
+    "cierres_turno",
+    "GET",
+    null,
+    {
+     select:"*",
+     order:"id.desc"
+    }
+   );
+
+
+  if(
+   !cortes||
+   !cortes.length
+  ){
+
+   contenedor.innerHTML=
+    `
+     <div class="alerta">
+      No hay cortes registrados.
+     </div>
+    `;
+
+   return;
+
+  }
+
+
+  contenedor.innerHTML="";
+
+
+  cortes.forEach(corte=>{
+
+   const diferencia=
+    Number(
+     corte.diferencia||0
+    );
+
+
+   const div=
+    document.createElement("div");
+
+
+   div.className="corte";
+
+
+   div.innerHTML=`
+    <strong>
+     📊 Corte #${corte.id}
+    </strong>
+
+    <br><br>
+
+    📅 ${formatearFecha(corte.fecha)}
+
+    <hr class="separador">
+
+    🧾 Ventas:
+    <strong>
+     ${Number(corte.ventas)||0}
+    </strong>
+
+    <br><br>
+
+    👤 Clientes:
+    <strong>
+     ${Number(corte.clientes)||0}
+    </strong>
+
+    <br><br>
+
+    💰 Efectivo esperado:
+    <strong>
+     $${dinero(corte.efectivo_esperado)}
+    </strong>
+
+    <br><br>
+
+    💵 Efectivo contado:
+    <strong>
+     $${dinero(corte.efectivo_contado)}
+    </strong>
+
+    <br><br>
+
+    ${
+     diferencia===0
+     ?
+     `
+      <span style="color:#25D366">
+       ✅ Diferencia: $0.00
+      </span>
+     `
+     :
+     `
+      <span style="color:#ff5252">
+       ⚠️ Diferencia:
+       $${dinero(diferencia)}
+      </span>
+     `
+    }
+   `;
+
+
+   contenedor.appendChild(div);
+
+  });
+
+
+ }catch(error){
+
+  contenedor.innerHTML=
+   `
+    <div class="alerta">
+     ❌ No se pudieron cargar los cortes.
+     <br><br>
+     ${escapeHtml(error.message)}
+    </div>
+   `;
+
+ }
+
+}
+
+
+/* =========================
    BORRAR ÚLTIMO CORTE
 ========================= */
 
 async function borrarUltimoCorte(){
 
- if(currentUser!=="christian"){
+ if(
+  currentUser!=="christian"
+ ){
 
   alert(
    "Solo Christian puede borrar cortes."
@@ -1891,11 +2412,13 @@ async function borrarUltimoCorte(){
 
  }
 
+
  if(
   !confirm(
    "¿Borrar el último corte?"
   )
  )return;
+
 
  try{
 
@@ -1911,6 +2434,7 @@ async function borrarUltimoCorte(){
     }
    );
 
+
   if(!cortes.length){
 
    alert(
@@ -1921,8 +2445,10 @@ async function borrarUltimoCorte(){
 
   }
 
+
   const corte=
    cortes[0];
+
 
   await api(
    "ventas",
@@ -1935,6 +2461,7 @@ async function borrarUltimoCorte(){
    }
   );
 
+
   await api(
    "cierres_turno",
    "DELETE",
@@ -1944,11 +2471,16 @@ async function borrarUltimoCorte(){
    }
   );
 
+
   alert(
    "✅ Último corte eliminado."
   );
 
+
   await actualizarEstadisticas();
+
+  await verCortes();
+
 
  }catch(error){
 
@@ -1968,7 +2500,9 @@ async function borrarUltimoCorte(){
 
 async function borrarHistorial(){
 
- if(currentUser!=="christian"){
+ if(
+  currentUser!=="christian"
+ ){
 
   alert(
    "Solo Christian puede borrar el historial."
@@ -1978,12 +2512,13 @@ async function borrarHistorial(){
 
  }
 
- const confirmar=
-  confirm(
-   "⚠️ Esto eliminará todas las ventas y detalles.\n\n¿Continuar?"
-  );
 
- if(!confirmar)return;
+ if(
+  !confirm(
+   "⚠️ Esto eliminará todas las ventas y detalles.\n\n¿Continuar?"
+  )
+ )return;
+
 
  try{
 
@@ -1997,41 +2532,100 @@ async function borrarHistorial(){
     }
    );
 
-  for(const venta of ventas){
+
+  for(
+   const venta of ventas
+  ){
 
    await api(
     "detalle_ventas",
     "DELETE",
     null,
     {
-     venta_id:"eq."+venta.id
+     venta_id:
+      "eq."+venta.id
     }
    );
 
   }
+
 
   await api(
    "ventas",
    "DELETE"
   );
 
+
   await api(
    "cierres_turno",
    "DELETE"
   );
 
+
   alert(
    "✅ Historial eliminado."
   );
 
+
   await actualizarEstadisticas();
+
+  await verCortes();
+
 
  }catch(error){
 
   alert(
-   "No se pudo borrar el historial:\n"+
+   "No se pudo borrar:\n"+
    error.message
   );
+
+ }
+
+}
+
+
+/* =========================
+   ESTADÍSTICAS
+========================= */
+
+async function actualizarEstadisticas(){
+
+ try{
+
+  const ventas=
+   await api(
+    "ventas",
+    "GET",
+    null,
+    {
+     select:"*"
+    }
+   );
+
+
+  document.getElementById(
+   "ventasHoy"
+  ).textContent=
+   ventas.length;
+
+
+  const clientesUnicos=
+   new Set(
+    ventas
+     .map(v=>v.cliente_id)
+     .filter(Boolean)
+   );
+
+
+  document.getElementById(
+   "clientesHoy"
+  ).textContent=
+   clientesUnicos.size;
+
+
+ }catch(error){
+
+  console.log(error);
 
  }
 
@@ -2046,6 +2640,38 @@ function dinero(valor){
 
  return Number(valor||0)
   .toFixed(2);
+
+}
+
+
+function formatearFecha(fecha){
+
+ if(!fecha){
+
+  return "Sin fecha";
+
+ }
+
+ const d=
+  new Date(fecha);
+
+ if(
+  Number.isNaN(
+   d.getTime()
+  )
+ ){
+
+  return String(fecha);
+
+ }
+
+ return d.toLocaleString(
+  "es-MX",
+  {
+   dateStyle:"medium",
+   timeStyle:"short"
+  }
+ );
 
 }
 
