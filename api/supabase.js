@@ -1,5 +1,3 @@
-
-
 export default async function handler(req, res) {
 
   const supabaseUrl = process.env.SUPABASE_URL;
@@ -48,12 +46,13 @@ export default async function handler(req, res) {
       "offset",
       "id",
       "activo",
-      "usuario",
       "whatsapp",
       "corte_id",
       "venta_id",
       "cliente_id",
-      "rol"
+      "usuario",
+      "rol",
+      "nombre"
     ];
 
     for (const key of allowedParams) {
@@ -96,9 +95,12 @@ export default async function handler(req, res) {
 
     const headers = {
       apikey: supabaseKey,
-      Authorization: `Bearer ${supabaseKey}`,
-      "Content-Type": "application/json",
-      Prefer: "return=representation"
+      Authorization:
+        `Bearer ${supabaseKey}`,
+      "Content-Type":
+        "application/json",
+      Prefer:
+        "return=representation"
     };
 
     const options = {
@@ -112,7 +114,9 @@ export default async function handler(req, res) {
     ) {
 
       options.body =
-        JSON.stringify(req.body);
+        JSON.stringify(
+          req.body
+        );
 
     }
 
@@ -139,8 +143,10 @@ export default async function handler(req, res) {
       return res
         .status(response.status)
         .json({
-          error: "Supabase no devolvió JSON.",
-          detalle: text
+          error:
+            "Supabase no devolvió JSON.",
+          detalle:
+            text
         });
 
     }
@@ -154,8 +160,10 @@ export default async function handler(req, res) {
     return res
       .status(500)
       .json({
-        error: "Error de conexión con Supabase.",
-        detalle: error.message
+        error:
+          "Error de conexión con Supabase.",
+        detalle:
+          error.message
       });
 
   }
