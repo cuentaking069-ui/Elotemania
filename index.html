@@ -400,6 +400,56 @@ select{
 
 }
 
+
+
+.social-menu{
+  max-width:900px;
+  margin:14px auto 0;
+  padding:0 15px;
+}
+
+.social-card{
+  background:#151515;
+  border:1px solid #333;
+  border-radius:14px;
+  padding:14px;
+  text-align:center;
+}
+
+.social-card h2{
+  margin:0 0 12px;
+  color:#d4af37;
+  font-size:18px;
+}
+
+.social-links{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:9px;
+}
+
+.social-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:10px 14px;
+  border-radius:9px;
+  border:1px solid #444;
+  background:#242424;
+  color:#fff;
+  text-decoration:none;
+  font-weight:bold;
+  transition:transform .15s ease,border-color .15s ease;
+}
+
+.social-link:hover,
+.social-link:focus{
+  border-color:#d4af37;
+  transform:translateY(-1px);
+}
+
 </style>
 
 </head>
@@ -413,6 +463,18 @@ select{
 <p>Entre compas sabe mejor</p>
 
 </header>
+
+<nav class="social-menu" aria-label="Redes sociales de Elotemanía">
+  <div class="social-card">
+    <h2>📲 ¡Síguenos en redes!</h2>
+    <div class="social-links">
+      <a class="social-link" href="https://www.tiktok.com/@elotemaniacuu" target="_blank" rel="noopener noreferrer" aria-label="Seguir a Elotemanía en TikTok">🎵 TikTok</a>
+      <a class="social-link" href="https://www.instagram.com/elotemania.cuu/" target="_blank" rel="noopener noreferrer" aria-label="Seguir a Elotemanía en Instagram">📸 Instagram</a>
+    </div>
+    <p class="info-pequena">Encuéntranos como <strong>elotemania.cuu</strong></p>
+  </div>
+</nav>
+
 
 
 <div class="container">
