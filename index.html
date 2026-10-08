@@ -1,44 +1,949 @@
-<!doctype html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Elotemanía</title>
-
-<style>
+<title>🌽 ELOTEMANÍA</title><style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#fff8df;color:#222}
-main{max-width:1100px;margin:auto;padding:14px}
-.top,.row{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
-.brand{font-size:30px;font-weight:900}
-.sub,.muted{color:#666;font-size:13px}
-.stats{display:flex;gap:7px}
-.stat{background:#fff;border:1px solid #ddd;border-radius:12px;padding:8px;text-align:center}
-.nav{display:flex;gap:8px;margin:14px 0}
-.layout{display:grid;grid-template-columns:1.2fr .8fr;gap:15px}
-.card{background:#fff;border:1px solid #ddd;border-radius:17px;padding:15px;margin-bottom:15px}
-.products{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.product,button,input{font:inherit}
-.product,button{border:1px solid #ddd;border-radius:11px;padding:11px;background:#fff;cursor:pointer}
-.primary,.active{background:#111!important;color:#fff!important}
-input{width:100%;padding:11px;border:1px solid #ccc;border-radius:10px;margin-top:5px}
-label{display:block;margin-top:9px}
-.cartrow{display:flex;gap:8px;padding:7px 0;border-bottom:1px solid #eee}
-.grow{flex:1}
-.customer,.success{padding:10px;border:1px solid #ddd;border-radius:12px;margin-top:10px}
-.success{background:#effff4}
-.hidden{display:none}
-.adminrow{display:grid;grid-template-columns:1fr 100px 85px;gap:7px;margin:7px 0}
 
-@media(max-width:800px){
-.layout{grid-template-columns:1fr}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#080808;
+  color:#fff;
 }
-</style>
-</head>
 
-<body>
-<main>
+header{
+  background:#080808;
+  border-bottom:1px solid #c9a227;
+  padding:18px 14px;
+  text-align:center;
+}
 
-<div class="top">
-  <div>
-    <div class="brand">🌽 ELOTEMANÍA</div>
+.logo{
+  font-size:28px;
+  font-weight:900;
+  color:#d4af37;
+  letter-spacing:1px;
+}
+
+.slogan{
+  color:#aaa;
+  font-size:13px;
+  margin-top:5px;
+}
+
+.stats{
+  display:flex;
+  gap:8px;
+  padding:10px;
+  max-width:700px;
+  margin:auto;
+}
+
+.stat{
+  flex:1;
+  background:#111;
+  border:1px solid #292929;
+  border-radius:12px;
+  padding:10px 5px;
+  text-align:center;
+}
+
+.stat b{
+  display:block;
+  color:#d4af37;
+  font-size:18px;
+}
+
+.stat span{
+  color:#999;
+  font-size:11px;
+}
+
+nav{
+  display:flex;
+  gap:8px;
+  padding:10px;
+  max-width:700px;
+  margin:auto;
+}
+
+button{
+  border:0;
+  border-radius:10px;
+  padding:13px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.navbtn{
+  flex:1;
+  background:#d4af37;
+  color:#080808;
+}
+
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:10px;
+}
+
+section{
+  background:#101010;
+  border:1px solid #292929;
+  border-radius:15px;
+  padding:14px;
+  margin-bottom:14px;
+}
+
+h2{
+  margin:0 0 12px;
+  color:#d4af37;
+  font-size:20px;
+}
+
+.menu{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.product{
+  background:#171717;
+  border:1px solid #333;
+  border-radius:14px;
+  padding:13px;
+}
+
+.product h3{
+  margin:0 0 8px;
+  font-size:16px;
+}
+
+.cat{
+  color:#888;
+  font-size:12px;
+  margin-bottom:8px;
+}
+
+.price{
+  color:#d4af37;
+  font-size:20px;
+  font-weight:900;
+}
+
+.product button{
+  width:100%;
+  margin-top:10px;
+  background:#d4af37;
+  color:#080808;
+}
+
+.order-item{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  align-items:center;
+  border-bottom:1px solid #292929;
+  padding:10px 0;
+}
+
+.order-item:last-child{
+  border-bottom:0;
+}
+
+.qty{
+  color:#d4af37;
+  font-weight:bold;
+}
+
+.total{
+  font-size:26px;
+  font-weight:900;
+  color:#d4af37;
+  text-align:right;
+  margin-top:10px;
+}
+
+input,select{
+  width:100%;
+  background:#080808;
+  color:#fff;
+  border:1px solid #444;
+  border-radius:10px;
+  padding:13px;
+  margin:5px 0 10px;
+  font-size:16px;
+}
+
+label{
+  font-size:13px;
+  color:#aaa;
+}
+
+.primary{
+  width:100%;
+  background:#d4af37;
+  color:#080808;
+  font-size:16px;
+}
+
+.secondary{
+  background:#222;
+  color:#d4af37;
+  border:1px solid #d4af37;
+}
+
+.danger{
+  background:#321010;
+  color:#ff7777;
+}
+
+.admin{
+  display:none;
+}
+
+.msg{
+  padding:10px;
+  border-radius:10px;
+  background:#181818;
+  color:#aaa;
+  margin-top:8px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+@media(max-width:430px){
+  .menu{
+    grid-template-columns:1fr;
+  }
+}
+</style></head><body><header>
+  <div class="logo">🌽 ELOTEMANÍA</div>
+  <div class="slogan">Entre compas sabe mejor · Punto de venta</div>
+</header><div class="stats">
+  <div class="stat">
+    <b id="sales">$0</b>
+    <span>Ventas</span>
+  </div>
+  <div class="stat">
+    <b id="orders">0</b>
+    <span>Pedidos</span>
+  </div>
+  <div class="stat">
+    <b id="customers">0</b>
+    <span>Clientes</span>
+  </div>
+</div><nav>
+  <button class="navbtn" onclick="showSale()">🛒 Venta</button>
+  <button class="navbtn" onclick="showAdmin()">⚙️ Administrador</button>
+</nav><div class="container"><section id="saleSection"><h2>📋 Menú</h2><div id="menu" class="menu">
+  <div class="msg">Cargando menú...</div>
+</div></section><section id="orderSection"><h2>🛒 Pedido</h2><div id="order">
+  <div class="msg">No hay productos seleccionados.</div>
+</div><div class="total">
+  Total $<span id="total">0</span>
+</div></section><section><h2>👤 Cliente</h2><label>WhatsApp</label>
+<input id="whatsapp" type="tel" placeholder="6141234567">
+
+<label>Nombre</label>
+<input id="customerName" placeholder="Nombre">
+
+<button class="primary" id="charge">
+  ✅ Cobrar + sumar 1 punto
+</button><div id="customerInfo"></div></section><section id="loginSection"><h2>🔐 Administrador</h2><input id="pin" type="password" placeholder="PIN"><button class="primary" onclick="login()">
+  Entrar
+</button></section><section id="adminSection" class="admin"><h2>⚙️ Administración</h2><button class="secondary" onclick="logout()">
+  Salir
+</button><br><br>
+
+<h2>🎁 Premio</h2><label>Puntos para premio</label>
+<input id="pointsPrize" type="number">
+
+<label>Premio</label>
+<input id="prizeText" placeholder="Ej. Elote gratis">
+
+<button class="primary" onclick="saveConfig()">
+  Guardar configuración
+</button><br><br>
+
+<h2>🌽 Agregar producto</h2><input id="newName" placeholder="Nombre"><input id="newCat" placeholder="Categoría"><input id="newPrice" type="number" placeholder="Precio"><button class="primary" onclick="addProduct()">
+  Agregar producto
+</button><div id="adminProducts"></div></section></div><script>
+
+const $=id=>document.getElementById(id);
+
+let products=[];
+let cart=[];
+let config={points:10,prize:'Elote gratis'};
+
+async function api(table,method='GET',body=null,query=''){
+
+  const response=await fetch(
+    '/api/supabase?table='+table+query,
+    {
+      method,
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:body?JSON.stringify(body):undefined
+    }
+  );
+
+  let data;
+
+  try{
+    data=await response.json();
+  }catch{
+    throw new Error('El servidor no devolvió una respuesta válida.');
+  }
+
+  if(!response.ok){
+    throw new Error(
+      data.error ||
+      data.message ||
+      data.details ||
+      data.detalle ||
+      JSON.stringify(data)
+    );
+  }
+
+  return data;
+}
+
+async function load(){
+
+  try{
+
+    products=await api(
+      'productos',
+      'GET',
+      null,
+      '&select=*&activo=eq.true&order=id.asc'
+    );
+
+    renderMenu();
+
+  }catch(error){
+
+    console.error(error);
+
+    $('menu').innerHTML=
+      '<div class="msg">❌ No se pudo cargar el menú.<br><small>'+
+      error.message+
+      '</small></div>';
+  }
+
+  try{
+
+    const sales=await api(
+      'ventas',
+      'GET',
+      null,
+      '&select=id,total'
+    );
+
+    let total=0;
+
+    sales.forEach(v=>{
+      total+=Number(v.total||0);
+    });
+
+    $('sales').textContent='$'+total.toFixed(0);
+    $('orders').textContent=sales.length;
+
+  }catch(error){
+    console.error(error);
+  }
+
+  try{
+
+    const customers=await api(
+      'clientes',
+      'GET',
+      null,
+      '&select=id'
+    );
+
+    $('customers').textContent=customers.length;
+
+  }catch(error){
+    console.error(error);
+  }
+
+  try{
+
+    const c=await api(
+      'configuracion',
+      'GET',
+      null,
+      '&select=*&order=id.asc&limit=1'
+    );
+
+    if(c.length){
+
+      config.points=Number(
+        c[0].puntos_para_premio||10
+      );
+
+      config.prize=
+        c[0].premio||'Elote gratis';
+
+      $('pointsPrize').value=config.points;
+      $('prizeText').value=config.prize;
+    }
+
+  }catch(error){
+    console.error(error);
+  }
+}
+
+function renderMenu(){
+
+  if(!products.length){
+
+    $('menu').innerHTML=
+      '<div class="msg">No hay productos disponibles.</div>';
+
+    return;
+  }
+
+  $('menu').innerHTML='';
+
+  products.forEach(p=>{
+
+    const div=document.createElement('div');
+
+    div.className='product';
+
+    div.innerHTML=`
+      <h3>${escapeHtml(p.nombre)}</h3>
+      <div class="cat">${escapeHtml(p.categoria||'')}</div>
+      <div class="price">$${Number(p.precio).toFixed(0)}</div>
+      <button onclick="addToCart(${p.id})">
+        ➕ Agregar
+      </button>
+    `;
+
+    $('menu').appendChild(div);
+  });
+}
+
+function escapeHtml(text){
+
+  return String(text)
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'","&#039;");
+}
+
+function addToCart(id){
+
+  const product=products.find(
+    p=>Number(p.id)===Number(id)
+  );
+
+  if(!product)return;
+
+  const existing=cart.find(
+    x=>Number(x.id)===Number(id)
+  );
+
+  if(existing){
+
+    existing.cantidad++;
+
+  }else{
+
+    cart.push({
+      id:product.id,
+      nombre:product.nombre,
+      precio:Number(product.precio),
+      cantidad:1
+    });
+  }
+
+  renderCart();
+}
+
+function removeFromCart(id){
+
+  const item=cart.find(
+    x=>Number(x.id)===Number(id)
+  );
+
+  if(!item)return;
+
+  item.cantidad--;
+
+  if(item.cantidad<=0){
+
+    cart=cart.filter(
+      x=>Number(x.id)!==Number(id)
+    );
+  }
+
+  renderCart();
+}
+
+function renderCart(){
+
+  if(!cart.length){
+
+    $('order').innerHTML=
+      '<div class="msg">No hay productos seleccionados.</div>';
+
+    $('total').textContent='0';
+
+    return;
+  }
+
+  let total=0;
+
+  $('order').innerHTML='';
+
+  cart.forEach(item=>{
+
+    const subtotal=
+      item.precio*item.cantidad;
+
+    total+=subtotal;
+
+    const div=document.createElement('div');
+
+    div.className='order-item';
+
+    div.innerHTML=`
+      <div>
+        <b>${escapeHtml(item.nombre)}</b><br>
+        <span class="qty">
+          ${item.cantidad} × $${item.precio.toFixed(0)}
+        </span>
+      </div>
+
+      <div>
+        <b>$${subtotal.toFixed(0)}</b><br>
+        <button class="secondary"
+          onclick="removeFromCart(${item.id})">
+          −
+        </button>
+      </div>
+    `;
+
+    $('order').appendChild(div);
+  });
+
+  $('total').textContent=total.toFixed(0);
+}
+
+async function charge(){
+
+  if(!cart.length){
+
+    alert('⚠️ Agrega productos al pedido.');
+
+    return;
+  }
+
+  const name=$('customerName').value.trim();
+  const whatsapp=$('whatsapp').value.trim();
+
+  if(!name){
+
+    alert('⚠️ Escribe el nombre del cliente.');
+
+    return;
+  }
+
+  if(!whatsapp){
+
+    alert('⚠️ Escribe el WhatsApp del cliente.');
+
+    return;
+  }
+
+  let total=0;
+
+  cart.forEach(item=>{
+    total+=item.precio*item.cantidad;
+  });
+
+  $('charge').disabled=true;
+
+  try{
+
+    let clients=await api(
+      'clientes',
+      'GET',
+      null,
+      '&select=*&whatsapp=eq.'+
+      encodeURIComponent(whatsapp)+
+      '&limit=1'
+    );
+
+    let client;
+
+    if(clients.length){
+
+      client=clients[0];
+
+    }else{
+
+      const created=await api(
+        'clientes',
+        'POST',
+        {
+          nombre:name,
+          whatsapp:whatsapp,
+          puntos:0,
+          premios_obtenidos:0
+        }
+      );
+
+      client=created[0];
+    }
+
+    const points=
+      Number(client.puntos||0)+1;
+
+    let premios=
+      Number(client.premios_obtenidos||0);
+
+    let newPoints=points;
+
+    let premioGanado=false;
+
+    if(points>=config.points){
+
+      premioGanado=true;
+      premios++;
+      newPoints=0;
+    }
+
+    await api(
+      'clientes',
+      'PATCH',
+      {
+        nombre:name,
+        puntos:newPoints,
+        premios_obtenidos:premios
+      },
+      '&id=eq.'+client.id
+    );
+
+    const sale=await api(
+      'ventas',
+      'POST',
+      {
+        cliente_id:client.id,
+        total:total,
+        puntos_ganados:1
+      }
+    );
+
+    const ventaId=sale[0].id;
+
+    for(const item of cart){
+
+      await api(
+        'detalle_ventas',
+        'POST',
+        {
+          venta_id:ventaId,
+          producto_id:item.id,
+          nombre_producto:item.nombre,
+          cantidad:item.cantidad,
+          precio:item.precio
+        }
+      );
+    }
+
+    let message=
+      `🌽 *ELOTEMANÍA* 🌽%0A%0A`+
+      `Hola ${name} 👋%0A%0A`+
+      `Gracias por tu compra ❤️%0A`+
+      `Total: $${total.toFixed(0)}%0A`+
+      `⭐ Puntos actuales: ${newPoints}`;
+
+    if(premioGanado){
+
+      message+=
+        `%0A%0A🎁 *¡FELICIDADES!* 🎁%0A`+
+        `Ganaste: ${config.prize}`;
+    }
+
+    message+=
+      `%0A%0A🌽 Entre compas sabe mejor`;
+
+    window.open(
+      'https://wa.me/52'+
+      whatsapp.replace(/\D/g,'')+
+      '?text='+message,
+      '_blank'
+    );
+
+    alert(
+      premioGanado
+      ? '🎁 Compra registrada y premio ganado.'
+      : '✅ Compra registrada correctamente.'
+    );
+
+    cart=[];
+
+    renderCart();
+
+    $('customerName').value='';
+    $('whatsapp').value='';
+
+    await load();
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      '❌ No se pudo registrar la venta:\n\n'+
+      error.message
+    );
+
+  }finally{
+
+    $('charge').disabled=false;
+  }
+}
+
+$('charge').onclick=charge;
+
+async function login(){
+
+  const pin=$('pin').value;
+
+  if(pin!=='1234'){
+
+    alert('❌ PIN incorrecto.');
+
+    return;
+  }
+
+  $('adminSection').style.display='block';
+  $('loginSection').style.display='none';
+
+  renderAdmin();
+}
+
+function logout(){
+
+  $('adminSection').style.display='none';
+  $('loginSection').style.display='block';
+  $('pin').value='';
+}
+
+function showSale(){
+
+  $('saleSection').style.display='block';
+  $('orderSection').style.display='block';
+  $('adminSection').style.display='none';
+}
+
+function showAdmin(){
+
+  $('saleSection').style.display='none';
+  $('orderSection').style.display='none';
+  $('adminSection').style.display='block';
+  $('loginSection').style.display='block';
+}
+
+async function addProduct(){
+
+  const name=$('newName').value.trim();
+  const category=
+    $('newCat').value.trim()||'Otros';
+
+  const price=
+    Number($('newPrice').value);
+
+  if(!name||!price){
+
+    alert('⚠️ Escribe nombre y precio.');
+
+    return;
+  }
+
+  try{
+
+    await api(
+      'productos',
+      'POST',
+      {
+        nombre:name,
+        categoria:category,
+        precio:price,
+        activo:true
+      }
+    );
+
+    alert('✅ Producto agregado.');
+
+    $('newName').value='';
+    $('newCat').value='';
+    $('newPrice').value='';
+
+    await load();
+
+    renderAdmin();
+
+  }catch(error){
+
+    alert(
+      '❌ Error al agregar producto:\n\n'+
+      error.message
+    );
+  }
+}
+
+function renderAdmin(){
+
+  const box=$('adminProducts');
+
+  if(!box)return;
+
+  box.innerHTML='';
+
+  products.forEach(p=>{
+
+    const div=document.createElement('div');
+
+    div.className='product';
+
+    div.style.marginTop='10px';
+
+    div.innerHTML=`
+      <b>${escapeHtml(p.nombre)}</b>
+
+      <input
+        id="name-${p.id}"
+        value="${escapeHtml(p.nombre)}"
+      >
+
+      <input
+        id="price-${p.id}"
+        type="number"
+        value="${Number(p.precio)}"
+      >
+
+      <button class="secondary"
+        onclick="updateProduct(${p.id})">
+        💾 Guardar
+      </button>
+    `;
+
+    box.appendChild(div);
+  });
+}
+
+async function updateProduct(id){
+
+  const name=
+    $('name-'+id).value.trim();
+
+  const price=
+    Number($('price-'+id).value);
+
+  if(!name||!price){
+
+    alert('⚠️ Nombre y precio son obligatorios.');
+
+    return;
+  }
+
+  try{
+
+    await api(
+      'productos',
+      'PATCH',
+      {
+        nombre:name,
+        precio:price
+      },
+      '&id=eq.'+id
+    );
+
+    alert('✅ Producto actualizado.');
+
+    await load();
+
+    renderAdmin();
+
+  }catch(error){
+
+    alert(
+      '❌ Error:\n\n'+
+      error.message
+    );
+  }
+}
+
+async function saveConfig(){
+
+  const points=
+    Number($('pointsPrize').value)||10;
+
+  const prize=
+    $('prizeText').value.trim()||
+    'Elote gratis';
+
+  try{
+
+    const current=await api(
+      'configuracion',
+      'GET',
+      null,
+      '&select=*&order=id.asc&limit=1'
+    );
+
+    if(current.length){
+
+      await api(
+        'configuracion',
+        'PATCH',
+        {
+          puntos_para_premio:points,
+          premio:prize
+        },
+        '&id=eq.'+current[0].id
+      );
+
+    }else{
+
+      await api(
+        'configuracion',
+        'POST',
+        {
+          puntos_para_premio:points,
+          premio:prize
+        }
+      );
+    }
+
+    config.points=points;
+    config.prize=prize;
+
+    alert('✅ Configuración guardada.');
+
+  }catch(error){
+
+    alert(
+      '❌ Error:\n\n'+
+      error.message
+    );
+  }
+}
+
+load();
+
+</script></body>
+</html>
