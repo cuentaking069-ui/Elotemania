@@ -17,7 +17,9 @@ export default async function handler(req, res) {
       });
     }
 
-    const url = new URL(`${supabaseUrl}/rest/v1/${table}`);
+    const url = new URL(
+      `${supabaseUrl}/rest/v1/${table}`
+    );
 
     const allowedParams = [
       "select",
@@ -50,7 +52,11 @@ export default async function handler(req, res) {
       options.body = JSON.stringify(req.body);
     }
 
-    const response = await fetch(url.toString(), options);
+    const response = await fetch(
+      url.toString(),
+      options
+    );
+
     const text = await response.text();
 
     let data;
