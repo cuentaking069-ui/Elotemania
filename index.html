@@ -2,30 +2,32 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Elotemanía POS</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+ box-sizing:border-box;
+}
 
 body{
  margin:0;
  font-family:Arial,Helvetica,sans-serif;
- background:#080808;
- color:#fff;
+ background:#111;
+ color:white;
 }
 
 header{
- background:linear-gradient(135deg,#111,#1d1600);
- border-bottom:2px solid #d4af37;
+ background:#000;
  padding:18px;
  text-align:center;
+ border-bottom:2px solid #d4af37;
 }
 
 header h1{
  margin:0;
- color:#ffd84d;
- font-size:30px;
+ color:#d4af37;
+ font-size:28px;
 }
 
 header p{
@@ -47,17 +49,17 @@ header p{
 }
 
 .stat{
- background:#151515;
+ background:#1d1d1d;
  border:1px solid #333;
  border-radius:12px;
- padding:14px;
+ padding:15px;
  text-align:center;
 }
 
 .stat b{
  display:block;
- color:#ffd84d;
- font-size:22px;
+ font-size:24px;
+ color:#d4af37;
 }
 
 .tabs{
@@ -66,54 +68,64 @@ header p{
  margin-bottom:15px;
 }
 
+.tabs button{
+ flex:1;
+}
+
 button{
  border:0;
  border-radius:10px;
- padding:12px 15px;
+ padding:13px;
  font-weight:bold;
  cursor:pointer;
 }
 
-.tab{
- flex:1;
- background:#222;
- color:#fff;
-}
-
-.tab.active{
+.btn-gold{
  background:#d4af37;
  color:#000;
 }
 
-.panel{
- display:none;
+.btn-dark{
+ background:#292929;
+ color:white;
 }
 
-.panel.active{
- display:block;
+.btn-green{
+ background:#25D366;
+ color:white;
+}
+
+.btn-red{
+ background:#c62828;
+ color:white;
+}
+
+.btn-blue{
+ background:#1976d2;
+ color:white;
 }
 
 .card{
- background:#151515;
+ background:#1b1b1b;
  border:1px solid #333;
  border-radius:14px;
  padding:15px;
  margin-bottom:15px;
 }
 
-.card h2{
- color:#ffd84d;
+h2{
+ color:#d4af37;
  margin-top:0;
 }
 
-input{
+input,select{
  width:100%;
  padding:13px;
- margin:6px 0;
  border-radius:9px;
  border:1px solid #444;
- background:#090909;
- color:#fff;
+ background:#101010;
+ color:white;
+ margin:6px 0 10px;
  font-size:16px;
 }
 
@@ -123,124 +135,69 @@ input{
  gap:10px;
 }
 
-.product{
- background:#202020;
+.producto{
+ background:#242424;
  border:1px solid #444;
  border-radius:12px;
- padding:14px;
- cursor:pointer;
+ padding:12px;
 }
 
-.product:hover{
- border-color:#ffd84d;
-}
-
-.product strong{
+.producto strong{
  display:block;
- color:#ffd84d;
- margin-bottom:7px;
+ margin-bottom:6px;
 }
 
-.product small{
- color:#bbb;
+.producto button{
+ width:100%;
+ margin-top:8px;
 }
 
-.cart-item{
+.item{
  display:flex;
  justify-content:space-between;
- gap:10px;
  align-items:center;
+ gap:10px;
  border-bottom:1px solid #333;
  padding:10px 0;
 }
 
-.cart-item button{
- padding:6px 9px;
- background:#8b0000;
- color:white;
-}
-
 .total{
- font-size:25px;
- color:#ffd84d;
+ font-size:24px;
+ color:#d4af37;
  text-align:right;
- margin:15px 0;
-}
-
-.primary{
- width:100%;
- background:#ffd84d;
- color:#000;
- font-size:17px;
-}
-
-.green{
- background:#19a463;
- color:white;
-}
-
-.red{
- background:#9b1515;
- color:white;
-}
-
-.gray{
- background:#333;
- color:#fff;
-}
-
-.message{
- padding:12px;
- border-radius:10px;
- background:#102718;
- border:1px solid #24753e;
- margin-top:10px;
-}
-
-.points{
- font-size:28px;
- color:#ffd84d;
- font-weight:bold;
- margin:8px 0;
-}
-
-.premio{
- background:#3a2900;
- border:1px solid #ffd84d;
- color:#ffd84d;
- padding:12px;
- border-radius:10px;
- margin-top:10px;
- font-weight:bold;
-}
-
-.history{
- border-bottom:1px solid #333;
- padding:12px 0;
-}
-
-.user{
- background:#202020;
- padding:15px;
- border-radius:12px;
- margin-bottom:10px;
- border:1px solid #444;
-}
-
-.user b{
- color:#ffd84d;
+ margin-top:15px;
 }
 
 .hidden{
- display:none!important;
+ display:none;
+}
+
+.alerta{
+ padding:12px;
+ border-radius:10px;
+ background:#332b00;
+ border:1px solid #d4af37;
+ margin-top:10px;
+}
+
+.premio{
+ padding:14px;
+ border-radius:10px;
+ background:#153d1d;
+ border:1px solid #25D366;
+ margin-top:10px;
+}
+
+.resultado{
+ padding:15px;
+ background:#202020;
+ border-radius:12px;
+ margin-top:12px;
 }
 
 @media(max-width:600px){
  .stats{
   grid-template-columns:1fr;
- }
- header h1{
-  font-size:25px;
  }
 }
 </style>
@@ -257,48 +214,37 @@ input{
 
  <div class="stats">
   <div class="stat">
-   Ventas
-   <b id="statVentas">0</b>
+   <span>Ventas</span>
+   <b id="ventasHoy">0</b>
   </div>
 
   <div class="stat">
-   Clientes
-   <b id="statClientes">0</b>
+   <span>Clientes</span>
+   <b id="clientesHoy">0</b>
   </div>
 
   <div class="stat">
-   Turno
+   <span>Turno</span>
    <b>1</b>
   </div>
  </div>
 
  <div class="tabs">
-  <button class="tab active" onclick="mostrarPanel('venta',this)">
-   🛒 Venta
-  </button>
-
-  <button class="tab" onclick="mostrarPanel('acceso',this)">
-   🔐 Acceso
-  </button>
+  <button class="btn-gold" onclick="mostrarVenta()">Venta</button>
+  <button class="btn-dark" onclick="mostrarAcceso()">Acceso</button>
  </div>
 
-
- <!-- =========================
-      VENTA
- ========================== -->
-
- <section id="venta" class="panel active">
+ <section id="ventaSection">
 
   <div class="card">
-   <h2>🌽 Menú</h2>
+   <h2>🛒 Productos</h2>
    <div id="productos" class="grid">
     Cargando productos...
    </div>
   </div>
 
-
   <div class="card">
-   <h2>🛒 Carrito</h2>
+   <h2>🧾 Venta</h2>
 
    <div id="carrito">
     No hay productos.
@@ -309,207 +255,117 @@ input{
    </div>
   </div>
 
-
   <div class="card">
+
    <h2>👤 Cliente</h2>
 
+   <label>Nombre</label>
    <input
-    id="clienteNombre"
+    id="nombreCliente"
+    type="text"
     placeholder="Nombre del cliente"
    >
 
+   <label>WhatsApp</label>
    <input
-    id="clienteWhatsapp"
-    placeholder="WhatsApp (10 dígitos)"
-    inputmode="numeric"
+    id="whatsappCliente"
+    type="tel"
+    placeholder="10 dígitos"
    >
 
-   <button class="green" onclick="buscarCliente()">
+   <button
+    class="btn-blue"
+    onclick="buscarCliente()"
+   >
     🔎 Buscar cliente
    </button>
 
-   <div id="clienteInfo"></div>
-  </div>
+   <div id="clienteResultado"></div>
 
-
-  <div class="card">
-
-   <button class="primary" onclick="registrarVenta()">
-    💰 REGISTRAR VENTA
+   <button
+    class="btn-gold"
+    style="width:100%;margin-top:10px"
+    onclick="registrarVenta()"
+   >
+    💰 Registrar venta
    </button>
-
-   <div id="resultadoVenta"></div>
 
   </div>
 
  </section>
 
 
- <!-- =========================
-      ACCESO
- ========================== -->
-
- <section id="acceso" class="panel">
+ <section id="accesoSection" class="hidden">
 
   <div class="card">
+   <h2>🔐 Acceso</h2>
 
-   <h2>👑 Acceso</h2>
+   <input
+    id="usuario"
+    placeholder="Usuario"
+   >
 
-   <div class="user">
+   <input
+    id="pin"
+    type="password"
+    placeholder="PIN"
+   >
 
-    <b>👑 Christian</b>
+   <button
+    class="btn-gold"
+    onclick="login()"
+   >
+    Entrar
+   </button>
 
-    <p>Gerente</p>
-
-    <button
-     class="gray"
-     onclick="login('christian')"
-    >
-     Entrar
-    </button>
-
-   </div>
-
-
-   <div class="user">
-
-    <b>👑 Andrid</b>
-
-    <p>Vendedor</p>
-
-    <button
-     class="gray"
-     onclick="login('andrid')"
-    >
-     Entrar
-    </button>
-
-   </div>
-
-   <div id="usuarioActual"></div>
-
+   <div id="accesoResultado"></div>
   </div>
 
-
-  <div id="adminPanel" class="hidden">
-
-
-   <!-- CONFIGURACIÓN -->
-
-   <div class="card" id="configPanel">
-
-    <h2>🎁 Configuración</h2>
-
-    <input
-     id="puntosPremio"
-     type="number"
-     min="1"
-     placeholder="Compras necesarias"
-    >
-
-    <button
-     class="primary"
-     onclick="guardarConfiguracion()"
-    >
-     💾 Guardar
-    </button>
-
-   </div>
-
-
-   <!-- CANJE -->
+  <div id="adminSection" class="hidden">
 
    <div class="card">
-
-    <h2>🎁 Canjear premio</h2>
+    <h2>🎁 Cliente / Premio</h2>
 
     <input
-     id="canjeWhatsapp"
+     id="buscarAdmin"
      placeholder="WhatsApp del cliente"
-     inputmode="numeric"
     >
 
     <button
-     class="green"
-     onclick="buscarClienteCanje()"
+     class="btn-blue"
+     onclick="buscarClienteAdmin()"
     >
      🔎 Buscar cliente
     </button>
 
-    <div id="canjeInfo"></div>
-
-    <button
-     class="primary"
-     onclick="canjearPremio()"
-     style="margin-top:10px"
-    >
-     🎁 CANJEAR PREMIO
-    </button>
-
+    <div id="adminClienteResultado"></div>
    </div>
 
-
-   <!-- HISTORIAL -->
-
    <div class="card">
-
-    <h2>📜 Historial</h2>
+    <h2>⚙️ Turno</h2>
 
     <button
-     class="gray"
-     onclick="cargarHistorial()"
-    >
-     🔄 Actualizar
-    </button>
-
-    <div id="historial"></div>
-
-   </div>
-
-
-   <!-- CORTE -->
-
-   <div class="card">
-
-    <h2>✂️ Corte de turno</h2>
-
-    <button
-     class="green"
+     class="btn-gold"
      onclick="hacerCorte()"
     >
-     💵 HACER CORTE
+     Cerrar turno
     </button>
-
-    <div id="corteResultado"></div>
-
-   </div>
-
-
-   <!-- SOLO CHRISTIAN -->
-
-   <div
-    class="card"
-    id="zonaChristian"
-   >
-
-    <h2>⚠️ Administración</h2>
 
     <button
-     class="red"
-     onclick="eliminarUltimoCorte()"
+     class="btn-red"
+     style="margin-top:10px"
+     onclick="borrarUltimoCorte()"
     >
-     🗑️ Eliminar último corte
+     Borrar último corte
     </button>
-
-    <br><br>
 
     <button
-     class="red"
-     onclick="eliminarTodoHistorial()"
+     class="btn-red"
+     style="margin-top:10px"
+     onclick="borrarHistorial()"
     >
-     🗑️ Eliminar TODO el historial
+     Borrar todo el historial
     </button>
-
    </div>
 
   </div>
@@ -521,144 +377,174 @@ input{
 
 <script>
 
+const API="/api/supabase";
+
 let productos=[];
 let carrito=[];
-let ventas=[];
-
+let clientes=[];
 let configuracion={
- puntos_para_premio:10
+ puntos_para_premio:10,
+ premio:"Premio"
 };
 
 let currentUser=null;
-
 let clienteSeleccionado=null;
-let clienteCanje=null;
 
 
 /* =========================
    API
 ========================= */
 
-const api="/api/supabase.js";
-
-
-async function apiRequest(
- table,
- method="GET",
- params={},
- body=null
+async function api(
+ tabla,
+ metodo="GET",
+ cuerpo=null,
+ params={}
 ){
 
- let url=
-  api+
-  "?table="+
-  encodeURIComponent(table);
+ let url=new URL(API,window.location.origin);
 
- Object.keys(params).forEach(key=>{
+ url.searchParams.set("table",tabla);
 
-  if(
-   params[key]!==undefined &&
-   params[key]!==null &&
-   params[key]!==""
-  ){
-
-   url+="&"+
-    encodeURIComponent(key)+
-    "="+
-    encodeURIComponent(params[key]);
-
+ Object.keys(params).forEach(k=>{
+  if(params[k]!==undefined && params[k]!==null){
+   url.searchParams.set(k,params[k]);
   }
-
  });
 
-
- const options={
-  method,
+ let opciones={
+  method:metodo,
   headers:{
    "Content-Type":"application/json"
   }
  };
 
-
- if(body!==null){
-  options.body=JSON.stringify(body);
+ if(cuerpo!==null){
+  opciones.body=JSON.stringify(cuerpo);
  }
 
+ const respuesta=await fetch(
+  url.toString(),
+  opciones
+ );
 
- const response=
-  await fetch(url,options);
+ const texto=await respuesta.text();
 
+ let datos;
 
- const data=
-  await response.json();
-
-
- if(!response.ok){
-
-  throw new Error(
-   data.error||
-   data.message||
-   "Error en Supabase"
-  );
-
+ try{
+  datos=texto ? JSON.parse(texto):null;
+ }catch{
+  throw new Error(texto||"Respuesta inválida");
  }
 
+ if(!respuesta.ok){
 
- return data;
-}
+  let mensaje=
+   datos?.message||
+   datos?.error||
+   datos?.details||
+   datos?.hint||
+   "Error en Supabase";
 
-
-function dinero(numero){
- return Number(numero||0).toFixed(2);
-}
-
-
-function escapar(texto){
-
- return String(texto||"")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;");
-
-}
-
-
-function numeroWhatsapp(numero){
-
- let n=
-  String(numero||"")
-  .replace(/\D/g,"");
-
- if(n.length===10){
-  n="52"+n;
+  throw new Error(mensaje);
  }
 
- return n;
+ return datos;
 }
 
 
 /* =========================
-   PANELES
+   INICIO
 ========================= */
 
-function mostrarPanel(id,boton){
+async function iniciar(){
+
+ try{
+
+  await cargarConfiguracion();
+  await cargarProductos();
+  await cargarClientes();
+  await actualizarEstadisticas();
+
+ }catch(error){
+
+  alert(
+   "Error al iniciar:\n"+
+   error.message
+  );
+
+ }
+
+}
+
+iniciar();
+
+
+/* =========================
+   NAVEGACIÓN
+========================= */
+
+function mostrarVenta(){
 
  document
-  .querySelectorAll(".panel")
-  .forEach(p=>{
-   p.classList.remove("active");
-  });
+  .getElementById("ventaSection")
+  .classList.remove("hidden");
 
  document
-  .getElementById(id)
-  .classList.add("active");
+  .getElementById("accesoSection")
+  .classList.add("hidden");
+
+}
+
+
+function mostrarAcceso(){
 
  document
-  .querySelectorAll(".tab")
-  .forEach(b=>{
-   b.classList.remove("active");
-  });
+  .getElementById("ventaSection")
+  .classList.add("hidden");
 
- boton.classList.add("active");
+ document
+  .getElementById("accesoSection")
+  .classList.remove("hidden");
+
+}
+
+
+/* =========================
+   CONFIGURACIÓN
+========================= */
+
+async function cargarConfiguracion(){
+
+ try{
+
+  const datos=
+   await api(
+    "configuracion",
+    "GET",
+    null,
+    {
+     select:"*",
+     limit:1
+    }
+   );
+
+  if(datos && datos.length){
+
+   configuracion.puntos_para_premio=
+    Number(datos[0].puntos_para_premio)||10;
+
+   configuracion.premio="Premio";
+
+  }
+
+ }catch(error){
+
+  console.log(error);
+
+ }
+
 }
 
 
@@ -668,77 +554,66 @@ function mostrarPanel(id,boton){
 
 async function cargarProductos(){
 
- try{
+ productos=
+  await api(
+   "productos",
+   "GET",
+   null,
+   {
+    select:"*",
+    activo:"eq.true",
+    order:"nombre.asc"
+   }
+  );
 
-  productos=
-   await apiRequest(
-    "productos",
-    "GET",
-    {
-     select:"*",
-     activo:"eq.true",
-     order:"id.asc"
-    }
-   );
-
-  pintarProductos();
-
- }catch(error){
-
-  document
-   .getElementById("productos")
-   .innerHTML=
-   `<p>Error: ${escapar(error.message)}</p>`;
-
- }
-
+ renderProductos();
 }
 
 
-function pintarProductos(){
+function renderProductos(){
 
  const contenedor=
   document.getElementById("productos");
 
-
  if(!productos.length){
 
   contenedor.innerHTML=
-   "<p>No hay productos activos.</p>";
+   "No hay productos activos.";
 
   return;
 
  }
 
+ contenedor.innerHTML="";
 
- contenedor.innerHTML=
-  productos.map(p=>`
+ productos.forEach(producto=>{
 
-   <div
-    class="product"
-    onclick="agregarProducto(${p.id})"
+  const div=
+   document.createElement("div");
+
+  div.className="producto";
+
+  div.innerHTML=`
+   <strong>${escapeHtml(producto.nombre)}</strong>
+   <div>$${dinero(producto.precio)}</div>
+   <button
+    class="btn-gold"
+    onclick="agregarProducto(${producto.id})"
    >
+    Agregar
+   </button>
+  `;
 
-    <strong>
-     ${escapar(p.nombre)}
-    </strong>
+  contenedor.appendChild(div);
 
-    <small>
-     ${escapar(p.categoria||"")}
-    </small>
-
-    <br>
-
-    <b>
-     $${dinero(p.precio)}
-    </b>
-
-   </div>
-
-  `).join("");
+ });
 
 }
 
+
+/* =========================
+   CARRITO
+========================= */
 
 function agregarProducto(id){
 
@@ -749,12 +624,10 @@ function agregarProducto(id){
 
  if(!producto)return;
 
-
  const existente=
   carrito.find(
    p=>Number(p.id)===Number(id)
   );
-
 
  if(existente){
 
@@ -771,8 +644,7 @@ function agregarProducto(id){
 
  }
 
-
- pintarCarrito();
+ renderCarrito();
 
 }
 
@@ -784,92 +656,88 @@ function quitarProducto(id){
    p=>Number(p.id)===Number(id)
   );
 
-
  if(index===-1)return;
 
+ if(carrito[index].cantidad>1){
 
- carrito[index].cantidad--;
+  carrito[index].cantidad--;
 
-
- if(carrito[index].cantidad<=0){
+ }else{
 
   carrito.splice(index,1);
 
  }
 
-
- pintarCarrito();
+ renderCarrito();
 
 }
 
 
-function pintarCarrito(){
+function renderCarrito(){
 
  const contenedor=
   document.getElementById("carrito");
-
 
  if(!carrito.length){
 
   contenedor.innerHTML=
    "No hay productos.";
 
-  document
-   .getElementById("total")
+  document.getElementById("total")
    .textContent="0.00";
 
   return;
 
  }
 
+ contenedor.innerHTML="";
 
  let total=0;
 
+ carrito.forEach(item=>{
 
- contenedor.innerHTML=
-  carrito.map(p=>{
+  const subtotal=
+   item.precio*item.cantidad;
 
-   const subtotal=
-    p.precio*p.cantidad;
+  total+=subtotal;
 
-   total+=subtotal;
+  const div=
+   document.createElement("div");
 
+  div.className="item";
 
-   return `
+  div.innerHTML=`
+   <div>
+    <strong>${escapeHtml(item.nombre)}</strong>
+    <br>
+    ${item.cantidad} × $${dinero(item.precio)}
+   </div>
 
-    <div class="cart-item">
+   <button
+    class="btn-red"
+    onclick="quitarProducto(${item.id})"
+   >
+    −
+   </button>
+  `;
 
-     <div>
+  contenedor.appendChild(div);
 
-      <b>
-       ${escapar(p.nombre)}
-      </b>
+ });
 
-      <br>
+ document.getElementById("total")
+  .textContent=dinero(total);
 
-      ${p.cantidad}
-      ×
-      $${dinero(p.precio)}
-
-     </div>
-
-     <button
-      onclick="quitarProducto(${p.id})"
-     >
-      −
-     </button>
-
-    </div>
-
-   `;
-
-  }).join("");
+}
 
 
- document
-  .getElementById("total")
-  .textContent=
-  dinero(total);
+function obtenerTotal(){
+
+ return carrito.reduce(
+  (total,item)=>
+   total+(item.precio*item.cantidad),
+  0
+ );
 
 }
 
@@ -878,326 +746,171 @@ function pintarCarrito(){
    CLIENTES
 ========================= */
 
+async function cargarClientes(){
+
+ clientes=
+  await api(
+   "clientes",
+   "GET",
+   null,
+   {
+    select:"*",
+    order:"nombre.asc"
+   }
+  );
+
+}
+
+
+function normalizarWhatsapp(numero){
+
+ return String(numero||"")
+  .replace(/\D/g,"");
+
+}
+
+
+function numeroWhatsapp(numero){
+
+ let n=
+  normalizarWhatsapp(numero);
+
+ if(n.length===10){
+
+  n="52"+n;
+
+ }
+
+ return n;
+
+}
+
+
 async function buscarCliente(){
 
- const nombre=
-  document
-   .getElementById("clienteNombre")
-   .value.trim();
-
-
  const whatsapp=
-  document
-   .getElementById("clienteWhatsapp")
-   .value
-   .trim()
-   .replace(/\D/g,"");
+  normalizarWhatsapp(
+   document.getElementById(
+    "whatsappCliente"
+   ).value
+  );
 
-
- if(!nombre&&!whatsapp){
+ if(!whatsapp){
 
   alert(
-   "Escribe el nombre o WhatsApp."
+   "Escribe el número de WhatsApp."
   );
 
   return;
 
  }
 
-
  try{
 
-  let resultado=[];
+  const encontrados=
+   await api(
+    "clientes",
+    "GET",
+    null,
+    {
+     select:"*",
+     whatsapp:"eq."+whatsapp,
+     limit:1
+    }
+   );
 
-
-  if(whatsapp){
-
-   resultado=
-    await apiRequest(
-     "clientes",
-     "GET",
-     {
-      select:"*",
-      whatsapp:"eq."+whatsapp,
-      limit:"1"
-     }
-    );
-
-  }
-
-
-  if(!resultado.length&&nombre){
-
-   resultado=
-    await apiRequest(
-     "clientes",
-     "GET",
-     {
-      select:"*",
-      nombre:"eq."+nombre,
-      limit:"1"
-     }
-    );
-
-  }
-
-
-  if(resultado.length){
+  if(encontrados.length){
 
    clienteSeleccionado=
-    resultado[0];
+    encontrados[0];
 
-   document
-    .getElementById("clienteNombre")
-    .value=
-    clienteSeleccionado.nombre;
+   document.getElementById(
+    "nombreCliente"
+   ).value=
+    clienteSeleccionado.nombre||"";
 
-
-   document
-    .getElementById("clienteWhatsapp")
-    .value=
-    clienteSeleccionado.whatsapp||"";
-
-
-   mostrarCliente(
-    clienteSeleccionado,
-    "clienteInfo"
+   mostrarClienteResultado(
+    clienteSeleccionado
    );
 
   }else{
 
    clienteSeleccionado=null;
 
-   document
-    .getElementById("clienteInfo")
-    .innerHTML=
-    `
-     <div class="message">
-      Cliente nuevo.
-      <br><br>
-      Al registrar la primera compra
-      comenzará su contador.
-     </div>
-    `;
+   document.getElementById(
+    "clienteResultado"
+   ).innerHTML=`
+    <div class="alerta">
+     👤 Cliente nuevo.<br>
+     Al registrarse tendrá
+     <strong>${configuracion.puntos_para_premio}</strong>
+     compras restantes para su Premio.
+    </div>
+   `;
 
   }
 
-
  }catch(error){
 
-  alert(error.message);
+  alert(
+   "No se pudo buscar el cliente:\n"+
+   error.message
+  );
 
  }
 
 }
 
 
-/* =========================
-   MOSTRAR CONTADOR
-========================= */
-
-function mostrarCliente(
- cliente,
- contenedor
-){
+function mostrarClienteResultado(cliente){
 
  const puntos=
-  Number(cliente.puntos||0);
+  Number(cliente.puntos);
 
+ let html=`
+  <div class="resultado">
 
- const necesarios=
-  Number(
-   configuracion.puntos_para_premio||10
-  );
+   <strong>
+    👤 ${escapeHtml(cliente.nombre)}
+   </strong>
 
+   <br><br>
 
- let texto="";
+   📱 ${escapeHtml(cliente.whatsapp)}
 
+   <br><br>
+
+   ⭐ Compras restantes:
+   <strong>${puntos}</strong>
+ `;
 
  if(puntos<=0){
 
-  texto=
-   `
-    <div class="premio">
-     🎁 ¡CLIENTE LISTO PARA PREMIO!
-     <br>
-     Solicita el canje al vendedor o gerente.
-    </div>
-   `;
-
- }else{
-
-  texto=
-   `
-    <div>
-     Te faltan
-     <b>${puntos}</b>
-     compras para tu premio.
-    </div>
-   `;
-
- }
-
-
- document
-  .getElementById(contenedor)
-  .innerHTML=
-  `
-   <div class="message">
-
-    <b>
-     ${escapar(cliente.nombre)}
-    </b>
-
-    <div class="points">
-     ⭐ ${puntos}
-    </div>
-
-    ${texto}
-
-    <br>
-
-    🎁 Premio
-
+  html+=`
+   <div class="premio">
+    🎉 ¡Ya puede solicitar su Premio!
    </div>
   `;
 
-}
+ }else{
 
-
-/* =========================
-   CONFIGURACIÓN
-========================= */
-
-async function cargarConfiguracion(){
-
- try{
-
-  const datos=
-   await apiRequest(
-    "configuracion",
-    "GET",
-    {
-     select:"*",
-     limit:"1"
-    }
-   );
-
-
-  if(datos.length){
-
-   configuracion=
-    datos[0];
-
-  }
-
-
-  document
-   .getElementById("puntosPremio")
-   .value=
-   configuracion.puntos_para_premio||10;
-
-
- }catch(error){
-
-  console.log(error);
+  html+=`
+   <div class="alerta">
+    ⭐ Le faltan
+    <strong>${puntos}</strong>
+    compras para su Premio.
+   </div>
+  `;
 
  }
 
-}
+ html+=`
+  </div>
+ `;
 
-
-async function guardarConfiguracion(){
-
- if(currentUser!=="christian"){
-
-  alert(
-   "Solo el gerente puede cambiar la configuración."
-  );
-
-  return;
-
- }
-
-
- const puntos=
-  Number(
-   document
-    .getElementById("puntosPremio")
-    .value
-  );
-
-
- if(puntos<1){
-
-  alert(
-   "Escribe una cantidad válida."
-  );
-
-  return;
-
- }
-
-
- try{
-
-  const actual=
-   await apiRequest(
-    "configuracion",
-    "GET",
-    {
-     select:"id",
-     limit:"1"
-    }
-   );
-
-
-  if(actual.length){
-
-   await apiRequest(
-    "configuracion",
-    "PATCH",
-    {
-     id:"eq."+actual[0].id
-    },
-    {
-     puntos_para_premio:puntos,
-     premio:"Premio"
-    }
-   );
-
-  }else{
-
-   await apiRequest(
-    "configuracion",
-    "POST",
-    {},
-    {
-     puntos_para_premio:puntos,
-     premio:"Premio"
-    }
-   );
-
-  }
-
-
-  configuracion.puntos_para_premio=
-   puntos;
-
-  configuracion.premio=
-   "Premio";
-
-
-  alert(
-   "Configuración guardada."
-  );
-
-
- }catch(error){
-
-  alert(error.message);
-
- }
+ document.getElementById(
+  "clienteResultado"
+ ).innerHTML=html;
 
 }
 
@@ -1211,27 +924,24 @@ async function registrarVenta(){
  if(!carrito.length){
 
   alert(
-   "Agrega productos al carrito."
+   "Agrega al menos un producto."
   );
 
   return;
 
  }
 
-
  const nombre=
-  document
-   .getElementById("clienteNombre")
-   .value.trim();
+  document.getElementById(
+   "nombreCliente"
+  ).value.trim();
 
-
- let whatsapp=
-  document
-   .getElementById("clienteWhatsapp")
-   .value
-   .trim()
-   .replace(/\D/g,"");
-
+ const whatsapp=
+  normalizarWhatsapp(
+   document.getElementById(
+    "whatsappCliente"
+   ).value
+  );
 
  if(!nombre){
 
@@ -1243,178 +953,221 @@ async function registrarVenta(){
 
  }
 
+ if(!whatsapp){
+
+  alert(
+   "Escribe el WhatsApp del cliente."
+  );
+
+  return;
+
+ }
 
  try{
 
-  let cliente=
-   clienteSeleccionado;
+  /* =====================
+     BUSCAR CLIENTE POR
+     WHATSAPP EXACTO
+  ===================== */
 
+  let clienteActual=null;
 
-  /*
-   BUSCAR CLIENTE
-  */
+  const encontrados=
+   await api(
+    "clientes",
+    "GET",
+    null,
+    {
+     select:"*",
+     whatsapp:"eq."+whatsapp,
+     limit:1
+    }
+   );
 
-  if(!cliente&&whatsapp){
+  if(encontrados.length){
 
-   const encontrados=
-    await apiRequest(
-     "clientes",
-     "GET",
-     {
-      select:"*",
-      whatsapp:"eq."+whatsapp,
-      limit:"1"
-     }
-    );
-
-
-   if(encontrados.length){
-
-    cliente=
-     encontrados[0];
-
-   }
+   clienteActual=
+    encontrados[0];
 
   }
 
 
-  /*
-   CREAR CLIENTE NUEVO
-  */
+  /* =====================
+     CONTADOR INDIVIDUAL
+  ===================== */
 
-  if(!cliente){
+  let puntosAntes;
+  let puntosDespues;
 
-   const puntosIniciales=
-    Number(
-     configuracion.puntos_para_premio||10
+  if(clienteActual){
+
+   puntosAntes=
+    Number(clienteActual.puntos);
+
+   /*
+    Si el cliente ya existe,
+    SOLO se modifica ese cliente.
+   */
+
+   if(
+    !Number.isFinite(puntosAntes) ||
+    puntosAntes<0
+   ){
+
+    puntosAntes=
+     configuracion.puntos_para_premio;
+
+   }
+
+   puntosDespues=
+    Math.max(
+     0,
+     puntosAntes-1
     );
 
+  }else{
 
-   const nuevos=
-    await apiRequest(
+   /*
+    Cliente nuevo:
+    empieza en 10 y esta compra
+    cuenta como la primera.
+   */
+
+   puntosAntes=
+    configuracion.puntos_para_premio;
+
+   puntosDespues=
+    Math.max(
+     0,
+     puntosAntes-1
+    );
+
+  }
+
+
+  /* =====================
+     CREAR / ACTUALIZAR
+     CLIENTE
+  ===================== */
+
+  if(clienteActual){
+
+   const actualizado=
+    await api(
+     "clientes",
+     "PATCH",
+     {
+      nombre:nombre,
+      whatsapp:whatsapp,
+      puntos:puntosDespues
+     },
+     {
+      id:"eq."+clienteActual.id
+     }
+    );
+
+   if(
+    !actualizado ||
+    !actualizado.length
+   ){
+
+    throw new Error(
+     "No se pudo actualizar el contador del cliente."
+    );
+
+   }
+
+   clienteActual=
+    actualizado[0];
+
+  }else{
+
+   const nuevo=
+    await api(
      "clientes",
      "POST",
-     {},
      {
-      nombre,
-      whatsapp,
-      puntos:puntosIniciales,
+      nombre:nombre,
+      whatsapp:whatsapp,
+      puntos:puntosDespues,
       premios_obtenidos:0
      }
     );
 
+   if(
+    !nuevo ||
+    !nuevo.length
+   ){
 
-   cliente=
-    nuevos[0];
+    throw new Error(
+     "No se pudo crear el cliente."
+    );
+
+   }
+
+   clienteActual=
+    nuevo[0];
 
   }
 
 
-  /*
-   CONTADOR REGRESIVO
-
-   Cada compra resta 1.
-
-   Nunca baja de 0.
-
-   NO SE REINICIA AQUÍ.
-
-   El reinicio ocurre solamente
-   cuando el vendedor o gerente
-   canjea el premio.
-  */
-
-  const puntosAntes=
-   Number(cliente.puntos);
-
-
-  const puntosDespues=
-   Math.max(
-    0,
-    puntosAntes-1
-   );
-
+  /* =====================
+     VENTA
+  ===================== */
 
   const total=
-   carrito.reduce(
-    (suma,p)=>
-     suma+
-     p.precio*p.cantidad,
-    0
-   );
+   obtenerTotal();
 
-
-  /*
-   CREAR VENTA
-  */
-
-  const nuevasVentas=
-   await apiRequest(
+  const venta=
+   await api(
     "ventas",
     "POST",
-    {},
     {
-     cliente_id:cliente.id,
-     total,
-     puntos_ganados:1,
-     corte_id:null
+     cliente_id:clienteActual.id,
+     total:total,
+     puntos_ganados:1
     }
    );
 
+  if(
+   !venta ||
+   !venta.length
+  ){
 
-  const venta=
-   nuevasVentas[0];
+   throw new Error(
+    "No se pudo registrar la venta."
+   );
+
+  }
+
+  const ventaId=
+   venta[0].id;
 
 
-  /*
-   DETALLE
-  */
+  /* =====================
+     DETALLE
+  ===================== */
 
-  for(const producto of carrito){
+  for(const item of carrito){
 
-   await apiRequest(
+   await api(
     "detalle_ventas",
     "POST",
-    {},
     {
-     venta_id:venta.id,
-     producto_id:producto.id,
-     nombre_producto:producto.nombre,
-     cantidad:producto.cantidad,
-     precio:producto.precio
+     venta_id:ventaId,
+     producto_id:item.id,
+     nombre_producto:item.nombre,
+     cantidad:item.cantidad,
+     precio:item.precio
     }
    );
 
   }
 
 
-  /*
-   ACTUALIZAR CONTADOR
-  */
-
-  await apiRequest(
-   "clientes",
-   "PATCH",
-   {
-    id:"eq."+cliente.id
-   },
-   {
-    puntos:puntosDespues
-   }
-  );
-
-
-  cliente.puntos=
-   puntosDespues;
-
-
-  clienteSeleccionado=
-   cliente;
-
-
-  /*
-   WHATSAPP
-  */
+  /* =====================
+     WHATSAPP
+  ===================== */
 
   let mensaje=
 `🌽 *ELOTEMANÍA* 🌽
@@ -1428,24 +1181,20 @@ Gracias por tu compra.
 
 🎁 Premio`;
 
-
   if(puntosDespues===0){
 
    mensaje+=
-`
-🎉 ¡Ya puedes solicitar tu Premio!`;
+`\n🎉 ¡Ya puedes solicitar tu Premio!`;
 
   }
 
 
   let botonWhatsApp="";
 
-
   if(whatsapp){
 
    const numero=
     numeroWhatsapp(whatsapp);
-
 
    const url=
     "https://wa.me/"+
@@ -1453,102 +1202,81 @@ Gracias por tu compra.
     "?text="+
     encodeURIComponent(mensaje);
 
+   botonWhatsApp=`
+    <br>
 
-   botonWhatsApp=
-    `
-     <br>
-
-     <a
-      href="${url}"
-      target="_blank"
-      style="
-       display:block;
-       text-align:center;
-       background:#25D366;
-       color:white;
-       padding:14px;
-       border-radius:10px;
-       text-decoration:none;
-       font-weight:bold;
-      "
-     >
-      📲 Abrir WhatsApp y enviar mensaje
-     </a>
-    `;
+    <a
+     href="${url}"
+     target="_blank"
+     style="
+      display:block;
+      text-align:center;
+      background:#25D366;
+      color:white;
+      padding:14px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:bold;
+     "
+    >
+     📲 Abrir WhatsApp y enviar mensaje
+    </a>
+   `;
 
   }
 
 
-  document
-   .getElementById("resultadoVenta")
-   .innerHTML=
-   `
-    <div class="message">
+  /* =====================
+     RESULTADO
+  ===================== */
 
-     <b>
-      ✅ Venta registrada
-     </b>
+  document.getElementById(
+   "clienteResultado"
+  ).innerHTML=`
+   <div class="resultado">
 
-     <br><br>
+    <h3>✅ Venta registrada</h3>
 
-     Cliente:
-     ${escapar(nombre)}
+    👤 ${escapeHtml(nombre)}
 
-     <br>
+    <br><br>
 
-     Total:
-     $${dinero(total)}
+    💰 Total:
+    <strong>$${dinero(total)}</strong>
 
-     <br><br>
+    <br><br>
 
-     ⭐ Compras restantes:
-     <span class="points">
-      ${puntosDespues}
-     </span>
+    ⭐ Compras restantes:
+    <strong>${puntosDespues}</strong>
 
-     ${
-      puntosDespues===0
-      ?
-      `
+    ${
+     puntosDespues===0
+      ? `
        <div class="premio">
-        🎁 ¡LISTO PARA CANJEAR PREMIO!
+        🎉 ¡Ya puede solicitar su Premio!
        </div>
       `
-      :
-      `
-       <br>
-       🎁 Premio
-      `
-     }
+      : ""
+    }
 
-     ${botonWhatsApp}
+    ${botonWhatsApp}
 
-    </div>
-   `;
+   </div>
+  `;
 
 
   carrito=[];
 
-  pintarCarrito();
+  renderCarrito();
 
+  await cargarClientes();
 
-  document
-   .getElementById("clienteNombre")
-   .value="";
-
-
-  document
-   .getElementById("clienteWhatsapp")
-   .value="";
-
-
-  clienteSeleccionado=null;
-
-
-  await cargarEstadisticas();
+  await actualizarEstadisticas();
 
 
  }catch(error){
+
+  console.error(error);
 
   alert(
    "No se pudo registrar la venta:\n"+
@@ -1561,87 +1289,80 @@ Gracias por tu compra.
 
 
 /* =========================
-   CANJE
+   LOGIN
 ========================= */
 
-async function buscarClienteCanje(){
+function login(){
 
- const whatsapp=
-  document
-   .getElementById("canjeWhatsapp")
-   .value
-   .trim()
-   .replace(/\D/g,"");
+ const usuario=
+  document.getElementById(
+   "usuario"
+  ).value.trim().toLowerCase();
 
+ const pin=
+  document.getElementById(
+   "pin"
+  ).value.trim();
 
- if(!whatsapp){
+ if(
+  usuario==="christian" &&
+  pin==="0204"
+ ){
 
-  alert(
-   "Escribe el WhatsApp."
-  );
+  currentUser="christian";
+
+  document.getElementById(
+   "adminSection"
+  ).classList.remove("hidden");
+
+  document.getElementById(
+   "accesoResultado"
+  ).innerHTML=
+   `<div class="premio">
+    👑 Bienvenido Christian
+   </div>`;
 
   return;
 
  }
 
+ if(
+  usuario==="andrid" &&
+  pin==="1234"
+ ){
 
- try{
+  currentUser="andrid";
 
-  const encontrados=
-   await apiRequest(
-    "clientes",
-    "GET",
-    {
-     select:"*",
-     whatsapp:"eq."+whatsapp,
-     limit:"1"
-    }
-   );
+  document.getElementById(
+   "adminSection"
+  ).classList.remove("hidden");
 
+  document.getElementById(
+   "accesoResultado"
+  ).innerHTML=
+   `<div class="premio">
+    👤 Bienvenido Andrid
+   </div>`;
 
-  if(!encontrados.length){
-
-   clienteCanje=null;
-
-   document
-    .getElementById("canjeInfo")
-    .innerHTML=
-    `
-     <div class="message">
-      Cliente no encontrado.
-     </div>
-    `;
-
-   return;
-
-  }
-
-
-  clienteCanje=
-   encontrados[0];
-
-
-  mostrarCliente(
-   clienteCanje,
-   "canjeInfo"
-  );
-
-
- }catch(error){
-
-  alert(error.message);
+  return;
 
  }
+
+ document.getElementById(
+  "accesoResultado"
+ ).innerHTML=
+  `<div class="alerta">
+   ❌ Usuario o PIN incorrecto.
+  </div>`;
 
 }
 
 
-/*
- SOLO VENDEDORES Y GERENTE
- PUEDEN CANJEAR.
-*/
+/* =========================
+   BUSCAR CLIENTE ADMIN
+========================= */
 
-async function canjearPremio(){
+async function buscarClienteAdmin(){
 
  if(
   currentUser!=="christian" &&
@@ -1649,305 +1370,394 @@ async function canjearPremio(){
  ){
 
   alert(
-   "Debes iniciar sesión como vendedor o gerente."
+   "Debes iniciar sesión."
   );
 
   return;
 
  }
 
+ const whatsapp=
+  normalizarWhatsapp(
+   document.getElementById(
+    "buscarAdmin"
+   ).value
+  );
 
- if(!clienteCanje){
+ if(!whatsapp){
 
   alert(
-   "Busca primero al cliente."
+   "Escribe el WhatsApp del cliente."
   );
 
   return;
 
  }
-
-
- const puntos=
-  Number(
-   clienteCanje.puntos||0
-  );
-
-
- /*
-  SOLO PUEDE CANJEAR CUANDO
-  LLEGÓ A CERO.
- */
-
- if(puntos>0){
-
-  alert(
-   "Este cliente todavía necesita "+
-   puntos+
-   " compra(s) para obtener su Premio."
-  );
-
-  return;
-
- }
-
-
- const reinicio=
-  Number(
-   configuracion.puntos_para_premio||10
-  );
-
 
  try{
 
-  /*
-   AL CANJEAR:
-
-   0 → 10
-
-   El premio se registra.
-  */
-
-  const premios=
-   Number(
-    clienteCanje.premios_obtenidos||0
-   )+1;
-
-
-  await apiRequest(
-   "clientes",
-   "PATCH",
-   {
-    id:"eq."+clienteCanje.id
-   },
-   {
-    puntos:reinicio,
-    premios_obtenidos:premios
-   }
-  );
-
-
-  clienteCanje.puntos=
-   reinicio;
-
-
-  clienteCanje.premios_obtenidos=
-   premios;
-
-
-  document
-   .getElementById("canjeInfo")
-   .innerHTML=
-   `
-    <div class="message">
-
-     🎉 <b>¡Premio canjeado!</b>
-
-     <br><br>
-
-     Cliente:
-     ${escapar(clienteCanje.nombre)}
-
-     <br><br>
-
-     🎁 Premio
-
-     <br><br>
-
-     ⭐ Nuevo contador:
-     <span class="points">
-      ${reinicio}
-     </span>
-
-     <br>
-
-     Ya puede comenzar a acumular
-     nuevamente.
-
-    </div>
-   `;
-
-
- }catch(error){
-
-  alert(error.message);
-
- }
-
-}
-
-
-/* =========================
-   LOGIN
-========================= */
-
-function login(usuario){
-
- const pin=
-  prompt(
-   "Escribe el PIN de "+
-   (
-    usuario==="christian"
-    ?"Christian"
-    :"Andrid"
-   )
-  );
-
-
- if(pin===null)return;
-
-
- if(
-  (usuario==="christian"&&pin==="0204")||
-  (usuario==="andrid"&&pin==="1234")
- ){
-
-  currentUser=
-   usuario;
-
-
-  document
-   .getElementById("adminPanel")
-   .classList
-   .remove("hidden");
-
-
-  document
-   .getElementById("usuarioActual")
-   .innerHTML=
-   `
-    <div class="message">
-     👑 Sesión iniciada como
-     <b>
-      ${
-       usuario==="christian"
-       ?"Christian"
-       :"Andrid"
-      }
-     </b>
-    </div>
-   `;
-
-
-  /*
-   SOLO CHRISTIAN:
-   configuración y eliminación.
-  */
-
-  if(usuario==="christian"){
-
-   document
-    .getElementById("zonaChristian")
-    .classList
-    .remove("hidden");
-
-   document
-    .getElementById("configPanel")
-    .classList
-    .remove("hidden");
-
-  }else{
-
-   document
-    .getElementById("zonaChristian")
-    .classList
-    .add("hidden");
-
-   document
-    .getElementById("configPanel")
-    .classList
-    .add("hidden");
-
-  }
-
-
-  cargarHistorial();
-
-
- }else{
-
-  alert(
-   "PIN incorrecto."
-  );
-
- }
-
-}
-
-
-/* =========================
-   HISTORIAL
-========================= */
-
-async function cargarHistorial(){
-
- try{
-
-  const datos=
-   await apiRequest(
-    "ventas",
+  const encontrados=
+   await api(
+    "clientes",
     "GET",
+    null,
     {
      select:"*",
-     order:"id.desc",
-     limit:"100"
+     whatsapp:"eq."+whatsapp,
+     limit:1
     }
    );
 
+  if(!encontrados.length){
 
-  ventas=
-   datos||[];
-
-
-  const contenedor=
-   document.getElementById("historial");
-
-
-  if(!ventas.length){
-
-   contenedor.innerHTML=
-    "<p>No hay ventas.</p>";
+   document.getElementById(
+    "adminClienteResultado"
+   ).innerHTML=
+    `<div class="alerta">
+     ❌ Cliente no encontrado.
+    </div>`;
 
    return;
 
   }
 
+  const cliente=
+   encontrados[0];
 
-  contenedor.innerHTML=
-   ventas.map(v=>`
-
-    <div class="history">
-
-     <b>
-      Venta #${v.id}
-     </b>
-
-     <br>
-
-     Cliente ID:
-     ${v.cliente_id||"-"}
-
-     <br>
-
-     Total:
-     $${dinero(v.total)}
-
-     <br>
-
-     ⭐ Compra:
-     ${v.puntos_ganados||1}
-
-    </div>
-
-   `).join("");
-
+  renderAdminCliente(cliente);
 
  }catch(error){
 
-  document
-   .getElementById("historial")
-   .innerHTML=
-   `<p>${escapar(error.message)}</p>`;
+  alert(
+   "Error:\n"+
+   error.message
+  );
+
+ }
+
+}
+
+
+function renderAdminCliente(cliente){
+
+ const puntos=
+  Number(cliente.puntos);
+
+ let html=`
+  <div class="resultado">
+
+   <h3>
+    👤 ${escapeHtml(cliente.nombre)}
+   </h3>
+
+   📱 ${escapeHtml(cliente.whatsapp)}
+
+   <br><br>
+
+   ⭐ Compras restantes:
+   <strong>${puntos}</strong>
+
+   <br><br>
+
+   🎁 Premio obtenidos:
+   <strong>
+    ${Number(cliente.premios_obtenidos)||0}
+   </strong>
+
+ `;
+
+
+ /* =====================
+    RESTAURAR A 10
+ ===================== */
+
+ html+=`
+  <br><br>
+
+  <button
+   class="btn-blue"
+   style="width:100%"
+   onclick="restaurarCliente(${cliente.id})"
+  >
+   🔄 Restaurar a ${configuracion.puntos_para_premio}
+  </button>
+ `;
+
+
+ /* =====================
+    CANJEAR PREMIO
+ ===================== */
+
+ if(puntos<=0){
+
+  html+=`
+   <br><br>
+
+   <button
+    class="btn-green"
+    style="width:100%"
+    onclick="canjearPremio(${cliente.id})"
+   >
+    🎁 Canjear Premio
+   </button>
+  `;
+
+ }else{
+
+  html+=`
+   <div class="alerta">
+    El cliente todavía necesita
+    <strong>${puntos}</strong>
+    compras.
+   </div>
+  `;
+
+ }
+
+ html+=`
+  </div>
+ `;
+
+ document.getElementById(
+  "adminClienteResultado"
+ ).innerHTML=html;
+
+}
+
+
+/* =========================
+   RESTAURAR CLIENTE
+========================= */
+
+async function restaurarCliente(id){
+
+ if(
+  currentUser!=="christian" &&
+  currentUser!=="andrid"
+ ){
+
+  alert(
+   "No tienes permiso."
+  );
+
+  return;
+
+ }
+
+ const confirmar=
+  confirm(
+   "¿Restaurar este cliente a "+
+   configuracion.puntos_para_premio+
+   " compras restantes?"
+  );
+
+ if(!confirmar)return;
+
+ try{
+
+  const actualizado=
+   await api(
+    "clientes",
+    "PATCH",
+    {
+     puntos:
+      configuracion.puntos_para_premio
+    },
+    {
+     id:"eq."+id
+    }
+   );
+
+  if(
+   !actualizado ||
+   !actualizado.length
+  ){
+
+   throw new Error(
+    "No se pudo restaurar el cliente."
+   );
+
+  }
+
+  renderAdminCliente(
+   actualizado[0]
+  );
+
+  await cargarClientes();
+
+  alert(
+   "✅ Cliente restaurado a "+
+   configuracion.puntos_para_premio+
+   " compras."
+  );
+
+ }catch(error){
+
+  alert(
+   "No se pudo restaurar:\n"+
+   error.message
+  );
+
+ }
+
+}
+
+
+/* =========================
+   CANJEAR PREMIO
+========================= */
+
+async function canjearPremio(id){
+
+ if(
+  currentUser!=="christian" &&
+  currentUser!=="andrid"
+ ){
+
+  alert(
+   "No tienes permiso."
+  );
+
+  return;
+
+ }
+
+ try{
+
+  const encontrados=
+   await api(
+    "clientes",
+    "GET",
+    null,
+    {
+     select:"*",
+     id:"eq."+id,
+     limit:1
+    }
+   );
+
+  if(!encontrados.length){
+
+   alert(
+    "Cliente no encontrado."
+   );
+
+   return;
+
+  }
+
+  const cliente=
+   encontrados[0];
+
+  if(Number(cliente.puntos)>0){
+
+   alert(
+    "Este cliente todavía no puede canjear el Premio."
+   );
+
+   return;
+
+  }
+
+  const confirmar=
+   confirm(
+    "¿Confirmar canje del Premio?"
+   );
+
+  if(!confirmar)return;
+
+  const premios=
+   (Number(cliente.premios_obtenidos)||0)+1;
+
+  const actualizado=
+   await api(
+    "clientes",
+    "PATCH",
+    {
+     puntos:
+      configuracion.puntos_para_premio,
+
+     premios_obtenidos:
+      premios
+    },
+    {
+     id:"eq."+id
+    }
+   );
+
+  if(
+   !actualizado ||
+   !actualizado.length
+  ){
+
+   throw new Error(
+    "No se pudo registrar el canje."
+   );
+
+  }
+
+  renderAdminCliente(
+   actualizado[0]
+  );
+
+  await cargarClientes();
+
+  alert(
+   "🎉 Premio canjeado.\n\n"+
+   "El contador volvió a "+
+   configuracion.puntos_para_premio+"."
+  );
+
+ }catch(error){
+
+  alert(
+   "Error al canjear:\n"+
+   error.message
+  );
+
+ }
+
+}
+
+
+/* =========================
+   ESTADÍSTICAS
+========================= */
+
+async function actualizarEstadisticas(){
+
+ try{
+
+  const ventas=
+   await api(
+    "ventas",
+    "GET",
+    null,
+    {
+     select:"*"
+    }
+   );
+
+  document.getElementById(
+   "ventasHoy"
+  ).textContent=
+   ventas.length;
+
+  const clientesUnicos=
+   new Set(
+    ventas
+     .map(v=>v.cliente_id)
+     .filter(Boolean)
+   );
+
+  document.getElementById(
+   "clientesHoy"
+  ).textContent=
+   clientesUnicos.size;
+
+ }catch(error){
+
+  console.log(error);
 
  }
 
@@ -1966,111 +1776,99 @@ async function hacerCorte(){
  ){
 
   alert(
-   "Inicia sesión."
+   "Debes iniciar sesión."
   );
 
   return;
 
  }
 
-
  try{
 
-  const ventasActuales=
-   await apiRequest(
+  const ventas=
+   await api(
     "ventas",
     "GET",
+    null,
     {
-     select:"*",
-     corte_id:"is.null"
+     select:"*"
     }
    );
 
-
-  const clientesActuales=
-   await apiRequest(
-    "clientes",
-    "GET",
-    {
-     select:"id"
-    }
+  const pendientes=
+   ventas.filter(
+    v=>
+     v.corte_id===null ||
+     v.corte_id===undefined
    );
-
 
   const total=
-   ventasActuales.reduce(
+   pendientes.reduce(
     (s,v)=>
      s+Number(v.total||0),
     0
    );
 
+  const clientesCorte=
+   new Set(
+    pendientes
+     .map(v=>v.cliente_id)
+     .filter(Boolean)
+   );
 
   const corte=
-   await apiRequest(
+   await api(
     "cierres_turno",
     "POST",
-    {},
     {
-     ventas:ventasActuales.length,
-     clientes:clientesActuales.length,
+     ventas:pendientes.length,
+     clientes:clientesCorte.size,
      efectivo_esperado:total,
      efectivo_contado:total,
      diferencia:0
     }
    );
 
+  if(!corte.length){
+
+   throw new Error(
+    "No se pudo crear el corte."
+   );
+
+  }
 
   const corteId=
    corte[0].id;
 
+  for(const venta of pendientes){
 
-  for(
-   const venta of ventasActuales
-  ){
-
-   await apiRequest(
+   await api(
     "ventas",
     "PATCH",
     {
-     id:"eq."+venta.id
+     corte_id:corteId
     },
     {
-     corte_id:corteId
+     id:"eq."+venta.id
     }
    );
 
   }
 
+  alert(
+   "✅ Turno cerrado.\n\n"+
+   "Ventas: "+pendientes.length+
+   "\nTotal: $"+dinero(total)
+  );
 
-  document
-   .getElementById("corteResultado")
-   .innerHTML=
-   `
-    <div class="message">
-
-     ✅ Corte realizado.
-
-     <br>
-
-     Ventas:
-     ${ventasActuales.length}
-
-     <br>
-
-     Total:
-     $${dinero(total)}
-
-     <br>
-
-     Corte #${corteId}
-
-    </div>
-   `;
-
+  await actualizarEstadisticas();
 
  }catch(error){
 
-  alert(error.message);
+  alert(
+   "No se pudo cerrar el turno:\n"+
+   error.message
+  );
 
  }
 
@@ -2078,44 +1876,40 @@ async function hacerCorte(){
 
 
 /* =========================
-   ELIMINAR CORTE
+   BORRAR ÚLTIMO CORTE
 ========================= */
 
-async function eliminarUltimoCorte(){
+async function borrarUltimoCorte(){
 
  if(currentUser!=="christian"){
 
   alert(
-   "Solo Christian puede eliminar cortes."
+   "Solo Christian puede borrar cortes."
   );
 
   return;
 
  }
 
-
- if(!confirm(
-  "¿Seguro que quieres eliminar el último corte y sus ventas?"
- )){
-
-  return;
-
- }
-
+ if(
+  !confirm(
+   "¿Borrar el último corte?"
+  )
+ )return;
 
  try{
 
   const cortes=
-   await apiRequest(
+   await api(
     "cierres_turno",
     "GET",
+    null,
     {
      select:"*",
      order:"id.desc",
-     limit:"1"
+     limit:1
     }
    );
-
 
   if(!cortes.length){
 
@@ -2127,67 +1921,41 @@ async function eliminarUltimoCorte(){
 
   }
 
-
   const corte=
    cortes[0];
 
+  await api(
+   "ventas",
+   "PATCH",
+   {
+    corte_id:null
+   },
+   {
+    corte_id:"eq."+corte.id
+   }
+  );
 
-  const ventasCorte=
-   await apiRequest(
-    "ventas",
-    "GET",
-    {
-     select:"*",
-     corte_id:"eq."+corte.id
-    }
-   );
-
-
-  for(
-   const venta of ventasCorte
-  ){
-
-   await apiRequest(
-    "detalle_ventas",
-    "DELETE",
-    {
-     venta_id:"eq."+venta.id
-    }
-   );
-
-
-   await apiRequest(
-    "ventas",
-    "DELETE",
-    {
-     id:"eq."+venta.id
-    }
-   );
-
-  }
-
-
-  await apiRequest(
+  await api(
    "cierres_turno",
    "DELETE",
+   null,
    {
     id:"eq."+corte.id
    }
   );
 
-
   alert(
-   "Corte eliminado correctamente."
+   "✅ Último corte eliminado."
   );
 
-
-  cargarHistorial();
-  cargarEstadisticas();
-
+  await actualizarEstadisticas();
 
  }catch(error){
 
-  alert(error.message);
+  alert(
+   "Error:\n"+
+   error.message
+  );
 
  }
 
@@ -2195,104 +1963,75 @@ async function eliminarUltimoCorte(){
 
 
 /* =========================
-   ELIMINAR TODO
+   BORRAR HISTORIAL
 ========================= */
 
-async function eliminarTodoHistorial(){
+async function borrarHistorial(){
 
  if(currentUser!=="christian"){
 
   alert(
-   "Solo Christian puede eliminar el historial."
+   "Solo Christian puede borrar el historial."
   );
 
   return;
 
  }
 
+ const confirmar=
+  confirm(
+   "⚠️ Esto eliminará todas las ventas y detalles.\n\n¿Continuar?"
+  );
 
- if(!confirm(
-  "⚠️ Esto eliminará todas las ventas, detalles y cortes. ¿Continuar?"
- )){
-
-  return;
-
- }
-
+ if(!confirmar)return;
 
  try{
 
-  const ventasTodas=
-   await apiRequest(
+  const ventas=
+   await api(
     "ventas",
     "GET",
+    null,
     {
      select:"id"
     }
    );
 
+  for(const venta of ventas){
 
-  for(
-   const venta of ventasTodas
-  ){
-
-   await apiRequest(
+   await api(
     "detalle_ventas",
     "DELETE",
+    null,
     {
      venta_id:"eq."+venta.id
     }
    );
 
-
-   await apiRequest(
-    "ventas",
-    "DELETE",
-    {
-     id:"eq."+venta.id
-    }
-   );
-
   }
 
-
-  const cortes=
-   await apiRequest(
-    "cierres_turno",
-    "GET",
-    {
-     select:"id"
-    }
-   );
-
-
-  for(
-   const corte of cortes
-  ){
-
-   await apiRequest(
-    "cierres_turno",
-    "DELETE",
-    {
-     id:"eq."+corte.id
-    }
-   );
-
-  }
-
-
-  alert(
-   "Historial eliminado."
+  await api(
+   "ventas",
+   "DELETE"
   );
 
+  await api(
+   "cierres_turno",
+   "DELETE"
+  );
 
-  cargarHistorial();
-  cargarEstadisticas();
+  alert(
+   "✅ Historial eliminado."
+  );
 
+  await actualizarEstadisticas();
 
  }catch(error){
 
-  alert(error.message);
+  alert(
+   "No se pudo borrar el historial:\n"+
+   error.message
+  );
 
  }
 
@@ -2300,74 +2039,29 @@ async function eliminarTodoHistorial(){
 
 
 /* =========================
-   ESTADÍSTICAS
+   UTILIDADES
 ========================= */
 
-async function cargarEstadisticas(){
+function dinero(valor){
 
- try{
-
-  const ventasDatos=
-   await apiRequest(
-    "ventas",
-    "GET",
-    {
-     select:"id"
-    }
-   );
-
-
-  const clientesDatos=
-   await apiRequest(
-    "clientes",
-    "GET",
-    {
-     select:"id"
-    }
-   );
-
-
-  document
-   .getElementById("statVentas")
-   .textContent=
-   ventasDatos.length;
-
-
-  document
-   .getElementById("statClientes")
-   .textContent=
-   clientesDatos.length;
-
-
- }catch(error){
-
-  console.log(error);
-
- }
+ return Number(valor||0)
+  .toFixed(2);
 
 }
 
 
-/* =========================
-   INICIO
-========================= */
+function escapeHtml(text){
 
-async function iniciar(){
-
- await cargarConfiguracion();
-
- await cargarProductos();
-
- await cargarEstadisticas();
-
- pintarCarrito();
+ return String(text||"")
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
-
-
-iniciar();
 
 </script>
 
 </body>
-</html>
+</html> 
