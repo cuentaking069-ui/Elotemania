@@ -7,7 +7,10 @@ export default async function handler(req, res) {
     process.env.SUPABASE_ANON_KEY;
 
 
-  if(!supabaseUrl || !supabaseKey){
+  if(
+    !supabaseUrl ||
+    !supabaseKey
+  ){
 
     return res.status(500).json({
       error:
@@ -40,6 +43,7 @@ export default async function handler(req, res) {
 
 
     const allowedParams = [
+
       "select",
       "order",
       "limit",
@@ -47,12 +51,17 @@ export default async function handler(req, res) {
       "id",
       "activo",
       "whatsapp"
+
     ];
 
 
-    for(const key of allowedParams){
+    for(
+      const key of allowedParams
+    ){
 
-      if(req.query[key] !== undefined){
+      if(
+        req.query[key] !== undefined
+      ){
 
         url.searchParams.set(
           key,
@@ -80,9 +89,11 @@ export default async function handler(req, res) {
 
     const options = {
 
-      method:req.method,
+      method:
+        req.method,
 
-      headers:headers
+      headers:
+        headers
 
     };
 
@@ -93,7 +104,9 @@ export default async function handler(req, res) {
     ){
 
       options.body =
-        JSON.stringify(req.body);
+        JSON.stringify(
+          req.body
+        );
 
     }
 
@@ -119,36 +132,43 @@ export default async function handler(req, res) {
 
     }catch{
 
-      return res.status(
-        response.status
-      ).json({
+      return res
+        .status(
+          response.status
+        )
+        .json({
 
-        error:
-          "Supabase no devolvió JSON.",
+          error:
+            "Supabase no devolvió JSON.",
 
-        detalle:text
+          detalle:
+            text
 
-      });
+        });
 
     }
 
 
-    return res.status(
-      response.status
-    ).json(data);
+    return res
+      .status(
+        response.status
+      )
+      .json(data);
 
 
   }catch(error){
 
-    return res.status(500).json({
+    return res
+      .status(500)
+      .json({
 
-      error:
-        "Error de conexión con Supabase.",
+        error:
+          "Error de conexión con Supabase.",
 
-      detalle:
-        error.message
+        detalle:
+          error.message
 
-    });
+      });
 
   }
 
