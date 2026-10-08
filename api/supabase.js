@@ -1,43 +1,31 @@
 export default async function handler(req, res) {
 
-  const supabaseUrl =
-    process.env.SUPABASE_URL;
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
-  const supabaseKey =
-    process.env.SUPABASE_ANON_KEY;
-
-
-  if(!supabaseUrl || !supabaseKey){
-
+  if (!supabaseUrl || !supabaseKey) {
     return res.status(500).json({
-      error:
-        "Faltan las variables de Supabase en Vercel."
+      error: "Faltan las variables de Supabase en Vercel."
     });
-
   }
 
+  try {
 
-  try{
+    const table = req.query.table;
 
-    const table =
-      req.query.table;
-
-
-    if(!table){
-
+    if (!table) {
       return res.status(400).json({
-        error:
-          "Falta indicar la tabla."
+        error: "Falta indicar la tabla."
       });
-
     }
 
+    const url = new URL(
+      `${supabaseUrl}/rest/v1/${table}`
+    );
 
-    const url =
-      new URL(
-        `${supabaseUrl}/rest/v1/${table}`
-      );
-
+    /*
+      Parámetros permitidos.
+    */
 
     const allowedParams = [
       "select",
@@ -46,13 +34,15 @@ export default async function handler(req, res) {
       "offset",
       "id",
       "activo",
-      "whatsapp"
+      "whatsapp",
+      "corte_id",
+      "venta_id",
+      "cliente_id"
     ];
 
+    for (const key of allowedParams) {
 
-    for(const key of allowedParams){
-
-      if(req.query[key] !== undefined){
+      if (req.query[key] !== undefined) {
 
         url.searchParams.set(
           key,
@@ -63,42 +53,27 @@ export default async function handler(req, res) {
 
     }
 
-
     const headers = {
-
-      apikey:
-        supabaseKey,
-
-      "Content-Type":
-        "application/json",
-
-      Prefer:
-        "return=representation"
-
+      apikey: supabaseKey,
+      Authorization: `Bearer ${supabaseKey}`,
+      "Content-Type": "application/json",
+      Prefer: "return=representation"
     };
-
 
     const options = {
-
-      method:
-        req.method,
-
-      headers:
-        headers
-
+      method: req.method,
+      headers
     };
 
-
-    if(
+    if (
       req.method !== "GET" &&
       req.method !== "HEAD"
-    ){
+    ) {
 
       options.body =
         JSON.stringify(req.body);
 
     }
-
 
     const response =
       await fetch(
@@ -106,50 +81,37 @@ export default async function handler(req, res) {
         options
       );
 
-
     const text =
       await response.text();
 
-
     let data;
 
-
-    try{
+    try {
 
       data =
         text
           ? JSON.parse(text)
           : null;
 
-    }catch{
+    } catch {
 
-      return res
-        .status(response.status)
-        .json({
-          error:
-            "Supabase no devolvió JSON.",
-          detalle:
-            text
-        });
+      return res.status(response.status).json({
+        error: "Supabase no devolvió JSON.",
+        detalle: text
+      });
 
     }
-
 
     return res
       .status(response.status)
       .json(data);
 
+  } catch (error) {
 
-  }catch(error){
-
-    return res
-      .status(500)
-      .json({
-        error:
-          "Error de conexión con Supabase.",
-        detalle:
-          error.message
-      });
+    return res.status(500).json({
+      error: "Error de conexión con Supabase.",
+      detalle: error.message
+    });
 
   }
 
