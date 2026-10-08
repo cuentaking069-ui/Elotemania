@@ -3,109 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Elotemanía</title>
 
 <style>
-
 *{
   box-sizing:border-box;
-  margin:0;
-  padding:0;
 }
 
 body{
+  margin:0;
   font-family:Arial,Helvetica,sans-serif;
-  background:#090909;
-  color:#fff;
-  min-height:100vh;
-}
-
-button,input,select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.header{
   background:#111;
-  border-bottom:1px solid #333;
-  padding:18px 16px;
+  color:#fff;
+}
+
+header{
+  background:#000;
+  border-bottom:3px solid #d4af37;
+  padding:18px;
   text-align:center;
-  position:sticky;
-  top:0;
-  z-index:20;
 }
 
-.logo-text{
+header h1{
+  margin:0;
   color:#d4af37;
-  font-size:27px;
-  font-weight:900;
-  letter-spacing:1px;
+  font-size:30px;
 }
 
-.subtitle{
-  color:#aaa;
-  margin-top:4px;
-  font-size:13px;
+header p{
+  margin:5px 0 0;
+  color:#fff;
 }
 
 .container{
-  width:100%;
   max-width:1100px;
   margin:auto;
-  padding:16px;
+  padding:15px;
 }
 
 .stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:10px;
-  margin-bottom:16px;
+  margin-bottom:15px;
 }
 
 .stat{
-  background:#151515;
-  border:1px solid #292929;
-  border-radius:14px;
-  padding:14px 8px;
+  background:#1d1d1d;
+  border:1px solid #444;
+  border-radius:12px;
+  padding:15px;
   text-align:center;
 }
 
-.stat-number{
+.stat strong{
+  display:block;
   color:#d4af37;
-  font-size:23px;
-  font-weight:900;
-}
-
-.stat-label{
-  color:#aaa;
-  font-size:11px;
-  margin-top:4px;
+  font-size:24px;
+  margin-top:5px;
 }
 
 .tabs{
-  display:grid;
-  grid-template-columns:1fr 1fr;
+  display:flex;
   gap:8px;
-  margin-bottom:16px;
+  margin-bottom:15px;
 }
 
-.tab{
-  border:1px solid #333;
-  background:#151515;
-  color:#aaa;
-  padding:13px;
-  border-radius:12px;
-  font-weight:bold;
+.tabs button{
+  flex:1;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:#292929;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
 }
 
-.tab.active{
+.tabs button.active{
   background:#d4af37;
   color:#000;
-  border-color:#d4af37;
+  font-weight:bold;
 }
 
 .section{
@@ -117,644 +95,1843 @@ button{
 }
 
 .card{
-  background:#121212;
-  border:1px solid #292929;
-  border-radius:16px;
-  padding:16px;
-  margin-bottom:16px;
+  background:#1b1b1b;
+  border:1px solid #444;
+  border-radius:14px;
+  padding:18px;
+  margin-bottom:15px;
 }
 
 .card h2{
   color:#d4af37;
-  font-size:19px;
-  margin-bottom:14px;
+  margin-top:0;
 }
 
-.card h3{
+input,select{
+  width:100%;
+  padding:13px;
+  margin:6px 0 10px;
+  border-radius:8px;
+  border:1px solid #555;
+  background:#101010;
   color:#fff;
-  font-size:17px;
-  margin-bottom:12px;
+  font-size:16px;
 }
 
-.menu-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:12px;
+button{
+  cursor:pointer;
 }
 
-.menu-title h2{
-  margin:0;
+.btn{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:9px;
+  background:#d4af37;
+  color:#000;
+  font-weight:bold;
+  font-size:16px;
+  margin-top:7px;
 }
 
-.loading{
-  color:#aaa;
-  text-align:center;
-  padding:25px;
+.btn-danger{
+  background:#b52b2b;
+  color:#fff;
 }
 
-.menu-grid{
+.btn-secondary{
+  background:#444;
+  color:#fff;
+}
+
+.btn-green{
+  background:#258c4b;
+  color:#fff;
+}
+
+.menu{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
   gap:10px;
 }
 
 .product{
-  background:#181818;
-  border:1px solid #303030;
-  border-radius:14px;
-  padding:14px 10px;
-  min-height:110px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-
-.product:active{
-  transform:scale(.98);
-}
-
-.product-name{
-  font-size:14px;
-  font-weight:bold;
-  line-height:1.25;
-}
-
-.product-category{
-  color:#888;
-  font-size:11px;
-  margin-top:4px;
-}
-
-.product-bottom{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:5px;
-  margin-top:12px;
-}
-
-.price{
-  color:#d4af37;
-  font-weight:900;
-  font-size:16px;
-}
-
-.add-btn{
-  border:0;
-  background:#d4af37;
-  color:#000;
-  width:38px;
-  height:38px;
-  border-radius:10px;
-  font-size:21px;
-  font-weight:bold;
-}
-
-.cart{
-  margin-top:16px;
-}
-
-.cart-empty{
-  color:#777;
+  background:#242424;
+  border:1px solid #444;
+  border-radius:12px;
+  padding:15px;
   text-align:center;
-  padding:20px;
+}
+
+.product h3{
+  margin:0 0 8px;
+  color:#fff;
+}
+
+.product .price{
+  color:#d4af37;
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.product button{
+  width:100%;
+  padding:10px;
+  border:0;
+  border-radius:8px;
+  background:#d4af37;
+  font-weight:bold;
 }
 
 .cart-item{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:8px;
-  padding:12px 0;
-  border-bottom:1px solid #282828;
-}
-
-.cart-item:last-child{
-  border-bottom:0;
-}
-
-.cart-name{
-  font-weight:bold;
-  font-size:14px;
-}
-
-.cart-price{
-  color:#d4af37;
-  font-size:13px;
-  margin-top:4px;
-}
-
-.quantity{
   display:flex;
+  justify-content:space-between;
   align-items:center;
-  gap:7px;
+  gap:10px;
+  border-bottom:1px solid #444;
+  padding:10px 0;
 }
 
-.quantity button{
-  width:32px;
-  height:32px;
-  border-radius:8px;
-  border:1px solid #444;
-  background:#222;
+.cart-item button{
+  background:#b52b2b;
   color:#fff;
-}
-
-.quantity span{
-  min-width:20px;
-  text-align:center;
+  border:0;
+  border-radius:6px;
+  padding:7px 10px;
 }
 
 .total{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding-top:15px;
-  margin-top:8px;
-  border-top:1px solid #333;
-}
-
-.total strong{
-  font-size:23px;
+  font-size:25px;
   color:#d4af37;
-}
-
-.field{
-  margin-bottom:13px;
-}
-
-.field label{
-  display:block;
-  color:#bbb;
-  font-size:13px;
-  margin-bottom:6px;
-}
-
-.field input,
-.field select{
-  width:100%;
-  background:#0c0c0c;
-  color:#fff;
-  border:1px solid #3a3a3a;
-  border-radius:10px;
-  padding:13px;
-  outline:none;
-}
-
-.field input:focus,
-.field select:focus{
-  border-color:#d4af37;
-}
-
-.primary-button{
-  width:100%;
-  border:0;
-  border-radius:11px;
-  padding:14px;
-  background:#d4af37;
-  color:#000;
-  font-weight:900;
-}
-
-.secondary-button{
-  width:100%;
-  border:1px solid #555;
-  border-radius:11px;
-  padding:12px;
-  background:#202020;
-  color:#fff;
   font-weight:bold;
+  text-align:right;
+  margin-top:15px;
 }
 
-.danger-button{
-  width:100%;
-  border:0;
-  border-radius:11px;
-  padding:13px;
-  background:#a83232;
-  color:#fff;
-  font-weight:bold;
-}
-
-.whatsapp-button{
-  width:100%;
-  border:0;
-  border-radius:11px;
-  padding:14px;
-  background:#25d366;
-  color:#000;
-  font-weight:900;
-  margin-top:10px;
-}
-
-.notice{
-  background:#19160b;
-  border:1px solid #5c4b12;
-  color:#d9c77c;
-  padding:12px;
-  border-radius:10px;
-  font-size:13px;
-  line-height:1.45;
-  margin-bottom:13px;
-}
-
-.success{
-  background:#102016;
-  border:1px solid #245d32;
-  color:#8fe0a1;
-}
-
-.warning{
-  background:#211c0d;
-  border:1px solid #66551c;
-  color:#e5d077;
-}
-
-.admin-login{
-  max-width:420px;
-  margin:30px auto;
-}
-
-.admin-content{
+.role-box{
   display:none;
 }
 
-.admin-content.show{
+.role-box.active{
   display:block;
 }
 
-.admin-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:16px;
-}
-
-.product-admin{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:10px;
-  padding:12px 0;
-  border-bottom:1px solid #292929;
-}
-
-.product-admin:last-child{
-  border-bottom:0;
-}
-
-.product-info strong{
-  display:block;
-  font-size:14px;
-}
-
-.product-info small{
-  color:#888;
-}
-
-.admin-actions{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-
-.small-button{
-  border:1px solid #444;
-  background:#222;
-  color:#fff;
-  border-radius:8px;
-  padding:8px 10px;
-  font-size:12px;
-}
-
-.small-button.gold{
-  background:#d4af37;
-  color:#000;
-  border-color:#d4af37;
-}
-
-.small-button.red{
-  background:#592020;
-  border-color:#7b2929;
-}
-
-.customer-result{
-  margin-top:12px;
-}
-
-.customer-box{
-  background:#171717;
-  border:1px solid #333;
-  border-radius:12px;
-  padding:14px;
-}
-
-.customer-box strong{
-  color:#d4af37;
-}
-
-.customer-points{
-  font-size:27px;
-  font-weight:900;
-  margin:8px 0;
-  color:#d4af37;
-}
-
-.prize-box{
-  background:#1e1808;
-  border:1px solid #8c721c;
-  border-radius:12px;
-  padding:14px;
-  margin-top:12px;
-  text-align:center;
-}
-
-.prize-title{
-  color:#d4af37;
-  font-size:20px;
-  font-weight:900;
-  margin-bottom:6px;
-}
-
-.close-stats{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin-bottom:14px;
-}
-
-.close-stat{
-  background:#181818;
-  border:1px solid #303030;
-  border-radius:12px;
-  padding:14px;
-  text-align:center;
-}
-
-.close-stat-label{
-  color:#999;
-  font-size:12px;
-}
-
-.close-stat-value{
-  color:#d4af37;
-  font-size:23px;
-  font-weight:900;
-  margin-top:5px;
-}
-
-.cash-result{
-  background:#181818;
-  border:1px solid #333;
+.user-card{
+  background:#242424;
+  border:1px solid #555;
   border-radius:12px;
   padding:15px;
-  margin-top:12px;
+  margin-bottom:10px;
+  text-align:center;
 }
 
-.cash-line{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:8px 0;
-  border-bottom:1px solid #292929;
-}
-
-.cash-line:last-child{
-  border-bottom:0;
-}
-
-.cash-difference{
-  font-size:23px;
-  font-weight:900;
+.user-card .name{
+  font-size:22px;
+  font-weight:bold;
   color:#d4af37;
+}
+
+.user-card .crown{
+  font-size:25px;
 }
 
 .history-item{
-  background:#181818;
-  border:1px solid #303030;
-  border-radius:12px;
+  background:#242424;
+  border:1px solid #444;
+  border-radius:10px;
   padding:14px;
   margin-bottom:10px;
 }
 
-.history-date{
-  color:#888;
-  font-size:11px;
-  margin-bottom:7px;
-}
-
-.history-total{
+.history-item strong{
   color:#d4af37;
-  font-weight:900;
-  font-size:17px;
-}
-
-.history-delete{
-  margin-top:10px;
-}
-
-.role-badge{
-  display:inline-block;
-  padding:7px 12px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:bold;
-  margin-bottom:12px;
-}
-
-.role-gerente{
-  background:#d4af37;
-  color:#000;
-}
-
-.role-vendedor{
-  background:#333;
-  color:#fff;
-  border:1px solid #555;
-}
-
-.user-bar{
-  background:#151515;
-  border:1px solid #292929;
-  border-radius:12px;
-  padding:10px 12px;
-  margin-bottom:16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-
-.user-bar span{
-  color:#aaa;
-  font-size:13px;
-}
-
-.logout-small{
-  border:1px solid #555;
-  background:#222;
-  color:#fff;
-  border-radius:8px;
-  padding:7px 10px;
-  font-size:12px;
 }
 
 .hidden{
   display:none!important;
 }
 
-.footer{
-  text-align:center;
-  color:#555;
-  padding:25px 10px;
-  font-size:12px;
+.product-admin{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+  background:#242424;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:10px;
 }
 
-@media(min-width:700px){
-
-  .menu-grid{
-    grid-template-columns:repeat(3,1fr);
+@media(max-width:600px){
+  .stats{
+    grid-template-columns:1fr;
   }
 
-  .admin-grid{
-    grid-template-columns:1fr 1fr;
+  header h1{
+    font-size:25px;
   }
-
 }
-
 </style>
 </head>
 
 <body>
 
-<header class="header">
-
-  <div class="logo-text">
-    🌽 ELOTEMANÍA
-  </div>
-
-  <div class="subtitle">
-    Entre compas sabe mejor
-  </div>
-
+<header>
+  <h1>🌽 ELOTEMANÍA</h1>
+  <p>Entre compas sabe mejor</p>
 </header>
 
-
-<main class="container">
-
-  <div
-    id="userBar"
-    class="user-bar hidden"
-  >
-
-    <span id="userRoleText"></span>
-
-    <button
-      class="logout-small"
-      onclick="logoutUser()"
-    >
-      Salir
-    </button>
-
-  </div>
-
+<div class="container">
 
   <div class="stats">
-
     <div class="stat">
-
-      <div
-        class="stat-number"
-        id="statVentas"
-      >
-        0
-      </div>
-
-      <div class="stat-label">
-        Ventas del turno
-      </div>
-
+      Ventas
+      <strong id="statVentas">0</strong>
     </div>
 
-
     <div class="stat">
-
-      <div
-        class="stat-number"
-        id="statPedidos"
-      >
-        0
-      </div>
-
-      <div class="stat-label">
-        Clientes
-      </div>
-
+      Clientes
+      <strong id="statClientes">0</strong>
     </div>
 
-
     <div class="stat">
-
-      <div
-        class="stat-number"
-        id="statEfectivo"
-      >
-        $0
-      </div>
-
-      <div class="stat-label">
-        Efectivo esperado
-      </div>
-
+      Turno
+      <strong id="statTurno">Turno 1</strong>
     </div>
-
   </div>
 
-
   <div class="tabs">
-
-    <button
-      class="tab active"
-      id="tabVenta"
-      onclick="showSection('venta')"
-    >
+    <button id="tabVenta" class="active" onclick="showSection('venta')">
       🛒 Venta
     </button>
 
-    <button
-      class="tab"
-      id="tabAdmin"
-      onclick="showSection('admin')"
-    >
-      🔐 Acceso
+    <button id="tabAcceso" onclick="showSection('acceso')">
+      👑 Acceso
     </button>
-
   </div>
 
+  <!-- ================= VENTA ================= -->
 
-  <!-- ============================= -->
-  <!-- VENTA -->
-  <!-- ============================= -->
+  <section id="venta" class="section active">
 
-  <section
-    id="venta"
-    class="section active"
-  >
+    <div class="card">
+      <h2>🌽 Menú</h2>
+
+      <div id="menu" class="menu">
+        Cargando productos...
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🛒 Carrito</h2>
+
+      <div id="cart">
+        El carrito está vacío.
+      </div>
+
+      <div class="total">
+        Total: $<span id="total">0.00</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>👤 Cliente</h2>
+
+      <input
+        type="text"
+        id="clienteNombre"
+        placeholder="Nombre del cliente"
+      >
+
+      <input
+        type="text"
+        id="clienteWhatsapp"
+        placeholder="WhatsApp"
+      >
+
+      <button class="btn" onclick="registerSale()">
+        💰 Registrar venta
+      </button>
+    </div>
+
+    <div class="card">
+      <h2>⭐ Puntos</h2>
+
+      <input
+        type="text"
+        id="buscarWhatsapp"
+        placeholder="WhatsApp del cliente"
+      >
+
+      <button class="btn-secondary btn" onclick="buscarCliente()">
+        🔎 Buscar cliente
+      </button>
+
+      <div id="clientePuntos"></div>
+    </div>
+
+  </section>
+
+  <!-- ================= ACCESO ================= -->
+
+  <section id="acceso" class="section">
 
     <div class="card">
 
-      <div class="menu-title">
+      <h2>👑 Acceso</h2>
 
-        <h2>
-          🌽 Menú
-        </h2>
+      <div class="user-card">
+        <div class="crown">👑</div>
+        <div class="name">Christian</div>
+        <small>Acceso completo</small>
+      </div>
 
-        <button
-          class="small-button"
-          onclick="loadProducts()"
-        >
-          ↻ Actualizar
+      <div class="user-card">
+        <div class="crown">👑</div>
+        <div class="name">Andrid</div>
+        <small>Acceso vendedor</small>
+      </div>
+
+      <select id="usuario">
+        <option value="christian">👑 Christian</option>
+        <option value="andrid">👑 Andrid</option>
+      </select>
+
+      <input
+        type="password"
+        id="pin"
+        placeholder="PIN"
+      >
+
+      <button class="btn" onclick="login()">
+        🔐 Entrar
+      </button>
+
+      <div id="loginMensaje"></div>
+
+    </div>
+
+    <!-- ================= PANEL CHRISTIAN ================= -->
+
+    <div id="panelChristian" class="role-box">
+
+      <div class="card">
+
+        <h2>👑 Panel de Christian</h2>
+
+        <button class="btn-secondary btn" onclick="showSection('venta')">
+          ↩️ Regresar a venta
         </button>
 
       </div>
+
+      <div class="card">
+
+        <h2>💰 Cerrar turno</h2>
+
+        <input
+          type="number"
+          id="efectivoContado"
+          step="0.01"
+          placeholder="Efectivo contado"
+        >
+
+        <button class="btn" onclick="closeTurn()">
+          🔒 Cerrar turno
+        </button>
+
+      </div>
+
+      <div class="card">
+
+        <h2>📋 Historial de cortes</h2>
+
+        <div id="historial">
+          Cargando historial...
+        </div>
+
+        <button
+          id="btnBorrarTodo"
+          class="btn btn-danger"
+          onclick="deleteCloseHistory()"
+        >
+          🗑️ Borrar todo el historial
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          onclick="showSection('venta')"
+        >
+          ↩️ Regresar a venta
+        </button>
+
+      </div>
+
+      <div class="card">
+
+        <h2>⚙️ Configuración</h2>
+
+        <input
+          type="number"
+          id="puntosPremio"
+          placeholder="Puntos para premio"
+        >
+
+        <input
+          type="text"
+          id="nombrePremio"
+          placeholder="Nombre del premio"
+        >
+
+        <button class="btn" onclick="saveConfig()">
+          💾 Guardar configuración
+        </button>
+
+      </div>
+
+      <div class="card">
+
+        <h2>🎁 Premios</h2>
+
+        <input
+          type="text"
+          id="premioWhatsapp"
+          placeholder="WhatsApp del cliente"
+        >
+
+        <button class="btn" onclick="redeemPoints()">
+          🎁 Canjear premio
+        </button>
+
+      </div>
+
+      <div class="card">
+
+        <h2>🌽 Productos</h2>
+
+        <div id="adminProductos">
+          Cargando productos...
+        </div>
+
+        <button class="btn" onclick="addProduct()">
+          ➕ Agregar producto
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- ================= PANEL ANDRID ================= -->
+
+    <div id="panelAndrid" class="role-box">
+
+      <div class="card">
+
+        <h2>👑 Panel de Andrid</h2>
+
+        <button class="btn-secondary btn" onclick="showSection('venta')">
+          ↩️ Regresar a venta
+        </button>
+
+      </div>
+
+      <div class="card">
+
+        <h2>💰 Cerrar turno</h2>
+
+        <input
+          type="number"
+          id="efectivoContadoAndrid"
+          step="0.01"
+          placeholder="Efectivo contado"
+        >
+
+        <button class="btn" onclick="closeTurn()">
+          🔒 Cerrar turno
+        </button>
+
+      </div>
+
+      <div class="card">
+
+        <h2>📋 Historial</h2>
+
+        <div id="historialAndrid">
+          Cargando historial...
+        </div>
+
+        <p style="color:#aaa;text-align:center;">
+          🔒 Andrid no tiene permiso para eliminar cortes.
+        </p>
+
+        <button class="btn btn-secondary" onclick="showSection('venta')">
+          ↩️ Regresar a venta
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+<script>
+
+const GERENTE_PIN = "0204";
+const VENDEDOR_PIN = "1234";
+
+let currentRole = null;
+let productos = [];
+let carrito = [];
+let config = {
+  puntos_para_premio: 10,
+  premio: "Premio"
+};
+
+/* ================= API ================= */
+
+async function api(table, method="GET", body=null, extra=""){
+
+  let url = "/api/supabase?table=" + encodeURIComponent(table);
+
+  if(extra){
+    url += extra;
+  }
+
+  const options = {
+    method,
+    headers:{
+      "Content-Type":"application/json"
+    }
+  };
+
+  if(body !== null){
+    options.body = JSON.stringify(body);
+  }
+
+  const response = await fetch(url, options);
+
+  const text = await response.text();
+
+  let data;
+
+  try{
+    data = JSON.parse(text);
+  }catch{
+    throw new Error(text || "Respuesta inválida del servidor.");
+  }
+
+  if(!response.ok){
+
+    let mensaje =
+      data?.error ||
+      data?.message ||
+      data?.detalle ||
+      "Error en la solicitud.";
+
+    throw new Error(mensaje);
+  }
+
+  return data;
+}
+
+/* ================= SECCIONES ================= */
+
+function showSection(section){
+
+  document.querySelectorAll(".section").forEach(el=>{
+    el.classList.remove("active");
+  });
+
+  document.querySelectorAll(".tabs button").forEach(el=>{
+    el.classList.remove("active");
+  });
+
+  document.getElementById(section).classList.add("active");
+
+  if(section === "venta"){
+    document.getElementById("tabVenta").classList.add("active");
+  }
+
+  if(section === "acceso"){
+    document.getElementById("tabAcceso").classList.add("active");
+  }
+}
+
+/* ================= LOGIN ================= */
+
+function login(){
+
+  const usuario =
+    document.getElementById("usuario").value;
+
+  const pin =
+    document.getElementById("pin").value.trim();
+
+  const mensaje =
+    document.getElementById("loginMensaje");
+
+  document.getElementById("panelChristian")
+    .classList.remove("active");
+
+  document.getElementById("panelAndrid")
+    .classList.remove("active");
+
+  if(usuario === "christian" && pin === GERENTE_PIN){
+
+    currentRole = "christian";
+
+    mensaje.innerHTML =
+      '<p style="color:#55d66b;text-align:center;">✅ Bienvenido Christian 👑</p>';
+
+    document.getElementById("panelChristian")
+      .classList.add("active");
+
+    loadCloseHistory();
+    loadConfig();
+    loadAdminProducts();
+
+    return;
+  }
+
+  if(usuario === "andrid" && pin === VENDEDOR_PIN){
+
+    currentRole = "andrid";
+
+    mensaje.innerHTML =
+      '<p style="color:#55d66b;text-align:center;">✅ Bienvenido Andrid 👑</p>';
+
+    document.getElementById("panelAndrid")
+      .classList.add("active");
+
+    loadCloseHistoryAndrid();
+
+    return;
+  }
+
+  currentRole = null;
+
+  mensaje.innerHTML =
+    '<p style="color:#ff5555;text-align:center;">❌ PIN incorrecto</p>';
+}
+
+/* ================= PRODUCTOS ================= */
+
+async function loadProducts(){
+
+  try{
+
+    productos = await api(
+      "productos",
+      "GET",
+      null,
+      "&select=*&order=id.asc"
+    );
+
+    renderMenu();
+
+  }catch(error){
+
+    document.getElementById("menu").innerHTML =
+      "<p>Error cargando productos.</p>";
+
+    console.error(error);
+  }
+}
+
+function renderMenu(){
+
+  const menu =
+    document.getElementById("menu");
+
+  const activos =
+    productos.filter(p=>p.activo !== false);
+
+  if(!activos.length){
+
+    menu.innerHTML =
+      "<p>No hay productos activos.</p>";
+
+    return;
+  }
+
+  menu.innerHTML = "";
+
+  activos.forEach(producto=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className = "product";
+
+    div.innerHTML = `
+      <h3>${escapeHtml(producto.nombre)}</h3>
+
+      <div class="price">
+        $${Number(producto.precio).toFixed(2)}
+      </div>
+
+      <button onclick="addToCart(${producto.id})">
+        ➕ Agregar
+      </button>
+    `;
+
+    menu.appendChild(div);
+  });
+}
+
+function addToCart(id){
+
+  const producto =
+    productos.find(p=>Number(p.id) === Number(id));
+
+  if(!producto)return;
+
+  const existente =
+    carrito.find(item=>Number(item.id) === Number(id));
+
+  if(existente){
+
+    existente.cantidad++;
+
+  }else{
+
+    carrito.push({
+      id:producto.id,
+      nombre:producto.nombre,
+      precio:Number(producto.precio),
+      cantidad:1
+    });
+  }
+
+  renderCart();
+}
+
+function removeFromCart(id){
+
+  const item =
+    carrito.find(x=>Number(x.id) === Number(id));
+
+  if(!item)return;
+
+  item.cantidad--;
+
+  if(item.cantidad <= 0){
+
+    carrito =
+      carrito.filter(x=>Number(x.id) !== Number(id));
+  }
+
+  renderCart();
+}
+
+function renderCart(){
+
+  const cart =
+    document.getElementById("cart");
+
+  if(!carrito.length){
+
+    cart.innerHTML =
+      "El carrito está vacío.";
+
+    document.getElementById("total").textContent =
+      "0.00";
+
+    return;
+  }
+
+  let total = 0;
+
+  cart.innerHTML = "";
+
+  carrito.forEach(item=>{
+
+    const subtotal =
+      item.precio * item.cantidad;
+
+    total += subtotal;
+
+    const div =
+      document.createElement("div");
+
+    div.className = "cart-item";
+
+    div.innerHTML = `
+      <div>
+        <strong>${escapeHtml(item.nombre)}</strong><br>
+        ${item.cantidad} x $${item.precio.toFixed(2)}
+      </div>
+
+      <div>
+        $${subtotal.toFixed(2)}
+        <br>
+        <button onclick="removeFromCart(${item.id})">
+          −
+        </button>
+      </div>
+    `;
+
+    cart.appendChild(div);
+  });
+
+  document.getElementById("total").textContent =
+    total.toFixed(2);
+}
+
+/* ================= CLIENTES ================= */
+
+async function findClientByWhatsapp(whatsapp){
+
+  const data =
+    await api(
+      "clientes",
+      "GET",
+      null,
+      "&select=*&whatsapp=eq." +
+      encodeURIComponent(whatsapp) +
+      "&limit=1"
+    );
+
+  return data && data.length ? data[0] : null;
+}
+
+async function buscarCliente(){
+
+  const whatsapp =
+    document.getElementById("buscarWhatsapp")
+      .value.trim();
+
+  const contenedor =
+    document.getElementById("clientePuntos");
+
+  if(!whatsapp){
+
+    contenedor.innerHTML =
+      "<p>Escribe un WhatsApp.</p>";
+
+    return;
+  }
+
+  try{
+
+    const cliente =
+      await findClientByWhatsapp(whatsapp);
+
+    if(!cliente){
+
+      contenedor.innerHTML =
+        "<p>Cliente no encontrado.</p>";
+
+      return;
+    }
+
+    contenedor.innerHTML = `
+      <div class="history-item">
+        <strong>${escapeHtml(cliente.nombre)}</strong><br>
+        WhatsApp: ${escapeHtml(cliente.whatsapp)}<br>
+        ⭐ Puntos: ${cliente.puntos || 0}<br>
+        🎁 Premios obtenidos: ${cliente.premios_obtenidos || 0}
+      </div>
+    `;
+
+  }catch(error){
+
+    contenedor.innerHTML =
+      "<p>Error buscando cliente.</p>";
+
+    console.error(error);
+  }
+}
+
+/* ================= VENTA ================= */
+
+async function registerSale(){
+
+  if(!carrito.length){
+
+    alert("❌ El carrito está vacío.");
+    return;
+  }
+
+  const nombre =
+    document.getElementById("clienteNombre")
+      .value.trim();
+
+  const whatsapp =
+    document.getElementById("clienteWhatsapp")
+      .value.trim();
+
+  if(!nombre){
+
+    alert("❌ Escribe el nombre del cliente.");
+    return;
+  }
+
+  if(!whatsapp){
+
+    alert("❌ Escribe el WhatsApp del cliente.");
+    return;
+  }
+
+  try{
+
+    let cliente =
+      await findClientByWhatsapp(whatsapp);
+
+    if(!cliente){
+
+      const nuevo =
+        await api(
+          "clientes",
+          "POST",
+          {
+            nombre,
+            whatsapp,
+            puntos:0,
+            premios_obtenidos:0
+          }
+        );
+
+      cliente =
+        Array.isArray(nuevo) ? nuevo[0] : nuevo;
+
+    }else{
+
+      await api(
+        "clientes",
+        "PATCH",
+        {
+          nombre
+        },
+        "&id=eq." + cliente.id
+      );
+    }
+
+    let total = 0;
+
+    carrito.forEach(item=>{
+      total += item.precio * item.cantidad;
+    });
+
+    const puntosGanados = 1;
+
+    const ventaResponse =
+      await api(
+        "ventas",
+        "POST",
+        {
+          cliente_id:cliente.id,
+          total,
+          puntos_ganados:puntosGanados
+        }
+      );
+
+    const venta =
+      Array.isArray(ventaResponse)
+        ? ventaResponse[0]
+        : ventaResponse;
+
+    for(const item of carrito){
+
+      await api(
+        "detalle_ventas",
+        "POST",
+        {
+          venta_id:venta.id,
+          producto_id:item.id,
+          nombre_producto:item.nombre,
+          cantidad:item.cantidad,
+          precio:item.precio
+        }
+      );
+    }
+
+    const puntosActuales =
+      Number(cliente.puntos || 0);
+
+    const nuevosPuntos =
+      puntosActuales + puntosGanados;
+
+    await api(
+      "clientes",
+      "PATCH",
+      {
+        puntos:nuevosPuntos
+      },
+      "&id=eq." + cliente.id
+    );
+
+    alert(
+      "✅ Venta registrada.\n\n" +
+      "Total: $" + total.toFixed(2) +
+      "\n⭐ Puntos ganados: " +
+      puntosGanados
+    );
+
+    carrito = [];
+
+    renderCart();
+
+    document.getElementById("clienteNombre").value = "";
+    document.getElementById("clienteWhatsapp").value = "";
+
+    await loadStats();
+
+  }catch(error){
+
+    alert(
+      "❌ No se pudo registrar la venta:\n\n" +
+      error.message
+    );
+
+    console.error(error);
+  }
+}
+
+/* ================= STATS ================= */
+
+async function loadStats(){
+
+  try{
+
+    const ventas =
+      await api(
+        "ventas",
+        "GET",
+        null,
+        "&select=id"
+      );
+
+    const clientes =
+      await api(
+        "clientes",
+        "GET",
+        null,
+        "&select=id"
+      );
+
+    document.getElementById("statVentas")
+      .textContent = ventas.length;
+
+    document.getElementById("statClientes")
+      .textContent = clientes.length;
+
+  }catch(error){
+
+    console.error(error);
+  }
+}
+
+/* ================= CIERRES ================= */
+
+async function closeTurn(){
+
+  if(!currentRole){
+
+    alert("❌ Primero debes iniciar sesión.");
+    return;
+  }
+
+  const inputId =
+    currentRole === "andrid"
+      ? "efectivoContadoAndrid"
+      : "efectivoContado";
+
+  const contado =
+    Number(
+      document.getElementById(inputId).value
+    );
+
+  if(!Number.isFinite(contado)){
+
+    alert("❌ Escribe el efectivo contado.");
+    return;
+  }
+
+  try{
+
+    const ventas =
+      await api(
+        "ventas",
+        "GET",
+        null,
+        "&select=id,total"
+      );
+
+    const clientes =
+      await api(
+        "clientes",
+        "GET",
+        null,
+        "&select=id"
+      );
+
+    let esperado = 0;
+
+    ventas.forEach(v=>{
+      esperado += Number(v.total || 0);
+    });
+
+    const diferencia =
+      contado - esperado;
+
+    await api(
+      "cierres_turno",
+      "POST",
+      {
+        ventas:ventas.length,
+        clientes:clientes.length,
+        efectivo_esperado:esperado,
+        efectivo_contado:contado,
+        diferencia
+      }
+    );
+
+    alert(
+      "✅ Corte guardado correctamente."
+    );
+
+    document.getElementById(inputId).value = "";
+
+    await loadCloseHistory();
+    await loadCloseHistoryAndrid();
+    await loadTurn();
+    await loadStats();
+
+  }catch(error){
+
+    alert(
+      "❌ No se pudo cerrar el turno:\n\n" +
+      error.message
+    );
+
+    console.error(error);
+  }
+}
+
+async function loadCloseHistory(){
+
+  const contenedor =
+    document.getElementById("historial");
+
+  if(!contenedor)return;
+
+  try{
+
+    const cierres =
+      await api(
+        "cierres_turno",
+        "GET",
+        null,
+        "&select=*&order=id.desc"
+      );
+
+    if(!cierres.length){
+
+      contenedor.innerHTML =
+        "<p>No hay cortes registrados.</p>";
+
+      return;
+    }
+
+    contenedor.innerHTML = "";
+
+    cierres.forEach(corte=>{
+
+      const div =
+        document.createElement("div");
+
+      div.className = "history-item";
+
+      div.innerHTML = `
+        <strong>📅 ${formatDate(corte.fecha)}</strong><br>
+        Ventas: ${corte.ventas || 0}<br>
+        Clientes: ${corte.clientes || 0}<br>
+        Efectivo esperado:
+        $${Number(corte.efectivo_esperado || 0).toFixed(2)}<br>
+        Efectivo contado:
+        $${Number(corte.efectivo_contado || 0).toFixed(2)}<br>
+        Diferencia:
+        $${Number(corte.diferencia || 0).toFixed(2)}
+
+        <button
+          class="btn btn-danger"
+          onclick="deleteClose(${corte.id})"
+        >
+          🗑️ Eliminar corte
+        </button>
+      `;
+
+      contenedor.appendChild(div);
+    });
+
+  }catch(error){
+
+    contenedor.innerHTML =
+      "<p>Error cargando historial.</p>";
+
+    console.error(error);
+  }
+}
+
+async function loadCloseHistoryAndrid(){
+
+  const contenedor =
+    document.getElementById("historialAndrid");
+
+  if(!contenedor)return;
+
+  try{
+
+    const cierres =
+      await api(
+        "cierres_turno",
+        "GET",
+        null,
+        "&select=*&order=id.desc"
+      );
+
+    if(!cierres.length){
+
+      contenedor.innerHTML =
+        "<p>No hay cortes registrados.</p>";
+
+      return;
+    }
+
+    contenedor.innerHTML = "";
+
+    cierres.forEach(corte=>{
+
+      const div =
+        document.createElement("div");
+
+      div.className = "history-item";
+
+      div.innerHTML = `
+        <strong>📅 ${formatDate(corte.fecha)}</strong><br>
+        Ventas: ${corte.ventas || 0}<br>
+        Clientes: ${corte.clientes || 0}<br>
+        Efectivo esperado:
+        $${Number(corte.efectivo_esperado || 0).toFixed(2)}<br>
+        Efectivo contado:
+        $${Number(corte.efectivo_contado || 0).toFixed(2)}<br>
+        Diferencia:
+        $${Number(corte.diferencia || 0).toFixed(2)}
+      `;
+
+      contenedor.appendChild(div);
+    });
+
+  }catch(error){
+
+    contenedor.innerHTML =
+      "<p>Error cargando historial.</p>";
+
+    console.error(error);
+  }
+}
+
+/* ================= ELIMINAR UN CORTE ================= */
+
+async function deleteClose(id){
+
+  if(currentRole !== "christian"){
+
+    alert(
+      "❌ Solo Christian puede eliminar cortes."
+    );
+
+    return;
+  }
+
+  const confirmar =
+    confirm(
+      "⚠️ ¿Seguro que quieres eliminar este corte?\n\n" +
+      "El registro será eliminado completamente de Supabase.\n\n" +
+      "Las ventas NO serán eliminadas.\n\n" +
+      "Esta acción no se puede deshacer."
+    );
+
+  if(!confirmar)return;
+
+  try{
+
+    await api(
+      "cierres_turno",
+      "DELETE",
+      null,
+      "&id=eq." + encodeURIComponent(id)
+    );
+
+    alert(
+      "✅ El corte fue eliminado completamente."
+    );
+
+    /*
+      IMPORTANTE:
+      Aquí NO hacemos showSection('venta').
+      El usuario permanece en historial.
+    */
+
+    await loadCloseHistory();
+    await loadTurn();
+    await loadStats();
+
+  }catch(error){
+
+    alert(
+      "❌ No se pudo eliminar el corte:\n\n" +
+      error.message
+    );
+
+    console.error(error);
+  }
+}
+
+/* ================= ELIMINAR TODO ================= */
+
+async function deleteCloseHistory(){
+
+  if(currentRole !== "christian"){
+
+    alert(
+      "❌ Solo Christian puede borrar el historial."
+    );
+
+    return;
+  }
+
+  const confirmar =
+    confirm(
+      "⚠️ ATENCIÓN\n\n" +
+      "Vas a eliminar TODOS los cortes registrados.\n\n" +
+      "Los registros desaparecerán completamente de Supabase.\n\n" +
+      "Las ventas NO serán eliminadas.\n\n" +
+      "¿Quieres continuar?"
+    );
+
+  if(!confirmar)return;
+
+  const confirmar2 =
+    confirm(
+      "🚨 ÚLTIMA CONFIRMACIÓN\n\n" +
+      "¿REALMENTE quieres borrar todo el historial de cortes?"
+    );
+
+  if(!confirmar2)return;
+
+  try{
+
+    await api(
+      "cierres_turno",
+      "DELETE",
+      null,
+      "&id=gte.0"
+    );
+
+    alert(
+      "✅ Todo el historial de cortes fue eliminado completamente."
+    );
+
+    /*
+      Permanece en historial.
+      NO regresa automáticamente a Venta.
+    */
+
+    await loadCloseHistory();
+    await loadTurn();
+    await loadStats();
+
+  }catch(error){
+
+    alert(
+      "❌ No se pudo borrar el historial:\n\n" +
+      error.message
+    );
+
+    console.error(error);
+  }
+}
+
+/* ================= TURNO ================= */
+
+async function loadTurn(){
+
+  /*
+    El usuario pidió que siempre se muestre:
+    Turno 1
+  */
+
+  document.getElementById("statTurno")
+    .textContent = "Turno 1";
+}
+
+/* ================= CONFIGURACIÓN ================= */
+
+async function loadConfig(){
+
+  try{
+
+    const data =
+      await api(
+        "configuracion",
+        "GET",
+        null,
+        "&select=*&limit=1"
+      );
+
+    if(data && data.length){
+
+      config = data[0];
+
+      document.getElementById("puntosPremio")
+        .value =
+        config.puntos_para_premio || 10;
+
+      document.getElementById("nombrePremio")
+        .value =
+        config.premio || "Premio";
+    }
+
+  }catch(error){
+
+    console.error(error);
+  }
+}
+
+async function saveConfig(){
+
+  if(currentRole !== "christian"){
+
+    alert(
+      "❌ Solo Christian puede cambiar la configuración."
+    );
+
+    return;
+  }
+
+  const puntos =
+    Number(
+      document.getElementById("puntosPremio").value
+    );
+
+  const premio =
+    document.getElementById("nombrePremio")
+      .value.trim();
+
+  if(!Number.isFinite(puntos) || puntos <= 0){
+
+    alert("❌ Escribe una cantidad válida de puntos.");
+    return;
+  }
+
+  if(!premio){
+
+    alert("❌ Escribe el nombre del premio.");
+    return;
+  }
+
+  try{
+
+    const actual =
+      await api(
+        "configuracion",
+        "GET",
+        null,
+        "&select=*&limit=1"
+      );
+
+    if(actual && actual.length){
+
+      await api(
+        "configuracion",
+        "PATCH",
+        {
+          puntos_para_premio:puntos,
+          premio
+        },
+        "&id=eq." + actual[0].id
+      );
+
+    }else{
+
+      await api(
+        "configuracion",
+        "POST",
+        {
+          puntos_para_premio:puntos,
+          premio
+        }
+      );
+    }
+
+    config.puntos_para_premio = puntos;
+    config.premio = premio;
+
+    alert("✅ Configuración guardada.");
+
+  }catch(error){
+
+    alert(
+      "❌ No se pudo guardar:\n\n" +
+      error.message
+    );
+  }
+}
+
+/* ================= CANJEAR PREMIO ================= */
+
+async function redeemPoints(){
+
+  if(currentRole !== "christian"){
+
+    alert(
+      "❌ Solo Christian puede canjear premios."
+    );
+
+    return;
+  }
+
+  const whatsapp =
+    document.getElementById("premioWhatsapp")
+      .value.trim();
+
+  if(!whatsapp){
+
+    alert("❌ Escribe el WhatsApp.");
+    return;
+  }
+
+  try{
+
+    const cliente =
+      await findClientByWhatsapp(whatsapp);
+
+    if(!cliente){
+
+      alert("❌ Cliente no encontrado.");
+      return;
+    }
+
+    const puntos =
+      Number(cliente.puntos || 0);
+
+    const necesarios =
+      Number(config.puntos_para_premio || 10);
+
+    if(puntos < necesarios){
+
+      alert(
+        "❌ No tiene suficientes puntos.\n\n" +
+        "Tiene: " + puntos +
+        "\nNecesita: " + necesarios
+      );
+
+      return;
+    }
+
+    await api(
+      "clientes",
+      "PATCH",
+      {
+        puntos:puntos - necesarios,
+        premios_obtenidos:
+          Number(cliente.premios_obtenidos || 0) + 1
+      },
+      "&id=eq." + cliente.id
+    );
+
+    alert(
+      "🎁 Premio canjeado correctamente.\n\n" +
+      "Premio: " + config.premio
+    );
+
+    document.getElementById("premioWhatsapp").value = "";
+
+  }catch(error){
+
+    alert(
+      "❌ No se pudo canjear el premio:\n\n" +
+      error.message
+    );
+  }
+}
+
+/* ================= ADMIN PRODUCTOS ================= */
+
+async function loadAdminProducts(){
+
+  const contenedor =
+    document.getElementById("adminProductos");
+
+  if(!contenedor)return;
+
+  try{
+
+    const data =
+      await api(
+        "productos",
+        "GET",
+        null,
+        "&select=*&order=id.asc"
+      );
+
+    contenedor.innerHTML = "";
+
+    data.forEach(producto=>{
+
+      const div =
+        document.createElement("div");
+
+      div.className = "product-admin";
+
+      div.innerHTML = `
+        <input
+          id="nombre-${producto.id}"
+          value="${escapeAttribute(producto.nombre)}"
+          placeholder="Nombre"
+        >
+
+        <input
+          id="precio-${producto.id}"
+          type="number"
+          step="0.01"
+          value="${Number(producto.precio)}"
+          placeholder="Precio"
+        >
+
+        <button
+          class="btn"
+          onclick="updateProduct(${producto.id})"
+        >
+          💾 Guardar
+        </button>
+
+        <button
+          class="btn ${producto.activo ? "btn-danger" : "btn-green"}"
+          onclick="toggleProduct(${producto.id}, ${producto.activo ? "false" : "true"})"
+        >
+          ${producto.activo ? "🙈 Ocultar" : "👁️ Restaurar"}
+        </button>
+      `;
+
+      contenedor.appendChild(div);
+    });
+
+  }catch(error){
+
+    contenedor.innerHTML =
+      "<p>Error cargando productos.</p>";
+
+    console.error(error);
+  }
+}
+
+async function updateProduct(id){
+
+  if(currentRole !== "christian"){
+
+    alert(
+      "❌ Solo Christian puede modificar productos."
+    );
+
+    return;
+  }
+
+  const nombre =
+    document.getElementById("nombre-" + id)
+      .value.trim();
+
+  const precio =
+    Number(
+      document.getElementById("precio-" + id).value
+    );
+
+  if(!nombre){
+
+    alert("❌ Escribe un nombre.");
+    return;
+  }
+
+  if(!Number.isFinite(precio) || precio < 0){
+
+    alert("❌ Escribe un precio válido.");
+    return;
+  }
+
+  try{
+
+    await api(
+      "productos",
+      "PATCH",
+      {
+        nombre,
+        precio
+      },
+      "&id=eq." + id
+    );
+
+    alert("✅ Producto actualizado.");
+
+    await loadProducts();
+    await loadAdminProducts();
+
+  }catch(error){
+
+    alert(
+      "❌ No se pudo actualizar:\n\n" +
+      error.message
+    );
+  }
+}
+
+async function toggleProduct(id, activo){
+
+  if(currentRole !== "christian"){
+
+    alert(
+      "❌ Solo Christian puede modificar productos."
+    );
+
+    return;
+  }
+
+  try{
+
+    await api(
+      "productos",
+      "PATCH",
+      {
+        activo
+      },
+      "&id=eq." + id
+    );
+
+    await loadProducts();
+    await loadAdminProducts();
+
+  }catch(error){
+
+    alert(
+      "❌ No se pudo modificar el producto:\n\n" +
+      error.message
+    );
+  }
+}
+
+async function addProduct(){
+
+  if(currentRole !== "christian"){
+
+    alert(
+      "❌ Solo Christian puede agregar productos."
+    );
+
+    return;
+  }
+
+  const nombre =
+    prompt("Nombre del producto:");
+
+  if(!nombre)return;
+
+  const precioTexto =
+    prompt("Precio del producto:");
+
+  if(precioTexto === null)return;
+
+  const precio =
+    Number(precioTexto);
+
+  if(!Number.isFinite(precio) || precio < 0){
+
+    alert("❌ Precio inválido.");
+    return;
+  }
+
+  try{
+
+    await api(
+      "productos",
+      "POST",
+      {
+        nombre:nombre.trim(),
+        categoria:"Elotes",
+        precio,
+        activo:true
+      }
+    );
+
+    alert("✅ Producto agregado.");
+
+    await loadProducts();
+    await loadAdminProducts();
+
+  }catch(error){
+
+    alert(
+      "❌ No se pudo agregar:\n\n" +
+      error.message
+    );
+  }
+}
+
+/* ================= UTILIDADES ================= */
+
+function formatDate(fecha){
+
+  if(!fecha)return "Sin fecha";
+
+  try{
+
+    return new Date(fecha).toLocaleString(
+      "es-MX",
+      {
+        dateStyle:"short",
+        timeStyle:"short"
+      }
+    );
+
+  }catch{
+
+    return fecha;
+  }
+}
+
+function escapeHtml(text){
+
+  return String(text ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function escapeAttribute(text){
+  return escapeHtml(text);
+}
+
+/* ================= INICIO ================= */
+
+async function init(){
+
+  await loadProducts();
+  await loadStats();
+  await loadTurn();
+  await loadConfig();
+
+}
+
+init();
+
+</script>
+
+</body>
+</html>
 
 
       <div
