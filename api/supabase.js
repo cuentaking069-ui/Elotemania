@@ -19,10 +19,6 @@ export default async function handler(req, res) {
       });
     }
 
-    /*
-     * Tablas permitidas
-     */
-
     const tablasPermitidas = [
       "productos",
       "configuracion",
@@ -38,56 +34,26 @@ export default async function handler(req, res) {
       });
     }
 
-
-    /*
-     * Crear URL de Supabase
-     */
-
     const url = new URL(
       `${supabaseUrl}/rest/v1/${table}`
     );
 
-
-    /*
-     * Filtros permitidos
-     */
-
     const allowedParams = [
-
       "select",
-
       "order",
-
       "limit",
-
       "offset",
-
       "id",
-
       "activo",
-
       "whatsapp",
-
       "corte_id",
-
       "venta_id",
-
       "cliente_id"
-
     ];
 
+    for (const key of allowedParams) {
 
-    /*
-     * Pasar filtros a Supabase
-     */
-
-    for (
-      const key of allowedParams
-    ) {
-
-      if (
-        req.query[key] !== undefined
-      ) {
+      if (req.query[key] !== undefined) {
 
         url.searchParams.set(
           key,
@@ -98,43 +64,48 @@ export default async function handler(req, res) {
 
     }
 
-
     /*
-     * Encabezados
+     * PROTECCIÓN IMPORTANTE:
+     * Supabase no permite DELETE sin una condición.
      */
+
+    if (req.method === "DELETE") {
+
+      const tieneCondicion =
+        allowedParams.some(
+          key =>
+            key !== "select" &&
+            key !== "order" &&
+            key !== "limit" &&
+            key !== "offset" &&
+            req.query[key] !== undefined
+        );
+
+      if (!tieneCondicion) {
+
+        return res.status(400).json({
+          error:
+            "Para borrar información debes indicar qué registro se va a borrar."
+        });
+
+      }
+
+    }
 
     const headers = {
-
       apikey: supabaseKey,
-
       Authorization:
         `Bearer ${supabaseKey}`,
-
       "Content-Type":
         "application/json",
-
       Prefer:
         "return=representation"
-
     };
-
-
-    /*
-     * Configuración de petición
-     */
 
     const options = {
-
       method: req.method,
-
       headers
-
     };
-
-
-    /*
-     * Para POST, PATCH, etc.
-     */
 
     if (
       req.method !== "GET" &&
@@ -148,29 +119,16 @@ export default async function handler(req, res) {
 
     }
 
-
-    /*
-     * Enviar a Supabase
-     */
-
     const response =
       await fetch(
         url.toString(),
         options
       );
 
-
     const text =
       await response.text();
 
-
-    /*
-     * Intentar convertir respuesta
-     * a JSON
-     */
-
     let data;
-
 
     try {
 
@@ -184,39 +142,27 @@ export default async function handler(req, res) {
       return res
         .status(response.status)
         .json({
-
           error:
             "Supabase no devolvió JSON.",
-
           detalle:
             text
-
         });
 
     }
 
-
-    /*
-     * Devolver respuesta
-     */
-
     return res
       .status(response.status)
       .json(data);
-
 
   } catch (error) {
 
     return res
       .status(500)
       .json({
-
         error:
           "Error de conexión con Supabase.",
-
         detalle:
           error.message
-
       });
 
   }
