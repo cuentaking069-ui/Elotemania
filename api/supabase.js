@@ -23,7 +23,6 @@ export default async function handler(req, res) {
 
     const headers = {
       apikey: supabaseKey,
-      Authorization: `Bearer ${supabaseKey}`,
       "Content-Type": "application/json",
       Prefer: "return=representation"
     };
