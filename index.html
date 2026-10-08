@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>Elotemanía</title>
 
@@ -372,9 +377,71 @@ button{
   color:#e5d077;
 }
 
-.admin-login{
-  max-width:420px;
-  margin:30px auto;
+.login-card{
+  max-width:430px;
+  margin:35px auto;
+}
+
+.role-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.role-button{
+  border:1px solid #444;
+  background:#1b1b1b;
+  color:#aaa;
+  border-radius:12px;
+  padding:15px 8px;
+  font-weight:900;
+}
+
+.role-button.active{
+  background:#d4af37;
+  color:#000;
+  border-color:#d4af37;
+}
+
+.role-title{
+  text-align:center;
+  margin-bottom:15px;
+  color:#d4af37;
+  font-size:18px;
+  font-weight:900;
+}
+
+.session-bar{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:12px;
+  padding:11px 13px;
+  margin-bottom:15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.session-role{
+  color:#d4af37;
+  font-weight:900;
+}
+
+.session-user{
+  color:#aaa;
+  font-size:12px;
+}
+
+.logout-button{
+  border:1px solid #633;
+  background:#241313;
+  color:#f99;
+  border-radius:8px;
+  padding:7px 10px;
+  font-size:12px;
+  font-weight:bold;
 }
 
 .admin-content{
@@ -549,6 +616,10 @@ button{
   font-size:17px;
 }
 
+.delete-history{
+  margin-top:12px;
+}
+
 .hidden{
   display:none!important;
 }
@@ -573,6 +644,7 @@ button{
 }
 
 </style>
+
 </head>
 
 <body>
@@ -593,351 +665,297 @@ button{
 <main class="container">
 
 
-  <div class="stats">
+  <!-- ============================= -->
+  <!-- LOGIN -->
+  <!-- ============================= -->
 
-    <div class="stat">
+  <div
+    id="loginSection"
+    class="card login-card"
+  >
 
-      <div
-        class="stat-number"
-        id="statVentas"
-      >
-        0
-      </div>
+    <div class="role-title">
+      🔐 Acceso al sistema
+    </div>
 
-      <div class="stat-label">
-        Ventas del turno
-      </div>
+
+    <div class="notice">
+
+      Selecciona quién va a utilizar el sistema.
+
+      <br><br>
+
+      👨‍💼 El vendedor puede registrar ventas.
+
+      <br>
+
+      👑 El gerente tiene acceso completo.
 
     </div>
 
 
-    <div class="stat">
+    <div class="role-buttons">
 
-      <div
-        class="stat-number"
-        id="statPedidos"
+      <button
+        id="sellerRoleButton"
+        class="role-button active"
+        type="button"
+        onclick="selectRole('vendedor')"
       >
-        0
-      </div>
+        👨‍💼 Vendedor
+      </button>
 
-      <div class="stat-label">
-        Clientes
-      </div>
+
+      <button
+        id="managerRoleButton"
+        class="role-button"
+        type="button"
+        onclick="selectRole('gerente')"
+      >
+        👑 Gerente
+      </button>
 
     </div>
 
 
-    <div class="stat">
+    <div class="field">
 
-      <div
-        class="stat-number"
-        id="statEfectivo"
+      <label>
+        PIN
+      </label>
+
+      <input
+        id="loginPin"
+        type="password"
+        inputmode="numeric"
+        maxlength="4"
+        placeholder="Ingresa tu PIN"
       >
-        $0
-      </div>
-
-      <div class="stat-label">
-        Efectivo esperado
-      </div>
 
     </div>
 
-  </div>
-
-
-  <div class="tabs">
 
     <button
-      class="tab active"
-      id="tabVenta"
-      onclick="showSection('venta')"
+      class="primary-button"
+      type="button"
+      onclick="loginSystem()"
     >
-      🛒 Venta
-    </button>
-
-    <button
-      class="tab"
-      id="tabAdmin"
-      onclick="showSection('admin')"
-    >
-      ⚙️ Administrador
+      Entrar al sistema
     </button>
 
   </div>
 
 
   <!-- ============================= -->
-  <!-- VENTA -->
+  <!-- SISTEMA -->
   <!-- ============================= -->
 
-  <section
-    id="venta"
-    class="section active"
+  <div
+    id="systemSection"
+    class="hidden"
   >
 
 
-    <div class="card">
+    <div class="session-bar">
 
-      <div class="menu-title">
+      <div>
 
-        <h2>
-          🌽 Menú
-        </h2>
+        <div class="session-role">
+          <span id="sessionRole">
+            👨‍💼 Vendedor
+          </span>
+        </div>
 
-        <button
-          class="small-button"
-          onclick="loadProducts()"
-        >
-          ↻ Actualizar
-        </button>
-
-      </div>
-
-
-      <div
-        id="menu"
-        class="menu-grid"
-      >
-
-        <div class="loading">
-          Cargando menú...
+        <div class="session-user">
+          Sesión activa
         </div>
 
       </div>
+
+
+      <button
+        class="logout-button"
+        type="button"
+        onclick="logoutSystem()"
+      >
+        Salir
+      </button>
 
     </div>
 
 
-    <div class="card">
+    <!-- ESTADÍSTICAS -->
 
-      <h2>
-        🛒 Pedido
-      </h2>
+    <div class="stats">
 
+      <div class="stat">
 
-      <div id="cart">
+        <div
+          class="stat-number"
+          id="statVentas"
+        >
+          0
+        </div>
 
-        <div class="cart-empty">
-          Agrega productos al pedido.
+        <div class="stat-label">
+          Ventas del turno
         </div>
 
       </div>
 
 
-      <div class="total">
+      <div class="stat">
 
-        <span>
-          Total
-        </span>
+        <div
+          class="stat-number"
+          id="statPedidos"
+        >
+          0
+        </div>
 
-        <strong id="total">
+        <div class="stat-label">
+          Clientes
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div
+          class="stat-number"
+          id="statEfectivo"
+        >
           $0
-        </strong>
+        </div>
+
+        <div class="stat-label">
+          Efectivo esperado
+        </div>
 
       </div>
 
     </div>
 
 
-    <div class="card">
+    <!-- TABS -->
 
-      <h2>
-        👤 Cliente
-      </h2>
-
-
-      <div class="field">
-
-        <label>
-          Nombre
-        </label>
-
-        <input
-          id="customerName"
-          type="text"
-          placeholder="Nombre del cliente"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          WhatsApp
-        </label>
-
-        <input
-          id="customerWhatsapp"
-          type="tel"
-          inputmode="numeric"
-          maxlength="10"
-          placeholder="10 dígitos"
-        >
-
-      </div>
-
-
-      <div
-        id="pointsPreview"
-        class="notice hidden"
-      ></div>
-
+    <div class="tabs">
 
       <button
-        class="primary-button"
-        onclick="registerSale()"
+        class="tab active"
+        id="tabVenta"
+        type="button"
+        onclick="showSection('venta')"
       >
-        💰 Registrar venta
+        🛒 Venta
       </button>
 
-    </div>
-
-  </section>
-
-
-  <!-- ============================= -->
-  <!-- ADMIN -->
-  <!-- ============================= -->
-
-  <section
-    id="admin"
-    class="section"
-  >
-
-
-    <div
-      id="adminLogin"
-      class="card admin-login"
-    >
-
-      <h2>
-        🔐 Administrador
-      </h2>
-
-      <div class="notice">
-        Ingresa el PIN de administrador.
-      </div>
-
-      <div class="field">
-
-        <label>
-          PIN
-        </label>
-
-        <input
-          id="adminPin"
-          type="password"
-          inputmode="numeric"
-          placeholder="PIN"
-        >
-
-      </div>
 
       <button
-        class="primary-button"
-        onclick="loginAdmin()"
+        class="tab"
+        id="tabAdmin"
+        type="button"
+        onclick="showSection('admin')"
       >
-        Entrar
+        ⚙️ Administrador
       </button>
 
     </div>
 
 
-    <div
-      id="adminContent"
-      class="admin-content"
+    <!-- ============================= -->
+    <!-- VENTA -->
+    <!-- ============================= -->
+
+    <section
+      id="venta"
+      class="section active"
     >
 
 
-      <!-- ============================= -->
-      <!-- CIERRE DE TURNO -->
-      <!-- ============================= -->
+      <div class="card">
+
+        <div class="menu-title">
+
+          <h2>
+            🌽 Menú
+          </h2>
+
+          <button
+            class="small-button"
+            type="button"
+            onclick="loadProducts()"
+          >
+            ↻ Actualizar
+          </button>
+
+        </div>
+
+
+        <div
+          id="menu"
+          class="menu-grid"
+        >
+
+          <div class="loading">
+            Cargando menú...
+          </div>
+
+        </div>
+
+      </div>
+
 
       <div class="card">
 
         <h2>
-          🔒 Cierre de turno
+          🛒 Pedido
         </h2>
 
 
-        <div class="notice">
+        <div id="cart">
 
-          Aquí puedes revisar cuánto debe haber
-          en efectivo y cuánto tienes físicamente.
-
-          <br><br>
-
-          Al cerrar el turno, los contadores
-          comenzarán nuevamente desde 0.
+          <div class="cart-empty">
+            Agrega productos al pedido.
+          </div>
 
         </div>
 
 
-        <div class="close-stats">
+        <div class="total">
 
-          <div class="close-stat">
+          <span>
+            Total
+          </span>
 
-            <div class="close-stat-label">
-              Ventas
-            </div>
+          <strong id="total">
+            $0
+          </strong>
 
-            <div
-              class="close-stat-value"
-              id="closeVentas"
-            >
-              0
-            </div>
+        </div>
 
-          </div>
+      </div>
 
 
-          <div class="close-stat">
+      <div class="card">
 
-            <div class="close-stat-label">
-              Clientes
-            </div>
-
-            <div
-              class="close-stat-value"
-              id="closeClientes"
-            >
-              0
-            </div>
-
-          </div>
+        <h2>
+          👤 Cliente
+        </h2>
 
 
-          <div class="close-stat">
+        <div class="field">
 
-            <div class="close-stat-label">
-              Efectivo esperado
-            </div>
+          <label>
+            Nombre
+          </label>
 
-            <div
-              class="close-stat-value"
-              id="closeEsperado"
-            >
-              $0.00
-            </div>
-
-          </div>
-
-
-          <div class="close-stat">
-
-            <div class="close-stat-label">
-              Turno
-            </div>
-
-            <div
-              class="close-stat-value"
-              id="closeNumero"
-            >
-              1
-            </div>
-
-          </div>
+          <input
+            id="customerName"
+            type="text"
+            placeholder="Nombre del cliente"
+          >
 
         </div>
 
@@ -945,1235 +963,28 @@ button{
         <div class="field">
 
           <label>
-            💵 Cantidad de efectivo contado
+            WhatsApp
           </label>
 
           <input
-            id="cashCounted"
-            type="number"
-            min="0"
-            step="0.01"
-            placeholder="Ej. 2500"
+            id="customerWhatsapp"
+            type="tel"
+            inputmode="numeric"
+            maxlength="10"
+            placeholder="10 dígitos"
           >
 
         </div>
 
 
-        <button
-          class="secondary-button"
-          onclick="calculateDifference()"
-        >
-          🧮 Calcular diferencia
-        </button>
-
-
         <div
-          id="cashResult"
-          class="cash-result hidden"
+          id="pointsPreview"
+          class="notice hidden"
         ></div>
 
 
         <button
-          class="primary-button"
-          style="margin-top:12px;"
-          onclick="closeTurn()"
-        >
-          🔒 Cerrar turno
-        </button>
-
-      </div>
-
-
-      <!-- ============================= -->
-      <!-- HISTORIAL CIERRES -->
-      <!-- ============================= -->
-
-      <div class="card">
-
-        <h2>
-          📋 Historial de cierres
-        </h2>
-
-        <div id="closeHistory">
-          Cargando...
-        </div>
-
-      </div>
-
-
-      <div class="admin-grid">
-
-
-        <!-- CONFIGURACIÓN -->
-
-        <div class="card">
-
-          <h2>
-            🎁 Configuración
-          </h2>
-
-
-          <div class="field">
-
-            <label>
-              Puntos para obtener Premio
-            </label>
-
-            <input
-              id="pointsRequired"
-              type="number"
-              min="1"
-              value="10"
-            >
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              Beneficio
-            </label>
-
-            <input
-              id="prizeName"
-              type="text"
-              value="Premio"
-            >
-
-          </div>
-
-
-          <button
-            class="primary-button"
-            onclick="saveConfig()"
-          >
-            💾 Guardar configuración
-          </button>
-
-        </div>
-
-
-        <!-- PREMIO -->
-
-        <div class="card">
-
-          <h2>
-            🎁 Premio
-          </h2>
-
-
-          <div class="notice">
-            Busca al cliente por WhatsApp
-            para autorizar su Premio.
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              WhatsApp
-            </label>
-
-            <input
-              id="redeemWhatsapp"
-              type="tel"
-              inputmode="numeric"
-              maxlength="10"
-              placeholder="10 dígitos"
-            >
-
-          </div>
-
-
-          <button
-            class="secondary-button"
-            onclick="findCustomerForPrize()"
-          >
-            🔎 Buscar cliente
-          </button>
-
-
-          <div
-            id="redeemResult"
-            class="customer-result"
-          ></div>
-
-        </div>
-
-
-        <!-- REINICIAR PUNTOS -->
-
-        <div class="card">
-
-          <h2>
-            🔄 Reiniciar puntos
-          </h2>
-
-
-          <div class="notice">
-            Esta opción pone los puntos
-            del cliente en 0.
-            Sus compras e historial permanecen.
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              WhatsApp del cliente
-            </label>
-
-            <input
-              id="resetWhatsapp"
-              type="tel"
-              inputmode="numeric"
-              maxlength="10"
-              placeholder="10 dígitos"
-            >
-
-          </div>
-
-
-          <button
-            class="danger-button"
-            onclick="resetCustomerPoints()"
-          >
-            🗑️ Poner puntos en 0
-          </button>
-
-        </div>
-
-
-        <!-- AGREGAR PRODUCTO -->
-
-        <div class="card">
-
-          <h2>
-            ➕ Agregar producto
-          </h2>
-
-
-          <div class="field">
-
-            <label>
-              Nombre
-            </label>
-
-            <input
-              id="newProductName"
-              type="text"
-              placeholder="Ej. Elote especial"
-            >
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              Categoría
-            </label>
-
-            <input
-              id="newProductCategory"
-              type="text"
-              placeholder="Ej. Elotes"
-            >
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              Precio
-            </label>
-
-            <input
-              id="newProductPrice"
-              type="number"
-              min="0"
-              step="0.01"
-              placeholder="0"
-            >
-
-          </div>
-
-
-          <button
-            class="primary-button"
-            onclick="addProduct()"
-          >
-            ➕ Agregar al menú
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- PRODUCTOS -->
-
-      <div class="card">
-
-        <h2>
-          📋 Administrar productos
-        </h2>
-
-        <div id="adminProducts">
-          Cargando productos...
-        </div>
-
-      </div>
-
-
-      <!-- SALIR -->
-
-      <div class="card">
-
-        <button
-          class="danger-button"
-          onclick="logoutAdmin()"
-        >
-          🔒 Cerrar administrador
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <div class="footer">
-    🌽 Elotemanía · Entre compas sabe mejor
-  </div>
-
-</main>
-
-
-<script>
-
-/* =========================================
-   CONFIGURACIÓN
-========================================= */
-
-const ADMIN_PIN = "1234";
-
-let cart = [];
-
-let products = [];
-
-let config = {
-  puntos_para_premio:10,
-  premio:"Premio"
-};
-
-let turnoActual = {
-  ventas:0,
-  clientes:0,
-  efectivo:0,
-  numero:1
-};
-
-
-/* =========================================
-   API
-========================================= */
-
-async function api(
-  table,
-  method = "GET",
-  body = null,
-  query = ""
-){
-
-  const url =
-    "/api/supabase?table=" +
-    encodeURIComponent(table) +
-    query;
-
-
-  const options = {
-
-    method,
-
-    headers:{
-      "Content-Type":"application/json"
-    }
-
-  };
-
-
-  if(body !== null){
-
-    options.body =
-      JSON.stringify(body);
-
-  }
-
-
-  const response =
-    await fetch(
-      url,
-      options
-    );
-
-
-  const text =
-    await response.text();
-
-
-  let data;
-
-
-  try{
-
-    data =
-      text
-        ? JSON.parse(text)
-        : null;
-
-  }catch{
-
-    throw new Error(
-      "El servidor devolvió una respuesta inválida."
-    );
-
-  }
-
-
-  if(!response.ok){
-
-    let message =
-      data?.message ||
-      data?.error ||
-      data?.hint ||
-      "Error desconocido.";
-
-    throw new Error(message);
-
-  }
-
-
-  return data;
-
-}
-
-
-/* =========================================
-   INICIO
-========================================= */
-
-window.addEventListener(
-  "DOMContentLoaded",
-  async function(){
-
-    await loadConfig();
-
-    await loadProducts();
-
-    await loadTurn();
-
-    await loadStats();
-
-    await loadCloseHistory();
-
-  }
-);
-
-
-/* =========================================
-   SECCIONES
-========================================= */
-
-function showSection(section){
-
-  document
-    .querySelectorAll(".section")
-    .forEach(
-      item =>
-        item.classList.remove("active")
-    );
-
-
-  document
-    .querySelectorAll(".tab")
-    .forEach(
-      item =>
-        item.classList.remove("active")
-    );
-
-
-  document
-    .getElementById(section)
-    .classList.add("active");
-
-
-  if(section === "venta"){
-
-    document
-      .getElementById("tabVenta")
-      .classList.add("active");
-
-  }
-
-
-  if(section === "admin"){
-
-    document
-      .getElementById("tabAdmin")
-      .classList.add("active");
-
-  }
-
-}
-
-
-/* =========================================
-   PRODUCTOS
-========================================= */
-
-async function loadProducts(){
-
-  const menu =
-    document.getElementById("menu");
-
-
-  menu.innerHTML =
-    `<div class="loading">
-      Cargando menú...
-    </div>`;
-
-
-  try{
-
-    products =
-      await api(
-        "productos",
-        "GET",
-        null,
-        "&select=*&activo=eq.true&order=id.asc"
-      );
-
-
-    renderMenu();
-
-    renderAdminProducts();
-
-  }catch(error){
-
-    menu.innerHTML =
-      `<div class="notice">
-        ❌ No se pudo cargar el menú.
-        <br><br>
-        ${escapeHtml(error.message)}
-      </div>`;
-
-  }
-
-}
-
-
-function renderMenu(){
-
-  const menu =
-    document.getElementById("menu");
-
-
-  if(!products.length){
-
-    menu.innerHTML =
-      `<div class="notice">
-        No hay productos activos.
-        Entra al administrador para agregarlos.
-      </div>`;
-
-    return;
-
-  }
-
-
-  menu.innerHTML =
-    products
-      .map(product => `
-
-        <div class="product">
-
-          <div>
-
-            <div class="product-name">
-              ${escapeHtml(product.nombre)}
-            </div>
-
-            <div class="product-category">
-              ${escapeHtml(product.categoria || "")}
-            </div>
-
-          </div>
-
-          <div class="product-bottom">
-
-            <div class="price">
-              $${money(product.precio)}
-            </div>
-
-            <button
-              class="add-btn"
-              onclick="addToCart(${product.id})"
-            >
-              +
-            </button>
-
-          </div>
-
-        </div>
-
-      `)
-      .join("");
-
-}
-
-
-function addToCart(id){
-
-  const product =
-    products.find(
-      p => Number(p.id) === Number(id)
-    );
-
-
-  if(!product)return;
-
-
-  const existing =
-    cart.find(
-      item =>
-        Number(item.id) === Number(id)
-    );
-
-
-  if(existing){
-
-    existing.cantidad++;
-
-  }else{
-
-    cart.push({
-
-      id:product.id,
-
-      nombre:product.nombre,
-
-      precio:Number(product.precio),
-
-      cantidad:1
-
-    });
-
-  }
-
-
-  renderCart();
-
-}
-
-
-function changeQuantity(id,change){
-
-  const item =
-    cart.find(
-      x => Number(x.id) === Number(id)
-    );
-
-
-  if(!item)return;
-
-
-  item.cantidad += change;
-
-
-  if(item.cantidad <= 0){
-
-    cart =
-      cart.filter(
-        x => Number(x.id) !== Number(id)
-      );
-
-  }
-
-
-  renderCart();
-
-}
-
-
-function renderCart(){
-
-  const container =
-    document.getElementById("cart");
-
-
-  if(!cart.length){
-
-    container.innerHTML =
-      `<div class="cart-empty">
-        Agrega productos al pedido.
-      </div>`;
-
-
-    document.getElementById("total").textContent =
-      "$0";
-
-
-    return;
-
-  }
-
-
-  let total = 0;
-
-
-  container.innerHTML =
-    cart
-      .map(item => {
-
-        const subtotal =
-          item.precio *
-          item.cantidad;
-
-
-        total += subtotal;
-
-
-        return `
-
-          <div class="cart-item">
-
-            <div>
-
-              <div class="cart-name">
-                ${escapeHtml(item.nombre)}
-              </div>
-
-              <div class="cart-price">
-                $${money(item.precio)}
-                ×
-                ${item.cantidad}
-                =
-                $${money(subtotal)}
-              </div>
-
-            </div>
-
-            <div class="quantity">
-
-              <button
-                onclick="changeQuantity(${item.id},-1)"
-              >
-                −
-              </button>
-
-              <span>
-                ${item.cantidad}
-              </span>
-
-              <button
-                onclick="changeQuantity(${item.id},1)"
-              >
-                +
-              </button>
-
-            </div>
-
-          </div>
-
-        `;
-
-      })
-      .join("");
-
-
-  document.getElementById("total").textContent =
-    "$" + money(total);
-
-}
-
-
-/* =========================================
-   CONFIGURACIÓN PREMIO
-========================================= */
-
-async function loadConfig(){
-
-  try{
-
-    const rows =
-      await api(
-        "configuracion",
-        "GET",
-        null,
-        "&select=*&limit=1"
-      );
-
-
-    if(rows && rows.length){
-
-      config =
-        rows[0];
-
-    }
-
-
-    document.getElementById(
-      "pointsRequired"
-    ).value =
-      config.puntos_para_premio || 10;
-
-
-    document.getElementById(
-      "prizeName"
-    ).value =
-      config.premio || "Premio";
-
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
-}
-
-
-async function saveConfig(){
-
-  const points =
-    Number(
-      document.getElementById(
-        "pointsRequired"
-      ).value
-    );
-
-
-  const prize =
-    document.getElementById(
-      "prizeName"
-    ).value.trim();
-
-
-  if(!Number.isFinite(points) || points < 1){
-
-    alert(
-      "Los puntos deben ser mayores a 0."
-    );
-
-    return;
-
-  }
-
-
-  if(!prize){
-
-    alert(
-      "Escribe el nombre del beneficio."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    const rows =
-      await api(
-        "configuracion",
-        "GET",
-        null,
-        "&select=*&limit=1"
-      );
-
-
-    const data = {
-
-      puntos_para_premio:
-        Math.floor(points),
-
-      premio:
-        prize
-
-    };
-
-
-    if(rows.length){
-
-      await api(
-        "configuracion",
-        "PATCH",
-        data,
-        "&id=eq." + rows[0].id
-      );
-
-    }else{
-
-      await api(
-        "configuracion",
-        "POST",
-        data
-      );
-
-    }
-
-
-    config =
-      data;
-
-
-    alert(
-      "✅ Configuración guardada."
-    );
-
-
-  }catch(error){
-
-    alert(
-      "❌ No se pudo guardar:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   VENTA
-========================================= */
-
-async function registerSale(){
-
-  if(!cart.length){
-
-    alert(
-      "Agrega al menos un producto."
-    );
-
-    return;
-
-  }
-
-
-  const name =
-    document
-      .getElementById("customerName")
-      .value
-      .trim();
-
-
-  const whatsapp =
-    document
-      .getElementById("customerWhatsapp")
-      .value
-      .trim();
-
-
-  if(!name){
-
-    alert(
-      "Escribe el nombre del cliente."
-    );
-
-    return;
-
-  }
-
-
-  if(!/^\d{10}$/.test(whatsapp)){
-
-    alert(
-      "El WhatsApp debe tener 10 dígitos."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    let clientes =
-      await api(
-        "clientes",
-        "GET",
-        null,
-        "&select=*&whatsapp=eq." +
-        encodeURIComponent(whatsapp)
-      );
-
-
-    let cliente;
-
-
-    if(clientes.length){
-
-      cliente =
-        clientes[0];
-
-    }else{
-
-      const nuevos =
-        await api(
-          "clientes",
-          "POST",
-          {
-
-            nombre:name,
-
-            whatsapp:whatsapp,
-
-            puntos:0,
-
-            premios_obtenidos:0
-
-          }
-        );
-
-
-      cliente =
-        nuevos[0];
-
-    }
-
-
-    if(cliente.nombre !== name){
-
-      await api(
-        "clientes",
-        "PATCH",
-        {
-          nombre:name
-        },
-        "&id=eq." + cliente.id
-      );
-
-    }
-
-
-    const threshold =
-      Number(
-        config.puntos_para_premio || 10
-      );
-
-
-    const currentPoints =
-      Number(cliente.puntos || 0);
-
-
-    let newPoints =
-      currentPoints;
-
-
-    if(currentPoints < threshold){
-
-      newPoints =
-        Math.min(
-          currentPoints + 1,
-          threshold
-        );
-
-    }
-
-
-    const total =
-      cart.reduce(
-        (sum,item) =>
-          sum +
-          (
-            Number(item.precio) *
-            Number(item.cantidad)
-          ),
-        0
-      );
-
-
-    const ventas =
-      await api(
-        "ventas",
-        "POST",
-        {
-
-          cliente_id:
-            cliente.id,
-
-          total:
-            total,
-
-          puntos_ganados:
-            newPoints - currentPoints
-
-        }
-      );
-
-
-    const venta =
-      ventas[0];
-
-
-    for(const item of cart){
-
-      await api(
-        "detalle_ventas",
-        "POST",
-        {
-
-          venta_id:
-            venta.id,
-
-          producto_id:
-            item.id,
-
-          nombre_producto:
-            item.nombre,
-
-          cantidad:
-            item.cantidad,
-
-          precio:
-            item.precio
-
-        }
-      );
-
-    }
-
-
-    if(newPoints !== currentPoints){
-
-      await api(
-        "clientes",
-        "PATCH",
-        {
-          puntos:newPoints
-        },
-        "&id=eq." + cliente.id
-      );
-
-    }
-
-
-    let message =
-      "🌽 ELOTEMANÍA\n\n" +
-      "¡Gracias por tu compra, " +
-      name +
-      "! ❤️\n\n" +
-      "Total: $" +
-      money(total) +
-      "\n\n";
-
-
-    if(newPoints >= threshold){
-
-      message +=
-        "🎁 ¡Felicidades!\n" +
-        "Ya tienes tu Premio disponible.";
-
-    }else{
-
-      const faltan =
-        threshold -
-        newPoints;
-
-
-      message +=
-        "⭐ Tienes " +
-        newPoints +
-        " punto" +
-        (newPoints === 1 ? "" : "s") +
-        ".\n" +
-        "Te faltan " +
-        faltan +
-        " para tu Premio.";
-
-    }
-
-
-    cart = [];
-
-    renderCart();
-
-
-    document.getElementById(
-      "customerName"
-    ).value = "";
-
-
-    document.getElementById(
-      "customerWhatsapp"
-    ).value = "";
-
-
-    document.getElementById(
-      "pointsPreview"
-    ).classList.add("hidden");
-
-
-    await loadTurn();
-
-
-    await loadStats();
-
-
-    const whatsappUrl =
-      "https://wa.me/52" +
-      whatsapp +
-      "?text=" +
-      encodeURIComponent(message);
-
-
-    window.open(
-      whatsappUrl,
-      "_blank"
-    );
-
-
-    alert(
-      "✅ Venta registrada correctamente."
-    );
-
-
-  }catch(error){
-
-    alert(
-      "❌ No se pudo registrar la venta:\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   PUNTOS
-========================================= */
-
-document
-  .getElementById("customerWhatsapp")
-  .addEventListener(
-    "blur",
-    updatePointsPreview
-  );
-
-
-async function updatePointsPreview(){
-
-  const whatsapp =
-    document
-      .getElementById("customerWhatsapp")
-      .value
-      .trim();
+          class=" 
 
 
   const box =
