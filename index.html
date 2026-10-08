@@ -171,7 +171,6 @@ button{
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-  transition:.15s;
 }
 
 .product:active{
@@ -477,29 +476,81 @@ button{
   margin-bottom:6px;
 }
 
-.hidden{
-  display:none!important;
+.close-stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-bottom:14px;
 }
 
-.table-wrap{
-  overflow-x:auto;
+.close-stat{
+  background:#181818;
+  border:1px solid #303030;
+  border-radius:12px;
+  padding:14px;
+  text-align:center;
 }
 
-table{
-  width:100%;
-  border-collapse:collapse;
+.close-stat-label{
+  color:#999;
   font-size:12px;
 }
 
-th,
-td{
-  padding:10px 6px;
-  border-bottom:1px solid #292929;
-  text-align:left;
+.close-stat-value{
+  color:#d4af37;
+  font-size:23px;
+  font-weight:900;
+  margin-top:5px;
 }
 
-th{
+.cash-result{
+  background:#181818;
+  border:1px solid #333;
+  border-radius:12px;
+  padding:15px;
+  margin-top:12px;
+}
+
+.cash-line{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:8px 0;
+  border-bottom:1px solid #292929;
+}
+
+.cash-line:last-child{
+  border-bottom:0;
+}
+
+.cash-difference{
+  font-size:23px;
+  font-weight:900;
   color:#d4af37;
+}
+
+.history-item{
+  background:#181818;
+  border:1px solid #303030;
+  border-radius:12px;
+  padding:12px;
+  margin-bottom:8px;
+}
+
+.history-date{
+  color:#888;
+  font-size:11px;
+  margin-bottom:6px;
+}
+
+.history-total{
+  color:#d4af37;
+  font-weight:900;
+  font-size:17px;
+}
+
+.hidden{
+  display:none!important;
 }
 
 .footer{
@@ -538,11 +589,14 @@ th{
 
 </header>
 
+
 <main class="container">
+
 
   <div class="stats">
 
     <div class="stat">
+
       <div
         class="stat-number"
         id="statVentas"
@@ -551,11 +605,14 @@ th{
       </div>
 
       <div class="stat-label">
-        Ventas
+        Ventas del turno
       </div>
+
     </div>
 
+
     <div class="stat">
+
       <div
         class="stat-number"
         id="statPedidos"
@@ -564,21 +621,25 @@ th{
       </div>
 
       <div class="stat-label">
-        Pedidos
+        Clientes
       </div>
+
     </div>
 
+
     <div class="stat">
+
       <div
         class="stat-number"
-        id="statClientes"
+        id="statEfectivo"
       >
-        0
+        $0
       </div>
 
       <div class="stat-label">
-        Clientes
+        Efectivo esperado
       </div>
+
     </div>
 
   </div>
@@ -605,14 +666,15 @@ th{
   </div>
 
 
-  <!-- ========================= -->
+  <!-- ============================= -->
   <!-- VENTA -->
-  <!-- ========================= -->
+  <!-- ============================= -->
 
   <section
     id="venta"
     class="section active"
   >
+
 
     <div class="card">
 
@@ -631,23 +693,27 @@ th{
 
       </div>
 
+
       <div
         id="menu"
         class="menu-grid"
       >
+
         <div class="loading">
           Cargando menú...
         </div>
+
       </div>
 
     </div>
 
 
-    <div class="card cart">
+    <div class="card">
 
       <h2>
         🛒 Pedido
       </h2>
+
 
       <div id="cart">
 
@@ -656,6 +722,7 @@ th{
         </div>
 
       </div>
+
 
       <div class="total">
 
@@ -677,6 +744,7 @@ th{
       <h2>
         👤 Cliente
       </h2>
+
 
       <div class="field">
 
@@ -728,14 +796,15 @@ th{
   </section>
 
 
-  <!-- ========================= -->
+  <!-- ============================= -->
   <!-- ADMIN -->
-  <!-- ========================= -->
+  <!-- ============================= -->
 
   <section
     id="admin"
     class="section"
   >
+
 
     <div
       id="adminLogin"
@@ -780,6 +849,158 @@ th{
       class="admin-content"
     >
 
+
+      <!-- ============================= -->
+      <!-- CIERRE DE TURNO -->
+      <!-- ============================= -->
+
+      <div class="card">
+
+        <h2>
+          🔒 Cierre de turno
+        </h2>
+
+
+        <div class="notice">
+
+          Aquí puedes revisar cuánto debe haber
+          en efectivo y cuánto tienes físicamente.
+
+          <br><br>
+
+          Al cerrar el turno, los contadores
+          comenzarán nuevamente desde 0.
+
+        </div>
+
+
+        <div class="close-stats">
+
+          <div class="close-stat">
+
+            <div class="close-stat-label">
+              Ventas
+            </div>
+
+            <div
+              class="close-stat-value"
+              id="closeVentas"
+            >
+              0
+            </div>
+
+          </div>
+
+
+          <div class="close-stat">
+
+            <div class="close-stat-label">
+              Clientes
+            </div>
+
+            <div
+              class="close-stat-value"
+              id="closeClientes"
+            >
+              0
+            </div>
+
+          </div>
+
+
+          <div class="close-stat">
+
+            <div class="close-stat-label">
+              Efectivo esperado
+            </div>
+
+            <div
+              class="close-stat-value"
+              id="closeEsperado"
+            >
+              $0.00
+            </div>
+
+          </div>
+
+
+          <div class="close-stat">
+
+            <div class="close-stat-label">
+              Turno
+            </div>
+
+            <div
+              class="close-stat-value"
+              id="closeNumero"
+            >
+              1
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            💵 Cantidad de efectivo contado
+          </label>
+
+          <input
+            id="cashCounted"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="Ej. 2500"
+          >
+
+        </div>
+
+
+        <button
+          class="secondary-button"
+          onclick="calculateDifference()"
+        >
+          🧮 Calcular diferencia
+        </button>
+
+
+        <div
+          id="cashResult"
+          class="cash-result hidden"
+        ></div>
+
+
+        <button
+          class="primary-button"
+          style="margin-top:12px;"
+          onclick="closeTurn()"
+        >
+          🔒 Cerrar turno
+        </button>
+
+      </div>
+
+
+      <!-- ============================= -->
+      <!-- HISTORIAL CIERRES -->
+      <!-- ============================= -->
+
+      <div class="card">
+
+        <h2>
+          📋 Historial de cierres
+        </h2>
+
+        <div id="closeHistory">
+          Cargando...
+        </div>
+
+      </div>
+
+
       <div class="admin-grid">
 
 
@@ -790,6 +1011,7 @@ th{
           <h2>
             🎁 Configuración
           </h2>
+
 
           <div class="field">
 
@@ -832,7 +1054,7 @@ th{
         </div>
 
 
-        <!-- CANJEAR PREMIO -->
+        <!-- PREMIO -->
 
         <div class="card">
 
@@ -840,9 +1062,12 @@ th{
             🎁 Premio
           </h2>
 
+
           <div class="notice">
-            Busca al cliente por WhatsApp para autorizar su Premio.
+            Busca al cliente por WhatsApp
+            para autorizar su Premio.
           </div>
+
 
           <div class="field">
 
@@ -860,12 +1085,14 @@ th{
 
           </div>
 
+
           <button
             class="secondary-button"
             onclick="findCustomerForPrize()"
           >
             🔎 Buscar cliente
           </button>
+
 
           <div
             id="redeemResult"
@@ -883,10 +1110,13 @@ th{
             🔄 Reiniciar puntos
           </h2>
 
+
           <div class="notice">
-            Esta opción pone los puntos del cliente en 0.
-            Sus compras e historial permanecen intactos.
+            Esta opción pone los puntos
+            del cliente en 0.
+            Sus compras e historial permanecen.
           </div>
+
 
           <div class="field">
 
@@ -903,6 +1133,7 @@ th{
             >
 
           </div>
+
 
           <button
             class="danger-button"
@@ -921,6 +1152,7 @@ th{
           <h2>
             ➕ Agregar producto
           </h2>
+
 
           <div class="field">
 
@@ -1034,8 +1266,15 @@ let cart = [];
 let products = [];
 
 let config = {
-  puntos_para_premio: 10,
-  premio: "Premio"
+  puntos_para_premio:10,
+  premio:"Premio"
+};
+
+let turnoActual = {
+  ventas:0,
+  clientes:0,
+  efectivo:0,
+  numero:1
 };
 
 
@@ -1055,25 +1294,39 @@ async function api(
     encodeURIComponent(table) +
     query;
 
+
   const options = {
+
     method,
+
     headers:{
       "Content-Type":"application/json"
     }
+
   };
 
+
   if(body !== null){
+
     options.body =
       JSON.stringify(body);
+
   }
 
+
   const response =
-    await fetch(url,options);
+    await fetch(
+      url,
+      options
+    );
+
 
   const text =
     await response.text();
 
+
   let data;
+
 
   try{
 
@@ -1090,6 +1343,7 @@ async function api(
 
   }
 
+
   if(!response.ok){
 
     let message =
@@ -1098,16 +1352,13 @@ async function api(
       data?.hint ||
       "Error desconocido.";
 
-    if(data?.details){
-      message +=
-        "\n" +
-        data.details;
-    }
-
     throw new Error(message);
+
   }
 
+
   return data;
+
 }
 
 
@@ -1123,16 +1374,18 @@ window.addEventListener(
 
     await loadProducts();
 
+    await loadTurn();
+
     await loadStats();
 
-    updatePointsPreview();
+    await loadCloseHistory();
 
   }
 );
 
 
 /* =========================================
-   TABS
+   SECCIONES
 ========================================= */
 
 function showSection(section){
@@ -1144,6 +1397,7 @@ function showSection(section){
         item.classList.remove("active")
     );
 
+
   document
     .querySelectorAll(".tab")
     .forEach(
@@ -1151,9 +1405,11 @@ function showSection(section){
         item.classList.remove("active")
     );
 
+
   document
     .getElementById(section)
     .classList.add("active");
+
 
   if(section === "venta"){
 
@@ -1162,6 +1418,7 @@ function showSection(section){
       .classList.add("active");
 
   }
+
 
   if(section === "admin"){
 
@@ -1183,10 +1440,12 @@ async function loadProducts(){
   const menu =
     document.getElementById("menu");
 
+
   menu.innerHTML =
     `<div class="loading">
       Cargando menú...
     </div>`;
+
 
   try{
 
@@ -1197,6 +1456,7 @@ async function loadProducts(){
         null,
         "&select=*&activo=eq.true&order=id.asc"
       );
+
 
     renderMenu();
 
@@ -1221,24 +1481,25 @@ function renderMenu(){
   const menu =
     document.getElementById("menu");
 
+
   if(!products.length){
 
     menu.innerHTML =
       `<div class="notice">
         No hay productos activos.
-        Entra al administrador para agregar productos.
+        Entra al administrador para agregarlos.
       </div>`;
 
     return;
+
   }
+
 
   menu.innerHTML =
     products
       .map(product => `
 
-        <div
-          class="product"
-        >
+        <div class="product">
 
           <div>
 
@@ -1261,7 +1522,6 @@ function renderMenu(){
             <button
               class="add-btn"
               onclick="addToCart(${product.id})"
-              aria-label="Agregar"
             >
               +
             </button>
@@ -1283,13 +1543,16 @@ function addToCart(id){
       p => Number(p.id) === Number(id)
     );
 
+
   if(!product)return;
+
 
   const existing =
     cart.find(
       item =>
         Number(item.id) === Number(id)
     );
+
 
   if(existing){
 
@@ -1298,13 +1561,19 @@ function addToCart(id){
   }else{
 
     cart.push({
+
       id:product.id,
+
       nombre:product.nombre,
+
       precio:Number(product.precio),
+
       cantidad:1
+
     });
 
   }
+
 
   renderCart();
 
@@ -1318,9 +1587,12 @@ function changeQuantity(id,change){
       x => Number(x.id) === Number(id)
     );
 
+
   if(!item)return;
 
+
   item.cantidad += change;
+
 
   if(item.cantidad <= 0){
 
@@ -1330,6 +1602,7 @@ function changeQuantity(id,change){
       );
 
   }
+
 
   renderCart();
 
@@ -1341,6 +1614,7 @@ function renderCart(){
   const container =
     document.getElementById("cart");
 
+
   if(!cart.length){
 
     container.innerHTML =
@@ -1348,13 +1622,18 @@ function renderCart(){
         Agrega productos al pedido.
       </div>`;
 
+
     document.getElementById("total").textContent =
       "$0";
 
+
     return;
+
   }
 
+
   let total = 0;
+
 
   container.innerHTML =
     cart
@@ -1364,7 +1643,9 @@ function renderCart(){
           item.precio *
           item.cantidad;
 
+
         total += subtotal;
+
 
         return `
 
@@ -1413,6 +1694,7 @@ function renderCart(){
       })
       .join("");
 
+
   document.getElementById("total").textContent =
     "$" + money(total);
 
@@ -1420,7 +1702,7 @@ function renderCart(){
 
 
 /* =========================================
-   CONFIGURACIÓN
+   CONFIGURACIÓN PREMIO
 ========================================= */
 
 async function loadConfig(){
@@ -1435,37 +1717,26 @@ async function loadConfig(){
         "&select=*&limit=1"
       );
 
+
     if(rows && rows.length){
 
-      config = rows[0];
-
-    }else{
-
-      await api(
-        "configuracion",
-        "POST",
-        {
-          puntos_para_premio:10,
-          premio:"Premio"
-        }
-      );
-
-      config = {
-        puntos_para_premio:10,
-        premio:"Premio"
-      };
+      config =
+        rows[0];
 
     }
+
 
     document.getElementById(
       "pointsRequired"
     ).value =
       config.puntos_para_premio || 10;
 
+
     document.getElementById(
       "prizeName"
     ).value =
       config.premio || "Premio";
+
 
   }catch(error){
 
@@ -1485,6 +1756,7 @@ async function saveConfig(){
       ).value
     );
 
+
   const prize =
     document.getElementById(
       "prizeName"
@@ -1494,10 +1766,11 @@ async function saveConfig(){
   if(!Number.isFinite(points) || points < 1){
 
     alert(
-      "Los puntos para el Premio deben ser mayores a 0."
+      "Los puntos deben ser mayores a 0."
     );
 
     return;
+
   }
 
 
@@ -1508,6 +1781,7 @@ async function saveConfig(){
     );
 
     return;
+
   }
 
 
@@ -1523,8 +1797,13 @@ async function saveConfig(){
 
 
     const data = {
-      puntos_para_premio:Math.floor(points),
-      premio:prize
+
+      puntos_para_premio:
+        Math.floor(points),
+
+      premio:
+        prize
+
     };
 
 
@@ -1548,11 +1827,14 @@ async function saveConfig(){
     }
 
 
-    config = data;
+    config =
+      data;
+
 
     alert(
       "✅ Configuración guardada."
     );
+
 
   }catch(error){
 
@@ -1567,7 +1849,7 @@ async function saveConfig(){
 
 
 /* =========================================
-   REGISTRAR VENTA
+   VENTA
 ========================================= */
 
 async function registerSale(){
@@ -1579,6 +1861,7 @@ async function registerSale(){
     );
 
     return;
+
   }
 
 
@@ -1603,6 +1886,7 @@ async function registerSale(){
     );
 
     return;
+
   }
 
 
@@ -1613,14 +1897,11 @@ async function registerSale(){
     );
 
     return;
+
   }
 
 
   try{
-
-    /*
-      Buscar cliente
-    */
 
     let clientes =
       await api(
@@ -1647,12 +1928,18 @@ async function registerSale(){
           "clientes",
           "POST",
           {
+
             nombre:name,
+
             whatsapp:whatsapp,
+
             puntos:0,
+
             premios_obtenidos:0
+
           }
         );
+
 
       cliente =
         nuevos[0];
@@ -1660,73 +1947,44 @@ async function registerSale(){
     }
 
 
-    /*
-      Actualizar nombre
-    */
+    if(cliente.nombre !== name){
 
-    if(
-      cliente.nombre !== name
-    ){
-
-      const updated =
-        await api(
-          "clientes",
-          "PATCH",
-          {
-            nombre:name
-          },
-          "&id=eq." + cliente.id
-        );
-
-      if(updated && updated.length){
-        cliente =
-          updated[0];
-      }else{
-        cliente.nombre = name;
-      }
+      await api(
+        "clientes",
+        "PATCH",
+        {
+          nombre:name
+        },
+        "&id=eq." + cliente.id
+      );
 
     }
 
-
-    /*
-      Puntos
-    */
 
     const threshold =
       Number(
         config.puntos_para_premio || 10
       );
 
-    let currentPoints =
+
+    const currentPoints =
       Number(cliente.puntos || 0);
+
 
     let newPoints =
       currentPoints;
 
 
-    /*
-      Si todavía no llega al límite,
-      gana un punto.
-    */
-
     if(currentPoints < threshold){
 
       newPoints =
-        currentPoints + 1;
-
-      if(newPoints > threshold){
-
-        newPoints =
-          threshold;
-
-      }
+        Math.min(
+          currentPoints + 1,
+          threshold
+        );
 
     }
 
-
-    /*
-      Crear venta
-    */
 
     const total =
       cart.reduce(
@@ -1745,10 +2003,16 @@ async function registerSale(){
         "ventas",
         "POST",
         {
-          cliente_id:cliente.id,
-          total:total,
+
+          cliente_id:
+            cliente.id,
+
+          total:
+            total,
+
           puntos_ganados:
             newPoints - currentPoints
+
         }
       );
 
@@ -1757,30 +2021,33 @@ async function registerSale(){
       ventas[0];
 
 
-    /*
-      Detalle de venta
-    */
-
     for(const item of cart){
 
       await api(
         "detalle_ventas",
         "POST",
         {
-          venta_id:venta.id,
-          producto_id:item.id,
-          nombre_producto:item.nombre,
-          cantidad:item.cantidad,
-          precio:item.precio
+
+          venta_id:
+            venta.id,
+
+          producto_id:
+            item.id,
+
+          nombre_producto:
+            item.nombre,
+
+          cantidad:
+            item.cantidad,
+
+          precio:
+            item.precio
+
         }
       );
 
     }
 
-
-    /*
-      Actualizar puntos
-    */
 
     if(newPoints !== currentPoints){
 
@@ -1796,10 +2063,6 @@ async function registerSale(){
     }
 
 
-    /*
-      Mensaje WhatsApp
-    */
-
     let message =
       "🌽 ELOTEMANÍA\n\n" +
       "¡Gracias por tu compra, " +
@@ -1814,14 +2077,14 @@ async function registerSale(){
 
       message +=
         "🎁 ¡Felicidades!\n" +
-        "Ya tienes tu Premio disponible.\n" +
-        "Pregunta en Elotemanía para canjearlo.";
+        "Ya tienes tu Premio disponible.";
 
     }else{
 
       const faltan =
         threshold -
         newPoints;
+
 
       message +=
         "⭐ Tienes " +
@@ -1836,33 +2099,31 @@ async function registerSale(){
     }
 
 
-    /*
-      Limpiar
-    */
-
     cart = [];
 
     renderCart();
+
 
     document.getElementById(
       "customerName"
     ).value = "";
 
+
     document.getElementById(
       "customerWhatsapp"
     ).value = "";
+
 
     document.getElementById(
       "pointsPreview"
     ).classList.add("hidden");
 
 
+    await loadTurn();
+
+
     await loadStats();
 
-
-    /*
-      Abrir WhatsApp
-    */
 
     const whatsappUrl =
       "https://wa.me/52" +
@@ -1895,16 +2156,8 @@ async function registerSale(){
 
 
 /* =========================================
-   PREVISUALIZAR PUNTOS
+   PUNTOS
 ========================================= */
-
-document
-  .getElementById("customerWhatsapp")
-  .addEventListener(
-    "input",
-    updatePointsPreview
-  );
-
 
 document
   .getElementById("customerWhatsapp")
@@ -1922,6 +2175,7 @@ async function updatePointsPreview(){
       .value
       .trim();
 
+
   const box =
     document.getElementById(
       "pointsPreview"
@@ -1933,6 +2187,7 @@ async function updatePointsPreview(){
     box.classList.add("hidden");
 
     return;
+
   }
 
 
@@ -1956,13 +2211,13 @@ async function updatePointsPreview(){
       box.classList.remove("hidden");
 
       return;
+
     }
 
 
     const points =
-      Number(
-        clientes[0].puntos || 0
-      );
+      Number(clientes[0].puntos || 0);
+
 
     const threshold =
       Number(
@@ -1988,6 +2243,7 @@ async function updatePointsPreview(){
 
 
     box.classList.remove("hidden");
+
 
   }catch(error){
 
@@ -2017,6 +2273,7 @@ function loginAdmin(){
     );
 
     return;
+
   }
 
 
@@ -2036,6 +2293,10 @@ function loginAdmin(){
 
 
   renderAdminProducts();
+
+  loadTurn();
+
+  loadCloseHistory();
 
 }
 
@@ -2089,6 +2350,7 @@ async function addProduct(){
     );
 
     return;
+
   }
 
 
@@ -2099,6 +2361,7 @@ async function addProduct(){
     );
 
     return;
+
   }
 
 
@@ -2108,27 +2371,32 @@ async function addProduct(){
       "productos",
       "POST",
       {
+
         nombre:name,
+
         categoria:category,
+
         precio:price,
+
         activo:true
+
       }
     );
 
 
-    document
-      .getElementById("newProductName")
-      .value = "";
+    document.getElementById(
+      "newProductName"
+    ).value = "";
 
 
-    document
-      .getElementById("newProductCategory")
-      .value = "";
+    document.getElementById(
+      "newProductCategory"
+    ).value = "";
 
 
-    document
-      .getElementById("newProductPrice")
-      .value = "";
+    document.getElementById(
+      "newProductPrice"
+    ).value = "";
 
 
     alert(
@@ -2137,6 +2405,7 @@ async function addProduct(){
 
 
     await loadProducts();
+
 
   }catch(error){
 
@@ -2162,22 +2431,6 @@ async function renderAdminProducts(){
     );
 
 
-  if(!products.length){
-
-    container.innerHTML =
-      `<div class="notice">
-        No hay productos activos.
-      </div>`;
-
-    return;
-
-  }
-
-
-  /*
-    Obtener también productos ocultos
-  */
-
   try{
 
     const allProducts =
@@ -2187,6 +2440,18 @@ async function renderAdminProducts(){
         null,
         "&select=*&order=id.asc"
       );
+
+
+    if(!allProducts.length){
+
+      container.innerHTML =
+        `<div class="notice">
+          No hay productos.
+        </div>`;
+
+      return;
+
+    }
 
 
     container.innerHTML =
@@ -2340,8 +2605,11 @@ async function editProduct(id){
       "productos",
       "PATCH",
       {
+
         nombre:name.trim(),
+
         precio:numericPrice
+
       },
       "&id=eq." + id
     );
@@ -2353,6 +2621,7 @@ async function editProduct(id){
 
 
     await loadProducts();
+
 
   }catch(error){
 
@@ -2367,19 +2636,16 @@ async function editProduct(id){
 
 
 /* =========================================
-   OCULTAR PRODUCTO
+   OCULTAR
 ========================================= */
 
 async function hideProduct(id){
 
-  const confirmar =
-    confirm(
-      "¿Quieres quitar este producto del menú?\n\n" +
-      "No se borrará el historial de ventas."
-    );
-
-
-  if(!confirmar)return;
+  if(
+    !confirm(
+      "¿Quieres quitar este producto del menú?"
+    )
+  )return;
 
 
   try{
@@ -2401,6 +2667,7 @@ async function hideProduct(id){
 
     await loadProducts();
 
+
   }catch(error){
 
     alert(
@@ -2414,7 +2681,7 @@ async function hideProduct(id){
 
 
 /* =========================================
-   RESTAURAR PRODUCTO
+   RESTAURAR
 ========================================= */
 
 async function restoreProduct(id){
@@ -2438,6 +2705,7 @@ async function restoreProduct(id){
 
     await loadProducts();
 
+
   }catch(error){
 
     alert(
@@ -2451,7 +2719,7 @@ async function restoreProduct(id){
 
 
 /* =========================================
-   BUSCAR CLIENTE PARA PREMIO
+   PREMIO
 ========================================= */
 
 async function findCustomerForPrize(){
@@ -2562,10 +2830,6 @@ async function findCustomerForPrize(){
 
     }else{
 
-      const faltan =
-        threshold - points;
-
-
       result.innerHTML = `
 
         <div class="customer-box">
@@ -2582,8 +2846,10 @@ async function findCustomerForPrize(){
           </div>
 
           <div class="notice">
-            Todavía le faltan
-            <strong>${faltan}</strong>
+            Le faltan
+            <strong>
+              ${threshold - points}
+            </strong>
             puntos para su Premio.
           </div>
 
@@ -2592,6 +2858,7 @@ async function findCustomerForPrize(){
       `;
 
     }
+
 
   }catch(error){
 
@@ -2605,20 +2872,14 @@ async function findCustomerForPrize(){
 }
 
 
-/* =========================================
-   CANJEAR PREMIO
-========================================= */
-
 async function redeemPrize(id){
 
-  const confirmar =
-    confirm(
+  if(
+    !confirm(
       "¿Confirmas que este cliente recibió su Premio?\n\n" +
       "Sus puntos volverán a 0."
-    );
-
-
-  if(!confirmar)return;
+    )
+  )return;
 
 
   try{
@@ -2651,11 +2912,14 @@ async function redeemPrize(id){
       "clientes",
       "PATCH",
       {
+
         puntos:0,
+
         premios_obtenidos:
           Number(
             cliente.premios_obtenidos || 0
           ) + 1
+
       },
       "&id=eq." + id
     );
@@ -2680,7 +2944,7 @@ async function redeemPrize(id){
   }catch(error){
 
     alert(
-      "❌ No se pudo autorizar el Premio:\n\n" +
+      "❌ No se pudo autorizar:\n\n" +
       error.message
     );
 
@@ -2705,7 +2969,7 @@ async function resetCustomerPoints(){
   if(!/^\d{10}$/.test(whatsapp)){
 
     alert(
-      "Escribe un WhatsApp válido de 10 dígitos."
+      "Escribe un WhatsApp válido."
     );
 
     return;
@@ -2740,23 +3004,17 @@ async function resetCustomerPoints(){
       clientes[0];
 
 
-    const puntosActuales =
-      Number(cliente.puntos || 0);
-
-
-    const confirmar =
-      confirm(
+    if(
+      !confirm(
         "¿Seguro que quieres poner los puntos de " +
         cliente.nombre +
         " en 0?\n\n" +
         "Actualmente tiene " +
-        puntosActuales +
+        (cliente.puntos || 0) +
         " puntos.\n\n" +
         "Sus compras e historial NO se borrarán."
-      );
-
-
-    if(!confirmar)return;
+      )
+    )return;
 
 
     await api(
@@ -2770,9 +3028,7 @@ async function resetCustomerPoints(){
 
 
     alert(
-      "✅ Los puntos de " +
-      cliente.nombre +
-      " fueron reiniciados a 0."
+      "✅ Los puntos fueron reiniciados a 0."
     );
 
 
@@ -2784,9 +3040,180 @@ async function resetCustomerPoints(){
   }catch(error){
 
     alert(
-      "❌ No se pudieron reiniciar los puntos:\n\n" +
+      "❌ No se pudieron reiniciar:\n\n" +
       error.message
     );
+
+  }
+
+}
+
+
+/* =========================================
+   OBTENER ÚLTIMO CIERRE
+========================================= */
+
+async function getLastClose(){
+
+  try{
+
+    const rows =
+      await api(
+        "cierres_turno",
+        "GET",
+        null,
+        "&select=*&order=id.desc&limit=1"
+      );
+
+
+    if(rows && rows.length){
+
+      return rows[0];
+
+    }
+
+
+    return null;
+
+
+  }catch(error){
+
+    console.error(error);
+
+    return null;
+
+  }
+
+}
+
+
+/* =========================================
+   CARGAR TURNO
+========================================= */
+
+async function loadTurn(){
+
+  try{
+
+    const ventas =
+      await api(
+        "ventas",
+        "GET",
+        null,
+        "&select=id,cliente_id,total&order=id.asc"
+      );
+
+
+    const lastClose =
+      await getLastClose();
+
+
+    let startIndex = 0;
+
+
+    if(lastClose){
+
+      startIndex =
+        Number(lastClose.ventas || 0);
+
+    }
+
+
+    const turnoVentas =
+      ventas.slice(startIndex);
+
+
+    const efectivo =
+      turnoVentas.reduce(
+        (sum,venta) =>
+          sum +
+          Number(venta.total || 0),
+        0
+      );
+
+
+    const clientesSet =
+      new Set();
+
+
+    turnoVentas.forEach(
+      venta => {
+
+        if(venta.cliente_id){
+
+          clientesSet.add(
+            String(venta.cliente_id)
+          );
+
+        }
+
+      }
+    );
+
+
+    const clientes =
+      clientesSet.size;
+
+
+    const totalVentas =
+      turnoVentas.length;
+
+
+    let numeroTurno = 1;
+
+
+    if(lastClose){
+
+      numeroTurno =
+        Number(lastClose.id) + 1;
+
+    }
+
+
+    turnoActual = {
+
+      ventas:
+        totalVentas,
+
+      clientes:
+        clientes,
+
+      efectivo:
+        efectivo,
+
+      numero:
+        numeroTurno
+
+    };
+
+
+    document.getElementById(
+      "closeVentas"
+    ).textContent =
+      totalVentas;
+
+
+    document.getElementById(
+      "closeClientes"
+    ).textContent =
+      clientes;
+
+
+    document.getElementById(
+      "closeEsperado"
+    ).textContent =
+      "$" + money(efectivo);
+
+
+    document.getElementById(
+      "closeNumero"
+    ).textContent =
+      numeroTurno;
+
+
+  }catch(error){
+
+    console.error(error);
 
   }
 
@@ -2799,59 +3226,423 @@ async function resetCustomerPoints(){
 
 async function loadStats(){
 
+  await loadTurn();
+
+
+  document.getElementById(
+    "statVentas"
+  ).textContent =
+    turnoActual.ventas;
+
+
+  document.getElementById(
+    "statPedidos"
+  ).textContent =
+    turnoActual.clientes;
+
+
+  document.getElementById(
+    "statEfectivo"
+  ).textContent =
+    "$" +
+    money(turnoActual.efectivo);
+
+}
+
+
+/* =========================================
+   CALCULAR DIFERENCIA
+========================================= */
+
+function calculateDifference(){
+
+  const counted =
+    Number(
+      document
+        .getElementById("cashCounted")
+        .value
+    );
+
+
+  if(!Number.isFinite(counted) || counted < 0){
+
+    alert(
+      "Escribe una cantidad de efectivo válida."
+    );
+
+    return;
+
+  }
+
+
+  const expected =
+    Number(
+      turnoActual.efectivo || 0
+    );
+
+
+  const difference =
+    counted - expected;
+
+
+  let message = "";
+
+
+  if(difference === 0){
+
+    message =
+      `<div class="notice success">
+        ✅ El efectivo coincide exactamente.
+      </div>`;
+
+  }else if(difference > 0){
+
+    message =
+      `<div class="notice success">
+        🟢 Hay $${money(difference)}
+        de más.
+      </div>`;
+
+  }else{
+
+    message =
+      `<div class="notice warning">
+        🔴 Faltan $${money(Math.abs(difference))}.
+      </div>`;
+
+  }
+
+
+  document.getElementById(
+    "cashResult"
+  ).innerHTML = `
+
+    <div class="cash-line">
+
+      <span>
+        Efectivo esperado
+      </span>
+
+      <strong>
+        $${money(expected)}
+      </strong>
+
+    </div>
+
+
+    <div class="cash-line">
+
+      <span>
+        Efectivo contado
+      </span>
+
+      <strong>
+        $${money(counted)}
+      </strong>
+
+    </div>
+
+
+    <div class="cash-line">
+
+      <span>
+        Diferencia
+      </span>
+
+      <strong class="cash-difference">
+        ${
+          difference >= 0
+          ? "+"
+          : "-"
+        }$${money(Math.abs(difference))}
+      </strong>
+
+    </div>
+
+    <br>
+
+    ${message}
+
+  `;
+
+
+  document.getElementById(
+    "cashResult"
+  ).classList.remove("hidden");
+
+}
+
+
+/* =========================================
+   CERRAR TURNO
+========================================= */
+
+async function closeTurn(){
+
+  const counted =
+    Number(
+      document
+        .getElementById("cashCounted")
+        .value
+    );
+
+
+  if(!Number.isFinite(counted) || counted < 0){
+
+    alert(
+      "Primero escribe cuánto efectivo tienes contado."
+    );
+
+    return;
+
+  }
+
+
+  await loadTurn();
+
+
+  const expected =
+    Number(
+      turnoActual.efectivo || 0
+    );
+
+
+  const difference =
+    counted - expected;
+
+
+  const confirmar =
+    confirm(
+
+      "¿Quieres cerrar este turno?\n\n" +
+
+      "Ventas: " +
+      turnoActual.ventas +
+      "\n" +
+
+      "Clientes: " +
+      turnoActual.clientes +
+      "\n" +
+
+      "Efectivo esperado: $" +
+      money(expected) +
+      "\n" +
+
+      "Efectivo contado: $" +
+      money(counted) +
+      "\n" +
+
+      "Diferencia: " +
+      (
+        difference >= 0
+        ? "+"
+        : "-"
+      ) +
+      "$" +
+      money(Math.abs(difference)) +
+
+      "\n\n" +
+
+      "Después del cierre comenzará un nuevo turno."
+
+    );
+
+
+  if(!confirmar)return;
+
+
   try{
 
-    const ventas =
-      await api(
-        "ventas",
-        "GET",
-        null,
-        "&select=id"
-      );
+    await api(
+      "cierres_turno",
+      "POST",
+      {
+
+        ventas:
+          turnoActual.ventas,
+
+        clientes:
+          turnoActual.clientes,
+
+        efectivo_esperado:
+          expected,
+
+        efectivo_contado:
+          counted,
+
+        diferencia:
+          difference
+
+      }
+    );
 
 
-    const clientes =
-      await api(
-        "clientes",
-        "GET",
-        null,
-        "&select=id"
-      );
-
-
-    const totalVentas =
-      ventas
-        ? ventas.length
-        : 0;
-
-
-    const totalClientes =
-      clientes
-        ? clientes.length
-        : 0;
-
-
-    document.getElementById(
-      "statVentas"
-    ).textContent =
-      totalVentas;
+    alert(
+      "🔒 Turno cerrado correctamente.\n\n" +
+      "El siguiente turno comienza desde 0."
+    );
 
 
     document.getElementById(
-      "statPedidos"
-    ).textContent =
-      totalVentas;
+      "cashCounted"
+    ).value = "";
 
 
     document.getElementById(
-      "statClientes"
-    ).textContent =
-      totalClientes;
+      "cashResult"
+    ).classList.add("hidden");
+
+
+    await loadTurn();
+
+    await loadStats();
+
+    await loadCloseHistory();
 
 
   }catch(error){
 
-    console.error(error);
+    alert(
+      "❌ No se pudo cerrar el turno:\n\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   HISTORIAL DE CIERRES
+========================================= */
+
+async function loadCloseHistory(){
+
+  const container =
+    document.getElementById(
+      "closeHistory"
+    );
+
+
+  try{
+
+    const rows =
+      await api(
+        "cierres_turno",
+        "GET",
+        null,
+        "&select=*&order=id.desc&limit=20"
+      );
+
+
+    if(!rows.length){
+
+      container.innerHTML =
+        `<div class="notice">
+          Todavía no hay cierres registrados.
+        </div>`;
+
+      return;
+
+    }
+
+
+    container.innerHTML =
+      rows
+        .map(row => {
+
+          const difference =
+            Number(
+              row.diferencia || 0
+            );
+
+
+          return `
+
+            <div class="history-item">
+
+              <div class="history-date">
+
+                ${formatDate(row.fecha)}
+
+              </div>
+
+
+              <div>
+
+                Turno #${row.id}
+
+              </div>
+
+
+              <div>
+
+                🧾 ${row.ventas || 0}
+                ventas
+
+                ·
+
+                👥 ${row.clientes || 0}
+                clientes
+
+              </div>
+
+
+              <div style="margin-top:6px;">
+
+                Esperado:
+                <strong>
+                  $${money(row.efectivo_esperado)}
+                </strong>
+
+                <br>
+
+                Contado:
+                <strong>
+                  $${money(row.efectivo_contado)}
+                </strong>
+
+              </div>
+
+
+              <div
+                style="
+                  margin-top:6px;
+                  color:${
+                    difference < 0
+                    ? "#e66"
+                    : "#8fe0a1"
+                  };
+                  font-weight:bold;
+                "
+              >
+
+                ${
+                  difference === 0
+                  ? "✅ Cuadrado"
+                  : difference > 0
+                    ? "🟢 Sobraron $" +
+                      money(difference)
+                    : "🔴 Faltaron $" +
+                      money(Math.abs(difference))
+                }
+
+              </div>
+
+            </div>
+
+          `;
+
+        })
+        .join("");
+
+
+  }catch(error){
+
+    container.innerHTML =
+      `<div class="notice">
+        ❌ ${escapeHtml(error.message)}
+      </div>`;
 
   }
 
@@ -2867,17 +3658,56 @@ function money(value){
   const number =
     Number(value);
 
+
   if(!Number.isFinite(number)){
+
     return "0.00";
+
   }
+
 
   return number.toLocaleString(
     "es-MX",
     {
+
       minimumFractionDigits:2,
+
       maximumFractionDigits:2
+
     }
   );
+
+}
+
+
+function formatDate(value){
+
+  if(!value){
+
+    return "Sin fecha";
+
+  }
+
+
+  try{
+
+    return new Date(value)
+      .toLocaleString(
+        "es-MX",
+        {
+
+          dateStyle:"short",
+
+          timeStyle:"short"
+
+        }
+      );
+
+  }catch{
+
+    return value;
+
+  }
 
 }
 
@@ -2896,4 +3726,4 @@ function escapeHtml(value){
 </script>
 
 </body>
-</html>
+  </html> 
