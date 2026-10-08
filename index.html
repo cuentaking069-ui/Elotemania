@@ -6,9 +6,7 @@
 <title>Elotemanía POS</title>
 
 <style>
-*{
- box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
  margin:0;
@@ -212,6 +210,14 @@ input,select{
  color:#d4af37;
 }
 
+.venta-corte{
+ background:#191919;
+ border:1px solid #333;
+ border-radius:10px;
+ padding:12px;
+ margin-top:10px;
+}
+
 .separador{
  border:0;
  border-top:1px solid #333;
@@ -239,304 +245,256 @@ input,select{
 
 <div class="container">
 
- <div class="stats">
+<div class="stats">
 
-  <div class="stat">
-   <span>Ventas</span>
-   <b id="ventasHoy">0</b>
-  </div>
+<div class="stat">
+<span>Ventas</span>
+<b id="ventasHoy">0</b>
+</div>
 
-  <div class="stat">
-   <span>Clientes</span>
-   <b id="clientesHoy">0</b>
-  </div>
+<div class="stat">
+<span>Clientes</span>
+<b id="clientesHoy">0</b>
+</div>
 
-  <div class="stat">
-   <span>Turno</span>
-   <b>1</b>
-  </div>
+<div class="stat">
+<span>Turno</span>
+<b>1</b>
+</div>
 
- </div>
+</div>
 
- <div class="tabs">
+<div class="tabs">
 
-  <button
-   class="btn-gold"
-   onclick="mostrarVenta()"
-  >
-   🛒 Venta
-  </button>
+<button class="btn-gold" onclick="mostrarVenta()">
+🛒 Venta
+</button>
 
-  <button
-   class="btn-dark"
-   onclick="mostrarAcceso()"
-  >
-   🔐 Acceso
-  </button>
+<button class="btn-dark" onclick="mostrarAcceso()">
+🔐 Acceso
+</button>
 
- </div>
+</div>
 
 
- <!-- =========================
-      VENTA
- ========================== -->
+<section id="ventaSection">
 
- <section id="ventaSection">
+<div class="card">
 
-  <div class="card">
+<h2>🛒 Productos</h2>
 
-   <h2>🛒 Productos</h2>
+<div id="productos" class="grid">
+Cargando productos...
+</div>
 
-   <div
-    id="productos"
-    class="grid"
-   >
-    Cargando productos...
-   </div>
+</div>
 
-  </div>
 
+<div class="card">
 
-  <div class="card">
+<h2>🧾 Venta</h2>
 
-   <h2>🧾 Venta</h2>
+<div id="carrito">
+No hay productos.
+</div>
 
-   <div id="carrito">
-    No hay productos.
-   </div>
+<div class="total">
+Total:
+$<span id="total">0.00</span>
+</div>
 
-   <div class="total">
-    Total:
-    $<span id="total">0.00</span>
-   </div>
+</div>
 
-  </div>
 
+<div class="card">
 
-  <div class="card">
+<h2>👤 Cliente</h2>
 
-   <h2>👤 Cliente</h2>
+<label>Nombre</label>
 
-   <label>Nombre</label>
+<input
+id="nombreCliente"
+type="text"
+placeholder="Nombre del cliente"
+>
 
-   <input
-    id="nombreCliente"
-    type="text"
-    placeholder="Nombre del cliente"
-   >
+<label>WhatsApp</label>
 
+<input
+id="whatsappCliente"
+type="tel"
+placeholder="10 dígitos"
+>
 
-   <label>WhatsApp</label>
+<button
+class="btn-blue"
+style="width:100%"
+onclick="buscarCliente()"
+>
+🔎 Buscar cliente
+</button>
 
-   <input
-    id="whatsappCliente"
-    type="tel"
-    placeholder="10 dígitos"
-   >
+<div id="clienteResultado"></div>
 
+<button
+class="btn-gold"
+style="width:100%;margin-top:10px"
+onclick="registrarVenta()"
+>
+💰 Registrar venta
+</button>
 
-   <button
-    class="btn-blue"
-    style="width:100%"
-    onclick="buscarCliente()"
-   >
-    🔎 Buscar cliente
-   </button>
+</div>
 
+</section>
 
-   <div id="clienteResultado"></div>
 
+<section id="accesoSection" class="hidden">
 
-   <button
-    class="btn-gold"
-    style="width:100%;margin-top:10px"
-    onclick="registrarVenta()"
-   >
-    💰 Registrar venta
-   </button>
+<div class="card">
 
-  </div>
+<h2>🔐 Acceso</h2>
 
- </section>
+<input
+id="usuario"
+placeholder="Usuario"
+>
 
+<input
+id="pin"
+type="password"
+placeholder="PIN"
+>
 
- <!-- =========================
-      ACCESO
- ========================== -->
+<button
+class="btn-gold"
+style="width:100%"
+onclick="login()"
+>
+Entrar
+</button>
 
- <section
-  id="accesoSection"
-  class="hidden"
- >
+<div id="accesoResultado"></div>
 
-  <div class="card">
+</div>
 
-   <h2>🔐 Acceso</h2>
 
-   <input
-    id="usuario"
-    placeholder="Usuario"
-   >
+<div id="adminSection" class="hidden">
 
-   <input
-    id="pin"
-    type="password"
-    placeholder="PIN"
-   >
 
-   <button
-    class="btn-gold"
-    style="width:100%"
-    onclick="login()"
-   >
-    Entrar
-   </button>
+<div class="card">
 
-   <div id="accesoResultado"></div>
+<h2>🎁 Cliente / Premio</h2>
 
-  </div>
+<input
+id="buscarAdmin"
+placeholder="WhatsApp del cliente"
+>
 
+<button
+class="btn-blue"
+style="width:100%"
+onclick="buscarClienteAdmin()"
+>
+🔎 Buscar cliente
+</button>
 
-  <div
-   id="adminSection"
-   class="hidden"
-  >
+<div id="adminClienteResultado"></div>
 
+</div>
 
-   <!-- =========================
-        CLIENTE
-   ========================== -->
 
-   <div class="card">
+<div class="card">
 
-    <h2>🎁 Cliente / Premio</h2>
+<h2>➕ Agregar producto</h2>
 
-    <input
-     id="buscarAdmin"
-     placeholder="WhatsApp del cliente"
-    >
+<label>Nombre del producto</label>
 
-    <button
-     class="btn-blue"
-     style="width:100%"
-     onclick="buscarClienteAdmin()"
-    >
-     🔎 Buscar cliente
-    </button>
+<input
+id="nuevoProductoNombre"
+placeholder="Ej. Elote chorreado"
+>
 
-    <div id="adminClienteResultado"></div>
+<label>Categoría</label>
 
-   </div>
+<input
+id="nuevoProductoCategoria"
+placeholder="Ej. Elotes"
+>
 
+<label>Precio</label>
 
-   <!-- =========================
-        PRODUCTOS
-   ========================== -->
+<input
+id="nuevoProductoPrecio"
+type="number"
+step="0.01"
+min="0"
+placeholder="Ej. 60"
+>
 
-   <div class="card">
+<button
+class="btn-gold"
+style="width:100%"
+onclick="agregarProductoNuevo()"
+>
+➕ Guardar producto
+</button>
 
-    <h2>➕ Agregar producto</h2>
+<div id="productoResultado"></div>
 
-    <label>Nombre del producto</label>
+</div>
 
-    <input
-     id="nuevoProductoNombre"
-     placeholder="Ej. Elote chorreado"
-    >
 
+<div class="card">
 
-    <label>Categoría</label>
+<h2>📊 Cortes</h2>
 
-    <input
-     id="nuevoProductoCategoria"
-     placeholder="Ej. Elotes"
-    >
+<button
+class="btn-purple"
+style="width:100%"
+onclick="verCortes()"
+>
+📊 Ver cortes
+</button>
 
+<div id="listaCortes"></div>
 
-    <label>Precio</label>
+</div>
 
-    <input
-     id="nuevoProductoPrecio"
-     type="number"
-     step="0.01"
-     min="0"
-     placeholder="Ej. 60"
-    >
 
+<div class="card">
 
-    <button
-     class="btn-gold"
-     style="width:100%"
-     onclick="agregarProductoNuevo()"
-    >
-     ➕ Guardar producto
-    </button>
+<h2>⚙️ Turno</h2>
 
-    <div id="productoResultado"></div>
+<button
+class="btn-gold"
+style="width:100%"
+onclick="hacerCorte()"
+>
+💰 Cerrar turno
+</button>
 
-   </div>
+<button
+class="btn-red"
+style="width:100%;margin-top:10px"
+onclick="borrarUltimoCorte()"
+>
+🗑️ Borrar último corte
+</button>
 
+<button
+class="btn-red"
+style="width:100%;margin-top:10px"
+onclick="borrarHistorial()"
+>
+🗑️ Borrar todo el historial
+</button>
 
-   <!-- =========================
-        CORTES
-   ========================== -->
+</div>
 
-   <div class="card">
+</div>
 
-    <h2>📊 Cortes</h2>
-
-    <button
-     class="btn-purple"
-     style="width:100%"
-     onclick="verCortes()"
-    >
-     📊 Ver cortes
-    </button>
-
-    <div id="listaCortes"></div>
-
-   </div>
-
-
-   <!-- =========================
-        TURNO
-   ========================== -->
-
-   <div class="card">
-
-    <h2>⚙️ Turno</h2>
-
-    <button
-     class="btn-gold"
-     style="width:100%"
-     onclick="hacerCorte()"
-    >
-     💰 Cerrar turno
-    </button>
-
-
-    <button
-     class="btn-red"
-     style="width:100%;margin-top:10px"
-     onclick="borrarUltimoCorte()"
-    >
-     🗑️ Borrar último corte
-    </button>
-
-
-    <button
-     class="btn-red"
-     style="width:100%;margin-top:10px"
-     onclick="borrarHistorial()"
-    >
-     🗑️ Borrar todo el historial
-    </button>
-
-   </div>
-
-  </div>
-
- </section>
+</section>
 
 </div>
 
@@ -828,8 +786,8 @@ function renderProductos(){
 
 
 /* =========================
-   AGREGAR PRODUCTO A VENTA
- ========================== */
+   CARRITO
+========================= */
 
 function agregarProducto(id){
 
@@ -1262,8 +1220,6 @@ async function registrarVenta(){
   }
 
 
-  /* ACTUALIZAR CLIENTE */
-
   if(clienteActual){
 
    const actualizado=
@@ -1325,8 +1281,6 @@ async function registrarVenta(){
   }
 
 
-  /* REGISTRAR VENTA */
-
   const total=
    obtenerTotal();
 
@@ -1337,7 +1291,8 @@ async function registrarVenta(){
     {
      cliente_id:clienteActual.id,
      total:total,
-     puntos_ganados:1
+     puntos_ganados:1,
+     corte_id:null
     }
    );
 
@@ -1355,8 +1310,6 @@ async function registrarVenta(){
   const ventaId=
    venta[0].id;
 
-
-  /* DETALLE */
 
   for(
    const item of carrito
@@ -1376,8 +1329,6 @@ async function registrarVenta(){
 
   }
 
-
-  /* WHATSAPP */
 
   let mensaje=
 `🌽 *ELOTEMANÍA* 🌽
@@ -1922,7 +1873,7 @@ async function canjearPremio(id){
 
 
 /* =========================
-   AGREGAR PRODUCTO NUEVO
+   AGREGAR PRODUCTO
 ========================= */
 
 async function agregarProductoNuevo(){
@@ -1939,7 +1890,6 @@ async function agregarProductoNuevo(){
   return;
 
  }
-
 
  const nombre=
   document.getElementById(
@@ -1958,7 +1908,6 @@ async function agregarProductoNuevo(){
    ).value
   );
 
-
  if(!nombre){
 
   alert(
@@ -1969,8 +1918,10 @@ async function agregarProductoNuevo(){
 
  }
 
-
- if(!Number.isFinite(precio)||precio<0){
+ if(
+  !Number.isFinite(precio)||
+  precio<0
+ ){
 
   alert(
    "Escribe un precio válido."
@@ -1979,7 +1930,6 @@ async function agregarProductoNuevo(){
   return;
 
  }
-
 
  try{
 
@@ -1995,7 +1945,6 @@ async function agregarProductoNuevo(){
     }
    );
 
-
   if(
    !nuevo||
    !nuevo.length
@@ -2006,7 +1955,6 @@ async function agregarProductoNuevo(){
    );
 
   }
-
 
   document.getElementById(
    "nuevoProductoNombre"
@@ -2020,7 +1968,6 @@ async function agregarProductoNuevo(){
    "nuevoProductoPrecio"
   ).value="";
 
-
   document.getElementById(
    "productoResultado"
   ).innerHTML=
@@ -2033,9 +1980,7 @@ async function agregarProductoNuevo(){
    </div>
   `;
 
-
   await cargarProductos();
-
 
  }catch(error){
 
@@ -2052,7 +1997,7 @@ async function agregarProductoNuevo(){
 
 
 /* =========================
-   HACER CORTE
+   CERRAR TURNO
 ========================= */
 
 async function hacerCorte(){
@@ -2070,7 +2015,6 @@ async function hacerCorte(){
 
  }
 
-
  try{
 
   const ventas=
@@ -2083,14 +2027,12 @@ async function hacerCorte(){
     }
    );
 
-
   const pendientes=
    ventas.filter(
     v=>
      v.corte_id===null||
      v.corte_id===undefined
    );
-
 
   const total=
    pendientes.reduce(
@@ -2099,14 +2041,12 @@ async function hacerCorte(){
     0
    );
 
-
   const clientesCorte=
    new Set(
     pendientes
      .map(v=>v.cliente_id)
      .filter(Boolean)
    );
-
 
   if(!pendientes.length){
 
@@ -2118,7 +2058,6 @@ async function hacerCorte(){
 
   }
 
-
   const contado=
    prompt(
     "Efectivo contado:\n\n"+
@@ -2126,18 +2065,13 @@ async function hacerCorte(){
     dinero(total)
    );
 
-
   if(contado===null)return;
-
 
   const efectivoContado=
    Number(contado);
 
-
   if(
-   !Number.isFinite(
-    efectivoContado
-   )||
+   !Number.isFinite(efectivoContado)||
    efectivoContado<0
   ){
 
@@ -2149,10 +2083,8 @@ async function hacerCorte(){
 
   }
 
-
   const diferencia=
    efectivoContado-total;
-
 
   const corte=
    await api(
@@ -2167,7 +2099,6 @@ async function hacerCorte(){
     }
    );
 
-
   if(
    !corte||
    !corte.length
@@ -2179,10 +2110,8 @@ async function hacerCorte(){
 
   }
 
-
   const corteId=
    corte[0].id;
-
 
   for(
    const venta of pendientes
@@ -2201,7 +2130,6 @@ async function hacerCorte(){
 
   }
 
-
   alert(
    "✅ Turno cerrado.\n\n"+
    "Ventas: "+
@@ -2214,13 +2142,13 @@ async function hacerCorte(){
    dinero(diferencia)
   );
 
-
   await actualizarEstadisticas();
 
   await verCortes();
 
-
  }catch(error){
+
+  console.error(error);
 
   alert(
    "No se pudo cerrar el turno:\n"+
@@ -2251,12 +2179,10 @@ async function verCortes(){
 
  }
 
-
  const contenedor=
   document.getElementById(
    "listaCortes"
   );
-
 
  contenedor.innerHTML=
   `
@@ -2264,7 +2190,6 @@ async function verCortes(){
     Cargando cortes...
    </div>
   `;
-
 
  try{
 
@@ -2278,7 +2203,6 @@ async function verCortes(){
      order:"id.desc"
     }
    );
-
 
   if(
    !cortes||
@@ -2296,24 +2220,21 @@ async function verCortes(){
 
   }
 
-
   contenedor.innerHTML="";
 
-
-  cortes.forEach(corte=>{
+  for(
+   const corte of cortes
+  ){
 
    const diferencia=
     Number(
      corte.diferencia||0
     );
 
-
    const div=
     document.createElement("div");
 
-
    div.className="corte";
-
 
    div.innerHTML=`
     <strong>
@@ -2370,13 +2291,26 @@ async function verCortes(){
       </span>
      `
     }
-   `;
 
+    <hr class="separador">
+
+    <button
+     class="btn-dark"
+     style="width:100%"
+     onclick="mostrarVentasCorte(${corte.id})"
+    >
+     🧾 Ver ventas de este corte
+    </button>
+
+    <div
+     id="ventasCorte${corte.id}"
+     class="hidden"
+    ></div>
+   `;
 
    contenedor.appendChild(div);
 
-  });
-
+  }
 
  }catch(error){
 
@@ -2384,6 +2318,127 @@ async function verCortes(){
    `
     <div class="alerta">
      ❌ No se pudieron cargar los cortes.
+     <br><br>
+     ${escapeHtml(error.message)}
+    </div>
+   `;
+
+ }
+
+}
+
+
+/* =========================
+   MOSTRAR VENTAS DEL CORTE
+========================= */
+
+async function mostrarVentasCorte(corteId){
+
+ const contenedor=
+  document.getElementById(
+   "ventasCorte"+corteId
+  );
+
+ if(!contenedor)return;
+
+ if(
+  !contenedor.classList.contains("hidden")
+ ){
+
+  contenedor.classList.add("hidden");
+
+  return;
+
+ }
+
+ contenedor.classList.remove("hidden");
+
+ contenedor.innerHTML=
+  `
+   <div class="alerta">
+    Cargando ventas...
+   </div>
+  `;
+
+ try{
+
+  const ventas=
+   await api(
+    "ventas",
+    "GET",
+    null,
+    {
+     select:"*",
+     corte_id:"eq."+corteId,
+     order:"id.asc"
+    }
+   );
+
+  if(
+   !ventas||
+   !ventas.length
+  ){
+
+   contenedor.innerHTML=
+    `
+     <div class="alerta">
+      No hay ventas en este corte.
+     </div>
+    `;
+
+   return;
+
+  }
+
+  contenedor.innerHTML="";
+
+  for(
+   const venta of ventas
+  ){
+
+   const cliente=
+    clientes.find(
+     c=>
+      Number(c.id)===
+      Number(venta.cliente_id)
+    );
+
+   const nombre=
+    cliente?.nombre||
+    "Cliente";
+
+   const div=
+    document.createElement("div");
+
+   div.className="venta-corte";
+
+   div.innerHTML=`
+    <strong>
+     Venta #${venta.id}
+    </strong>
+
+    <br><br>
+
+    👤 ${escapeHtml(nombre)}
+
+    <br><br>
+
+    💰 Total:
+    <strong>
+     $${dinero(venta.total)}
+    </strong>
+   `;
+
+   contenedor.appendChild(div);
+
+  }
+
+ }catch(error){
+
+  contenedor.innerHTML=
+   `
+    <div class="alerta">
+     ❌ No se pudieron cargar las ventas.
      <br><br>
      ${escapeHtml(error.message)}
     </div>
@@ -2412,13 +2467,11 @@ async function borrarUltimoCorte(){
 
  }
 
-
  if(
   !confirm(
-   "¿Borrar el último corte?"
+   "⚠️ Se eliminará el último corte Y TODAS las ventas de ese corte.\n\n¿Continuar?"
   )
  )return;
-
 
  try{
 
@@ -2434,7 +2487,6 @@ async function borrarUltimoCorte(){
     }
    );
 
-
   if(!cortes.length){
 
    alert(
@@ -2445,82 +2497,13 @@ async function borrarUltimoCorte(){
 
   }
 
-
   const corte=
    cortes[0];
 
-
-  await api(
-   "ventas",
-   "PATCH",
-   {
-    corte_id:null
-   },
-   {
-    corte_id:"eq."+corte.id
-   }
-  );
-
-
-  await api(
-   "cierres_turno",
-   "DELETE",
-   null,
-   {
-    id:"eq."+corte.id
-   }
-  );
-
-
-  alert(
-   "✅ Último corte eliminado."
-  );
-
-
-  await actualizarEstadisticas();
-
-  await verCortes();
-
-
- }catch(error){
-
-  alert(
-   "Error:\n"+
-   error.message
-  );
-
- }
-
-}
-
-
-/* =========================
-   BORRAR HISTORIAL
-========================= */
-
-async function borrarHistorial(){
-
- if(
-  currentUser!=="christian"
- ){
-
-  alert(
-   "Solo Christian puede borrar el historial."
-  );
-
-  return;
-
- }
-
-
- if(
-  !confirm(
-   "⚠️ Esto eliminará todas las ventas y detalles.\n\n¿Continuar?"
-  )
- )return;
-
-
- try{
+  /*
+   * IMPORTANTE:
+   * Primero buscamos las ventas de ese corte.
+   */
 
   const ventas=
    await api(
@@ -2528,10 +2511,15 @@ async function borrarHistorial(){
     "GET",
     null,
     {
-     select:"id"
+     select:"id",
+     corte_id:"eq."+corte.id
     }
    );
 
+  /*
+   * Primero eliminamos los detalles
+   * de cada venta.
+   */
 
   for(
    const venta of ventas
@@ -2549,33 +2537,186 @@ async function borrarHistorial(){
 
   }
 
+  /*
+   * Después eliminamos las ventas.
+   * Cada DELETE lleva WHERE por ID.
+   */
 
-  await api(
-   "ventas",
-   "DELETE"
-  );
+  for(
+   const venta of ventas
+  ){
 
+   await api(
+    "ventas",
+    "DELETE",
+    null,
+    {
+     id:
+      "eq."+venta.id
+    }
+   );
+
+  }
+
+  /*
+   * Finalmente eliminamos el corte.
+   */
 
   await api(
    "cierres_turno",
-   "DELETE"
+   "DELETE",
+   null,
+   {
+    id:
+     "eq."+corte.id
+   }
   );
-
 
   alert(
-   "✅ Historial eliminado."
+   "✅ Corte eliminado correctamente.\n\n"+
+   "Se eliminaron "+
+   ventas.length+
+   " venta(s) y sus detalles."
   );
 
+  await cargarClientes();
 
   await actualizarEstadisticas();
 
   await verCortes();
 
+ }catch(error){
+
+  console.error(error);
+
+  alert(
+   "Error al eliminar el corte:\n"+
+   error.message
+  );
+
+ }
+
+}
+
+
+/* =========================
+   BORRAR TODO HISTORIAL
+========================= */
+
+async function borrarHistorial(){
+
+ if(
+  currentUser!=="christian"
+ ){
+
+  alert(
+   "Solo Christian puede borrar el historial."
+  );
+
+  return;
+
+ }
+
+ if(
+  !confirm(
+   "⚠️ ATENCIÓN\n\n"+
+   "Se eliminarán TODAS las ventas, detalles y cortes.\n\n"+
+   "Los clientes, productos y puntos NO se eliminarán.\n\n"+
+   "¿Continuar?"
+  )
+ )return;
+
+ try{
+
+  /*
+   * BUSCAR TODAS LAS VENTAS
+   */
+
+  const ventas=
+   await api(
+    "ventas",
+    "GET",
+    null,
+    {
+     select:"id"
+    }
+   );
+
+  /*
+   * ELIMINAR DETALLES
+   */
+
+  for(
+   const venta of ventas
+  ){
+
+   await api(
+    "detalle_ventas",
+    "DELETE",
+    null,
+    {
+     venta_id:
+      "eq."+venta.id
+    }
+   );
+
+  }
+
+  /*
+   * ELIMINAR CADA VENTA
+   */
+
+  for(
+   const venta of ventas
+  ){
+
+   await api(
+    "ventas",
+    "DELETE",
+    null,
+    {
+     id:
+      "eq."+venta.id
+    }
+   );
+
+  }
+
+  /*
+   * ELIMINAR TODOS LOS CORTES
+   *
+   * IMPORTANTE:
+   * id=not.is.null evita el DELETE
+   * sin WHERE.
+   */
+
+  await api(
+   "cierres_turno",
+   "DELETE",
+   null,
+   {
+    id:"not.is.null"
+   }
+  );
+
+  alert(
+   "✅ Historial eliminado correctamente.\n\n"+
+   "Ventas eliminadas: "+
+   ventas.length+
+   "\n\n"+
+   "Los clientes, puntos y productos siguen intactos."
+  );
+
+  await actualizarEstadisticas();
+
+  await verCortes();
 
  }catch(error){
 
+  console.error(error);
+
   alert(
-   "No se pudo borrar:\n"+
+   "No se pudo borrar el historial:\n"+
    error.message
   );
 
@@ -2602,12 +2743,10 @@ async function actualizarEstadisticas(){
     }
    );
 
-
   document.getElementById(
    "ventasHoy"
   ).textContent=
    ventas.length;
-
 
   const clientesUnicos=
    new Set(
@@ -2616,12 +2755,10 @@ async function actualizarEstadisticas(){
      .filter(Boolean)
    );
 
-
   document.getElementById(
    "clientesHoy"
   ).textContent=
    clientesUnicos.size;
-
 
  }catch(error){
 
@@ -2690,4 +2827,4 @@ function escapeHtml(text){
 </script>
 
 </body>
-</html> 
+</html>
