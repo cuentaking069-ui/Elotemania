@@ -17,17 +17,23 @@ export default async function handler(req, res) {
       });
     }
 
-    const params = { ...req.query };
-    delete params.table;
-    delete params.chatgpt;
-
     const url = new URL(`${supabaseUrl}/rest/v1/${table}`);
 
-    Object.entries(params).forEach(([key, value]) => {
-      if (value !== undefined && value !== "") {
-        url.searchParams.set(key, value);
+    const allowedParams = [
+      "select",
+      "order",
+      "limit",
+      "offset",
+      "id",
+      "activo",
+      "whatsapp"
+    ];
+
+    for (const key of allowedParams) {
+      if (req.query[key] !== undefined) {
+        url.searchParams.set(key, req.query[key]);
       }
-    });
+    }
 
     const headers = {
       apikey: supabaseKey,
