@@ -7,14 +7,13 @@ export default async function handler(req, res) {
     process.env.SUPABASE_ANON_KEY;
 
 
-  if(
-    !supabaseUrl ||
-    !supabaseKey
-  ){
+  if(!supabaseUrl || !supabaseKey){
 
     return res.status(500).json({
+
       error:
         "Faltan las variables de Supabase en Vercel."
+
     });
 
   }
@@ -29,8 +28,10 @@ export default async function handler(req, res) {
     if(!table){
 
       return res.status(400).json({
+
         error:
           "Falta indicar la tabla."
+
       });
 
     }
@@ -41,6 +42,10 @@ export default async function handler(req, res) {
         `${supabaseUrl}/rest/v1/${table}`
       );
 
+
+    /*
+      Parámetros permitidos
+    */
 
     const allowedParams = [
 
@@ -55,9 +60,7 @@ export default async function handler(req, res) {
     ];
 
 
-    for(
-      const key of allowedParams
-    ){
+    for(const key of allowedParams){
 
       if(
         req.query[key] !== undefined
@@ -98,15 +101,18 @@ export default async function handler(req, res) {
     };
 
 
+    /*
+      GET no necesita body.
+      PATCH y POST sí.
+    */
+
     if(
       req.method !== "GET" &&
       req.method !== "HEAD"
     ){
 
       options.body =
-        JSON.stringify(
-          req.body
-        );
+        JSON.stringify(req.body);
 
     }
 
@@ -128,14 +134,14 @@ export default async function handler(req, res) {
     try{
 
       data =
-        JSON.parse(text);
+        text
+          ? JSON.parse(text)
+          : null;
 
     }catch{
 
       return res
-        .status(
-          response.status
-        )
+        .status(response.status)
         .json({
 
           error:
@@ -150,9 +156,7 @@ export default async function handler(req, res) {
 
 
     return res
-      .status(
-        response.status
-      )
+      .status(response.status)
       .json(data);
 
 
