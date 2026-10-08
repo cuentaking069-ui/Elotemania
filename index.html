@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Elotemanía</title>
 
@@ -26,9 +21,7 @@ body{
   min-height:100vh;
 }
 
-button,
-input,
-select{
+button,input,select{
   font:inherit;
 }
 
@@ -377,71 +370,9 @@ button{
   color:#e5d077;
 }
 
-.login-card{
-  max-width:430px;
-  margin:35px auto;
-}
-
-.role-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-bottom:15px;
-}
-
-.role-button{
-  border:1px solid #444;
-  background:#1b1b1b;
-  color:#aaa;
-  border-radius:12px;
-  padding:15px 8px;
-  font-weight:900;
-}
-
-.role-button.active{
-  background:#d4af37;
-  color:#000;
-  border-color:#d4af37;
-}
-
-.role-title{
-  text-align:center;
-  margin-bottom:15px;
-  color:#d4af37;
-  font-size:18px;
-  font-weight:900;
-}
-
-.session-bar{
-  background:#151515;
-  border:1px solid #292929;
-  border-radius:12px;
-  padding:11px 13px;
-  margin-bottom:15px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-}
-
-.session-role{
-  color:#d4af37;
-  font-weight:900;
-}
-
-.session-user{
-  color:#aaa;
-  font-size:12px;
-}
-
-.logout-button{
-  border:1px solid #633;
-  background:#241313;
-  color:#f99;
-  border-radius:8px;
-  padding:7px 10px;
-  font-size:12px;
-  font-weight:bold;
+.admin-login{
+  max-width:420px;
+  margin:30px auto;
 }
 
 .admin-content{
@@ -600,14 +531,14 @@ button{
   background:#181818;
   border:1px solid #303030;
   border-radius:12px;
-  padding:12px;
-  margin-bottom:8px;
+  padding:14px;
+  margin-bottom:10px;
 }
 
 .history-date{
   color:#888;
   font-size:11px;
-  margin-bottom:6px;
+  margin-bottom:7px;
 }
 
 .history-total{
@@ -616,8 +547,54 @@ button{
   font-size:17px;
 }
 
-.delete-history{
-  margin-top:12px;
+.history-delete{
+  margin-top:10px;
+}
+
+.role-badge{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:12px;
+}
+
+.role-gerente{
+  background:#d4af37;
+  color:#000;
+}
+
+.role-vendedor{
+  background:#333;
+  color:#fff;
+  border:1px solid #555;
+}
+
+.user-bar{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:12px;
+  padding:10px 12px;
+  margin-bottom:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.user-bar span{
+  color:#aaa;
+  font-size:13px;
+}
+
+.logout-small{
+  border:1px solid #555;
+  background:#222;
+  color:#fff;
+  border-radius:8px;
+  padding:7px 10px;
+  font-size:12px;
 }
 
 .hidden{
@@ -644,7 +621,6 @@ button{
 }
 
 </style>
-
 </head>
 
 <body>
@@ -664,327 +640,1707 @@ button{
 
 <main class="container">
 
-
-  <!-- ============================= -->
-  <!-- LOGIN -->
-  <!-- ============================= -->
-
   <div
-    id="loginSection"
-    class="card login-card"
+    id="userBar"
+    class="user-bar hidden"
   >
 
-    <div class="role-title">
-      🔐 Acceso al sistema
-    </div>
-
-
-    <div class="notice">
-
-      Selecciona quién va a utilizar el sistema.
-
-      <br><br>
-
-      👨‍💼 El vendedor puede registrar ventas.
-
-      <br>
-
-      👑 El gerente tiene acceso completo.
-
-    </div>
-
-
-    <div class="role-buttons">
-
-      <button
-        id="sellerRoleButton"
-        class="role-button active"
-        type="button"
-        onclick="selectRole('vendedor')"
-      >
-        👨‍💼 Vendedor
-      </button>
-
-
-      <button
-        id="managerRoleButton"
-        class="role-button"
-        type="button"
-        onclick="selectRole('gerente')"
-      >
-        👑 Gerente
-      </button>
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        PIN
-      </label>
-
-      <input
-        id="loginPin"
-        type="password"
-        inputmode="numeric"
-        maxlength="4"
-        placeholder="Ingresa tu PIN"
-      >
-
-    </div>
-
+    <span id="userRoleText"></span>
 
     <button
-      class="primary-button"
-      type="button"
-      onclick="loginSystem()"
+      class="logout-small"
+      onclick="logoutUser()"
     >
-      Entrar al sistema
+      Salir
+    </button>
+
+  </div>
+
+
+  <div class="stats">
+
+    <div class="stat">
+
+      <div
+        class="stat-number"
+        id="statVentas"
+      >
+        0
+      </div>
+
+      <div class="stat-label">
+        Ventas del turno
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div
+        class="stat-number"
+        id="statPedidos"
+      >
+        0
+      </div>
+
+      <div class="stat-label">
+        Clientes
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div
+        class="stat-number"
+        id="statEfectivo"
+      >
+        $0
+      </div>
+
+      <div class="stat-label">
+        Efectivo esperado
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="tabs">
+
+    <button
+      class="tab active"
+      id="tabVenta"
+      onclick="showSection('venta')"
+    >
+      🛒 Venta
+    </button>
+
+    <button
+      class="tab"
+      id="tabAdmin"
+      onclick="showSection('admin')"
+    >
+      🔐 Acceso
     </button>
 
   </div>
 
 
   <!-- ============================= -->
-  <!-- SISTEMA -->
+  <!-- VENTA -->
   <!-- ============================= -->
 
-  <div
-    id="systemSection"
-    class="hidden"
+  <section
+    id="venta"
+    class="section active"
   >
 
+    <div class="card">
 
-    <div class="session-bar">
+      <div class="menu-title">
 
-      <div>
+        <h2>
+          🌽 Menú
+        </h2>
 
-        <div class="session-role">
-          <span id="sessionRole">
-            👨‍💼 Vendedor
-          </span>
-        </div>
-
-        <div class="session-user">
-          Sesión activa
-        </div>
+        <button
+          class="small-button"
+          onclick="loadProducts()"
+        >
+          ↻ Actualizar
+        </button>
 
       </div>
 
 
-      <button
-        class="logout-button"
-        type="button"
-        onclick="logoutSystem()"
+      <div
+        id="menu"
+        class="menu-grid"
       >
-        Salir
-      </button>
+
+        <div class="loading">
+          Cargando menú...
+        </div>
+
+      </div>
 
     </div>
 
 
-    <!-- ESTADÍSTICAS -->
+    <div class="card">
 
-    <div class="stats">
+      <h2>
+        🛒 Pedido
+      </h2>
 
-      <div class="stat">
+      <div id="cart">
 
-        <div
-          class="stat-number"
-          id="statVentas"
-        >
-          0
-        </div>
-
-        <div class="stat-label">
-          Ventas del turno
+        <div class="cart-empty">
+          Agrega productos al pedido.
         </div>
 
       </div>
 
 
-      <div class="stat">
+      <div class="total">
 
-        <div
-          class="stat-number"
-          id="statPedidos"
-        >
-          0
-        </div>
+        <span>
+          Total
+        </span>
 
-        <div class="stat-label">
-          Clientes
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div
-          class="stat-number"
-          id="statEfectivo"
-        >
+        <strong id="total">
           $0
-        </div>
-
-        <div class="stat-label">
-          Efectivo esperado
-        </div>
+        </strong>
 
       </div>
 
     </div>
 
 
-    <!-- TABS -->
+    <div class="card">
 
-    <div class="tabs">
+      <h2>
+        👤 Cliente
+      </h2>
+
+
+      <div class="field">
+
+        <label>
+          Nombre
+        </label>
+
+        <input
+          id="customerName"
+          type="text"
+          placeholder="Nombre del cliente"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          WhatsApp
+        </label>
+
+        <input
+          id="customerWhatsapp"
+          type="tel"
+          inputmode="numeric"
+          maxlength="10"
+          placeholder="10 dígitos"
+        >
+
+      </div>
+
+
+      <div
+        id="pointsPreview"
+        class="notice hidden"
+      ></div>
+
 
       <button
-        class="tab active"
-        id="tabVenta"
-        type="button"
-        onclick="showSection('venta')"
+        class="primary-button"
+        onclick="registerSale()"
       >
-        🛒 Venta
+        💰 Registrar venta
       </button>
 
+    </div>
+
+  </section>
+
+
+  <!-- ============================= -->
+  <!-- ACCESO -->
+  <!-- ============================= -->
+
+  <section
+    id="admin"
+    class="section"
+  >
+
+    <div
+      id="adminLogin"
+      class="card admin-login"
+    >
+
+      <h2>
+        🔐 Acceso
+      </h2>
+
+      <div class="notice">
+        Selecciona tu tipo de acceso.
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Tipo de usuario
+        </label>
+
+        <select id="loginRole">
+
+          <option value="vendedor">
+            👨‍💼 Vendedor
+          </option>
+
+          <option value="gerente">
+            👑 Gerente
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          PIN
+        </label>
+
+        <input
+          id="adminPin"
+          type="password"
+          inputmode="numeric"
+          placeholder="PIN"
+        >
+
+      </div>
+
 
       <button
-        class="tab"
-        id="tabAdmin"
-        type="button"
-        onclick="showSection('admin')"
+        class="primary-button"
+        onclick="loginAdmin()"
       >
-        ⚙️ Administrador
+        Entrar
       </button>
 
     </div>
 
 
-    <!-- ============================= -->
-    <!-- VENTA -->
-    <!-- ============================= -->
-
-    <section
-      id="venta"
-      class="section active"
+    <div
+      id="adminContent"
+      class="admin-content"
     >
 
 
+      <!-- ============================= -->
+      <!-- CIERRE DE TURNO -->
+      <!-- ============================= -->
+
       <div class="card">
 
-        <div class="menu-title">
+        <h2>
+          🔒 Cierre de turno
+        </h2>
 
-          <h2>
-            🌽 Menú
-          </h2>
 
-          <button
-            class="small-button"
-            type="button"
-            onclick="loadProducts()"
-          >
-            ↻ Actualizar
-          </button>
+        <div id="roleNotice"></div>
+
+
+        <div class="notice">
+
+          Aquí puedes revisar cuánto debe haber
+          en efectivo y cuánto tienes físicamente.
+
+          <br><br>
+
+          Al cerrar el turno, los contadores
+          comenzarán nuevamente desde 0.
 
         </div>
 
 
-        <div
-          id="menu"
-          class="menu-grid"
+        <div class="close-stats">
+
+          <div class="close-stat">
+
+            <div class="close-stat-label">
+              Ventas
+            </div>
+
+            <div
+              class="close-stat-value"
+              id="closeVentas"
+            >
+              0
+            </div>
+
+          </div>
+
+
+          <div class="close-stat">
+
+            <div class="close-stat-label">
+              Clientes
+            </div>
+
+            <div
+              class="close-stat-value"
+              id="closeClientes"
+            >
+              0
+            </div>
+
+          </div>
+
+
+          <div class="close-stat">
+
+            <div class="close-stat-label">
+              Efectivo esperado
+            </div>
+
+            <div
+              class="close-stat-value"
+              id="closeEsperado"
+            >
+              $0.00
+            </div>
+
+          </div>
+
+
+          <div class="close-stat">
+
+            <div class="close-stat-label">
+              Turno
+            </div>
+
+            <div
+              class="close-stat-value"
+              id="closeNumero"
+            >
+              Turno 1
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            💵 Cantidad de efectivo contado
+          </label>
+
+          <input
+            id="cashCounted"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="Ej. 2500"
+          >
+
+        </div>
+
+
+        <button
+          class="secondary-button"
+          onclick="calculateDifference()"
         >
-
-          <div class="loading">
-            Cargando menú...
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="card">
-
-        <h2>
-          🛒 Pedido
-        </h2>
-
-
-        <div id="cart">
-
-          <div class="cart-empty">
-            Agrega productos al pedido.
-          </div>
-
-        </div>
-
-
-        <div class="total">
-
-          <span>
-            Total
-          </span>
-
-          <strong id="total">
-            $0
-          </strong>
-
-        </div>
-
-      </div>
-
-
-      <div class="card">
-
-        <h2>
-          👤 Cliente
-        </h2>
-
-
-        <div class="field">
-
-          <label>
-            Nombre
-          </label>
-
-          <input
-            id="customerName"
-            type="text"
-            placeholder="Nombre del cliente"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            WhatsApp
-          </label>
-
-          <input
-            id="customerWhatsapp"
-            type="tel"
-            inputmode="numeric"
-            maxlength="10"
-            placeholder="10 dígitos"
-          >
-
-        </div>
+          🧮 Calcular diferencia
+        </button>
 
 
         <div
-          id="pointsPreview"
-          class="notice hidden"
+          id="cashResult"
+          class="cash-result hidden"
         ></div>
 
 
         <button
-          class=" 
+          class="primary-button"
+          style="margin-top:12px;"
+          onclick="closeTurn()"
+        >
+          🔒 Cerrar turno
+        </button>
+
+      </div>
+
+
+      <!-- ============================= -->
+      <!-- HISTORIAL -->
+      <!-- ============================= -->
+
+      <div class="card">
+
+        <h2>
+          📋 Historial de cierres
+        </h2>
+
+
+        <div
+          id="historyManagerNotice"
+          class="notice"
+        ></div>
+
+
+        <div id="closeHistory">
+          Cargando...
+        </div>
+
+      </div>
+
+
+      <!-- ============================= -->
+      <!-- OPCIONES SOLO GERENTE -->
+      <!-- ============================= -->
+
+      <div
+        id="gerenteOptions"
+        class="hidden"
+      >
+
+        <div class="admin-grid">
+
+
+          <!-- CONFIGURACIÓN -->
+
+          <div class="card">
+
+            <h2>
+              🎁 Configuración
+            </h2>
+
+
+            <div class="field">
+
+              <label>
+                Puntos para obtener Premio
+              </label>
+
+              <input
+                id="pointsRequired"
+                type="number"
+                min="1"
+                value="10"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Beneficio
+              </label>
+
+              <input
+                id="prizeName"
+                type="text"
+                value="Premio"
+              >
+
+            </div>
+
+
+            <button
+              class="primary-button"
+              onclick="saveConfig()"
+            >
+              💾 Guardar configuración
+            </button>
+
+          </div>
+
+
+          <!-- PREMIO -->
+
+          <div class="card">
+
+            <h2>
+              🎁 Premio
+            </h2>
+
+
+            <div class="notice">
+              Busca al cliente por WhatsApp
+              para autorizar su Premio.
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                WhatsApp
+              </label>
+
+              <input
+                id="redeemWhatsapp"
+                type="tel"
+                inputmode="numeric"
+                maxlength="10"
+                placeholder="10 dígitos"
+              >
+
+            </div>
+
+
+            <button
+              class="secondary-button"
+              onclick="findCustomerForPrize()"
+            >
+              🔎 Buscar cliente
+            </button>
+
+
+            <div
+              id="redeemResult"
+              class="customer-result"
+            ></div>
+
+          </div>
+
+
+          <!-- REINICIAR PUNTOS -->
+
+          <div class="card">
+
+            <h2>
+              🔄 Reiniciar puntos
+            </h2>
+
+
+            <div class="notice">
+              Esta opción pone los puntos
+              del cliente en 0.
+              Sus compras e historial permanecen.
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                WhatsApp del cliente
+              </label>
+
+              <input
+                id="resetWhatsapp"
+                type="tel"
+                inputmode="numeric"
+                maxlength="10"
+                placeholder="10 dígitos"
+              >
+
+            </div>
+
+
+            <button
+              class="danger-button"
+              onclick="resetCustomerPoints()"
+            >
+              🗑️ Poner puntos en 0
+            </button>
+
+          </div>
+
+
+          <!-- AGREGAR PRODUCTO -->
+
+          <div class="card">
+
+            <h2>
+              ➕ Agregar producto
+            </h2>
+
+
+            <div class="field">
+
+              <label>
+                Nombre
+              </label>
+
+              <input
+                id="newProductName"
+                type="text"
+                placeholder="Ej. Elote especial"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Categoría
+              </label>
+
+              <input
+                id="newProductCategory"
+                type="text"
+                placeholder="Ej. Elotes"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Precio
+              </label>
+
+              <input
+                id="newProductPrice"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="0"
+              >
+
+            </div>
+
+
+            <button
+              class="primary-button"
+              onclick="addProduct()"
+            >
+              ➕ Agregar al menú
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- PRODUCTOS -->
+
+        <div class="card">
+
+          <h2>
+            📋 Administrar productos
+          </h2>
+
+          <div id="adminProducts">
+            Cargando productos...
+          </div>
+
+        </div>
+
+
+        <!-- BORRAR HISTORIAL -->
+
+        <div class="card">
+
+          <h2>
+            🗑️ Administración del historial
+          </h2>
+
+          <div class="notice warning">
+
+            ⚠️ Esta opción solamente está disponible
+            para el Gerente.
+
+            <br><br>
+
+            Al borrar el historial de cierres,
+            los registros de cortes se eliminarán
+            permanentemente.
+
+          </div>
+
+
+          <button
+            class="danger-button"
+            onclick="deleteCloseHistory()"
+          >
+            🗑️ Borrar historial de cortes
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- ============================= -->
+      <!-- SALIR -->
+      <!-- ============================= -->
+
+      <div class="card">
+
+        <button
+          class="danger-button"
+          onclick="logoutUser()"
+        >
+          🔒 Cerrar sesión
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <div class="footer">
+    🌽 Elotemanía · Entre compas sabe mejor
+  </div>
+
+</main>
+
+
+<script>
+
+/* =========================================
+   CONFIGURACIÓN DE ACCESOS
+========================================= */
+
+const GERENTE_PIN = "0204";
+
+const VENDEDOR_PIN = "1234";
+
+let currentRole = null;
+
+let cart = [];
+
+let products = [];
+
+let config = {
+  puntos_para_premio:10,
+  premio:"Premio"
+};
+
+let turnoActual = {
+  ventas:0,
+  clientes:0,
+  efectivo:0,
+  numero:1
+};
+
+
+/* =========================================
+   API
+========================================= */
+
+async function api(
+  table,
+  method = "GET",
+  body = null,
+  query = ""
+){
+
+  const url =
+    "/api/supabase?table=" +
+    encodeURIComponent(table) +
+    query;
+
+
+  const options = {
+
+    method,
+
+    headers:{
+      "Content-Type":"application/json"
+    }
+
+  };
+
+
+  if(body !== null){
+
+    options.body =
+      JSON.stringify(body);
+
+  }
+
+
+  const response =
+    await fetch(
+      url,
+      options
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data;
+
+
+  try{
+
+    data =
+      text
+        ? JSON.parse(text)
+        : null;
+
+  }catch{
+
+    throw new Error(
+      "El servidor devolvió una respuesta inválida."
+    );
+
+  }
+
+
+  if(!response.ok){
+
+    let message =
+      data?.message ||
+      data?.error ||
+      data?.hint ||
+      "Error desconocido.";
+
+    throw new Error(message);
+
+  }
+
+
+  return data;
+
+}
+
+
+/* =========================================
+   INICIO
+========================================= */
+
+window.addEventListener(
+  "DOMContentLoaded",
+  async function(){
+
+    await loadConfig();
+
+    await loadProducts();
+
+    await loadTurn();
+
+    await loadStats();
+
+    await loadCloseHistory();
+
+  }
+);
+
+
+/* =========================================
+   SECCIONES
+========================================= */
+
+function showSection(section){
+
+  document
+    .querySelectorAll(".section")
+    .forEach(
+      item =>
+        item.classList.remove("active")
+    );
+
+
+  document
+    .querySelectorAll(".tab")
+    .forEach(
+      item =>
+        item.classList.remove("active")
+    );
+
+
+  document
+    .getElementById(section)
+    .classList.add("active");
+
+
+  if(section === "venta"){
+
+    document
+      .getElementById("tabVenta")
+      .classList.add("active");
+
+  }
+
+
+  if(section === "admin"){
+
+    document
+      .getElementById("tabAdmin")
+      .classList.add("active");
+
+  }
+
+}
+
+
+/* =========================================
+   PRODUCTOS
+========================================= */
+
+async function loadProducts(){
+
+  const menu =
+    document.getElementById("menu");
+
+
+  menu.innerHTML =
+    `<div class="loading">
+      Cargando menú...
+    </div>`;
+
+
+  try{
+
+    products =
+      await api(
+        "productos",
+        "GET",
+        null,
+        "&select=*&activo=eq.true&order=id.asc"
+      );
+
+
+    renderMenu();
+
+    if(currentRole === "gerente"){
+
+      renderAdminProducts();
+
+    }
+
+  }catch(error){
+
+    menu.innerHTML =
+      `<div class="notice">
+        ❌ No se pudo cargar el menú.
+        <br><br>
+        ${escapeHtml(error.message)}
+      </div>`;
+
+  }
+
+}
+
+
+function renderMenu(){
+
+  const menu =
+    document.getElementById("menu");
+
+
+  if(!products.length){
+
+    menu.innerHTML =
+      `<div class="notice">
+        No hay productos activos.
+      </div>`;
+
+    return;
+
+  }
+
+
+  menu.innerHTML =
+    products
+      .map(product => `
+
+        <div class="product">
+
+          <div>
+
+            <div class="product-name">
+              ${escapeHtml(product.nombre)}
+            </div>
+
+            <div class="product-category">
+              ${escapeHtml(product.categoria || "")}
+            </div>
+
+          </div>
+
+          <div class="product-bottom">
+
+            <div class="price">
+              $${money(product.precio)}
+            </div>
+
+            <button
+              class="add-btn"
+              onclick="addToCart(${product.id})"
+            >
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+      `)
+      .join("");
+
+}
+
+
+function addToCart(id){
+
+  const product =
+    products.find(
+      p => Number(p.id) === Number(id)
+    );
+
+
+  if(!product)return;
+
+
+  const existing =
+    cart.find(
+      item =>
+        Number(item.id) === Number(id)
+    );
+
+
+  if(existing){
+
+    existing.cantidad++;
+
+  }else{
+
+    cart.push({
+
+      id:product.id,
+
+      nombre:product.nombre,
+
+      precio:Number(product.precio),
+
+      cantidad:1
+
+    });
+
+  }
+
+
+  renderCart();
+
+}
+
+
+function changeQuantity(id,change){
+
+  const item =
+    cart.find(
+      x => Number(x.id) === Number(id)
+    );
+
+
+  if(!item)return;
+
+
+  item.cantidad += change;
+
+
+  if(item.cantidad <= 0){
+
+    cart =
+      cart.filter(
+        x => Number(x.id) !== Number(id)
+      );
+
+  }
+
+
+  renderCart();
+
+}
+
+
+function renderCart(){
+
+  const container =
+    document.getElementById("cart");
+
+
+  if(!cart.length){
+
+    container.innerHTML =
+      `<div class="cart-empty">
+        Agrega productos al pedido.
+      </div>`;
+
+
+    document.getElementById("total").textContent =
+      "$0";
+
+
+    return;
+
+  }
+
+
+  let total = 0;
+
+
+  container.innerHTML =
+    cart
+      .map(item => {
+
+        const subtotal =
+          item.precio *
+          item.cantidad;
+
+
+        total += subtotal;
+
+
+        return `
+
+          <div class="cart-item">
+
+            <div>
+
+              <div class="cart-name">
+                ${escapeHtml(item.nombre)}
+              </div>
+
+              <div class="cart-price">
+                $${money(item.precio)}
+                ×
+                ${item.cantidad}
+                =
+                $${money(subtotal)}
+              </div>
+
+            </div>
+
+            <div class="quantity">
+
+              <button
+                onclick="changeQuantity(${item.id},-1)"
+              >
+                −
+              </button>
+
+              <span>
+                ${item.cantidad}
+              </span>
+
+              <button
+                onclick="changeQuantity(${item.id},1)"
+              >
+                +
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+
+  document.getElementById("total").textContent =
+    "$" + money(total);
+
+}
+
+
+/* =========================================
+   CONFIGURACIÓN PREMIO
+========================================= */
+
+async function loadConfig(){
+
+  try{
+
+    const rows =
+      await api(
+        "configuracion",
+        "GET",
+        null,
+        "&select=*&limit=1"
+      );
+
+
+    if(rows && rows.length){
+
+      config =
+        rows[0];
+
+    }
+
+
+    const pointsInput =
+      document.getElementById("pointsRequired");
+
+    const prizeInput =
+      document.getElementById("prizeName");
+
+
+    if(pointsInput){
+
+      pointsInput.value =
+        config.puntos_para_premio || 10;
+
+    }
+
+
+    if(prizeInput){
+
+      prizeInput.value =
+        config.premio || "Premio";
+
+    }
+
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+async function saveConfig(){
+
+  if(currentRole !== "gerente"){
+
+    alert(
+      "❌ Solo el Gerente puede modificar la configuración."
+    );
+
+    return;
+
+  }
+
+
+  const points =
+    Number(
+      document.getElementById(
+        "pointsRequired"
+      ).value
+    );
+
+
+  const prize =
+    document.getElementById(
+      "prizeName"
+    ).value.trim();
+
+
+  if(!Number.isFinite(points) || points < 1){
+
+    alert(
+      "Los puntos deben ser mayores a 0."
+    );
+
+    return;
+
+  }
+
+
+  if(!prize){
+
+    alert(
+      "Escribe el nombre del beneficio."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const rows =
+      await api(
+        "configuracion",
+        "GET",
+        null,
+        "&select=*&limit=1"
+      );
+
+
+    const data = {
+
+      puntos_para_premio:
+        Math.floor(points),
+
+      premio:
+        prize
+
+    };
+
+
+    if(rows.length){
+
+      await api(
+        "configuracion",
+        "PATCH",
+        data,
+        "&id=eq." + rows[0].id
+      );
+
+    }else{
+
+      await api(
+        "configuracion",
+        "POST",
+        data
+      );
+
+    }
+
+
+    config =
+      data;
+
+
+    alert(
+      "✅ Configuración guardada."
+    );
+
+
+  }catch(error){
+
+    alert(
+      "❌ No se pudo guardar:\n\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   VENTA
+========================================= */
+
+async function registerSale(){
+
+  if(!cart.length){
+
+    alert(
+      "Agrega al menos un producto."
+    );
+
+    return;
+
+  }
+
+
+  const name =
+    document
+      .getElementById("customerName")
+      .value
+      .trim();
+
+
+  const whatsapp =
+    document
+      .getElementById("customerWhatsapp")
+      .value
+      .trim();
+
+
+  if(!name){
+
+    alert(
+      "Escribe el nombre del cliente."
+    );
+
+    return;
+
+  }
+
+
+  if(!/^\d{10}$/.test(whatsapp)){
+
+    alert(
+      "El WhatsApp debe tener 10 dígitos."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    let clientes =
+      await api(
+        "clientes",
+        "GET",
+        null,
+        "&select=*&whatsapp=eq." +
+        encodeURIComponent(whatsapp)
+      );
+
+
+    let cliente;
+
+
+    if(clientes.length){
+
+      cliente =
+        clientes[0];
+
+    }else{
+
+      const nuevos =
+        await api(
+          "clientes",
+          "POST",
+          {
+
+            nombre:name,
+
+            whatsapp:whatsapp,
+
+            puntos:0,
+
+            premios_obtenidos:0
+
+          }
+        );
+
+
+      cliente =
+        nuevos[0];
+
+    }
+
+
+    if(cliente.nombre !== name){
+
+      await api(
+        "clientes",
+        "PATCH",
+        {
+          nombre:name
+        },
+        "&id=eq." + cliente.id
+      );
+
+    }
+
+
+    const threshold =
+      Number(
+        config.puntos_para_premio || 10
+      );
+
+
+    const currentPoints =
+      Number(cliente.puntos || 0);
+
+
+    let newPoints =
+      currentPoints;
+
+
+    if(currentPoints < threshold){
+
+      newPoints =
+        Math.min(
+          currentPoints + 1,
+          threshold
+        );
+
+    }
+
+
+    const total =
+      cart.reduce(
+        (sum,item) =>
+          sum +
+          (
+            Number(item.precio) *
+            Number(item.cantidad)
+          ),
+        0
+      );
+
+
+    const ventas =
+      await api(
+        "ventas",
+        "POST",
+        {
+
+          cliente_id:
+            cliente.id,
+
+          total:
+            total,
+
+          puntos_ganados:
+            newPoints - currentPoints
+
+        }
+      );
+
+
+    const venta =
+      ventas[0];
+
+
+    for(const item of cart){
+
+      await api(
+        "detalle_ventas",
+        "POST",
+        {
+
+          venta_id:
+            venta.id,
+
+          producto_id:
+            item.id,
+
+          nombre_producto:
+            item.nombre,
+
+          cantidad:
+            item.cantidad,
+
+          precio:
+            item.precio
+
+        }
+      );
+
+    }
+
+
+    if(newPoints !== currentPoints){
+
+      await api(
+        "clientes",
+        "PATCH",
+        {
+          puntos:newPoints
+        },
+        "&id=eq." + cliente.id
+      );
+
+    }
+
+
+    let message =
+      "🌽 ELOTEMANÍA\n\n" +
+      "¡Gracias por tu compra, " +
+      name +
+      "! ❤️\n\n" +
+      "Total: $" +
+      money(total) +
+      "\n\n";
+
+
+    if(newPoints >= threshold){
+
+      message +=
+        "🎁 ¡Felicidades!\n" +
+        "Ya tienes tu Premio disponible.";
+
+    }else{
+
+      const faltan =
+        threshold -
+        newPoints;
+
+
+      message +=
+        "⭐ Tienes " +
+        newPoints +
+        " punto" +
+        (newPoints === 1 ? "" : "s") +
+        ".\n" +
+        "Te faltan " +
+        faltan +
+        " para tu Premio.";
+
+    }
+
+
+    cart = [];
+
+    renderCart();
+
+
+    document.getElementById(
+      "customerName"
+    ).value = "";
+
+
+    document.getElementById(
+      "customerWhatsapp"
+    ).value = "";
+
+
+    document.getElementById(
+      "pointsPreview"
+    ).classList.add("hidden");
+
+
+    await loadTurn();
+
+    await loadStats();
+
+
+    const whatsappUrl =
+      "https://wa.me/52" +
+      whatsapp +
+      "?text=" +
+      encodeURIComponent(message);
+
+
+    window.open(
+      whatsappUrl,
+      "_blank"
+    );
+
+
+    alert(
+      "✅ Venta registrada correctamente."
+    );
+
+
+  }catch(error){
+
+    alert(
+      "❌ No se pudo registrar la venta:\n\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   PUNTOS
+========================================= */
+
+document
+  .getElementById("customerWhatsapp")
+  .addEventListener(
+    "blur",
+    updatePointsPreview
+  );
+
+
+async function updatePointsPreview(){
+
+  const whatsapp =
+    document
+      .getElementById("customerWhatsapp")
+      .value
+      .trim();
 
 
   const box =
@@ -1066,10 +2422,16 @@ button{
 
 
 /* =========================================
-   ADMIN LOGIN
+   LOGIN
 ========================================= */
 
 function loginAdmin(){
+
+  const role =
+    document.getElementById(
+      "loginRole"
+    ).value;
+
 
   const pin =
     document
@@ -1077,15 +2439,36 @@ function loginAdmin(){
       .value;
 
 
-  if(pin !== ADMIN_PIN){
+  if(
+    role === "gerente" &&
+    pin !== GERENTE_PIN
+  ){
 
     alert(
-      "❌ PIN incorrecto."
+      "❌ PIN de Gerente incorrecto."
     );
 
     return;
 
   }
+
+
+  if(
+    role === "vendedor" &&
+    pin !== VENDEDOR_PIN
+  ){
+
+    alert(
+      "❌ PIN de Vendedor incorrecto."
+    );
+
+    return;
+
+  }
+
+
+  currentRole =
+    role;
 
 
   document
@@ -1103,7 +2486,36 @@ function loginAdmin(){
     .value = "";
 
 
-  renderAdminProducts();
+  document
+    .getElementById("userBar")
+    .classList.remove("hidden");
+
+
+  const roleText =
+    document.getElementById(
+      "userRoleText"
+    );
+
+
+  if(role === "gerente"){
+
+    roleText.innerHTML =
+      `<span class="role-badge role-gerente">
+        👑 GERENTE
+      </span>`;
+
+  }else{
+
+    roleText.innerHTML =
+      `<span class="role-badge role-vendedor">
+        👨‍💼 VENDEDOR
+      </span>`;
+
+  }
+
+
+  applyRolePermissions();
+
 
   loadTurn();
 
@@ -1112,7 +2524,76 @@ function loginAdmin(){
 }
 
 
+function applyRolePermissions(){
+
+  const gerenteOptions =
+    document.getElementById(
+      "gerenteOptions"
+    );
+
+
+  const historyNotice =
+    document.getElementById(
+      "historyManagerNotice"
+    );
+
+
+  const roleNotice =
+    document.getElementById(
+      "roleNotice"
+    );
+
+
+  if(currentRole === "gerente"){
+
+    gerenteOptions
+      .classList.remove("hidden");
+
+
+    historyNotice.innerHTML =
+      "👑 El Gerente puede eliminar el historial de cortes.";
+
+
+    roleNotice.innerHTML =
+      `<div class="role-badge role-gerente">
+        👑 Sesión de Gerente
+      </div>`;
+
+
+    renderAdminProducts();
+
+  }else{
+
+    gerenteOptions
+      .classList.add("hidden");
+
+
+    historyNotice.innerHTML =
+      "👨‍💼 El Vendedor puede consultar el historial, pero no puede eliminarlo.";
+
+
+    roleNotice.innerHTML =
+      `<div class="role-badge role-vendedor">
+        👨‍💼 Sesión de Vendedor
+      </div>`;
+
+  }
+
+}
+
+
 function logoutAdmin(){
+
+  logoutUser();
+
+}
+
+
+function logoutUser(){
+
+  currentRole =
+    null;
+
 
   document
     .getElementById("adminContent")
@@ -1123,6 +2604,19 @@ function logoutAdmin(){
     .getElementById("adminLogin")
     .style.display = "block";
 
+
+  document
+    .getElementById("userBar")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("adminPin")
+    .value = "";
+
+
+  showSection("venta");
+
 }
 
 
@@ -1131,6 +2625,17 @@ function logoutAdmin(){
 ========================================= */
 
 async function addProduct(){
+
+  if(currentRole !== "gerente"){
+
+    alert(
+      "❌ Solo el Gerente puede agregar productos."
+    );
+
+    return;
+
+  }
+
 
   const name =
     document
@@ -1235,6 +2740,13 @@ async function addProduct(){
 ========================================= */
 
 async function renderAdminProducts(){
+
+  if(currentRole !== "gerente"){
+
+    return;
+
+  }
+
 
   const container =
     document.getElementById(
@@ -1347,6 +2859,17 @@ async function renderAdminProducts(){
 
 async function editProduct(id){
 
+  if(currentRole !== "gerente"){
+
+    alert(
+      "❌ Solo el Gerente puede editar productos."
+    );
+
+    return;
+
+  }
+
+
   try{
 
     const rows =
@@ -1452,6 +2975,17 @@ async function editProduct(id){
 
 async function hideProduct(id){
 
+  if(currentRole !== "gerente"){
+
+    alert(
+      "❌ Solo el Gerente puede modificar productos."
+    );
+
+    return;
+
+  }
+
+
   if(
     !confirm(
       "¿Quieres quitar este producto del menú?"
@@ -1497,6 +3031,17 @@ async function hideProduct(id){
 
 async function restoreProduct(id){
 
+  if(currentRole !== "gerente"){
+
+    alert(
+      "❌ Solo el Gerente puede modificar productos."
+    );
+
+    return;
+
+  }
+
+
   try{
 
     await api(
@@ -1534,6 +3079,17 @@ async function restoreProduct(id){
 ========================================= */
 
 async function findCustomerForPrize(){
+
+  if(currentRole !== "gerente"){
+
+    alert(
+      "❌ Solo el Gerente puede autorizar premios."
+    );
+
+    return;
+
+  }
+
 
   const whatsapp =
     document
@@ -1685,6 +3241,17 @@ async function findCustomerForPrize(){
 
 async function redeemPrize(id){
 
+  if(currentRole !== "gerente"){
+
+    alert(
+      "❌ Solo el Gerente puede autorizar premios."
+    );
+
+    return;
+
+  }
+
+
   if(
     !confirm(
       "¿Confirmas que este cliente recibió su Premio?\n\n" +
@@ -1769,6 +3336,17 @@ async function redeemPrize(id){
 ========================================= */
 
 async function resetCustomerPoints(){
+
+  if(currentRole !== "gerente"){
+
+    alert(
+      "❌ Solo el Gerente puede reiniciar puntos."
+    );
+
+    return;
+
+  }
+
 
   const whatsapp =
     document
@@ -1970,17 +3548,6 @@ async function loadTurn(){
       turnoVentas.length;
 
 
-    let numeroTurno = 1;
-
-
-    if(lastClose){
-
-      numeroTurno =
-        Number(lastClose.id) + 1;
-
-    }
-
-
     turnoActual = {
 
       ventas:
@@ -1993,7 +3560,7 @@ async function loadTurn(){
         efectivo,
 
       numero:
-        numeroTurno
+        1
 
     };
 
@@ -2019,7 +3586,7 @@ async function loadTurn(){
     document.getElementById(
       "closeNumero"
     ).textContent =
-      numeroTurno;
+      "Turno 1";
 
 
   }catch(error){
@@ -2190,6 +3757,20 @@ function calculateDifference(){
 
 async function closeTurn(){
 
+  if(
+    currentRole !== "gerente" &&
+    currentRole !== "vendedor"
+  ){
+
+    alert(
+      "Primero inicia sesión."
+    );
+
+    return;
+
+  }
+
+
   const counted =
     Number(
       document
@@ -2227,6 +3808,8 @@ async function closeTurn(){
 
       "¿Quieres cerrar este turno?\n\n" +
 
+      "Turno: 1\n" +
+
       "Ventas: " +
       turnoActual.ventas +
       "\n" +
@@ -2254,7 +3837,7 @@ async function closeTurn(){
 
       "\n\n" +
 
-      "Después del cierre comenzará un nuevo turno."
+      "Después del cierre comenzará nuevamente desde 0."
 
     );
 
@@ -2368,6 +3951,27 @@ async function loadCloseHistory(){
             );
 
 
+          const deleteButton =
+            currentRole === "gerente"
+
+            ?
+
+            `
+
+              <button
+                class="danger-button history-delete"
+                onclick="deleteClose(${row.id})"
+              >
+                🗑️ Eliminar este corte
+              </button>
+
+            `
+
+            :
+
+            "";
+
+
           return `
 
             <div class="history-item">
@@ -2381,12 +3985,14 @@ async function loadCloseHistory(){
 
               <div>
 
-                Turno #${row.id}
+                <strong>
+                  Turno 1
+                </strong>
 
               </div>
 
 
-              <div>
+              <div style="margin-top:6px;">
 
                 🧾 ${row.ventas || 0}
                 ventas
@@ -2440,6 +4046,9 @@ async function loadCloseHistory(){
 
               </div>
 
+
+              ${deleteButton}
+
             </div>
 
           `;
@@ -2454,6 +4063,140 @@ async function loadCloseHistory(){
       `<div class="notice">
         ❌ ${escapeHtml(error.message)}
       </div>`;
+
+  }
+
+}
+
+
+/* =========================================
+   ELIMINAR UN CORTE
+========================================= */
+
+async function deleteClose(id){
+
+  if(currentRole !== "gerente"){
+
+    alert(
+      "❌ Solo el Gerente puede eliminar cortes."
+    );
+
+    return;
+
+  }
+
+
+  const confirmar =
+    confirm(
+      "⚠️ ¿Seguro que quieres eliminar este corte?\n\n" +
+      "Esta acción no se puede deshacer."
+    );
+
+
+  if(!confirmar)return;
+
+
+  try{
+
+    await api(
+      "cierres_turno",
+      "DELETE",
+      null,
+      "&id=eq." + id
+    );
+
+
+    alert(
+      "✅ Corte eliminado correctamente."
+    );
+
+
+    await loadCloseHistory();
+
+    await loadTurn();
+
+    await loadStats();
+
+
+  }catch(error){
+
+    alert(
+      "❌ No se pudo eliminar el corte:\n\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   BORRAR TODO EL HISTORIAL
+========================================= */
+
+async function deleteCloseHistory(){
+
+  if(currentRole !== "gerente"){
+
+    alert(
+      "❌ Solo el Gerente puede borrar el historial."
+    );
+
+    return;
+
+  }
+
+
+  const confirmar =
+    confirm(
+      "⚠️ ATENCIÓN\n\n" +
+      "Vas a borrar TODO el historial de cortes.\n\n" +
+      "Esta acción no se puede deshacer.\n\n" +
+      "¿Quieres continuar?"
+    );
+
+
+  if(!confirmar)return;
+
+
+  const confirmar2 =
+    confirm(
+      "Última confirmación.\n\n" +
+      "¿REALMENTE quieres borrar todos los cortes?"
+    );
+
+
+  if(!confirmar2)return;
+
+
+  try{
+
+    await api(
+      "cierres_turno",
+      "DELETE",
+      null,
+      "&id=gte.0"
+    );
+
+
+    alert(
+      "✅ Todo el historial de cortes fue eliminado."
+    );
+
+
+    await loadCloseHistory();
+
+    await loadTurn();
+
+    await loadStats();
+
+
+  }catch(error){
+
+    alert(
+      "❌ No se pudo borrar el historial:\n\n" +
+      error.message
+    );
 
   }
 
@@ -2486,6 +4229,7 @@ function money(value){
       maximumFractionDigits:2
 
     }
+
   );
 
 }
