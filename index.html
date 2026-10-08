@@ -44,6 +44,7 @@ input,select{width:100%;padding:13px;border-radius:9px;border:1px solid #444;bac
 .separador{border:0;border-top:1px solid #333;margin:18px 0}
 .ganancia{color:#25d366;font-weight:bold}
 .perdida{color:#ff5252;font-weight:bold}
+
 @media(max-width:700px){
 .stats{grid-template-columns:1fr 1fr}
 .tabs{flex-direction:column}
@@ -126,7 +127,65 @@ Entrar
 <div id="usuarioActual"></div>
 </div>
 
+<!-- =========================
+     GANANCIAS Y MARGEN
+========================= -->
+
+<div id="gananciasAdmin" class="card hidden">
+
+<button
+class="btn-purple"
+style="width:100%"
+onclick="toggleGanancias()"
+>
+📈 Ganancias y margen ▾
+</button>
+
+<div id="gananciasContenido" class="hidden">
+
+<hr class="separador">
+
+<div class="grid">
+
+<div class="stat">
+<span>Ventas</span>
+<b id="gananciasVentas">$0</b>
+</div>
+
+<div class="stat">
+<span>Costos</span>
+<b id="gananciasCostos">$0</b>
+</div>
+
+<div class="stat">
+<span>Ganancia</span>
+<b id="gananciasUtilidad">$0</b>
+</div>
+
+<div class="stat">
+<span>Margen</span>
+<b id="gananciasMargen">0%</b>
+</div>
+
+</div>
+
+<hr class="separador">
+
+<h3>📦 Ganancia por producto</h3>
+
+<div id="gananciasProductos">
+Cargando...
+</div>
+
+</div>
+</div>
+
+<!-- =========================
+     PRODUCTOS ADMIN
+========================= -->
+
 <div id="productosAdmin" class="card hidden">
+
 <h2>💰 Productos y ganancias</h2>
 
 <input id="nuevoProductoNombre" placeholder="Nombre del producto">
@@ -143,9 +202,16 @@ Entrar
 </button>
 
 <div id="productoResultado"></div>
+
 <hr class="separador">
+
 <div id="listaProductosAdmin"></div>
+
 </div>
+
+<!-- =========================
+     USUARIOS
+========================= -->
 
 <div id="usuariosAdmin" class="card hidden">
 
@@ -167,8 +233,14 @@ Entrar
 <div id="usuarioResultado"></div>
 
 <hr class="separador">
+
 <div id="listaUsuarios"></div>
+
 </div>
+
+<!-- =========================
+     CLIENTE / PREMIO
+========================= -->
 
 <div class="card">
 <h2>🎁 Cliente / Premio</h2>
@@ -180,7 +252,12 @@ Entrar
 </button>
 
 <div id="adminClienteResultado"></div>
+
 </div>
+
+<!-- =========================
+     CORTES
+========================= -->
 
 <div class="card">
 <h2>📊 Cortes</h2>
@@ -190,7 +267,12 @@ Entrar
 </button>
 
 <div id="listaCortes"></div>
+
 </div>
+
+<!-- =========================
+     TURNO
+========================= -->
 
 <div class="card">
 <h2>⚙️ Turno</h2>
@@ -206,10 +288,13 @@ Entrar
 <button class="btn-red" style="width:100%;margin-top:10px" onclick="borrarHistorial()">
 🗑️ Borrar todo el historial
 </button>
+
 </div>
 
 </div>
+
 </section>
+
 </div>
 
 <script>
@@ -224,459 +309,592 @@ let currentRole=null;
 let clienteSeleccionado=null;
 
 let configuracion={
- puntos_para_premio:10,
- premio:"Premio"
+puntos_para_premio:10,
+premio:"Premio"
 };
 
 async function api(tabla,metodo="GET",cuerpo=null,params={}){
 
- const url=new URL(API,window.location.origin);
+const url=new URL(API,window.location.origin);
 
- url.searchParams.set("table",tabla);
+url.searchParams.set("table",tabla);
 
- Object.keys(params).forEach(k=>{
-  if(params[k]!==undefined&&params[k]!==null){
-   url.searchParams.set(k,params[k]);
-  }
- });
+Object.keys(params).forEach(k=>{
 
- const opciones={
-  method:metodo,
-  headers:{"Content-Type":"application/json"}
- };
+if(params[k]!==undefined&&params[k]!==null){
 
- if(cuerpo!==null){
-  opciones.body=JSON.stringify(cuerpo);
- }
+url.searchParams.set(k,params[k]);
 
- const respuesta=await fetch(url.toString(),opciones);
- const texto=await respuesta.text();
+}
 
- let datos;
+});
 
- try{
-  datos=texto?JSON.parse(texto):null;
- }catch{
-  throw new Error(texto||"Respuesta inválida");
- }
+const opciones={
+method:metodo,
+headers:{"Content-Type":"application/json"}
+};
 
- if(!respuesta.ok){
-  throw new Error(
-   datos?.message||
-   datos?.error||
-   datos?.details||
-   "Error en Supabase"
-  );
- }
+if(cuerpo!==null){
 
- return datos;
+opciones.body=JSON.stringify(cuerpo);
+
+}
+
+const respuesta=await fetch(url.toString(),opciones);
+
+const texto=await respuesta.text();
+
+let datos;
+
+try{
+
+datos=texto?JSON.parse(texto):null;
+
+}catch{
+
+throw new Error(texto||"Respuesta inválida");
+
+}
+
+if(!respuesta.ok){
+
+throw new Error(
+datos?.message||
+datos?.error||
+datos?.details||
+"Error en Supabase"
+);
+
+}
+
+return datos;
+
 }
 
 async function iniciar(){
 
- try{
-  await cargarConfiguracion();
-  await cargarProductos();
-  await cargarClientes();
-  await actualizarEstadisticas();
- }catch(error){
-  console.error(error);
-  alert("Error al iniciar:\n"+error.message);
- }
+try{
+
+await cargarConfiguracion();
+await cargarProductos();
+await cargarClientes();
+await actualizarEstadisticas();
+
+}catch(error){
+
+console.error(error);
+
+alert("Error al iniciar:\n"+error.message);
+
+}
+
 }
 
 iniciar();
 
 function mostrarVenta(){
- document.getElementById("ventaSection").classList.remove("hidden");
- document.getElementById("accesoSection").classList.add("hidden");
+
+document.getElementById("ventaSection")
+.classList.remove("hidden");
+
+document.getElementById("accesoSection")
+.classList.add("hidden");
+
 }
 
 function mostrarAcceso(){
- document.getElementById("ventaSection").classList.add("hidden");
- document.getElementById("accesoSection").classList.remove("hidden");
+
+document.getElementById("ventaSection")
+.classList.add("hidden");
+
+document.getElementById("accesoSection")
+.classList.remove("hidden");
+
 }
 
 async function cargarConfiguracion(){
 
- try{
+try{
 
-  const datos=await api("configuracion","GET",null,{
-   select:"*",
-   limit:1
-  });
+const datos=await api("configuracion","GET",null,{
+select:"*",
+limit:1
+});
 
-  if(datos?.length){
-   configuracion.puntos_para_premio=
-    Number(datos[0].puntos_para_premio)||10;
-  }
+if(datos?.length){
 
- }catch(error){
-  console.log(error);
- }
+configuracion.puntos_para_premio=
+Number(datos[0].puntos_para_premio)||10;
+
+}
+
+}catch(error){
+
+console.log(error);
+
+}
+
 }
 
 async function cargarProductos(){
 
- productos=await api("productos","GET",null,{
-  select:"*",
-  activo:"eq.true",
-  order:"nombre.asc"
- });
+productos=await api("productos","GET",null,{
+select:"*",
+activo:"eq.true",
+order:"nombre.asc"
+});
 
- renderProductos();
+renderProductos();
+
 }
 
 function renderProductos(){
 
- const contenedor=document.getElementById("productos");
+const contenedor=document.getElementById("productos");
 
- if(!productos.length){
-  contenedor.innerHTML="No hay productos activos.";
-  return;
- }
+if(!productos.length){
 
- contenedor.innerHTML="";
+contenedor.innerHTML="No hay productos activos.";
 
- productos.forEach(producto=>{
+return;
 
-  const div=document.createElement("div");
-  div.className="producto";
+}
 
-  div.innerHTML=`
-   <strong>${escapeHtml(producto.nombre)}</strong>
-   <div>$${dinero(producto.precio)}</div>
+contenedor.innerHTML="";
 
-   <button class="btn-gold"
-    onclick="agregarProducto(${producto.id})">
-    Agregar
-   </button>
-  `;
+productos.forEach(producto=>{
 
-  contenedor.appendChild(div);
- });
+const div=document.createElement("div");
+
+div.className="producto";
+
+div.innerHTML=`
+
+<strong>${escapeHtml(producto.nombre)}</strong>
+
+<div>$${dinero(producto.precio)}</div>
+
+<button class="btn-gold"
+onclick="agregarProducto(${producto.id})">
+Agregar
+</button>
+
+`;
+
+contenedor.appendChild(div);
+
+});
+
 }
 
 function agregarProducto(id){
 
- const producto=productos.find(
-  p=>Number(p.id)===Number(id)
- );
+const producto=productos.find(
+p=>Number(p.id)===Number(id)
+);
 
- if(!producto)return;
+if(!producto)return;
 
- const existente=carrito.find(
-  p=>Number(p.id)===Number(id)
- );
+const existente=carrito.find(
+p=>Number(p.id)===Number(id)
+);
 
- if(existente){
-  existente.cantidad++;
- }else{
-  carrito.push({
-   id:producto.id,
-   nombre:producto.nombre,
-   precio:Number(producto.precio),
-   costo:Number(producto.costo||0),
-   cantidad:1
-  });
- }
+if(existente){
 
- renderCarrito();
+existente.cantidad++;
+
+}else{
+
+carrito.push({
+
+id:producto.id,
+nombre:producto.nombre,
+precio:Number(producto.precio),
+costo:Number(producto.costo||0),
+cantidad:1
+
+});
+
+}
+
+renderCarrito();
+
 }
 
 function quitarProducto(id){
 
- const index=carrito.findIndex(
-  p=>Number(p.id)===Number(id)
- );
+const index=carrito.findIndex(
+p=>Number(p.id)===Number(id)
+);
 
- if(index===-1)return;
+if(index===-1)return;
 
- if(carrito[index].cantidad>1){
-  carrito[index].cantidad--;
- }else{
-  carrito.splice(index,1);
- }
+if(carrito[index].cantidad>1){
 
- renderCarrito();
+carrito[index].cantidad--;
+
+}else{
+
+carrito.splice(index,1);
+
+}
+
+renderCarrito();
+
 }
 
 function renderCarrito(){
 
- const contenedor=document.getElementById("carrito");
+const contenedor=document.getElementById("carrito");
 
- if(!carrito.length){
+if(!carrito.length){
 
-  contenedor.innerHTML="No hay productos.";
-  document.getElementById("total").textContent="0.00";
-  return;
- }
+contenedor.innerHTML="No hay productos.";
 
- contenedor.innerHTML="";
+document.getElementById("total").textContent="0.00";
 
- let total=0;
+return;
 
- carrito.forEach(item=>{
+}
 
-  const subtotal=item.precio*item.cantidad;
-  total+=subtotal;
+contenedor.innerHTML="";
 
-  const div=document.createElement("div");
-  div.className="item";
+let total=0;
 
-  div.innerHTML=`
-   <div>
-    <strong>${escapeHtml(item.nombre)}</strong>
-    <br>
-    ${item.cantidad} × $${dinero(item.precio)}
-   </div>
+carrito.forEach(item=>{
 
-   <button class="btn-red"
-    onclick="quitarProducto(${item.id})">
-    −
-   </button>
-  `;
+const subtotal=item.precio*item.cantidad;
 
-  contenedor.appendChild(div);
- });
+total+=subtotal;
 
- document.getElementById("total").textContent=dinero(total);
+const div=document.createElement("div");
+
+div.className="item";
+
+div.innerHTML=`
+
+<div>
+
+<strong>${escapeHtml(item.nombre)}</strong>
+
+<br>
+
+${item.cantidad} × $${dinero(item.precio)}
+
+</div>
+
+<button class="btn-red"
+onclick="quitarProducto(${item.id})">
+−
+</button>
+
+`;
+
+contenedor.appendChild(div);
+
+});
+
+document.getElementById("total").textContent=dinero(total);
+
 }
 
 function obtenerTotal(){
 
- return carrito.reduce(
-  (total,item)=>total+item.precio*item.cantidad,
-  0
- );
+return carrito.reduce(
+(total,item)=>total+item.precio*item.cantidad,
+0
+);
+
 }
 
 function obtenerUtilidad(){
 
- return carrito.reduce(
-  (total,item)=>
-   total+(item.precio-item.costo)*item.cantidad,
-  0
- );
+return carrito.reduce(
+(total,item)=>
+total+(item.precio-item.costo)*item.cantidad,
+0
+);
+
 }
 
 async function cargarClientes(){
 
- clientes=await api("clientes","GET",null,{
-  select:"*",
-  order:"nombre.asc"
- });
+clientes=await api("clientes","GET",null,{
+select:"*",
+order:"nombre.asc"
+});
+
 }
 
 function normalizarWhatsapp(numero){
- return String(numero||"").replace(/\D/g,"");
+
+return String(numero||"").replace(/\D/g,"");
+
 }
 
 function numeroWhatsapp(numero){
 
- let n=normalizarWhatsapp(numero);
+let n=normalizarWhatsapp(numero);
 
- if(n.length===10)n="52"+n;
+if(n.length===10)n="52"+n;
 
- return n;
+return n;
+
 }
 
 async function buscarCliente(){
 
- const whatsapp=normalizarWhatsapp(
-  document.getElementById("whatsappCliente").value
- );
+const whatsapp=normalizarWhatsapp(
+document.getElementById("whatsappCliente").value
+);
 
- if(!whatsapp){
-  alert("Escribe el número de WhatsApp.");
-  return;
- }
+if(!whatsapp){
 
- try{
+alert("Escribe el número de WhatsApp.");
 
-  const encontrados=await api("clientes","GET",null,{
-   select:"*",
-   whatsapp:"eq."+whatsapp,
-   limit:1
-  });
+return;
 
-  if(encontrados.length){
+}
 
-   clienteSeleccionado=encontrados[0];
+try{
 
-   document.getElementById("nombreCliente").value=
-    clienteSeleccionado.nombre||"";
+const encontrados=await api("clientes","GET",null,{
+select:"*",
+whatsapp:"eq."+whatsapp,
+limit:1
+});
 
-   mostrarClienteResultado(clienteSeleccionado);
+if(encontrados.length){
 
-  }else{
+clienteSeleccionado=encontrados[0];
 
-   clienteSeleccionado=null;
+document.getElementById("nombreCliente").value=
+clienteSeleccionado.nombre||"";
 
-   document.getElementById("clienteResultado").innerHTML=`
-    <div class="alerta">
-     👤 Cliente nuevo.<br><br>
-     Empezará con
-     <strong>${configuracion.puntos_para_premio}</strong>
-     compras restantes.
-    </div>
-   `;
-  }
+mostrarClienteResultado(clienteSeleccionado);
 
- }catch(error){
-  alert("No se pudo buscar:\n"+error.message);
- }
+}else{
+
+clienteSeleccionado=null;
+
+document.getElementById("clienteResultado").innerHTML=`
+
+<div class="alerta">
+
+👤 Cliente nuevo.
+
+<br><br>
+
+Empezará con
+<strong>${configuracion.puntos_para_premio}</strong>
+compras restantes.
+
+</div>
+
+`;
+
+}
+
+}catch(error){
+
+alert("No se pudo buscar:\n"+error.message);
+
+}
+
 }
 
 function mostrarClienteResultado(cliente){
 
- const puntos=Number(cliente.puntos);
+const puntos=Number(cliente.puntos);
 
- let html=`
-  <div class="resultado">
-   <strong>👤 ${escapeHtml(cliente.nombre)}</strong>
-   <br><br>
-   📱 ${escapeHtml(cliente.whatsapp)}
-   <br><br>
-   ⭐ Compras restantes:
-   <strong>${puntos}</strong>
- `;
+let html=`
 
- if(puntos<=0){
+<div class="resultado">
 
-  html+=`
-   <div class="premio">
-    🎉 ¡Ya puede solicitar su Premio!
-   </div>
-  `;
+<strong>👤 ${escapeHtml(cliente.nombre)}</strong>
 
- }else{
+<br><br>
 
-  html+=`
-   <div class="alerta">
-    ⭐ Le faltan <strong>${puntos}</strong>
-    compras para su Premio.
-   </div>
-  `;
- }
+📱 ${escapeHtml(cliente.whatsapp)}
 
- html+="</div>";
+<br><br>
 
- document.getElementById("clienteResultado").innerHTML=html;
+⭐ Compras restantes:
+
+<strong>${puntos}</strong>
+
+`;
+
+if(puntos<=0){
+
+html+=`
+
+<div class="premio">
+
+🎉 ¡Ya puede solicitar su Premio!
+
+</div>
+
+`;
+
+}else{
+
+html+=`
+
+<div class="alerta">
+
+⭐ Le faltan <strong>${puntos}</strong>
+compras para su Premio.
+
+</div>
+
+`;
+
+}
+
+html+="</div>";
+
+document.getElementById("clienteResultado").innerHTML=html;
+
 }
 
 async function registrarVenta(){
 
- if(!carrito.length){
-  alert("Agrega al menos un producto.");
-  return;
- }
+if(!carrito.length){
 
- const nombre=document.getElementById("nombreCliente").value.trim();
+alert("Agrega al menos un producto.");
 
- const whatsapp=normalizarWhatsapp(
-  document.getElementById("whatsappCliente").value
- );
+return;
 
- if(!nombre){
-  alert("Escribe el nombre del cliente.");
-  return;
- }
+}
 
- if(!whatsapp){
-  alert("Escribe el WhatsApp del cliente.");
-  return;
- }
+const nombre=document.getElementById("nombreCliente").value.trim();
 
- try{
+const whatsapp=normalizarWhatsapp(
+document.getElementById("whatsappCliente").value
+);
 
-  let clienteActual=null;
+if(!nombre){
 
-  const encontrados=await api("clientes","GET",null,{
-   select:"*",
-   whatsapp:"eq."+whatsapp,
-   limit:1
-  });
+alert("Escribe el nombre del cliente.");
 
-  if(encontrados.length){
-   clienteActual=encontrados[0];
-  }
+return;
 
-  let puntosAntes;
-  let puntosDespues;
+}
 
-  if(clienteActual){
+if(!whatsapp){
 
-   puntosAntes=Number(clienteActual.puntos);
+alert("Escribe el WhatsApp del cliente.");
 
-   if(!Number.isFinite(puntosAntes)||puntosAntes<0){
-    puntosAntes=configuracion.puntos_para_premio;
-   }
+return;
 
-   puntosDespues=Math.max(0,puntosAntes-1);
+}
 
-  }else{
+try{
 
-   puntosAntes=configuracion.puntos_para_premio;
-   puntosDespues=Math.max(0,puntosAntes-1);
-  }
+let clienteActual=null;
 
-  if(clienteActual){
+const encontrados=await api("clientes","GET",null,{
+select:"*",
+whatsapp:"eq."+whatsapp,
+limit:1
+});
 
-   const actualizado=await api("clientes","PATCH",{
-    nombre:nombre,
-    whatsapp:whatsapp,
-    puntos:puntosDespues
-   },{
-    id:"eq."+clienteActual.id
-   });
+if(encontrados.length){
 
-   clienteActual=actualizado[0];
+clienteActual=encontrados[0];
 
-  }else{
+}
 
-   const nuevo=await api("clientes","POST",{
-    nombre:nombre,
-    whatsapp:whatsapp,
-    puntos:puntosDespues,
-    premios_obtenidos:0
-   });
+let puntosAntes;
+let puntosDespues;
 
-   clienteActual=nuevo[0];
-  }
+if(clienteActual){
 
-  const total=obtenerTotal();
-  const utilidad=obtenerUtilidad();
+puntosAntes=Number(clienteActual.puntos);
 
-  const venta=await api("ventas","POST",{
-   cliente_id:clienteActual.id,
-   total:total,
-   utilidad:utilidad,
-   puntos_ganados:1,
-   corte_id:null
-  });
+if(!Number.isFinite(puntosAntes)||puntosAntes<0){
 
-  const ventaId=venta[0].id;
+puntosAntes=configuracion.puntos_para_premio;
 
-  for(const item of carrito){
+}
 
-   await api("detalle_ventas","POST",{
-    venta_id:ventaId,
-    producto_id:item.id,
-    nombre_producto:item.nombre,
-    cantidad:item.cantidad,
-    precio:item.precio,
-    costo:item.costo
-   });
-  }
+puntosDespues=Math.max(0,puntosAntes-1);
 
-  let botonWhatsApp="";
+}else{
 
-  if(whatsapp){
+puntosAntes=configuracion.puntos_para_premio;
 
-   const numero=numeroWhatsapp(whatsapp);
+puntosDespues=Math.max(0,puntosAntes-1);
 
-   const mensaje=
+}
+
+if(clienteActual){
+
+const actualizado=await api("clientes","PATCH",{
+
+nombre:nombre,
+whatsapp:whatsapp,
+puntos:puntosDespues
+
+},{
+id:"eq."+clienteActual.id
+});
+
+clienteActual=actualizado[0];
+
+}else{
+
+const nuevo=await api("clientes","POST",{
+
+nombre:nombre,
+whatsapp:whatsapp,
+puntos:puntosDespues,
+premios_obtenidos:0
+
+});
+
+clienteActual=nuevo[0];
+
+}
+
+const total=obtenerTotal();
+const utilidad=obtenerUtilidad();
+
+const venta=await api("ventas","POST",{
+
+cliente_id:clienteActual.id,
+total:total,
+utilidad:utilidad,
+puntos_ganados:1,
+corte_id:null
+
+});
+
+const ventaId=venta[0].id;
+
+for(const item of carrito){
+
+await api("detalle_ventas","POST",{
+
+venta_id:ventaId,
+producto_id:item.id,
+nombre_producto:item.nombre,
+cantidad:item.cantidad,
+precio:item.precio,
+costo:item.costo
+
+});
+
+}
+
+let botonWhatsApp="";
+
+if(whatsapp){
+
+const numero=numeroWhatsapp(whatsapp);
+
+const mensaje=
 `🌽 ELOTEMANÍA 🌽
 
 Hola ${nombre}!
@@ -688,218 +906,438 @@ Gracias por tu compra.
 
 🎁 Premio`;
 
-   const url=
-    "https://wa.me/"+numero+
-    "?text="+encodeURIComponent(mensaje);
+const url=
+"https://wa.me/"+numero+
+"?text="+encodeURIComponent(mensaje);
 
-   botonWhatsApp=`
-    <br>
-    <a href="${url}" target="_blank"
-     style="display:block;text-align:center;background:#25D366;color:white;padding:14px;border-radius:10px;text-decoration:none;font-weight:bold">
-     📲 Abrir WhatsApp
-    </a>
-   `;
-  }
+botonWhatsApp=`
 
-  document.getElementById("clienteResultado").innerHTML=`
-   <div class="resultado">
+<br>
 
-    <h3>✅ Venta registrada</h3>
+<a href="${url}" target="_blank"
+style="display:block;text-align:center;background:#25D366;color:white;padding:14px;border-radius:10px;text-decoration:none;font-weight:bold">
 
-    👤 ${escapeHtml(nombre)}
+📲 Abrir WhatsApp
 
-    <br><br>
+</a>
 
-    💰 Total:
-    <strong>$${dinero(total)}</strong>
+`;
 
-    <br><br>
+}
 
-    ⭐ Compras restantes:
-    <strong>${puntosDespues}</strong>
+document.getElementById("clienteResultado").innerHTML=`
 
-    ${
-     puntosDespues===0
-     ?
-     `<div class="premio">🎉 ¡Ya puede solicitar su Premio!</div>`
-     :""
-    }
+<div class="resultado">
 
-    ${botonWhatsApp}
+<h3>✅ Venta registrada</h3>
 
-   </div>
-  `;
+👤 ${escapeHtml(nombre)}
 
-  carrito=[];
-  renderCarrito();
+<br><br>
 
-  await cargarClientes();
-  await actualizarEstadisticas();
+💰 Total:
+<strong>$${dinero(total)}</strong>
 
- }catch(error){
+<br><br>
 
-  console.error(error);
+⭐ Compras restantes:
+<strong>${puntosDespues}</strong>
 
-  alert(
-   "No se pudo registrar la venta:\n"+
-   error.message
-  );
- }
+${
+puntosDespues===0
+?
+`<div class="premio">🎉 ¡Ya puede solicitar su Premio!</div>`
+:""
+}
+
+${botonWhatsApp}
+
+</div>
+
+`;
+
+carrito=[];
+
+renderCarrito();
+
+await cargarClientes();
+
+await actualizarEstadisticas();
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"No se pudo registrar la venta:\n"+
+error.message
+);
+
+}
+
 }
 
 /* =========================
-   LOGIN CORREGIDO
+   LOGIN
 ========================= */
 
 async function login(){
 
- const usuario=document.getElementById("usuario")
-  .value.trim().toLowerCase();
+const usuario=document.getElementById("usuario")
+.value.trim().toLowerCase();
 
- const pin=document.getElementById("pin")
-  .value.trim();
+const pin=document.getElementById("pin")
+.value.trim();
 
- if(!usuario||!pin){
+if(!usuario||!pin){
 
-  document.getElementById("accesoResultado").innerHTML=`
-   <div class="alerta">
-    ⚠️ Escribe usuario y PIN.
-   </div>
-  `;
+document.getElementById("accesoResultado").innerHTML=`
 
-  return;
- }
+<div class="alerta">
 
- try{
+⚠️ Escribe usuario y PIN.
 
-  /*
-   * IMPORTANTE:
-   * Traemos los usuarios y comparamos aquí.
-   * Así no importa si Supabase guardó
-   * Christian con mayúscula o minúscula.
-   */
+</div>
 
-  const usuarios=await api("usuarios","GET",null,{
-   select:"*",
-   activo:"eq.true"
-  });
+`;
 
-  const user=usuarios.find(u=>
-   String(u.usuario||"").trim().toLowerCase()===usuario &&
-   String(u.pin||"").trim()===pin &&
-   u.activo===true
-  );
+return;
 
-  if(!user){
+}
 
-   document.getElementById("accesoResultado").innerHTML=`
-    <div class="alerta">
-     ❌ Usuario o PIN incorrecto.
-    </div>
-   `;
+try{
 
-   return;
-  }
+const usuarios=await api("usuarios","GET",null,{
+select:"*",
+activo:"eq.true"
+});
 
-  currentUser=user.usuario;
-  currentRole=String(user.rol||"empleado").toLowerCase();
+const user=usuarios.find(u=>
 
-  document.getElementById("adminSection")
-   .classList.remove("hidden");
+String(u.usuario||"")
+.trim()
+.toLowerCase()===usuario &&
 
-  const esChristian=
-   currentRole==="superadmin"||
-   String(user.usuario).toLowerCase()==="christian";
+String(u.pin||"")
+.trim()===pin &&
 
-  const esAdmin=
-   esChristian||
-   currentRole==="admin";
+u.activo===true
 
-  document.getElementById("usuarioActual").innerHTML=`
-   <div class="premio">
+);
 
-    ${
-     esChristian
-     ?"👑"
-     :esAdmin
-     ?"🛡️"
-     :"👤"
-    }
+if(!user){
 
-    Bienvenido
-    <strong>
-     ${escapeHtml(user.nombre||user.usuario)}
-    </strong>
+document.getElementById("accesoResultado").innerHTML=`
 
-    <br><br>
+<div class="alerta">
 
-    Rol:
-    <strong>
-     ${
-      esChristian
-      ?"Administrador de Christian"
-      :currentRole==="admin"
-      ?"Administrador"
-      :"Empleado"
-     }
-    </strong>
+❌ Usuario o PIN incorrecto.
 
-   </div>
-  `;
+</div>
 
-  document.getElementById("accesoResultado").innerHTML="";
+`;
 
-  aplicarPermisos();
+return;
 
- }catch(error){
+}
 
-  console.error(error);
+currentUser=user.usuario;
 
-  document.getElementById("accesoResultado").innerHTML=`
-   <div class="alerta">
-    ❌ No se pudo iniciar sesión.<br><br>
-    ${escapeHtml(error.message)}
-   </div>
-  `;
- }
+currentRole=String(
+user.rol||"empleado"
+).toLowerCase();
+
+document.getElementById("adminSection")
+.classList.remove("hidden");
+
+const esChristian=
+
+currentRole==="superadmin"||
+
+String(user.usuario)
+.toLowerCase()==="christian";
+
+const esAdmin=
+
+esChristian||
+
+currentRole==="admin";
+
+document.getElementById("usuarioActual").innerHTML=`
+
+<div class="premio">
+
+${
+
+esChristian
+?"👑"
+:esAdmin
+?"🛡️"
+:"👤"
+
+}
+
+Bienvenido
+
+<strong>
+${escapeHtml(user.nombre||user.usuario)}
+</strong>
+
+<br><br>
+
+Rol:
+
+<strong>
+
+${
+
+esChristian
+?"Administrador de Christian"
+:currentRole==="admin"
+?"Administrador"
+:"Empleado"
+
+}
+
+</strong>
+
+</div>
+
+`;
+
+document.getElementById("accesoResultado").innerHTML="";
+
+aplicarPermisos();
+
+}catch(error){
+
+console.error(error);
+
+document.getElementById("accesoResultado").innerHTML=`
+
+<div class="alerta">
+
+❌ No se pudo iniciar sesión.
+
+<br><br>
+
+${escapeHtml(error.message)}
+
+</div>
+
+`;
+
+}
+
 }
 
 function aplicarPermisos(){
 
- const esChristian=
-  currentRole==="superadmin"||
-  String(currentUser).toLowerCase()==="christian";
+const esChristian=
 
- const esAdmin=
-  esChristian||
-  currentRole==="admin";
+currentRole==="superadmin"||
 
- document.getElementById("productosAdmin")
-  .classList.toggle("hidden",!esAdmin);
+String(currentUser)
+.toLowerCase()==="christian";
 
- /*
-  * SOLO CHRISTIAN puede administrar usuarios.
-  */
+const esAdmin=
 
- document.getElementById("usuariosAdmin")
-  .classList.toggle("hidden",!esChristian);
+esChristian||
 
- /*
-  * Si es administrador puede ver costos,
-  * utilidades y cortes.
-  */
+currentRole==="admin";
 
- if(esAdmin){
+document.getElementById("productosAdmin")
+.classList.toggle(
+"hidden",
+!esAdmin
+);
 
-  cargarProductosAdmin();
+document.getElementById("usuariosAdmin")
+.classList.toggle(
+"hidden",
+!esChristian
+);
 
- }
+/*
+ * GANANCIAS SOLO CHRISTIAN
+ */
 
- if(esChristian){
+document.getElementById("gananciasAdmin")
+.classList.toggle(
+"hidden",
+!esChristian
+);
 
-  cargarUsuarios();
+if(esAdmin){
 
- }
+cargarProductosAdmin();
+
+}
+
+if(esChristian){
+
+cargarUsuarios();
+
+}
+
+}
+
+/* =========================
+   GANANCIAS Y MARGEN
+========================= */
+
+function toggleGanancias(){
+
+const contenido=
+document.getElementById("gananciasContenido");
+
+contenido.classList.toggle("hidden");
+
+if(!contenido.classList.contains("hidden")){
+
+cargarGanancias();
+
+}
+
+}
+
+async function cargarGanancias(){
+
+try{
+
+const ventas=await api("ventas","GET",null,{
+select:"*"
+});
+
+let ventasTotal=0;
+let utilidadTotal=0;
+
+ventas.forEach(v=>{
+
+ventasTotal+=Number(v.total||0);
+
+utilidadTotal+=Number(v.utilidad||0);
+
+});
+
+const costosTotal=
+ventasTotal-utilidadTotal;
+
+const margen=
+ventasTotal>0
+?
+(utilidadTotal/ventasTotal)*100
+:
+0;
+
+document.getElementById("gananciasVentas")
+.textContent=
+"$"+dinero(ventasTotal);
+
+document.getElementById("gananciasCostos")
+.textContent=
+"$"+dinero(costosTotal);
+
+document.getElementById("gananciasUtilidad")
+.textContent=
+"$"+dinero(utilidadTotal);
+
+document.getElementById("gananciasMargen")
+.textContent=
+dinero(margen)+"%";
+
+const productosLista=
+await api("productos","GET",null,{
+select:"*",
+activo:"eq.true",
+order:"nombre.asc"
+});
+
+const contenedor=
+document.getElementById("gananciasProductos");
+
+contenedor.innerHTML="";
+
+productosLista.forEach(p=>{
+
+const costo=
+Number(p.costo||0);
+
+const precio=
+Number(p.precio||0);
+
+const ganancia=
+precio-costo;
+
+const margenProducto=
+precio>0
+?
+(ganancia/precio)*100
+:
+0;
+
+const div=document.createElement("div");
+
+div.className="resultado";
+
+div.innerHTML=`
+
+<strong>
+${escapeHtml(p.nombre)}
+</strong>
+
+<br><br>
+
+Venta:
+<strong>
+$${dinero(precio)}
+</strong>
+
+<br>
+
+Costo:
+<strong>
+$${dinero(costo)}
+</strong>
+
+<br>
+
+Ganancia:
+<span class="ganancia">
+$${dinero(ganancia)}
+</span>
+
+<br>
+
+Margen:
+<strong>
+${dinero(margenProducto)}%
+</strong>
+
+`;
+
+contenedor.appendChild(div);
+
+});
+
+}catch(error){
+
+document.getElementById(
+"gananciasProductos"
+).innerHTML=`
+
+<div class="alerta">
+
+❌ No se pudieron cargar las ganancias.
+
+</div>
+
+`;
+
+console.error(error);
+
+}
+
 }
 
 /* =========================
@@ -908,208 +1346,313 @@ function aplicarPermisos(){
 
 async function cargarProductosAdmin(){
 
- const esAdmin=
-  currentRole==="superadmin"||
-  currentRole==="admin"||
-  String(currentUser).toLowerCase()==="christian";
+const esAdmin=
 
- if(!esAdmin)return;
+currentRole==="superadmin"||
+currentRole==="admin"||
+String(currentUser)
+.toLowerCase()==="christian";
 
- try{
+if(!esAdmin)return;
 
-  const lista=await api("productos","GET",null,{
-   select:"*",
-   activo:"eq.true",
-   order:"nombre.asc"
-  });
+try{
 
-  const contenedor=
-   document.getElementById("listaProductosAdmin");
+const lista=await api("productos","GET",null,{
+select:"*",
+activo:"eq.true",
+order:"nombre.asc"
+});
 
-  contenedor.innerHTML="";
+const contenedor=
+document.getElementById("listaProductosAdmin");
 
-  lista.forEach(p=>{
+contenedor.innerHTML="";
 
-   const costo=Number(p.costo||0);
-   const precio=Number(p.precio||0);
-   const utilidad=precio-costo;
-   const margen=precio>0?(utilidad/precio)*100:0;
+lista.forEach(p=>{
 
-   const div=document.createElement("div");
-   div.className="resultado";
+const costo=Number(p.costo||0);
 
-   div.innerHTML=`
-    <strong>${escapeHtml(p.nombre)}</strong>
+const precio=Number(p.precio||0);
 
-    <br><br>
+const utilidad=precio-costo;
 
-    Costo:
-    <strong>$${dinero(costo)}</strong>
+const margen=
+precio>0
+?
+(utilidad/precio)*100
+:
+0;
 
-    <br><br>
+const div=document.createElement("div");
 
-    Venta:
-    <strong>$${dinero(precio)}</strong>
+div.className="resultado";
 
-    <br><br>
+div.innerHTML=`
 
-    Utilidad:
-    <span class="ganancia">
-     $${dinero(utilidad)}
-    </span>
+<strong>
+${escapeHtml(p.nombre)}
+</strong>
 
-    <br><br>
+<br><br>
 
-    Margen:
-    <strong>${dinero(margen)}%</strong>
+Costo:
 
-    <br><br>
+<strong>
+$${dinero(costo)}
+</strong>
 
-    <button class="btn-blue"
-     style="width:100%"
-     onclick="editarCostoPrecio(${p.id})">
-     ✏️ Cambiar costo y precio
-    </button>
-   `;
+<br><br>
 
-   contenedor.appendChild(div);
-  });
+Venta:
 
- }catch(error){
-  console.error(error);
- }
+<strong>
+$${dinero(precio)}
+</strong>
+
+<br><br>
+
+Utilidad:
+
+<span class="ganancia">
+$${dinero(utilidad)}
+</span>
+
+<br><br>
+
+Margen:
+
+<strong>
+${dinero(margen)}%
+</strong>
+
+<br><br>
+
+<button
+class="btn-blue"
+style="width:100%"
+onclick="editarCostoPrecio(${p.id})">
+
+✏️ Cambiar costo y precio
+
+</button>
+
+`;
+
+contenedor.appendChild(div);
+
+});
+
+}catch(error){
+
+console.error(error);
+
+}
+
 }
 
 async function editarCostoPrecio(id){
 
- const esAdmin=
-  currentRole==="superadmin"||
-  currentRole==="admin"||
-  String(currentUser).toLowerCase()==="christian";
+const esAdmin=
 
- if(!esAdmin){
-  alert("Sin permiso.");
-  return;
- }
+currentRole==="superadmin"||
+currentRole==="admin"||
+String(currentUser)
+.toLowerCase()==="christian";
 
- let producto=productos.find(
-  p=>Number(p.id)===Number(id)
- );
+if(!esAdmin){
 
- if(!producto){
+alert("Sin permiso.");
 
-  const lista=await api("productos","GET",null,{
-   select:"*",
-   id:"eq."+id,
-   limit:1
-  });
+return;
 
-  if(!lista.length)return;
+}
 
-  producto=lista[0];
- }
+let producto=productos.find(
+p=>Number(p.id)===Number(id)
+);
 
- const costo=prompt(
-  "Costo para Elotemanía:",
-  Number(producto.costo||0)
- );
+if(!producto){
 
- if(costo===null)return;
+const lista=await api("productos","GET",null,{
+select:"*",
+id:"eq."+id,
+limit:1
+});
 
- const precio=prompt(
-  "Precio de venta:",
-  Number(producto.precio||0)
- );
+if(!lista.length)return;
 
- if(precio===null)return;
+producto=lista[0];
 
- const nuevoCosto=Number(costo);
- const nuevoPrecio=Number(precio);
+}
 
- if(
-  !Number.isFinite(nuevoCosto)||
-  nuevoCosto<0||
-  !Number.isFinite(nuevoPrecio)||
-  nuevoPrecio<0
- ){
-  alert("Valores inválidos.");
-  return;
- }
+const costo=prompt(
+"Costo para Elotemanía:",
+Number(producto.costo||0)
+);
 
- await api("productos","PATCH",{
-  costo:nuevoCosto,
-  precio:nuevoPrecio
- },{
-  id:"eq."+id
- });
+if(costo===null)return;
 
- await cargarProductos();
- await cargarProductosAdmin();
+const precio=prompt(
+"Precio de venta:",
+Number(producto.precio||0)
+);
 
- alert("✅ Producto actualizado.");
+if(precio===null)return;
+
+const nuevoCosto=Number(costo);
+
+const nuevoPrecio=Number(precio);
+
+if(
+
+!Number.isFinite(nuevoCosto)||
+nuevoCosto<0||
+!Number.isFinite(nuevoPrecio)||
+nuevoPrecio<0
+
+){
+
+alert("Valores inválidos.");
+
+return;
+
+}
+
+await api("productos","PATCH",{
+
+costo:nuevoCosto,
+precio:nuevoPrecio
+
+},{
+id:"eq."+id
+});
+
+await cargarProductos();
+
+await cargarProductosAdmin();
+
+alert("✅ Producto actualizado.");
+
 }
 
 async function agregarProductoNuevo(){
 
- const esAdmin=
-  currentRole==="superadmin"||
-  currentRole==="admin"||
-  String(currentUser).toLowerCase()==="christian";
+const esAdmin=
 
- if(!esAdmin){
-  alert("Sin permiso.");
-  return;
- }
+currentRole==="superadmin"||
+currentRole==="admin"||
+String(currentUser)
+.toLowerCase()==="christian";
 
- const nombre=document.getElementById("nuevoProductoNombre").value.trim();
- const categoria=document.getElementById("nuevoProductoCategoria").value.trim();
- const costo=Number(document.getElementById("nuevoProductoCosto").value);
- const precio=Number(document.getElementById("nuevoProductoPrecio").value);
+if(!esAdmin){
 
- if(!nombre){
-  alert("Escribe el nombre.");
-  return;
- }
+alert("Sin permiso.");
 
- if(!Number.isFinite(costo)||costo<0){
-  alert("Escribe un costo válido.");
-  return;
- }
+return;
 
- if(!Number.isFinite(precio)||precio<0){
-  alert("Escribe un precio válido.");
-  return;
- }
+}
 
- try{
+const nombre=
+document.getElementById(
+"nuevoProductoNombre"
+).value.trim();
 
-  await api("productos","POST",{
-   nombre:nombre,
-   categoria:categoria||"General",
-   costo:costo,
-   precio:precio,
-   activo:true
-  });
+const categoria=
+document.getElementById(
+"nuevoProductoCategoria"
+).value.trim();
 
-  document.getElementById("nuevoProductoNombre").value="";
-  document.getElementById("nuevoProductoCategoria").value="";
-  document.getElementById("nuevoProductoCosto").value="";
-  document.getElementById("nuevoProductoPrecio").value="";
+const costo=
+Number(
+document.getElementById(
+"nuevoProductoCosto"
+).value
+);
 
-  document.getElementById("productoResultado").innerHTML=`
-   <div class="premio">✅ Producto agregado.</div>
-  `;
+const precio=
+Number(
+document.getElementById(
+"nuevoProductoPrecio"
+).value
+);
 
-  await cargarProductos();
-  await cargarProductosAdmin();
+if(!nombre){
 
- }catch(error){
+alert("Escribe el nombre.");
 
-  alert(
-   "No se pudo agregar:\n"+
-   error.message
-  );
- }
+return;
+
+}
+
+if(!Number.isFinite(costo)||costo<0){
+
+alert("Escribe un costo válido.");
+
+return;
+
+}
+
+if(!Number.isFinite(precio)||precio<0){
+
+alert("Escribe un precio válido.");
+
+return;
+
+}
+
+try{
+
+await api("productos","POST",{
+
+nombre:nombre,
+categoria:categoria||"General",
+costo:costo,
+precio:precio,
+activo:true
+
+});
+
+document.getElementById(
+"nuevoProductoNombre"
+).value="";
+
+document.getElementById(
+"nuevoProductoCategoria"
+).value="";
+
+document.getElementById(
+"nuevoProductoCosto"
+).value="";
+
+document.getElementById(
+"nuevoProductoPrecio"
+).value="";
+
+document.getElementById(
+"productoResultado"
+).innerHTML=`
+
+<div class="premio">
+
+✅ Producto agregado.
+
+</div>
+
+`;
+
+await cargarProductos();
+
+await cargarProductosAdmin();
+
+}catch(error){
+
+alert(
+"No se pudo agregar:\n"+
+error.message
+);
+
+}
+
 }
 
 /* =========================
@@ -1118,179 +1661,261 @@ async function agregarProductoNuevo(){
 
 async function cargarUsuarios(){
 
- if(
-  currentRole!=="superadmin"&&
-  String(currentUser).toLowerCase()!=="christian"
- ){
-  return;
- }
+if(
 
- try{
+currentRole!=="superadmin"&&
+String(currentUser)
+.toLowerCase()!=="christian"
 
-  const usuarios=await api("usuarios","GET",null,{
-   select:"*",
-   order:"id.asc"
-  });
+){
 
-  const contenedor=document.getElementById("listaUsuarios");
-  contenedor.innerHTML="";
+return;
 
-  usuarios.forEach(u=>{
+}
 
-   const div=document.createElement("div");
-   div.className="resultado";
+try{
 
-   const esChristian=
-    String(u.usuario||"").toLowerCase()==="christian";
+const usuarios=await api("usuarios","GET",null,{
+select:"*",
+order:"id.asc"
+});
 
-   div.innerHTML=`
-    <strong>
-     👤 ${escapeHtml(u.nombre||u.usuario)}
-    </strong>
+const contenedor=
+document.getElementById("listaUsuarios");
 
-    <br><br>
+contenedor.innerHTML="";
 
-    Usuario:
-    ${escapeHtml(u.usuario)}
+usuarios.forEach(u=>{
 
-    <br><br>
+const div=document.createElement("div");
 
-    Rol:
-    <strong>
-     ${
-      u.rol==="superadmin"
-      ?"Administrador de Christian"
-      :u.rol==="admin"
-      ?"Administrador"
-      :"Empleado"
-     }
-    </strong>
+div.className="resultado";
 
-    <br><br>
+const esChristian=
+String(u.usuario||"")
+.toLowerCase()==="christian";
 
-    Estado:
-    ${u.activo?"🟢 Activo":"🔴 Inactivo"}
+div.innerHTML=`
 
-    ${
-     !esChristian
-     ?
-     `
-      <br><br>
-      <button
-       class="${u.activo?"btn-red":"btn-green"}"
-       style="width:100%"
-       onclick="cambiarEstadoUsuario(${u.id},${!u.activo})">
-       ${u.activo?"🚫 Desactivar":"✅ Activar"}
-      </button>
-     `
-     :""
-    }
-   `;
+<strong>
+👤 ${escapeHtml(u.nombre||u.usuario)}
+</strong>
 
-   contenedor.appendChild(div);
-  });
+<br><br>
 
- }catch(error){
-  console.error(error);
- }
+Usuario:
+${escapeHtml(u.usuario)}
+
+<br><br>
+
+Rol:
+
+<strong>
+
+${
+u.rol==="superadmin"
+?
+"Administrador de Christian"
+:
+u.rol==="admin"
+?
+"Administrador"
+:
+"Empleado"
+}
+
+</strong>
+
+<br><br>
+
+Estado:
+
+${u.activo?"🟢 Activo":"🔴 Inactivo"}
+
+${
+
+!esChristian
+?
+
+`
+
+<br><br>
+
+<button
+class="${u.activo?"btn-red":"btn-green"}"
+style="width:100%"
+onclick="cambiarEstadoUsuario(${u.id},${!u.activo})">
+
+${u.activo?"🚫 Desactivar":"✅ Activar"}
+
+</button>
+
+`
+
+:""
+
+}
+
+`;
+
+contenedor.appendChild(div);
+
+});
+
+}catch(error){
+
+console.error(error);
+
+}
+
 }
 
 async function crearUsuario(){
 
- if(
-  currentRole!=="superadmin"&&
-  String(currentUser).toLowerCase()!=="christian"
- ){
-  alert("Solo Christian puede crear usuarios.");
-  return;
- }
+if(
 
- const usuario=document.getElementById("nuevoUsuario")
-  .value.trim().toLowerCase();
+currentRole!=="superadmin"&&
+String(currentUser)
+.toLowerCase()!=="christian"
 
- const nombre=document.getElementById("nuevoUsuarioNombre")
-  .value.trim();
+){
 
- const pin=document.getElementById("nuevoUsuarioPin")
-  .value.trim();
+alert("Solo Christian puede crear usuarios.");
 
- const rol=document.getElementById("nuevoUsuarioRol").value;
+return;
 
- if(!usuario||!nombre||!pin){
-  alert("Completa todos los datos.");
-  return;
- }
+}
 
- try{
+const usuario=
+document.getElementById(
+"nuevoUsuario"
+).value.trim().toLowerCase();
 
-  const usuarios=await api("usuarios","GET",null,{
-   select:"*"
-  });
+const nombre=
+document.getElementById(
+"nuevoUsuarioNombre"
+).value.trim();
 
-  const existe=usuarios.some(
-   u=>String(u.usuario||"").toLowerCase()===usuario
-  );
+const pin=
+document.getElementById(
+"nuevoUsuarioPin"
+).value.trim();
 
-  if(existe){
-   alert("Ese usuario ya existe.");
-   return;
-  }
+const rol=
+document.getElementById(
+"nuevoUsuarioRol"
+).value;
 
-  await api("usuarios","POST",{
-   usuario:usuario,
-   nombre:nombre,
-   pin:pin,
-   rol:rol,
-   activo:true
-  });
+if(!usuario||!nombre||!pin){
 
-  document.getElementById("nuevoUsuario").value="";
-  document.getElementById("nuevoUsuarioNombre").value="";
-  document.getElementById("nuevoUsuarioPin").value="";
+alert("Completa todos los datos.");
 
-  document.getElementById("usuarioResultado").innerHTML=`
-   <div class="premio">
-    ✅ Usuario creado correctamente.
-   </div>
-  `;
+return;
 
-  await cargarUsuarios();
+}
 
- }catch(error){
+try{
 
-  alert(
-   "No se pudo crear el usuario:\n"+
-   error.message
-  );
- }
+const usuarios=await api("usuarios","GET",null,{
+select:"*"
+});
+
+const existe=usuarios.some(
+u=>
+String(u.usuario||"")
+.toLowerCase()===usuario
+);
+
+if(existe){
+
+alert("Ese usuario ya existe.");
+
+return;
+
+}
+
+await api("usuarios","POST",{
+
+usuario:usuario,
+nombre:nombre,
+pin:pin,
+rol:rol,
+activo:true
+
+});
+
+document.getElementById(
+"nuevoUsuario"
+).value="";
+
+document.getElementById(
+"nuevoUsuarioNombre"
+).value="";
+
+document.getElementById(
+"nuevoUsuarioPin"
+).value="";
+
+document.getElementById(
+"usuarioResultado"
+).innerHTML=`
+
+<div class="premio">
+
+✅ Usuario creado correctamente.
+
+</div>
+
+`;
+
+await cargarUsuarios();
+
+}catch(error){
+
+alert(
+"No se pudo crear el usuario:\n"+
+error.message
+);
+
+}
+
 }
 
 async function cambiarEstadoUsuario(id,activo){
 
- if(
-  currentRole!=="superadmin"&&
-  String(currentUser).toLowerCase()!=="christian"
- ){
-  return;
- }
+if(
 
- try{
+currentRole!=="superadmin"&&
+String(currentUser)
+.toLowerCase()!=="christian"
 
-  await api("usuarios","PATCH",{
-   activo:activo
-  },{
-   id:"eq."+id
-  });
+){
 
-  await cargarUsuarios();
+return;
 
- }catch(error){
+}
 
-  alert(
-   "No se pudo cambiar el estado:\n"+
-   error.message
-  );
- }
+try{
+
+await api("usuarios","PATCH",{
+
+activo:activo
+
+},{
+id:"eq."+id
+});
+
+await cargarUsuarios();
+
+}catch(error){
+
+alert(
+"No se pudo cambiar el estado:\n"+
+error.message
+);
+
+}
+
 }
 
 /* =========================
@@ -1299,175 +1924,258 @@ async function cambiarEstadoUsuario(id,activo){
 
 async function buscarClienteAdmin(){
 
- if(!currentUser){
-  alert("Debes iniciar sesión.");
-  return;
- }
+if(!currentUser){
 
- const whatsapp=normalizarWhatsapp(
-  document.getElementById("buscarAdmin").value
- );
+alert("Debes iniciar sesión.");
 
- if(!whatsapp){
-  alert("Escribe el WhatsApp.");
-  return;
- }
+return;
 
- try{
+}
 
-  const encontrados=await api("clientes","GET",null,{
-   select:"*",
-   whatsapp:"eq."+whatsapp,
-   limit:1
-  });
+const whatsapp=
+normalizarWhatsapp(
+document.getElementById(
+"buscarAdmin"
+).value
+);
 
-  if(!encontrados.length){
+if(!whatsapp){
 
-   document.getElementById("adminClienteResultado").innerHTML=`
-    <div class="alerta">❌ Cliente no encontrado.</div>
-   `;
+alert("Escribe el WhatsApp.");
 
-   return;
-  }
+return;
 
-  renderAdminCliente(encontrados[0]);
+}
 
- }catch(error){
-  alert("Error:\n"+error.message);
- }
+try{
+
+const encontrados=
+await api("clientes","GET",null,{
+select:"*",
+whatsapp:"eq."+whatsapp,
+limit:1
+});
+
+if(!encontrados.length){
+
+document.getElementById(
+"adminClienteResultado"
+).innerHTML=`
+
+<div class="alerta">
+
+❌ Cliente no encontrado.
+
+</div>
+
+`;
+
+return;
+
+}
+
+renderAdminCliente(encontrados[0]);
+
+}catch(error){
+
+alert("Error:\n"+error.message);
+
+}
+
 }
 
 function renderAdminCliente(cliente){
 
- const puntos=Number(cliente.puntos);
+const puntos=Number(cliente.puntos);
 
- let html=`
-  <div class="resultado">
+let html=`
 
-   <h3>👤 ${escapeHtml(cliente.nombre)}</h3>
+<div class="resultado">
 
-   📱 ${escapeHtml(cliente.whatsapp)}
+<h3>
+👤 ${escapeHtml(cliente.nombre)}
+</h3>
 
-   <br><br>
+📱 ${escapeHtml(cliente.whatsapp)}
 
-   ⭐ Compras restantes:
-   <strong>${puntos}</strong>
+<br><br>
 
-   <br><br>
+⭐ Compras restantes:
 
-   🎁 Premios obtenidos:
-   <strong>${Number(cliente.premios_obtenidos)||0}</strong>
+<strong>${puntos}</strong>
 
-   <br><br>
+<br><br>
 
-   <button class="btn-blue"
-    style="width:100%"
-    onclick="restaurarCliente(${cliente.id})">
-    🔄 Restaurar a ${configuracion.puntos_para_premio}
-   </button>
- `;
+🎁 Premios obtenidos:
 
- if(puntos<=0){
+<strong>
+${Number(cliente.premios_obtenidos)||0}
+</strong>
 
-  html+=`
-   <br><br>
-   <button class="btn-green"
-    style="width:100%"
-    onclick="canjearPremio(${cliente.id})">
-    🎁 Canjear Premio
-   </button>
-  `;
+<br><br>
 
- }else{
+<button
+class="btn-blue"
+style="width:100%"
+onclick="restaurarCliente(${cliente.id})">
 
-  html+=`
-   <div class="alerta">
-    Todavía necesita <strong>${puntos}</strong> compras.
-   </div>
-  `;
- }
+🔄 Restaurar a
+${configuracion.puntos_para_premio}
 
- html+="</div>";
+</button>
 
- document.getElementById("adminClienteResultado").innerHTML=html;
+`;
+
+if(puntos<=0){
+
+html+=`
+
+<br><br>
+
+<button
+class="btn-green"
+style="width:100%"
+onclick="canjearPremio(${cliente.id})">
+
+🎁 Canjear Premio
+
+</button>
+
+`;
+
+}else{
+
+html+=`
+
+<div class="alerta">
+
+Todavía necesita
+<strong>${puntos}</strong>
+compras.
+
+</div>
+
+`;
+
+}
+
+html+="</div>";
+
+document.getElementById(
+"adminClienteResultado"
+).innerHTML=html;
+
 }
 
 async function restaurarCliente(id){
 
- if(!currentUser){
-  alert("No tienes permiso.");
-  return;
- }
+if(!currentUser){
 
- if(!confirm("¿Restaurar este cliente?"))return;
+alert("No tienes permiso.");
 
- try{
+return;
 
-  const actualizado=await api("clientes","PATCH",{
-   puntos:configuracion.puntos_para_premio
-  },{
-   id:"eq."+id
-  });
+}
 
-  renderAdminCliente(actualizado[0]);
+if(!confirm("¿Restaurar este cliente?"))return;
 
-  await cargarClientes();
+try{
 
-  alert("✅ Cliente restaurado.");
+const actualizado=
+await api("clientes","PATCH",{
 
- }catch(error){
-  alert("No se pudo restaurar:\n"+error.message);
- }
+puntos:configuracion.puntos_para_premio
+
+},{
+id:"eq."+id
+});
+
+renderAdminCliente(actualizado[0]);
+
+await cargarClientes();
+
+alert("✅ Cliente restaurado.");
+
+}catch(error){
+
+alert(
+"No se pudo restaurar:\n"+
+error.message
+);
+
+}
+
 }
 
 async function canjearPremio(id){
 
- if(!currentUser){
-  alert("No tienes permiso.");
-  return;
- }
+if(!currentUser){
 
- try{
+alert("No tienes permiso.");
 
-  const encontrados=await api("clientes","GET",null,{
-   select:"*",
-   id:"eq."+id,
-   limit:1
-  });
+return;
 
-  if(!encontrados.length){
-   alert("Cliente no encontrado.");
-   return;
-  }
+}
 
-  const cliente=encontrados[0];
+try{
 
-  if(Number(cliente.puntos)>0){
-   alert("Todavía no puede canjear el Premio.");
-   return;
-  }
+const encontrados=
+await api("clientes","GET",null,{
+select:"*",
+id:"eq."+id,
+limit:1
+});
 
-  if(!confirm("¿Confirmar canje del Premio?"))return;
+if(!encontrados.length){
 
-  const premios=
-   (Number(cliente.premios_obtenidos)||0)+1;
+alert("Cliente no encontrado.");
 
-  const actualizado=await api("clientes","PATCH",{
-   puntos:configuracion.puntos_para_premio,
-   premios_obtenidos:premios
-  },{
-   id:"eq."+id
-  });
+return;
 
-  renderAdminCliente(actualizado[0]);
+}
 
-  await cargarClientes();
+const cliente=encontrados[0];
 
-  alert("🎉 Premio canjeado.");
+if(Number(cliente.puntos)>0){
 
- }catch(error){
-  alert("Error al canjear:\n"+error.message);
- }
+alert("Todavía no puede canjear el Premio.");
+
+return;
+
+}
+
+if(!confirm(
+"¿Confirmar canje del Premio?"
+))return;
+
+const premios=
+(Number(cliente.premios_obtenidos)||0)+1;
+
+const actualizado=
+await api("clientes","PATCH",{
+
+puntos:configuracion.puntos_para_premio,
+premios_obtenidos:premios
+
+},{
+id:"eq."+id
+});
+
+renderAdminCliente(actualizado[0]);
+
+await cargarClientes();
+
+alert("🎉 Premio canjeado.");
+
+}catch(error){
+
+alert(
+"Error al canjear:\n"+
+error.message
+);
+
+}
+
 }
 
 /* =========================
@@ -1476,450 +2184,661 @@ async function canjearPremio(id){
 
 async function hacerCorte(){
 
- if(!currentUser){
-  alert("Debes iniciar sesión.");
-  return;
- }
+if(!currentUser){
 
- try{
+alert("Debes iniciar sesión.");
 
-  const ventas=await api("ventas","GET",null,{
-   select:"*"
-  });
+return;
 
-  const pendientes=ventas.filter(
-   v=>v.corte_id===null||v.corte_id===undefined
-  );
+}
 
-  const total=pendientes.reduce(
-   (s,v)=>s+Number(v.total||0),0
-  );
+try{
 
-  const utilidad=pendientes.reduce(
-   (s,v)=>s+Number(v.utilidad||0),0
-  );
+const ventas=
+await api("ventas","GET",null,{
+select:"*"
+});
 
-  if(!pendientes.length){
-   alert("No hay ventas pendientes.");
-   return;
-  }
+const pendientes=ventas.filter(
+v=>v.corte_id===null||
+v.corte_id===undefined
+);
 
-  const contado=prompt(
-   "Efectivo contado:\n\nEsperado: $"+
-   dinero(total)
-  );
+const total=pendientes.reduce(
+(s,v)=>s+Number(v.total||0),
+0
+);
 
-  if(contado===null)return;
+const utilidad=pendientes.reduce(
+(s,v)=>s+Number(v.utilidad||0),
+0
+);
 
-  const efectivoContado=Number(contado);
+if(!pendientes.length){
 
-  if(
-   !Number.isFinite(efectivoContado)||
-   efectivoContado<0
-  ){
-   alert("Cantidad inválida.");
-   return;
-  }
+alert("No hay ventas pendientes.");
 
-  const diferencia=efectivoContado-total;
+return;
 
-  const clientesCorte=new Set(
-   pendientes.map(v=>v.cliente_id).filter(Boolean)
-  );
+}
 
-  const corte=await api("cierres_turno","POST",{
-   ventas:pendientes.length,
-   clientes:clientesCorte.size,
-   efectivo_esperado:total,
-   efectivo_contado:efectivoContado,
-   diferencia:diferencia
-  });
+const contado=prompt(
+"Efectivo contado:\n\nEsperado: $"+
+dinero(total)
+);
 
-  const corteId=corte[0].id;
+if(contado===null)return;
 
-  for(const venta of pendientes){
+const efectivoContado=Number(contado);
 
-   await api("ventas","PATCH",{
-    corte_id:corteId
-   },{
-    id:"eq."+venta.id
-   });
-  }
+if(
+!Number.isFinite(efectivoContado)||
+efectivoContado<0
+){
 
-  alert(
-   "✅ Turno cerrado.\n\n"+
-   "Ventas: "+pendientes.length+
-   "\nEsperado: $"+dinero(total)+
-   "\nContado: $"+dinero(efectivoContado)+
-   "\nDiferencia: $"+dinero(diferencia)+
-   "\n\nUtilidad: $"+dinero(utilidad)
-  );
+alert("Cantidad inválida.");
 
-  await actualizarEstadisticas();
-  await verCortes();
+return;
 
- }catch(error){
-  alert("No se pudo cerrar:\n"+error.message);
- }
+}
+
+const diferencia=
+efectivoContado-total;
+
+const clientesCorte=
+new Set(
+pendientes
+.map(v=>v.cliente_id)
+.filter(Boolean)
+);
+
+const corte=
+await api("cierres_turno","POST",{
+
+ventas:pendientes.length,
+clientes:clientesCorte.size,
+efectivo_esperado:total,
+efectivo_contado:efectivoContado,
+diferencia:diferencia
+
+});
+
+const corteId=corte[0].id;
+
+for(const venta of pendientes){
+
+await api("ventas","PATCH",{
+
+corte_id:corteId
+
+},{
+id:"eq."+venta.id
+});
+
+}
+
+alert(
+
+"✅ Turno cerrado.\n\n"+
+"Ventas: "+pendientes.length+
+"\nEsperado: $"+dinero(total)+
+"\nContado: $"+dinero(efectivoContado)+
+"\nDiferencia: $"+dinero(diferencia)+
+"\n\nUtilidad: $"+dinero(utilidad)
+
+);
+
+await actualizarEstadisticas();
+
+await verCortes();
+
+}catch(error){
+
+alert(
+"No se pudo cerrar:\n"+
+error.message
+);
+
+}
+
 }
 
 async function verCortes(){
 
- if(!currentUser){
-  alert("Debes iniciar sesión.");
-  return;
- }
+if(!currentUser){
 
- const contenedor=document.getElementById("listaCortes");
+alert("Debes iniciar sesión.");
 
- contenedor.innerHTML=
-  `<div class="alerta">Cargando...</div>`;
+return;
 
- try{
+}
 
-  const cortes=await api("cierres_turno","GET",null,{
-   select:"*",
-   order:"id.desc"
-  });
+const contenedor=
+document.getElementById("listaCortes");
 
-  if(!cortes.length){
+contenedor.innerHTML=
+`<div class="alerta">Cargando...</div>`;
 
-   contenedor.innerHTML=
-    `<div class="alerta">No hay cortes registrados.</div>`;
+try{
 
-   return;
-  }
+const cortes=
+await api("cierres_turno","GET",null,{
+select:"*",
+order:"id.desc"
+});
 
-  contenedor.innerHTML="";
+if(!cortes.length){
 
-  for(const corte of cortes){
+contenedor.innerHTML=
+`<div class="alerta">
+No hay cortes registrados.
+</div>`;
 
-   const diferencia=Number(corte.diferencia||0);
+return;
 
-   const div=document.createElement("div");
-   div.className="corte";
+}
 
-   div.innerHTML=`
-    <strong>📊 Corte #${corte.id}</strong>
+contenedor.innerHTML="";
 
-    <br><br>
+for(const corte of cortes){
 
-    📅 ${formatearFecha(corte.fecha)}
+const diferencia=
+Number(corte.diferencia||0);
 
-    <hr class="separador">
+const div=document.createElement("div");
 
-    🧾 Ventas:
-    <strong>${Number(corte.ventas)||0}</strong>
+div.className="corte";
 
-    <br><br>
+div.innerHTML=`
 
-    👤 Clientes:
-    <strong>${Number(corte.clientes)||0}</strong>
+<strong>
+📊 Corte #${corte.id}
+</strong>
 
-    <br><br>
+<br><br>
 
-    💰 Esperado:
-    <strong>$${dinero(corte.efectivo_esperado)}</strong>
+📅 ${formatearFecha(corte.fecha)}
 
-    <br><br>
+<hr class="separador">
 
-    💵 Contado:
-    <strong>$${dinero(corte.efectivo_contado)}</strong>
+🧾 Ventas:
 
-    <br><br>
+<strong>
+${Number(corte.ventas)||0}
+</strong>
 
-    ${
-     diferencia===0
-     ?
-     `<span class="ganancia">✅ Diferencia: $0.00</span>`
-     :
-     `<span class="perdida">
-      ⚠️ Diferencia: $${dinero(diferencia)}
-     </span>`
-    }
+<br><br>
 
-    <br><br>
+👤 Clientes:
 
-    <button class="btn-dark"
-     style="width:100%"
-     onclick="mostrarVentasCorte(${corte.id})">
-     🧾 Ver ventas
-    </button>
+<strong>
+${Number(corte.clientes)||0}
+</strong>
 
-    <div id="ventasCorte${corte.id}" class="hidden"></div>
-   `;
+<br><br>
 
-   contenedor.appendChild(div);
-  }
+💰 Esperado:
 
- }catch(error){
+<strong>
+$${dinero(corte.efectivo_esperado)}
+</strong>
 
-  contenedor.innerHTML=
-   `<div class="alerta">❌ ${escapeHtml(error.message)}</div>`;
- }
+<br><br>
+
+💵 Contado:
+
+<strong>
+$${dinero(corte.efectivo_contado)}
+</strong>
+
+<br><br>
+
+${
+diferencia===0
+?
+`<span class="ganancia">
+✅ Diferencia: $0.00
+</span>`
+:
+`<span class="perdida">
+⚠️ Diferencia: $${dinero(diferencia)}
+</span>`
+}
+
+<br><br>
+
+<button
+class="btn-dark"
+style="width:100%"
+onclick="mostrarVentasCorte(${corte.id})">
+
+🧾 Ver ventas
+
+</button>
+
+<div
+id="ventasCorte${corte.id}"
+class="hidden">
+</div>
+
+`;
+
+contenedor.appendChild(div);
+
+}
+
+}catch(error){
+
+contenedor.innerHTML=
+`<div class="alerta">
+❌ ${escapeHtml(error.message)}
+</div>`;
+
+}
+
 }
 
 async function mostrarVentasCorte(corteId){
 
- const contenedor=
-  document.getElementById("ventasCorte"+corteId);
+const contenedor=
+document.getElementById(
+"ventasCorte"+corteId
+);
 
- if(!contenedor)return;
+if(!contenedor)return;
 
- if(!contenedor.classList.contains("hidden")){
-  contenedor.classList.add("hidden");
-  return;
- }
+if(!contenedor.classList.contains("hidden")){
 
- contenedor.classList.remove("hidden");
+contenedor.classList.add("hidden");
 
- contenedor.innerHTML=
-  `<div class="alerta">Cargando ventas...</div>`;
+return;
 
- try{
+}
 
-  const ventas=await api("ventas","GET",null,{
-   select:"*",
-   corte_id:"eq."+corteId,
-   order:"id.asc"
-  });
+contenedor.classList.remove("hidden");
 
-  contenedor.innerHTML="";
+contenedor.innerHTML=
+`<div class="alerta">
+Cargando ventas...
+</div>`;
 
-  for(const venta of ventas){
+try{
 
-   const cliente=clientes.find(
-    c=>Number(c.id)===Number(venta.cliente_id)
-   );
+const ventas=
+await api("ventas","GET",null,{
+select:"*",
+corte_id:"eq."+corteId,
+order:"id.asc"
+});
 
-   const div=document.createElement("div");
-   div.className="venta-corte";
+contenedor.innerHTML="";
 
-   div.innerHTML=`
-    <strong>Venta #${venta.id}</strong>
+for(const venta of ventas){
 
-    <br><br>
+const cliente=clientes.find(
+c=>Number(c.id)===
+Number(venta.cliente_id)
+);
 
-    👤 ${escapeHtml(cliente?.nombre||"Cliente")}
+const div=document.createElement("div");
 
-    <br><br>
+div.className="venta-corte";
 
-    💰 Venta:
-    <strong>$${dinero(venta.total)}</strong>
+div.innerHTML=`
 
-    ${
-     currentRole==="admin"||
-     currentRole==="superadmin"||
-     String(currentUser).toLowerCase()==="christian"
-     ?
-     `
-      <br><br>
-      📈 Utilidad:
-      <strong class="ganancia">
-       $${dinero(venta.utilidad)}
-      </strong>
-     `
-     :""
-    }
-   `;
+<strong>
+Venta #${venta.id}
+</strong>
 
-   contenedor.appendChild(div);
-  }
+<br><br>
 
- }catch(error){
+👤 ${escapeHtml(
+cliente?.nombre||"Cliente"
+)}
 
-  contenedor.innerHTML=
-   `<div class="alerta">❌ ${escapeHtml(error.message)}</div>`;
- }
+<br><br>
+
+💰 Venta:
+
+<strong>
+$${dinero(venta.total)}
+</strong>
+
+${
+currentRole==="admin"||
+currentRole==="superadmin"||
+String(currentUser)
+.toLowerCase()==="christian"
+
+?
+
+`
+
+<br><br>
+
+📈 Utilidad:
+
+<strong class="ganancia">
+
+$${dinero(venta.utilidad)}
+
+</strong>
+
+`
+
+:""
+
+}
+
+`;
+
+contenedor.appendChild(div);
+
+}
+
+}catch(error){
+
+contenedor.innerHTML=
+`<div class="alerta">
+❌ ${escapeHtml(error.message)}
+</div>`;
+
+}
+
 }
 
 async function borrarUltimoCorte(){
 
- const esAdmin=
-  currentRole==="admin"||
-  currentRole==="superadmin"||
-  String(currentUser).toLowerCase()==="christian";
+const esAdmin=
 
- if(!esAdmin){
-  alert("Solo el administrador puede borrar cortes.");
-  return;
- }
+currentRole==="admin"||
+currentRole==="superadmin"||
+String(currentUser)
+.toLowerCase()==="christian";
 
- if(!confirm(
-  "⚠️ Se eliminará el último corte y sus ventas.\n\n¿Continuar?"
- ))return;
+if(!esAdmin){
 
- try{
+alert(
+"Solo el administrador puede borrar cortes."
+);
 
-  const cortes=await api("cierres_turno","GET",null,{
-   select:"*",
-   order:"id.desc",
-   limit:1
-  });
+return;
 
-  if(!cortes.length){
-   alert("No hay cortes.");
-   return;
-  }
+}
 
-  const corte=cortes[0];
+if(!confirm(
+"⚠️ Se eliminará el último corte y sus ventas.\n\n¿Continuar?"
+))return;
 
-  const ventas=await api("ventas","GET",null,{
-   select:"id",
-   corte_id:"eq."+corte.id
-  });
+try{
 
-  for(const venta of ventas){
+const cortes=
+await api("cierres_turno","GET",null,{
+select:"*",
+order:"id.desc",
+limit:1
+});
 
-   await api("detalle_ventas","DELETE",null,{
-    venta_id:"eq."+venta.id
-   });
+if(!cortes.length){
 
-   await api("ventas","DELETE",null,{
-    id:"eq."+venta.id
-   });
-  }
+alert("No hay cortes.");
 
-  await api("cierres_turno","DELETE",null,{
-   id:"eq."+corte.id
-  });
+return;
 
-  alert("✅ Corte eliminado.");
+}
 
-  await cargarClientes();
-  await actualizarEstadisticas();
-  await verCortes();
+const corte=cortes[0];
 
- }catch(error){
-  alert("Error:\n"+error.message);
- }
+const ventas=
+await api("ventas","GET",null,{
+select:"id",
+corte_id:"eq."+corte.id
+});
+
+for(const venta of ventas){
+
+await api(
+"detalle_ventas",
+"DELETE",
+null,
+{
+venta_id:"eq."+venta.id
+}
+);
+
+await api(
+"ventas",
+"DELETE",
+null,
+{
+id:"eq."+venta.id
+}
+);
+
+}
+
+await api(
+"cierres_turno",
+"DELETE",
+null,
+{
+id:"eq."+corte.id
+}
+);
+
+alert("✅ Corte eliminado.");
+
+await cargarClientes();
+
+await actualizarEstadisticas();
+
+await verCortes();
+
+}catch(error){
+
+alert("Error:\n"+error.message);
+
+}
+
 }
 
 async function borrarHistorial(){
 
- const esAdmin=
-  currentRole==="admin"||
-  currentRole==="superadmin"||
-  String(currentUser).toLowerCase()==="christian";
+const esAdmin=
 
- if(!esAdmin){
-  alert("Solo el administrador puede borrar el historial.");
-  return;
- }
+currentRole==="admin"||
+currentRole==="superadmin"||
+String(currentUser)
+.toLowerCase()==="christian";
 
- if(!confirm(
-  "⚠️ ATENCIÓN\n\n"+
-  "Se eliminarán TODAS las ventas, detalles y cortes.\n\n"+
-  "¿Continuar?"
- ))return;
+if(!esAdmin){
 
- try{
+alert(
+"Solo el administrador puede borrar el historial."
+);
 
-  const ventas=await api("ventas","GET",null,{
-   select:"id"
-  });
+return;
 
-  for(const venta of ventas){
-
-   await api("detalle_ventas","DELETE",null,{
-    venta_id:"eq."+venta.id
-   });
-
-   await api("ventas","DELETE",null,{
-    id:"eq."+venta.id
-   });
-  }
-
-  const cortes=await api("cierres_turno","GET",null,{
-   select:"id"
-  });
-
-  for(const corte of cortes){
-
-   await api("cierres_turno","DELETE",null,{
-    id:"eq."+corte.id
-   });
-  }
-
-  alert("✅ Historial eliminado.");
-
-  await actualizarEstadisticas();
-  await verCortes();
-
- }catch(error){
-  alert("No se pudo borrar:\n"+error.message);
- }
 }
+
+if(!confirm(
+
+"⚠️ ATENCIÓN\n\n"+
+"Se eliminarán TODAS las ventas, detalles y cortes.\n\n"+
+"¿Continuar?"
+
+))return;
+
+try{
+
+const ventas=
+await api("ventas","GET",null,{
+select:"id"
+});
+
+for(const venta of ventas){
+
+await api(
+"detalle_ventas",
+"DELETE",
+null,
+{
+venta_id:"eq."+venta.id
+}
+);
+
+await api(
+"ventas",
+"DELETE",
+null,
+{
+id:"eq."+venta.id
+}
+);
+
+}
+
+const cortes=
+await api("cierres_turno","GET",null,{
+select:"id"
+});
+
+for(const corte of cortes){
+
+await api(
+"cierres_turno",
+"DELETE",
+null,
+{
+id:"eq."+corte.id
+}
+);
+
+}
+
+alert("✅ Historial eliminado.");
+
+await actualizarEstadisticas();
+
+await verCortes();
+
+}catch(error){
+
+alert(
+"No se pudo borrar:\n"+
+error.message
+);
+
+}
+
+}
+
+/* =========================
+   ESTADÍSTICAS
+========================= */
 
 async function actualizarEstadisticas(){
 
- try{
+try{
 
-  const ventas=await api("ventas","GET",null,{
-   select:"*"
-  });
+const ventas=
+await api("ventas","GET",null,{
+select:"*"
+});
 
-  document.getElementById("ventasHoy").textContent=
-   ventas.length;
+document.getElementById(
+"ventasHoy"
+).textContent=
+ventas.length;
 
-  const clientesUnicos=new Set(
-   ventas.map(v=>v.cliente_id).filter(Boolean)
-  );
+const clientesUnicos=
+new Set(
+ventas
+.map(v=>v.cliente_id)
+.filter(Boolean)
+);
 
-  document.getElementById("clientesHoy").textContent=
-   clientesUnicos.size;
+document.getElementById(
+"clientesHoy"
+).textContent=
+clientesUnicos.size;
 
-  const utilidad=ventas.reduce(
-   (s,v)=>s+Number(v.utilidad||0),0
-  );
+const utilidad=
+ventas.reduce(
+(s,v)=>s+Number(v.utilidad||0),
+0
+);
 
-  document.getElementById("utilidadHoy").textContent=
-   "$"+dinero(utilidad);
+document.getElementById(
+"utilidadHoy"
+).textContent=
+"$"+dinero(utilidad);
 
- }catch(error){
-  console.log(error);
- }
+}catch(error){
+
+console.log(error);
+
 }
 
+}
+
+/* =========================
+   FUNCIONES GENERALES
+========================= */
+
 function dinero(valor){
- return Number(valor||0).toFixed(2);
+
+return Number(valor||0).toFixed(2);
+
 }
 
 function formatearFecha(fecha){
 
- if(!fecha)return "Sin fecha";
+if(!fecha)return "Sin fecha";
 
- const d=new Date(fecha);
+const d=new Date(fecha);
 
- if(Number.isNaN(d.getTime())){
-  return String(fecha);
- }
+if(Number.isNaN(d.getTime())){
 
- return d.toLocaleString("es-MX",{
-  dateStyle:"medium",
-  timeStyle:"short"
- });
+return String(fecha);
+
+}
+
+return d.toLocaleString(
+"es-MX",
+{
+dateStyle:"medium",
+timeStyle:"short"
+}
+);
+
 }
 
 function escapeHtml(text){
 
- return String(text??"")
-  .replace(/&/g,"&amp;")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;")
-  .replace(/"/g,"&quot;")
-  .replace(/'/g,"&#039;");
+return String(text??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
 }
 
 if("serviceWorker" in navigator){
 
- window.addEventListener("load",function(){
+window.addEventListener(
+"load",
+function(){
 
-  navigator.serviceWorker
-   .register("/sw.js")
-   .catch(error=>console.error(error));
+navigator.serviceWorker
+.register("/sw.js")
+.catch(
+error=>console.error(error)
+);
 
- });
+});
+
 }
 
 </script>
