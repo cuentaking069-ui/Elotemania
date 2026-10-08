@@ -2,48 +2,50 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>Elotemanía POS</title>
-
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#d4af37">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elotemanía</title>
 
 <style>
-
 *{
   box-sizing:border-box
 }
 
 body{
   margin:0;
-  font-family:Arial,sans-serif;
-  background:#111;
-  color:#fff
+  background:#0b0b0b;
+  color:#fff;
+  font-family:Arial,sans-serif
 }
 
 header{
-  background:#000;
-  padding:18px;
   text-align:center;
-  border-bottom:2px solid #d4af37
+  padding:20px;
+  background:#111;
+  border-bottom:1px solid #333
 }
 
 header h1{
   margin:0;
-  color:#d4af37;
-  font-size:28px
+  color:#d4af37
 }
 
 header p{
-  margin:5px 0;
-  color:#ddd
+  margin:6px 0 0;
+  color:#aaa
 }
 
 .container{
-  max-width:1100px;
+  max-width:900px;
   margin:auto;
   padding:15px
+}
+
+.card{
+  background:#151515;
+  border:1px solid #333;
+  border-radius:14px;
+  padding:15px;
+  margin-bottom:15px
 }
 
 .stats{
@@ -54,165 +56,166 @@ header p{
 }
 
 .stat{
-  background:#1d1d1d;
+  background:#191919;
   border:1px solid #333;
   border-radius:12px;
-  padding:15px;
+  padding:14px;
   text-align:center
 }
 
-.stat b{
+.stat span{
   display:block;
-  font-size:24px;
-  color:#d4af37;
-  margin-top:5px
+  color:#aaa;
+  font-size:13px;
+  margin-bottom:5px
+}
+
+.stat b{
+  font-size:20px
 }
 
 .tabs{
   display:flex;
-  gap:8px;
+  gap:10px;
   margin-bottom:15px
+}
+
+button,
+input,
+select{
+  font:inherit
 }
 
 button{
-  border:0;
-  border-radius:10px;
-  padding:13px;
-  font-weight:bold;
   cursor:pointer
-}
-
-button:active{
-  transform:scale(.98)
-}
-
-.tabs button{
-  flex:1
-}
-
-.btn-gold{
-  background:#d4af37;
-  color:#000
-}
-
-.btn-dark{
-  background:#292929;
-  color:#fff
-}
-
-.btn-green{
-  background:#25d366;
-  color:#fff
-}
-
-.btn-red{
-  background:#c62828;
-  color:#fff
-}
-
-.btn-blue{
-  background:#1976d2;
-  color:#fff
-}
-
-.btn-purple{
-  background:#7b1fa2;
-  color:#fff
-}
-
-.card{
-  background:#1b1b1b;
-  border:1px solid #333;
-  border-radius:14px;
-  padding:15px;
-  margin-bottom:15px
-}
-
-h2{
-  color:#d4af37;
-  margin-top:0
-}
-
-h3{
-  color:#d4af37
 }
 
 input,
 select{
   width:100%;
   padding:13px;
-  border-radius:9px;
-  border:1px solid #444;
-  background:#101010;
+  margin:6px 0;
+  background:#202020;
   color:#fff;
-  margin:6px 0 10px;
-  font-size:16px
+  border:1px solid #444;
+  border-radius:9px
+}
+
+.btn-gold{
+  background:#d4af37;
+  color:#111;
+  border:0;
+  border-radius:9px;
+  padding:13px;
+  font-weight:bold
+}
+
+.btn-dark{
+  background:#242424;
+  color:#fff;
+  border:1px solid #444;
+  border-radius:9px;
+  padding:13px
+}
+
+.btn-blue{
+  background:#1976d2;
+  color:#fff;
+  border:0;
+  border-radius:9px;
+  padding:13px
+}
+
+.btn-purple{
+  background:#7b1fa2;
+  color:#fff;
+  border:0;
+  border-radius:9px;
+  padding:13px
+}
+
+.btn-red{
+  background:#b71c1c;
+  color:#fff;
+  border:0;
+  border-radius:9px;
+  padding:13px
+}
+
+.btn-green{
+  background:#16833a;
+  color:#fff;
+  border:0;
+  border-radius:9px;
+  padding:13px
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:10px
 }
 
 .producto{
-  background:#242424;
-  border:1px solid #444;
+  background:#202020;
+  border:1px solid #3d3d3d;
   border-radius:12px;
-  padding:12px
+  padding:14px
 }
 
 .producto strong{
-  display:block;
-  margin-bottom:6px
+  color:#d4af37
 }
 
 .producto button{
   width:100%;
-  margin-top:8px
+  margin-top:10px
 }
 
 .item{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
-  border-bottom:1px solid #333;
-  padding:10px 0
+  background:#202020;
+  border:1px solid #333;
+  border-radius:10px;
+  padding:10px;
+  margin-top:8px
 }
 
 .total{
-  font-size:24px;
-  color:#d4af37;
-  text-align:right;
-  margin-top:15px
+  font-size:20px;
+  font-weight:bold;
+  margin-top:15px;
+  color:#d4af37
 }
 
-.hidden{
-  display:none!important
+.resultado{
+  background:#202020;
+  border:1px solid #444;
+  border-radius:10px;
+  padding:12px;
+  margin-top:10px
 }
 
 .alerta{
-  padding:12px;
+  background:#3a2410;
+  border:1px solid #8a641b;
   border-radius:10px;
-  background:#332b00;
-  border:1px solid #d4af37;
+  padding:12px;
   margin-top:10px
 }
 
 .premio{
-  padding:14px;
+  background:#17351f;
+  border:1px solid #26733b;
   border-radius:10px;
-  background:#153d1d;
-  border:1px solid #25d366;
+  padding:12px;
   margin-top:10px
 }
 
-.resultado{
-  padding:15px;
-  background:#202020;
-  border-radius:12px;
-  margin-top:12px
+.hidden{
+  display:none!important
 }
 
 .corte{
@@ -321,120 +324,68 @@ select{
   }
 
 }
-
 </style>
+
 </head>
 
 <body>
 
 <header>
-
 <h1>🌽 ELOTEMANÍA</h1>
-
-<p>
-Entre compas sabe mejor
-</p>
-
+<p>Entre compas sabe mejor</p>
 </header>
 
-
 <div class="container">
-
-
-<!-- ==================================================
-     ESTADÍSTICAS
-================================================== -->
 
 <div class="stats">
 
 <div class="stat">
-
 <span>Ventas</span>
-
-<b id="ventasHoy">
-0
-</b>
-
+<b id="ventasHoy">0</b>
 </div>
 
-
 <div class="stat">
-
 <span>Clientes</span>
-
-<b id="clientesHoy">
-0
-</b>
-
+<b id="clientesHoy">0</b>
 </div>
 
-
-<div
-class="stat hidden"
-id="utilidadStat"
->
-
+<div class="stat hidden" id="utilidadStat">
 <span>Utilidad</span>
-
-<b id="utilidadHoy">
-$0
-</b>
-
+<b id="utilidadHoy">$0</b>
 </div>
-
 
 <div class="stat">
-
 <span>Turno</span>
-
 <b>1</b>
-
 </div>
 
 </div>
-
-
-<!-- ==================================================
-     TABS
-================================================== -->
 
 <div class="tabs">
 
 <button
 class="btn-gold"
-onclick="mostrarVenta()"
->
+onclick="mostrarVenta()">
 🛒 Venta
 </button>
 
-
 <button
 class="btn-dark"
-onclick="mostrarAcceso()"
->
+onclick="mostrarAcceso()">
 🔐 Acceso
 </button>
 
 </div>
 
-
-<!-- ==================================================
-     VENTA
-================================================== -->
-
 <section id="ventaSection">
-
 
 <div class="card">
 
-<h2>
-🛒 Productos
-</h2>
+<h2>🛒 Productos</h2>
 
 <div
 id="productos"
-class="grid"
->
+class="grid">
 Cargando productos...
 </div>
 
@@ -443,19 +394,14 @@ Cargando productos...
 
 <div class="card">
 
-<h2>
-🧾 Venta
-</h2>
+<h2>🧾 Venta</h2>
 
 <div id="carrito">
 No hay productos.
 </div>
 
 <div class="total">
-
-Total:
-$<span id="total">0.00</span>
-
+Total: $<span id="total">0.00</span>
 </div>
 
 </div>
@@ -463,42 +409,30 @@ $<span id="total">0.00</span>
 
 <div class="card">
 
-<h2>
-👤 Cliente
-</h2>
-
+<h2>👤 Cliente</h2>
 
 <input
 id="nombreCliente"
-placeholder="Nombre del cliente"
->
-
+placeholder="Nombre del cliente">
 
 <input
 id="whatsappCliente"
 type="tel"
-placeholder="10 dígitos"
->
-
+placeholder="10 dígitos">
 
 <button
 class="btn-blue"
 style="width:100%"
-onclick="buscarCliente()"
->
+onclick="buscarCliente()">
 🔎 Buscar cliente
 </button>
 
-
-<div id="clienteResultado">
-</div>
-
+<div id="clienteResultado"></div>
 
 <button
 class="btn-gold"
 style="width:100%;margin-top:10px"
-onclick="registrarVenta()"
->
+onclick="registrarVenta()">
 💰 Registrar venta
 </button>
 
@@ -507,147 +441,89 @@ onclick="registrarVenta()"
 </section>
 
 
-<!-- ==================================================
-     ACCESO
-================================================== -->
-
 <section
 id="accesoSection"
-class="hidden"
->
-
+class="hidden">
 
 <div class="card">
 
-<h2>
-🔐 Acceso
-</h2>
-
+<h2>🔐 Acceso</h2>
 
 <input
 id="usuario"
-placeholder="Usuario"
->
-
+placeholder="Usuario">
 
 <input
 id="pin"
 type="password"
-placeholder="PIN"
->
-
+placeholder="PIN">
 
 <button
 class="btn-gold"
 style="width:100%"
-onclick="login()"
->
+onclick="login()">
 Entrar
 </button>
 
-
-<div id="accesoResultado">
-</div>
+<div id="accesoResultado"></div>
 
 </div>
 
-
-<!-- ==================================================
-     ADMINISTRADOR
-================================================== -->
 
 <div
 id="adminSection"
-class="hidden"
->
-
+class="hidden">
 
 <div class="card">
 
-<h2>
-👑 Administrador de Christian
-</h2>
+<h2>👑 Administrador de Christian</h2>
 
-
-<div id="usuarioActual">
-</div>
-
+<div id="usuarioActual"></div>
 
 <hr class="separador">
 
-
 <div class="menu-admin">
-
-
-<!-- PRODUCTOS -->
 
 <button
 id="botonProductos"
 class="boton-admin"
-onclick="togglePanel('productosAdmin','botonProductos')"
->
-<span>📦</span>
-Productos
+onclick="togglePanel('productosAdmin','botonProductos')">
+<span>📦</span>Productos
 </button>
-
-
-<!-- GANANCIAS -->
 
 <button
 id="botonGanancias"
 class="boton-admin hidden"
-onclick="togglePanel('gananciasAdmin','botonGanancias')"
->
-<span>📈</span>
-Margen y ganancias
+onclick="togglePanel('gananciasAdmin','botonGanancias')">
+<span>📈</span>Margen y ganancias
 </button>
-
-
-<!-- USUARIOS -->
 
 <button
 id="botonUsuarios"
 class="boton-admin hidden"
-onclick="togglePanel('usuariosAdmin','botonUsuarios')"
->
-<span>👥</span>
-Usuarios
+onclick="togglePanel('usuariosAdmin','botonUsuarios')">
+<span>👥</span>Usuarios
 </button>
-
-
-<!-- CLIENTES -->
 
 <button
 id="botonClientes"
 class="boton-admin"
-onclick="togglePanel('clientesAdmin','botonClientes')"
->
-<span>🎁</span>
-Clientes y premios
+onclick="togglePanel('clientesAdmin','botonClientes')">
+<span>🎁</span>Clientes y premios
 </button>
-
-
-<!-- CORTES -->
 
 <button
 id="botonCortes"
 class="boton-admin"
-onclick="togglePanel('cortesAdmin','botonCortes')"
->
-<span>📊</span>
-Cortes
+onclick="togglePanel('cortesAdmin','botonCortes')">
+<span>📊</span>Cortes
 </button>
-
-
-<!-- TURNO -->
 
 <button
 id="botonTurno"
 class="boton-admin"
-onclick="togglePanel('turnoAdmin','botonTurno')"
->
-<span>⚙️</span>
-Turno
+onclick="togglePanel('turnoAdmin','botonTurno')">
+<span>⚙️</span>Turno
 </button>
 
 </div>
@@ -655,20 +531,11 @@ Turno
 </div>
 
 
-<!-- ==================================================
-     PANEL PRODUCTOS
-================================================== -->
-
 <div
 id="productosAdmin"
-class="card panel-admin hidden"
->
+class="card panel-admin hidden">
 
-
-<h2>
-📦 Productos
-</h2>
-
+<h2>📦 Productos</h2>
 
 <p class="info-pequena">
 
@@ -683,224 +550,132 @@ automáticamente en el menú digital.
 
 </p>
 
-
 <hr class="separador">
 
+<h3>➕ Nuevo producto</h3>
 
-<h3>
-➕ Nuevo producto
-</h3>
-
-
-<label>
-Nombre del producto
-</label>
-
+<label>Nombre del producto</label>
 
 <input
 id="nuevoProductoNombre"
-placeholder="Ej. Elote con Takis"
->
+placeholder="Ej. Elote con Takis">
 
-
-<label>
-Categoría
-</label>
-
+<label>Categoría</label>
 
 <input
 id="nuevoProductoCategoria"
-placeholder="Ej. Elotes"
->
+placeholder="Ej. Elotes">
 
-
-<label>
-Costo para Elotemanía
-</label>
-
+<label>Costo para Elotemanía</label>
 
 <input
 id="nuevoProductoCosto"
 type="number"
 step="0.01"
 min="0"
-placeholder="Ej. 25"
->
+placeholder="Ej. 25">
 
-
-<label>
-Precio de venta
-</label>
-
+<label>Precio de venta</label>
 
 <input
 id="nuevoProductoPrecio"
 type="number"
 step="0.01"
 min="0"
-placeholder="Ej. 60"
->
-
+placeholder="Ej. 60">
 
 <button
 class="btn-gold"
 style="width:100%"
-onclick="agregarProductoNuevo()"
->
+onclick="agregarProductoNuevo()">
 ➕ Guardar producto
 </button>
 
-
-<div id="productoResultado">
-</div>
-
+<div id="productoResultado"></div>
 
 <hr class="separador">
 
-
-<h3>
-📋 Productos actuales
-</h3>
-
+<h3>📋 Productos actuales</h3>
 
 <div id="listaProductosAdmin">
 Cargando...
 </div>
 
-
 </div>
 
-
-<!-- ==================================================
-     PANEL GANANCIAS
-================================================== -->
 
 <div
 id="gananciasAdmin"
-class="card panel-admin hidden"
->
+class="card panel-admin hidden">
 
-
-<h2>
-📈 Margen y ganancias
-</h2>
-
+<h2>📈 Margen y ganancias</h2>
 
 <p class="info-pequena">
-
-Esta información solamente está disponible
-para Christian.
-
+Esta información solamente está disponible para Christian.
 </p>
-
 
 <div class="grid">
 
-
 <div class="stat">
-
 <span>Ventas</span>
-
-<b id="gananciasVentas">
-$0
-</b>
-
+<b id="gananciasVentas">$0</b>
 </div>
 
-
 <div class="stat">
-
 <span>Costos</span>
-
-<b id="gananciasCostos">
-$0
-</b>
-
+<b id="gananciasCostos">$0</b>
 </div>
 
-
 <div class="stat">
-
 <span>Ganancia</span>
-
-<b id="gananciasUtilidad">
-$0
-</b>
-
+<b id="gananciasUtilidad">$0</b>
 </div>
-
 
 <div class="stat">
-
 <span>Margen</span>
-
-<b id="gananciasMargen">
-0%
-</b>
-
+<b id="gananciasMargen">0%</b>
 </div>
 
-
 </div>
-
 
 <hr class="separador">
 
-
-<h3>
-📦 Ganancia por producto
-</h3>
-
+<h3>📦 Ganancia por producto</h3>
 
 <div id="gananciasProductos">
 Cargando...
 </div>
 
-
 </div>
 
 
-<!-- ==================================================
-     PANEL USUARIOS
-================================================== -->
-
 <div
 id="usuariosAdmin"
-class="card panel-admin hidden"
->
+class="card panel-admin hidden">
 
-
-<h2>
-👥 Usuarios
-</h2>
-
+<h2>👥 Usuarios</h2>
 
 <p class="info-pequena">
-
-Solo Christian puede crear o desactivar
-usuarios.
-
+Solo Christian puede crear, activar, desactivar o eliminar usuarios.
 </p>
-
 
 <input
 id="nuevoUsuario"
-placeholder="Nuevo usuario"
->
-
+placeholder="Nuevo usuario">
 
 <input
 id="nuevoUsuarioNombre"
-placeholder="Nombre"
->
+placeholder="Nombre">
 
+<input
+id="nuevoUsuarioCorreo"
+type="email"
+placeholder="Correo electrónico">
 
 <input
 id="nuevoUsuarioPin"
 type="password"
-placeholder="PIN"
->
-
+placeholder="PIN">
 
 <select id="nuevoUsuarioRol">
 
@@ -914,147 +689,92 @@ Administrador
 
 </select>
 
-
 <button
 class="btn-gold"
 style="width:100%"
-onclick="crearUsuario()"
->
+onclick="crearUsuario()">
 ➕ Crear usuario
 </button>
 
-
-<div id="usuarioResultado">
-</div>
-
+<div id="usuarioResultado"></div>
 
 <hr class="separador">
 
+<h3>📋 Usuarios actuales</h3>
 
-<h3>
-📋 Usuarios actuales
-</h3>
-
-
-<div id="listaUsuarios">
-</div>
-
+<div id="listaUsuarios"></div>
 
 </div>
 
-
-<!-- ==================================================
-     PANEL CLIENTES
-================================================== -->
 
 <div
 id="clientesAdmin"
-class="card panel-admin hidden"
->
+class="card panel-admin hidden">
 
-
-<h2>
-🎁 Clientes y premios
-</h2>
-
+<h2>🎁 Clientes y premios</h2>
 
 <input
 id="buscarAdmin"
-placeholder="WhatsApp del cliente"
->
-
+placeholder="WhatsApp del cliente">
 
 <button
 class="btn-blue"
 style="width:100%"
-onclick="buscarClienteAdmin()"
->
+onclick="buscarClienteAdmin()">
 🔎 Buscar cliente
 </button>
 
-
-<div id="adminClienteResultado">
-</div>
-
+<div id="adminClienteResultado"></div>
 
 </div>
 
-
-<!-- ==================================================
-     PANEL CORTES
-================================================== -->
 
 <div
 id="cortesAdmin"
-class="card panel-admin hidden"
->
+class="card panel-admin hidden">
 
-
-<h2>
-📊 Cortes
-</h2>
-
+<h2>📊 Cortes</h2>
 
 <button
 class="btn-purple"
 style="width:100%"
-onclick="verCortes()"
->
+onclick="verCortes()">
 📊 Ver cortes
 </button>
 
-
-<div id="listaCortes">
-</div>
-
+<div id="listaCortes"></div>
 
 </div>
 
-
-<!-- ==================================================
-     PANEL TURNO
-================================================== -->
 
 <div
 id="turnoAdmin"
-class="card panel-admin hidden"
->
+class="card panel-admin hidden">
 
-
-<h2>
-⚙️ Turno
-</h2>
-
+<h2>⚙️ Turno</h2>
 
 <button
 class="btn-gold"
 style="width:100%"
-onclick="hacerCorte()"
->
+onclick="hacerCorte()">
 💰 Cerrar turno
 </button>
 
-
 <button
 class="btn-red"
 style="width:100%;margin-top:10px"
-onclick="borrarUltimoCorte()"
->
+onclick="borrarUltimoCorte()">
 🗑️ Borrar último corte
 </button>
 
-
 <button
 class="btn-red"
 style="width:100%;margin-top:10px"
-onclick="borrarHistorial()"
->
+onclick="borrarHistorial()">
 🗑️ Borrar todo el historial
 </button>
 
-
 </div>
-
 
 </div>
 
@@ -1062,42 +782,22 @@ onclick="borrarHistorial()"
 
 </div>
 
-
 <script>
-
-/* ==================================================
-   CONFIGURACIÓN
-================================================== */
 
 const API="/api/supabase";
 
-
-/* ==================================================
-   VARIABLES
-================================================== */
-
 let productos=[];
-
 let carrito=[];
-
 let clientes=[];
-
 let currentUser=null;
-
 let currentRole=null;
-
 let clienteSeleccionado=null;
-
 
 let configuracion={
   puntos_para_premio:10,
   premio:"Premio"
 };
 
-
-/* ==================================================
-   API
-================================================== */
 
 async function api(
   tabla,
@@ -1106,23 +806,20 @@ async function api(
   params={}
 ){
 
-  const url=
-    new URL(
-      API,
-      window.location.origin
-    );
-
+  const url=new URL(
+    API,
+    window.location.origin
+  );
 
   url.searchParams.set(
     "table",
     tabla
   );
 
-
   Object.keys(params).forEach(k=>{
 
     if(
-      params[k]!==undefined &&
+      params[k]!==undefined&&
       params[k]!==null
     ){
 
@@ -1139,8 +836,7 @@ async function api(
   const opciones={
     method:metodo,
     headers:{
-      "Content-Type":
-        "application/json"
+      "Content-Type":"application/json"
     }
   };
 
@@ -1170,16 +866,14 @@ async function api(
   try{
 
     datos=
-      texto
-      ?
-      JSON.parse(texto)
-      :
+      texto?
+      JSON.parse(texto):
       null;
 
   }catch{
 
     throw new Error(
-      texto ||
+      texto||
       "Respuesta inválida"
     );
 
@@ -1189,9 +883,9 @@ async function api(
   if(!respuesta.ok){
 
     throw new Error(
-      datos?.message ||
-      datos?.error ||
-      datos?.details ||
+      datos?.message||
+      datos?.error||
+      datos?.details||
       "Error en Supabase"
     );
 
@@ -1202,10 +896,6 @@ async function api(
 
 }
 
-
-/* ==================================================
-   INICIO
-================================================== */
 
 async function iniciar(){
 
@@ -1232,20 +922,14 @@ async function iniciar(){
 
 }
 
-
 iniciar();
 
-
-/* ==================================================
-   NAVEGACIÓN
-================================================== */
 
 function mostrarVenta(){
 
   document
     .getElementById("ventaSection")
     .classList.remove("hidden");
-
 
   document
     .getElementById("accesoSection")
@@ -1260,17 +944,12 @@ function mostrarAcceso(){
     .getElementById("ventaSection")
     .classList.add("hidden");
 
-
   document
     .getElementById("accesoSection")
     .classList.remove("hidden");
 
 }
 
-
-/* ==================================================
-   ABRIR / CERRAR APARTADOS ADMIN
-================================================== */
 
 function togglePanel(
   id,
@@ -1280,25 +959,12 @@ function togglePanel(
   const panel=
     document.getElementById(id);
 
-
-  if(!panel){
-
-    return;
-
-  }
+  if(!panel)return;
 
 
   const estabaCerrado=
-    panel.classList.contains(
-      "hidden"
-    );
+    panel.classList.contains("hidden");
 
-
-  /*
-    Cerramos todos los paneles
-    para que solamente uno quede
-    abierto a la vez.
-  */
 
   const paneles=[
     "productosAdmin",
@@ -1313,9 +979,7 @@ function togglePanel(
   paneles.forEach(panelId=>{
 
     const elemento=
-      document.getElementById(
-        panelId
-      );
+      document.getElementById(panelId);
 
     if(elemento){
 
@@ -1328,11 +992,6 @@ function togglePanel(
   });
 
 
-  /*
-    Si estaba cerrado,
-    lo abrimos.
-  */
-
   if(estabaCerrado){
 
     panel.classList.remove(
@@ -1340,32 +999,20 @@ function togglePanel(
     );
 
 
-    if(id==="productosAdmin"){
-
+    if(id==="productosAdmin")
       cargarProductosAdmin();
 
-    }
 
-
-    if(id==="gananciasAdmin"){
-
+    if(id==="gananciasAdmin")
       cargarGanancias();
 
-    }
 
-
-    if(id==="usuariosAdmin"){
-
+    if(id==="usuariosAdmin")
       cargarUsuarios();
 
-    }
 
-
-    if(id==="cortesAdmin"){
-
+    if(id==="cortesAdmin")
       verCortes();
-
-    }
 
 
     panel.scrollIntoView({
@@ -1377,10 +1024,6 @@ function togglePanel(
 
 }
 
-
-/* ==================================================
-   CONFIGURACIÓN
-================================================== */
 
 async function cargarConfiguracion(){
 
@@ -1398,16 +1041,12 @@ async function cargarConfiguracion(){
       );
 
 
-    if(
-      datos?.length
-    ){
+    if(datos?.length){
 
       configuracion.puntos_para_premio=
         Number(
-          datos[0]
-            .puntos_para_premio
-        ) ||
-        10;
+          datos[0].puntos_para_premio
+        )||10;
 
     }
 
@@ -1419,10 +1058,6 @@ async function cargarConfiguracion(){
 
 }
 
-
-/* ==================================================
-   PRODUCTOS
-================================================== */
 
 async function cargarProductos(){
 
@@ -1452,9 +1087,7 @@ function renderProductos(){
     );
 
 
-  if(
-    !productos.length
-  ){
+  if(!productos.length){
 
     contenedor.innerHTML=
       "No hay productos activos.";
@@ -1482,30 +1115,23 @@ function renderProductos(){
     div.innerHTML=`
 
       <strong>
-        ${escapeHtml(
-          producto.nombre
-        )}
+        ${escapeHtml(producto.nombre)}
       </strong>
 
       <div>
-        $${dinero(
-          producto.precio
-        )}
+        $${dinero(producto.precio)}
       </div>
 
       <button
         class="btn-gold"
-        onclick="agregarProducto(${producto.id})"
-      >
+        onclick="agregarProducto(${producto.id})">
         Agregar
       </button>
 
     `;
 
 
-    contenedor.appendChild(
-      div
-    );
+    contenedor.appendChild(div);
 
   });
 
@@ -1516,24 +1142,16 @@ function agregarProducto(id){
 
   const producto=
     productos.find(
-      p =>
-        Number(p.id)===
-        Number(id)
+      p=>Number(p.id)===Number(id)
     );
 
 
-  if(!producto){
-
-    return;
-
-  }
+  if(!producto)return;
 
 
   const existente=
     carrito.find(
-      p =>
-        Number(p.id)===
-        Number(id)
+      p=>Number(p.id)===Number(id)
     );
 
 
@@ -1545,21 +1163,17 @@ function agregarProducto(id){
 
     carrito.push({
 
-      id:
-        producto.id,
+      id:producto.id,
 
-      nombre:
-        producto.nombre,
+      nombre:producto.nombre,
 
-      precio:
-        Number(
-          producto.precio
-        ),
+      precio:Number(
+        producto.precio
+      ),
 
-      costo:
-        Number(
-          producto.costo||0
-        ),
+      costo:Number(
+        producto.costo||0
+      ),
 
       cantidad:1
 
@@ -1577,17 +1191,11 @@ function quitarProducto(id){
 
   const index=
     carrito.findIndex(
-      p =>
-        Number(p.id)===
-        Number(id)
+      p=>Number(p.id)===Number(id)
     );
 
 
-  if(index===-1){
-
-    return;
-
-  }
+  if(index===-1)return;
 
 
   if(
@@ -1619,21 +1227,14 @@ function renderCarrito(){
     );
 
 
-  if(
-    !carrito.length
-  ){
+  if(!carrito.length){
 
     contenedor.innerHTML=
       "No hay productos.";
 
-
     document
-      .getElementById(
-        "total"
-      )
-      .textContent=
-      "0.00";
-
+      .getElementById("total")
+      .textContent="0.00";
 
     return;
 
@@ -1670,44 +1271,36 @@ function renderCarrito(){
       <div>
 
         <strong>
-          ${escapeHtml(
-            item.nombre
-          )}
+          ${escapeHtml(item.nombre)}
         </strong>
 
         <br>
 
         ${item.cantidad}
         ×
-        $${dinero(
-          item.precio
-        )}
+        $${dinero(item.precio)}
 
       </div>
 
+
       <button
         class="btn-red"
-        onclick="quitarProducto(${item.id})"
-      >
+        onclick="quitarProducto(${item.id})">
         −
       </button>
 
     `;
 
 
-    contenedor.appendChild(
-      div
-    );
+    contenedor.appendChild(div);
 
   });
 
 
   document
-    .getElementById(
-      "total"
-    )
+    .getElementById("total")
     .textContent=
-    dinero(total);
+      dinero(total);
 
 }
 
@@ -1715,10 +1308,7 @@ function renderCarrito(){
 function obtenerTotal(){
 
   return carrito.reduce(
-    (
-      total,
-      item
-    ) =>
+    (total,item)=>
       total+
       item.precio*
       item.cantidad,
@@ -1731,10 +1321,7 @@ function obtenerTotal(){
 function obtenerUtilidad(){
 
   return carrito.reduce(
-    (
-      total,
-      item
-    ) =>
+    (total,item)=>
       total+
       (
         item.precio-
@@ -1746,10 +1333,6 @@ function obtenerUtilidad(){
 
 }
 
-
-/* ==================================================
-   CLIENTES
-================================================== */
 
 async function cargarClientes(){
 
@@ -1791,23 +1374,14 @@ function numeroWhatsapp(
     );
 
 
-  if(
-    n.length===10
-  ){
-
+  if(n.length===10)
     n="52"+n;
-
-  }
 
 
   return n;
 
 }
 
-
-/* ==================================================
-   BUSCAR CLIENTE
-================================================== */
 
 async function buscarCliente(){
 
@@ -1848,9 +1422,7 @@ async function buscarCliente(){
       );
 
 
-    if(
-      encontrados.length
-    ){
+    if(encontrados.length){
 
       clienteSeleccionado=
         encontrados[0];
@@ -1861,9 +1433,8 @@ async function buscarCliente(){
           "nombreCliente"
         )
         .value=
-        clienteSeleccionado
-          .nombre||
-        "";
+          clienteSeleccionado
+            .nombre||"";
 
 
       mostrarClienteResultado(
@@ -1882,21 +1453,23 @@ async function buscarCliente(){
         )
         .innerHTML=`
 
-        <div class="alerta">
+          <div class="alerta">
 
-          👤 Cliente nuevo.
+            👤 Cliente nuevo.
 
-          <br><br>
+            <br><br>
 
-          Empezará con
-          <strong>
-          ${configuracion.puntos_para_premio}
-          </strong>
-          compras restantes.
+            Empezará con
 
-        </div>
+            <strong>
+              ${configuracion.puntos_para_premio}
+            </strong>
 
-      `;
+            compras restantes.
+
+          </div>
+
+        `;
 
     }
 
@@ -1917,9 +1490,7 @@ function mostrarClienteResultado(
 ){
 
   const puntos=
-    Number(
-      cliente.puntos
-    );
+    Number(cliente.puntos);
 
 
   let html=`
@@ -1928,17 +1499,13 @@ function mostrarClienteResultado(
 
       <strong>
         👤
-        ${escapeHtml(
-          cliente.nombre
-        )}
+        ${escapeHtml(cliente.nombre)}
       </strong>
 
       <br><br>
 
       📱
-      ${escapeHtml(
-        cliente.whatsapp
-      )}
+      ${escapeHtml(cliente.whatsapp)}
 
       <br><br>
 
@@ -1951,16 +1518,14 @@ function mostrarClienteResultado(
   `;
 
 
-  if(
-    puntos<=0
-  ){
+  if(puntos<=0){
 
     html+=`
 
       <div class="premio">
 
-        🎉 ¡Ya puede solicitar
-        su Premio!
+        🎉
+        ¡Ya puede solicitar su Premio!
 
       </div>
 
@@ -1973,9 +1538,11 @@ function mostrarClienteResultado(
       <div class="alerta">
 
         ⭐ Le faltan
+
         <strong>
           ${puntos}
         </strong>
+
         compras para su Premio.
 
       </div>
@@ -1985,8 +1552,7 @@ function mostrarClienteResultado(
   }
 
 
-  html+=
-    "</div>";
+  html+="</div>";
 
 
   document
@@ -1994,20 +1560,14 @@ function mostrarClienteResultado(
       "clienteResultado"
     )
     .innerHTML=
-    html;
+      html;
 
 }
 
 
-/* ==================================================
-   REGISTRAR VENTA
-================================================== */
-
 async function registrarVenta(){
 
-  if(
-    !carrito.length
-  ){
+  if(!carrito.length){
 
     alert(
       "Agrega al menos un producto."
@@ -2078,18 +1638,12 @@ async function registrarVenta(){
       );
 
 
-    if(
-      encontrados.length
-    ){
-
+    if(encontrados.length)
       clienteActual=
         encontrados[0];
 
-    }
-
 
     let puntosAntes;
-
     let puntosDespues;
 
 
@@ -2104,7 +1658,7 @@ async function registrarVenta(){
       if(
         !Number.isFinite(
           puntosAntes
-        ) ||
+        )||
         puntosAntes<0
       ){
 
@@ -2196,17 +1750,13 @@ async function registrarVenta(){
           cliente_id:
             clienteActual.id,
 
-          total:
-            total,
+          total:total,
 
-          utilidad:
-            utilidad,
+          utilidad:utilidad,
 
-          puntos_ganados:
-            1,
+          puntos_ganados:1,
 
-          corte_id:
-            null
+          corte_id:null
         }
       );
 
@@ -2287,16 +1837,14 @@ Gracias por tu compra.
           href="${url}"
           target="_blank"
           style="
-            display:block;
-            text-align:center;
-            background:#25D366;
-            color:white;
-            padding:14px;
-            border-radius:10px;
-            text-decoration:none;
-            font-weight:bold
-          "
-        >
+          display:block;
+          text-align:center;
+          background:#25D366;
+          color:white;
+          padding:14px;
+          border-radius:10px;
+          text-decoration:none;
+          font-weight:bold">
 
           📲 Abrir WhatsApp
 
@@ -2343,10 +1891,7 @@ Gracias por tu compra.
           ?
           `
           <div class="premio">
-
-            🎉 ¡Ya puede solicitar
-            su Premio!
-
+            🎉 ¡Ya puede solicitar su Premio!
           </div>
           `
           :
@@ -2368,6 +1913,7 @@ Gracias por tu compra.
 
     await actualizarEstadisticas();
 
+
   }catch(error){
 
     console.error(error);
@@ -2382,17 +1928,11 @@ Gracias por tu compra.
 }
 
 
-/* ==================================================
-   LOGIN
-================================================== */
-
 async function login(){
 
   const usuario=
     document
-      .getElementById(
-        "usuario"
-      )
+      .getElementById("usuario")
       .value
       .trim()
       .toLowerCase();
@@ -2400,17 +1940,12 @@ async function login(){
 
   const pin=
     document
-      .getElementById(
-        "pin"
-      )
+      .getElementById("pin")
       .value
       .trim();
 
 
-  if(
-    !usuario||
-    !pin
-  ){
+  if(!usuario||!pin){
 
     document
       .getElementById(
@@ -2418,13 +1953,11 @@ async function login(){
       )
       .innerHTML=`
 
-      <div class="alerta">
+        <div class="alerta">
+          ⚠️ Escribe usuario y PIN.
+        </div>
 
-        ⚠️ Escribe usuario y PIN.
-
-      </div>
-
-    `;
+      `;
 
     return;
 
@@ -2447,24 +1980,18 @@ async function login(){
 
     const user=
       usuarios.find(
-        u =>
-
+        u=>
           String(
             u.usuario||""
           )
           .trim()
-          .toLowerCase()===
-          usuario
-
-          &&
+          .toLowerCase()
+          ===usuario&&
 
           String(
             u.pin||""
-          )
-          .trim()===
-          pin
-
-          &&
+          ).trim()
+          ===pin&&
 
           u.activo===true
       );
@@ -2478,13 +2005,11 @@ async function login(){
         )
         .innerHTML=`
 
-        <div class="alerta">
+          <div class="alerta">
+            ❌ Usuario o PIN incorrecto.
+          </div>
 
-          ❌ Usuario o PIN incorrecto.
-
-        </div>
-
-      `;
+        `;
 
       return;
 
@@ -2498,8 +2023,7 @@ async function login(){
     currentRole=
       String(
         user.rol||"empleado"
-      )
-      .toLowerCase();
+      ).toLowerCase();
 
 
     document
@@ -2514,8 +2038,8 @@ async function login(){
       currentRole==="superadmin"||
       String(
         user.usuario
-      )
-      .toLowerCase()==="christian";
+      ).toLowerCase()
+      ==="christian";
 
 
     const esAdmin=
@@ -2529,50 +2053,50 @@ async function login(){
       )
       .innerHTML=`
 
-      <div class="premio">
+        <div class="premio">
 
-        ${
-          esChristian
-          ?"👑"
-          :
-          esAdmin
-          ?"🛡️"
-          :
-          "👤"
-        }
+          ${
+            esChristian
+            ?"👑"
+            :
+            esAdmin
+            ?"🛡️"
+            :
+            "👤"
+          }
 
-        Bienvenido
+          Bienvenido
 
-        <strong>
-          ${escapeHtml(
-            user.nombre||
-            user.usuario
-          )}
-        </strong>
+          <strong>
+            ${escapeHtml(
+              user.nombre||
+              user.usuario
+            )}
+          </strong>
 
-        <br><br>
+          <br><br>
 
-        Rol:
+          Rol:
 
-        <strong>
+          <strong>
 
-        ${
-          esChristian
-          ?
-          "Administrador de Christian"
-          :
-          currentRole==="admin"
-          ?
-          "Administrador"
-          :
-          "Empleado"
-        }
+            ${
+              esChristian
+              ?
+              "Administrador de Christian"
+              :
+              currentRole==="admin"
+              ?
+              "Administrador"
+              :
+              "Empleado"
+            }
 
-        </strong>
+          </strong>
 
-      </div>
+        </div>
 
-    `;
+      `;
 
 
     document
@@ -2584,6 +2108,7 @@ async function login(){
 
     aplicarPermisos();
 
+
   }catch(error){
 
     console.error(error);
@@ -2594,28 +2119,24 @@ async function login(){
       )
       .innerHTML=`
 
-      <div class="alerta">
+        <div class="alerta">
 
-        ❌ No se pudo iniciar sesión.
+          ❌ No se pudo iniciar sesión.
 
-        <br><br>
+          <br><br>
 
-        ${escapeHtml(
-          error.message
-        )}
+          ${escapeHtml(
+            error.message
+          )}
 
-      </div>
+        </div>
 
-    `;
+      `;
 
   }
 
 }
 
-
-/* ==================================================
-   PERMISOS
-================================================== */
 
 function aplicarPermisos(){
 
@@ -2623,18 +2144,14 @@ function aplicarPermisos(){
     currentRole==="superadmin"||
     String(
       currentUser||""
-    )
-    .toLowerCase()==="christian";
+    ).toLowerCase()
+    ==="christian";
 
 
   const esAdmin=
     esChristian||
     currentRole==="admin";
 
-
-  /*
-    BOTÓN PRODUCTOS
-  */
 
   document
     .getElementById(
@@ -2647,11 +2164,6 @@ function aplicarPermisos(){
     );
 
 
-  /*
-    BOTÓN GANANCIAS
-    SOLAMENTE CHRISTIAN
-  */
-
   document
     .getElementById(
       "botonGanancias"
@@ -2663,11 +2175,6 @@ function aplicarPermisos(){
     );
 
 
-  /*
-    BOTÓN USUARIOS
-    SOLAMENTE CHRISTIAN
-  */
-
   document
     .getElementById(
       "botonUsuarios"
@@ -2678,10 +2185,6 @@ function aplicarPermisos(){
       !esChristian
     );
 
-
-  /*
-    CLIENTES Y CORTES
-  */
 
   document
     .getElementById(
@@ -2716,10 +2219,6 @@ function aplicarPermisos(){
     );
 
 
-  /*
-    UTILIDAD
-  */
-
   document
     .getElementById(
       "utilidadStat"
@@ -2731,29 +2230,15 @@ function aplicarPermisos(){
     );
 
 
-  /*
-    Cargar información
-  */
-
-  if(esAdmin){
-
+  if(esAdmin)
     cargarProductosAdmin();
 
-  }
 
-
-  if(esChristian){
-
+  if(esChristian)
     cargarUsuarios();
-
-  }
 
 }
 
-
-/* ==================================================
-   GANANCIAS
-================================================== */
 
 async function cargarGanancias(){
 
@@ -2761,15 +2246,11 @@ async function cargarGanancias(){
     currentRole==="superadmin"||
     String(
       currentUser||""
-    )
-    .toLowerCase()==="christian";
+    ).toLowerCase()
+    ==="christian";
 
 
-  if(!esChristian){
-
-    return;
-
-  }
+  if(!esChristian)return;
 
 
   try{
@@ -2786,7 +2267,6 @@ async function cargarGanancias(){
 
 
     let ventasTotal=0;
-
     let utilidadTotal=0;
 
 
@@ -2817,8 +2297,7 @@ async function cargarGanancias(){
       (
         utilidadTotal/
         ventasTotal
-      )*
-      100
+      )*100
       :
       0;
 
@@ -2828,10 +2307,10 @@ async function cargarGanancias(){
         "gananciasVentas"
       )
       .textContent=
-      "$"+
-      dinero(
-        ventasTotal
-      );
+        "$"+
+        dinero(
+          ventasTotal
+        );
 
 
     document
@@ -2839,10 +2318,10 @@ async function cargarGanancias(){
         "gananciasCostos"
       )
       .textContent=
-      "$"+
-      dinero(
-        costosTotal
-      );
+        "$"+
+        dinero(
+          costosTotal
+        );
 
 
     document
@@ -2850,10 +2329,10 @@ async function cargarGanancias(){
         "gananciasUtilidad"
       )
       .textContent=
-      "$"+
-      dinero(
-        utilidadTotal
-      );
+        "$"+
+        dinero(
+          utilidadTotal
+        );
 
 
     document
@@ -2861,10 +2340,10 @@ async function cargarGanancias(){
         "gananciasMargen"
       )
       .textContent=
-      dinero(
-        margen
-      )+
-      "%";
+        dinero(
+          margen
+        )+
+        "%";
 
 
     const productosLista=
@@ -2904,8 +2383,7 @@ async function cargarGanancias(){
 
 
       const ganancia=
-        precio-
-        costo;
+        precio-costo;
 
 
       const margenProducto=
@@ -2914,8 +2392,7 @@ async function cargarGanancias(){
         (
           ganancia/
           precio
-        )*
-        100
+        )*100
         :
         0;
 
@@ -2933,16 +2410,13 @@ async function cargarGanancias(){
       div.innerHTML=`
 
         <div class="titulo">
-
-          ${escapeHtml(
-            p.nombre
-          )}
-
+          ${escapeHtml(p.nombre)}
         </div>
 
         <br>
 
         💵 Venta:
+
         <strong>
           $${dinero(precio)}
         </strong>
@@ -2950,6 +2424,7 @@ async function cargarGanancias(){
         <br><br>
 
         💰 Costo:
+
         <strong>
           $${dinero(costo)}
         </strong>
@@ -2959,11 +2434,7 @@ async function cargarGanancias(){
         📈 Ganancia:
 
         <span class="ganancia">
-
-          $${dinero(
-            ganancia
-          )}
-
+          $${dinero(ganancia)}
         </span>
 
         <br><br>
@@ -2971,24 +2442,20 @@ async function cargarGanancias(){
         📊 Margen:
 
         <strong>
-          ${dinero(
-            margenProducto
-          )}%
+          ${dinero(margenProducto)}%
         </strong>
 
       `;
 
 
-      contenedor.appendChild(
-        div
-      );
+      contenedor.appendChild(div);
 
     });
+
 
   }catch(error){
 
     console.error(error);
-
 
     document
       .getElementById(
@@ -2996,12 +2463,9 @@ async function cargarGanancias(){
       )
       .innerHTML=`
 
-      <div class="alerta">
-
-        ❌ No se pudieron cargar
-        las ganancias.
-
-      </div>
+        <div class="alerta">
+          ❌ No se pudieron cargar las ganancias.
+        </div>
 
       `;
 
@@ -3010,10 +2474,6 @@ async function cargarGanancias(){
 }
 
 
-/* ==================================================
-   PRODUCTOS ADMIN
-================================================== */
-
 async function cargarProductosAdmin(){
 
   const esAdmin=
@@ -3021,15 +2481,11 @@ async function cargarProductosAdmin(){
     currentRole==="admin"||
     String(
       currentUser||""
-    )
-    .toLowerCase()==="christian";
+    ).toLowerCase()
+    ==="christian";
 
 
-  if(!esAdmin){
-
-    return;
-
-  }
+  if(!esAdmin)return;
 
 
   try{
@@ -3070,8 +2526,7 @@ async function cargarProductosAdmin(){
 
 
       const utilidad=
-        precio-
-        costo;
+        precio-costo;
 
 
       const margen=
@@ -3080,8 +2535,7 @@ async function cargarProductosAdmin(){
         (
           utilidad/
           precio
-        )*
-        100
+        )*100
         :
         0;
 
@@ -3103,16 +2557,13 @@ async function cargarProductosAdmin(){
       div.innerHTML=`
 
         <div class="titulo">
-
-          ${escapeHtml(
-            p.nombre
-          )}
-
+          ${escapeHtml(p.nombre)}
         </div>
 
         <br>
 
         📂 Categoría:
+
         <strong>
           ${escapeHtml(
             p.categoria||
@@ -3123,6 +2574,7 @@ async function cargarProductosAdmin(){
         <br><br>
 
         💰 Costo:
+
         <strong>
           $${dinero(costo)}
         </strong>
@@ -3130,6 +2582,7 @@ async function cargarProductosAdmin(){
         <br><br>
 
         💵 Venta:
+
         <strong>
           $${dinero(precio)}
         </strong>
@@ -3145,6 +2598,7 @@ async function cargarProductosAdmin(){
         <br><br>
 
         📊 Margen:
+
         <strong>
           ${dinero(margen)}%
         </strong>
@@ -3174,8 +2628,7 @@ async function cargarProductosAdmin(){
         <button
           class="btn-blue"
           style="width:100%"
-          onclick="editarCostoPrecio(${p.id})"
-        >
+          onclick="editarCostoPrecio(${p.id})">
 
           ✏️ Cambiar costo y precio
 
@@ -3185,8 +2638,7 @@ async function cargarProductosAdmin(){
         <button
           class="${activo?'btn-red':'btn-green'}"
           style="width:100%;margin-top:8px"
-          onclick="cambiarEstadoProducto(${p.id},${!activo})"
-        >
+          onclick="cambiarEstadoProducto(${p.id},${!activo})">
 
           ${
             activo
@@ -3201,11 +2653,10 @@ async function cargarProductosAdmin(){
       `;
 
 
-      contenedor.appendChild(
-        div
-      );
+      contenedor.appendChild(div);
 
     });
+
 
   }catch(error){
 
@@ -3216,10 +2667,6 @@ async function cargarProductosAdmin(){
 }
 
 
-/* ==================================================
-   AGREGAR PRODUCTO
-================================================== */
-
 async function agregarProductoNuevo(){
 
   const esAdmin=
@@ -3227,8 +2674,8 @@ async function agregarProductoNuevo(){
     currentRole==="admin"||
     String(
       currentUser||""
-    )
-    .toLowerCase()==="christian";
+    ).toLowerCase()
+    ==="christian";
 
 
   if(!esAdmin){
@@ -3325,21 +2772,13 @@ async function agregarProductoNuevo(){
       "productos",
       "POST",
       {
-        nombre:
-          nombre,
-
+        nombre:nombre,
         categoria:
           categoria||
           "General",
-
-        costo:
-          costo,
-
-        precio:
-          precio,
-
-        activo:
-          true
+        costo:costo,
+        precio:precio,
+        activo:true
       }
     );
 
@@ -3378,23 +2817,23 @@ async function agregarProductoNuevo(){
       )
       .innerHTML=`
 
-      <div class="premio">
+        <div class="premio">
 
-        ✅ Producto agregado correctamente.
+          ✅ Producto agregado correctamente.
 
-        <br><br>
+          <br><br>
 
-        🌐 Ya puede aparecer
-        en el menú digital.
+          🌐 Ya puede aparecer en el menú digital.
 
-      </div>
+        </div>
 
-    `;
+      `;
 
 
     await cargarProductos();
 
     await cargarProductosAdmin();
+
 
   }catch(error){
 
@@ -3408,21 +2847,15 @@ async function agregarProductoNuevo(){
 }
 
 
-/* ==================================================
-   EDITAR COSTO Y PRECIO
-================================================== */
-
-async function editarCostoPrecio(
-  id
-){
+async function editarCostoPrecio(id){
 
   const esAdmin=
     currentRole==="superadmin"||
     currentRole==="admin"||
     String(
       currentUser||""
-    )
-    .toLowerCase()==="christian";
+    ).toLowerCase()
+    ==="christian";
 
 
   if(!esAdmin){
@@ -3438,9 +2871,7 @@ async function editarCostoPrecio(
 
   let producto=
     productos.find(
-      p =>
-        Number(p.id)===
-        Number(id)
+      p=>Number(p.id)===Number(id)
     );
 
 
@@ -3454,17 +2885,14 @@ async function editarCostoPrecio(
         {
           select:"*",
           id:
-            "eq."+id,
+            "eq."+
+            id,
           limit:1
         }
       );
 
 
-    if(!lista.length){
-
-      return;
-
-    }
+    if(!lista.length)return;
 
 
     producto=
@@ -3482,11 +2910,7 @@ async function editarCostoPrecio(
     );
 
 
-  if(costo===null){
-
-    return;
-
-  }
+  if(costo===null)return;
 
 
   const precio=
@@ -3498,11 +2922,7 @@ async function editarCostoPrecio(
     );
 
 
-  if(precio===null){
-
-    return;
-
-  }
+  if(precio===null)return;
 
 
   const nuevoCosto=
@@ -3514,19 +2934,14 @@ async function editarCostoPrecio(
 
 
   if(
-
     !Number.isFinite(
       nuevoCosto
     )||
-
     nuevoCosto<0||
-
     !Number.isFinite(
       nuevoPrecio
     )||
-
     nuevoPrecio<0
-
   ){
 
     alert(
@@ -3546,13 +2961,13 @@ async function editarCostoPrecio(
       {
         costo:
           nuevoCosto,
-
         precio:
           nuevoPrecio
       },
       {
         id:
-          "eq."+id
+          "eq."+
+          id
       }
     );
 
@@ -3566,6 +2981,7 @@ async function editarCostoPrecio(
       "✅ Producto actualizado."
     );
 
+
   }catch(error){
 
     alert(
@@ -3578,10 +2994,6 @@ async function editarCostoPrecio(
 }
 
 
-/* ==================================================
-   ACTIVAR / DESACTIVAR PRODUCTO
-================================================== */
-
 async function cambiarEstadoProducto(
   id,
   activo
@@ -3592,8 +3004,8 @@ async function cambiarEstadoProducto(
     currentRole==="admin"||
     String(
       currentUser||""
-    )
-    .toLowerCase()==="christian";
+    ).toLowerCase()
+    ==="christian";
 
 
   if(!esAdmin){
@@ -3618,7 +3030,8 @@ async function cambiarEstadoProducto(
       },
       {
         id:
-          "eq."+id
+          "eq."+
+          id
       }
     );
 
@@ -3635,6 +3048,7 @@ async function cambiarEstadoProducto(
       :
       "🚫 Producto desactivado."
     );
+
 
   }catch(error){
 
@@ -3658,15 +3072,11 @@ async function cargarUsuarios(){
     currentRole==="superadmin"||
     String(
       currentUser||""
-    )
-    .toLowerCase()==="christian";
+    ).toLowerCase()
+    ==="christian";
 
 
-  if(!esChristian){
-
-    return;
-
-  }
+  if(!esChristian)return;
 
 
   try{
@@ -3707,8 +3117,8 @@ async function cargarUsuarios(){
       const esChristianUsuario=
         String(
           u.usuario||""
-        )
-        .toLowerCase()==="christian";
+        ).toLowerCase()
+        ==="christian";
 
 
       div.innerHTML=`
@@ -3724,8 +3134,18 @@ async function cargarUsuarios(){
         <br><br>
 
         Usuario:
+
         ${escapeHtml(
           u.usuario
+        )}
+
+        <br><br>
+
+        📧 Correo:
+
+        ${escapeHtml(
+          u.correo||
+          "Sin correo"
         )}
 
         <br><br>
@@ -3768,10 +3188,20 @@ async function cargarUsuarios(){
           <br><br>
 
           <button
-            class="${u.activo?'btn-red':'btn-green'}"
+            class="${
+              u.activo
+              ?
+              "btn-red"
+              :
+              "btn-green"
+            }"
             style="width:100%"
-            onclick="cambiarEstadoUsuario(${u.id},${!u.activo})"
-          >
+            onclick="
+              cambiarEstadoUsuario(
+                ${u.id},
+                ${!u.activo}
+              )
+            ">
 
             ${
               u.activo
@@ -3783,19 +3213,47 @@ async function cargarUsuarios(){
 
           </button>
 
+
+          <button
+            class="btn-red"
+            style="
+              width:100%;
+              margin-top:8px
+            "
+            onclick="
+              eliminarUsuario(
+                ${u.id}
+              )
+            ">
+
+            🗑️ Eliminar usuario
+
+          </button>
+
           `
           :
-          ""
+          `
+
+          <br><br>
+
+          <div class="info-pequena">
+
+            👑 Usuario protegido.
+            Christian no puede eliminarse
+            ni desactivarse.
+
+          </div>
+
+          `
         }
 
       `;
 
 
-      contenedor.appendChild(
-        div
-      );
+      contenedor.appendChild(div);
 
     });
+
 
   }catch(error){
 
@@ -3806,18 +3264,14 @@ async function cargarUsuarios(){
 }
 
 
-/* ==================================================
-   CREAR USUARIO
-================================================== */
-
 async function crearUsuario(){
 
   const esChristian=
     currentRole==="superadmin"||
     String(
       currentUser||""
-    )
-    .toLowerCase()==="christian";
+    ).toLowerCase()
+    ==="christian";
 
 
   if(!esChristian){
@@ -3850,6 +3304,16 @@ async function crearUsuario(){
       .trim();
 
 
+  const correo=
+    document
+      .getElementById(
+        "nuevoUsuarioCorreo"
+      )
+      .value
+      .trim()
+      .toLowerCase();
+
+
   const pin=
     document
       .getElementById(
@@ -3870,6 +3334,7 @@ async function crearUsuario(){
   if(
     !usuario||
     !nombre||
+    !correo||
     !pin
   ){
 
@@ -3897,12 +3362,11 @@ async function crearUsuario(){
 
     const existe=
       usuarios.some(
-        u =>
+        u=>
           String(
             u.usuario||""
-          )
-          .toLowerCase()===
-          usuario
+          ).toLowerCase()
+          ===usuario
       );
 
 
@@ -3910,6 +3374,27 @@ async function crearUsuario(){
 
       alert(
         "Ese usuario ya existe."
+      );
+
+      return;
+
+    }
+
+
+    const correoExiste=
+      usuarios.some(
+        u=>
+          String(
+            u.correo||""
+          ).toLowerCase()
+          ===correo
+      );
+
+
+    if(correoExiste){
+
+      alert(
+        "Ese correo ya está registrado."
       );
 
       return;
@@ -3926,6 +3411,9 @@ async function crearUsuario(){
 
         nombre:
           nombre,
+
+        correo:
+          correo,
 
         pin:
           pin,
@@ -3955,6 +3443,13 @@ async function crearUsuario(){
 
     document
       .getElementById(
+        "nuevoUsuarioCorreo"
+      )
+      .value="";
+
+
+    document
+      .getElementById(
         "nuevoUsuarioPin"
       )
       .value="";
@@ -3966,16 +3461,17 @@ async function crearUsuario(){
       )
       .innerHTML=`
 
-      <div class="premio">
+        <div class="premio">
 
-        ✅ Usuario creado correctamente.
+          ✅ Usuario creado correctamente.
 
-      </div>
+        </div>
 
-    `;
+      `;
 
 
     await cargarUsuarios();
+
 
   }catch(error){
 
@@ -3989,10 +3485,6 @@ async function crearUsuario(){
 }
 
 
-/* ==================================================
-   CAMBIAR ESTADO USUARIO
-================================================== */
-
 async function cambiarEstadoUsuario(
   id,
   activo
@@ -4002,18 +3494,46 @@ async function cambiarEstadoUsuario(
     currentRole==="superadmin"||
     String(
       currentUser||""
-    )
-    .toLowerCase()==="christian";
+    ).toLowerCase()
+    ==="christian";
 
 
-  if(!esChristian){
-
-    return;
-
-  }
+  if(!esChristian)return;
 
 
   try{
+
+    const usuarios=
+      await api(
+        "usuarios",
+        "GET",
+        null,
+        {
+          select:"id,usuario",
+          id:
+            "eq."+
+            id,
+          limit:1
+        }
+      );
+
+
+    if(
+      usuarios.length&&
+      String(
+        usuarios[0].usuario||""
+      ).toLowerCase()
+      ==="christian"
+    ){
+
+      alert(
+        "⚠️ Christian está protegido."
+      );
+
+      return;
+
+    }
+
 
     await api(
       "usuarios",
@@ -4024,12 +3544,14 @@ async function cambiarEstadoUsuario(
       },
       {
         id:
-          "eq."+id
+          "eq."+
+          id
       }
     );
 
 
     await cargarUsuarios();
+
 
   }catch(error){
 
@@ -4043,11 +3565,121 @@ async function cambiarEstadoUsuario(
 }
 
 
-/* ==================================================
-   CLIENTES ADMIN
-================================================== */
+async function eliminarUsuario(id){
 
-async function buscarClienteAdmin(){
+  const esChristian=
+    currentRole==="superadmin"||
+    String(
+      currentUser||""
+    ).toLowerCase()
+    ==="christian";
+
+
+  if(!esChristian){
+
+    alert(
+      "Solo Christian puede eliminar usuarios."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const usuarios=
+      await api(
+        "usuarios",
+        "GET",
+        null,
+        {
+          select:"id,usuario,nombre",
+          id:
+            "eq."+
+            id,
+          limit:1
+        }
+      );
+
+
+    if(!usuarios.length){
+
+      alert(
+        "Usuario no encontrado."
+      );
+
+      return;
+
+    }
+
+
+    const usuario=
+      usuarios[0];
+
+
+    if(
+      String(
+        usuario.usuario||""
+      ).toLowerCase()
+      ==="christian"
+    ){
+
+      alert(
+        "⚠️ El usuario Christian está protegido y no puede eliminarse."
+      );
+
+      return;
+
+    }
+
+
+    const confirmar=
+      confirm(
+        "⚠️ ATENCIÓN\n\n"+
+        "Vas a eliminar permanentemente al usuario:\n\n"+
+        (
+          usuario.nombre||
+          usuario.usuario
+        )+
+        "\n\n¿Deseas continuar?"
+      );
+
+
+    if(!confirmar)return;
+
+
+    await api(
+      "usuarios",
+      "DELETE",
+      null,
+      {
+        id:
+          "eq."+
+          id
+      }
+    );
+
+
+    alert(
+      "✅ Usuario eliminado correctamente."
+    );
+
+
+    await cargarUsuarios();
+
+
+  }catch(error){
+
+    alert(
+      "❌ No se pudo eliminar el usuario:\n"+
+      error.message
+    );
+
+  }
+
+}
+  async function buscarClienteAdmin(){
 
   if(!currentUser){
 
@@ -4097,9 +3729,7 @@ async function buscarClienteAdmin(){
       );
 
 
-    if(
-      !encontrados.length
-    ){
+    if(!encontrados.length){
 
       document
         .getElementById(
@@ -4107,13 +3737,13 @@ async function buscarClienteAdmin(){
         )
         .innerHTML=`
 
-        <div class="alerta">
+          <div class="alerta">
 
-          ❌ Cliente no encontrado.
+            ❌ Cliente no encontrado.
 
-        </div>
+          </div>
 
-      `;
+        `;
 
       return;
 
@@ -4123,6 +3753,7 @@ async function buscarClienteAdmin(){
     renderAdminCliente(
       encontrados[0]
     );
+
 
   }catch(error){
 
@@ -4187,8 +3818,11 @@ function renderAdminCliente(
       <button
         class="btn-blue"
         style="width:100%"
-        onclick="restaurarCliente(${cliente.id})"
-      >
+        onclick="
+          restaurarCliente(
+            ${cliente.id}
+          )
+        ">
 
         🔄 Restaurar a
         ${configuracion.puntos_para_premio}
@@ -4207,8 +3841,11 @@ function renderAdminCliente(
       <button
         class="btn-green"
         style="width:100%"
-        onclick="canjearPremio(${cliente.id})"
-      >
+        onclick="
+          canjearPremio(
+            ${cliente.id}
+          )
+        ">
 
         🎁 Canjear Premio
 
@@ -4223,9 +3860,11 @@ function renderAdminCliente(
       <div class="alerta">
 
         Todavía necesita
+
         <strong>
           ${puntos}
         </strong>
+
         compras.
 
       </div>
@@ -4235,8 +3874,7 @@ function renderAdminCliente(
   }
 
 
-  html+=
-    "</div>";
+  html+="</div>";
 
 
   document
@@ -4244,7 +3882,7 @@ function renderAdminCliente(
       "adminClienteResultado"
     )
     .innerHTML=
-    html;
+      html;
 
 }
 
@@ -4288,7 +3926,8 @@ async function restaurarCliente(
         },
         {
           id:
-            "eq."+id
+            "eq."+
+            id
         }
       );
 
@@ -4304,6 +3943,7 @@ async function restaurarCliente(
     alert(
       "✅ Cliente restaurado."
     );
+
 
   }catch(error){
 
@@ -4342,15 +3982,14 @@ async function canjearPremio(
         {
           select:"*",
           id:
-            "eq."+id,
+            "eq."+
+            id,
           limit:1
         }
       );
 
 
-    if(
-      !encontrados.length
-    ){
+    if(!encontrados.length){
 
       alert(
         "Cliente no encontrado."
@@ -4366,9 +4005,7 @@ async function canjearPremio(
 
 
     if(
-      Number(
-        cliente.puntos
-      )>0
+      Number(cliente.puntos)>0
     ){
 
       alert(
@@ -4394,11 +4031,9 @@ async function canjearPremio(
     const premios=
       (
         Number(
-          cliente
-            .premios_obtenidos
+          cliente.premios_obtenidos
         )||0
-      )+
-      1;
+      )+1;
 
 
     const actualizado=
@@ -4415,7 +4050,8 @@ async function canjearPremio(
         },
         {
           id:
-            "eq."+id
+            "eq."+
+            id
         }
       );
 
@@ -4432,6 +4068,7 @@ async function canjearPremio(
       "🎉 Premio canjeado."
     );
 
+
   }catch(error){
 
     alert(
@@ -4444,10 +4081,6 @@ async function canjearPremio(
 }
 
 
-/* ==================================================
-   CORTES
-================================================== */
-
 async function hacerCorte(){
 
   const esAdmin=
@@ -4455,8 +4088,8 @@ async function hacerCorte(){
     currentRole==="admin"||
     String(
       currentUser||""
-    )
-    .toLowerCase()==="christian";
+    ).toLowerCase()
+    ==="christian";
 
 
   if(!esAdmin){
@@ -4485,7 +4118,7 @@ async function hacerCorte(){
 
     const pendientes=
       ventas.filter(
-        v =>
+        v=>
           v.corte_id===null||
           v.corte_id===undefined
       );
@@ -4493,10 +4126,7 @@ async function hacerCorte(){
 
     const total=
       pendientes.reduce(
-        (
-          s,
-          v
-        ) =>
+        (s,v)=>
           s+
           Number(
             v.total||0
@@ -4507,10 +4137,7 @@ async function hacerCorte(){
 
     const utilidad=
       pendientes.reduce(
-        (
-          s,
-          v
-        ) =>
+        (s,v)=>
           s+
           Number(
             v.utilidad||0
@@ -4519,9 +4146,7 @@ async function hacerCorte(){
       );
 
 
-    if(
-      !pendientes.length
-    ){
+    if(!pendientes.length){
 
       alert(
         "No hay ventas pendientes."
@@ -4540,11 +4165,7 @@ async function hacerCorte(){
       );
 
 
-    if(contado===null){
-
-      return;
-
-    }
+    if(contado===null)return;
 
 
     const efectivoContado=
@@ -4576,8 +4197,7 @@ async function hacerCorte(){
       new Set(
         pendientes
           .map(
-            v =>
-              v.cliente_id
+            v=>v.cliente_id
           )
           .filter(Boolean)
       );
@@ -4623,7 +4243,8 @@ async function hacerCorte(){
         },
         {
           id:
-            "eq."+venta.id
+            "eq."+
+            venta.id
         }
       );
 
@@ -4633,16 +4254,27 @@ async function hacerCorte(){
     alert(
 
       "✅ Turno cerrado.\n\n"+
+
       "Ventas: "+
       pendientes.length+
+
       "\nEsperado: $"+
       dinero(total)+
+
       "\nContado: $"+
-      dinero(efectivoContado)+
+      dinero(
+        efectivoContado
+      )+
+
       "\nDiferencia: $"+
-      dinero(diferencia)+
+      dinero(
+        diferencia
+      )+
+
       "\n\nUtilidad: $"+
-      dinero(utilidad)
+      dinero(
+        utilidad
+      )
 
     );
 
@@ -4650,6 +4282,7 @@ async function hacerCorte(){
     await actualizarEstadisticas();
 
     await verCortes();
+
 
   }catch(error){
 
@@ -4670,15 +4303,11 @@ async function verCortes(){
     currentRole==="admin"||
     String(
       currentUser||""
-    )
-    .toLowerCase()==="christian";
+    ).toLowerCase()
+    ==="christian";
 
 
-  if(!esAdmin){
-
-    return;
-
-  }
+  if(!esAdmin)return;
 
 
   const contenedor=
@@ -4687,10 +4316,13 @@ async function verCortes(){
     );
 
 
-  contenedor.innerHTML=
-    `<div class="alerta">
+  contenedor.innerHTML=`
+
+    <div class="alerta">
       Cargando...
-    </div>`;
+    </div>
+
+  `;
 
 
   try{
@@ -4707,16 +4339,15 @@ async function verCortes(){
       );
 
 
-    if(
-      !cortes.length
-    ){
+    if(!cortes.length){
 
-      contenedor.innerHTML=
-        `
+      contenedor.innerHTML=`
+
         <div class="alerta">
           No hay cortes registrados.
         </div>
-        `;
+
+      `;
 
       return;
 
@@ -4764,11 +4395,9 @@ async function verCortes(){
         🧾 Ventas:
 
         <strong>
-          ${
-            Number(
-              corte.ventas
-            )||0
-          }
+          ${Number(
+            corte.ventas
+          )||0}
         </strong>
 
         <br><br>
@@ -4776,11 +4405,9 @@ async function verCortes(){
         👤 Clientes:
 
         <strong>
-          ${
-            Number(
-              corte.clientes
-            )||0
-          }
+          ${Number(
+            corte.clientes
+          )||0}
         </strong>
 
         <br><br>
@@ -4827,18 +4454,19 @@ async function verCortes(){
         <button
           class="btn-dark"
           style="width:100%"
-          onclick="mostrarVentasCorte(${corte.id})"
-        >
+          onclick="
+            mostrarVentasCorte(
+              ${corte.id}
+            )
+          ">
 
           🧾 Ver ventas
 
         </button>
 
-
         <div
           id="ventasCorte${corte.id}"
-          class="hidden"
-        >
+          class="hidden">
         </div>
 
       `;
@@ -4850,10 +4478,11 @@ async function verCortes(){
 
     }
 
+
   }catch(error){
 
-    contenedor.innerHTML=
-      `
+    contenedor.innerHTML=`
+
       <div class="alerta">
 
         ❌
@@ -4862,16 +4491,13 @@ async function verCortes(){
         )}
 
       </div>
-      `;
+
+    `;
 
   }
 
 }
 
-
-/* ==================================================
-   VENTAS DE CORTE
-================================================== */
 
 async function mostrarVentasCorte(
   corteId
@@ -4884,39 +4510,36 @@ async function mostrarVentasCorte(
     );
 
 
-  if(!contenedor){
-
-    return;
-
-  }
+  if(!contenedor)return;
 
 
   if(
-    !contenedor
-      .classList
-      .contains("hidden")
+    !contenedor.classList.contains(
+      "hidden"
+    )
   ){
 
-    contenedor
-      .classList
-      .add("hidden");
+    contenedor.classList.add(
+      "hidden"
+    );
 
     return;
 
   }
 
 
-  contenedor
-    .classList
-    .remove("hidden");
+  contenedor.classList.remove(
+    "hidden"
+  );
 
 
-  contenedor.innerHTML=
-    `
+  contenedor.innerHTML=`
+
     <div class="alerta">
       Cargando ventas...
     </div>
-    `;
+
+  `;
 
 
   try{
@@ -4928,8 +4551,11 @@ async function mostrarVentasCorte(
         null,
         {
           select:"*",
+
           corte_id:
-            "eq."+corteId,
+            "eq."+
+            corteId,
+
           order:"id.asc"
         }
       );
@@ -4944,7 +4570,7 @@ async function mostrarVentasCorte(
 
       const cliente=
         clientes.find(
-          c =>
+          c=>
             Number(c.id)===
             Number(
               venta.cliente_id
@@ -4967,8 +4593,8 @@ async function mostrarVentasCorte(
         currentRole==="superadmin"||
         String(
           currentUser||""
-        )
-        .toLowerCase()==="christian";
+        ).toLowerCase()
+        ==="christian";
 
 
       div.innerHTML=`
@@ -4999,7 +4625,6 @@ async function mostrarVentasCorte(
           esAdmin
           ?
           `
-
           <br><br>
 
           📈 Utilidad:
@@ -5009,7 +4634,6 @@ async function mostrarVentasCorte(
               venta.utilidad
             )}
           </strong>
-
           `
           :
           ""
@@ -5024,10 +4648,11 @@ async function mostrarVentasCorte(
 
     }
 
+
   }catch(error){
 
-    contenedor.innerHTML=
-      `
+    contenedor.innerHTML=`
+
       <div class="alerta">
 
         ❌
@@ -5036,16 +4661,13 @@ async function mostrarVentasCorte(
         )}
 
       </div>
-      `;
+
+    `;
 
   }
 
 }
 
-
-/* ==================================================
-   BORRAR ÚLTIMO CORTE
-================================================== */
 
 async function borrarUltimoCorte(){
 
@@ -5054,8 +4676,8 @@ async function borrarUltimoCorte(){
     currentRole==="superadmin"||
     String(
       currentUser||""
-    )
-    .toLowerCase()==="christian";
+    ).toLowerCase()
+    ==="christian";
 
 
   if(!esAdmin){
@@ -5071,7 +4693,8 @@ async function borrarUltimoCorte(){
 
   if(
     !confirm(
-      "⚠️ Se eliminará el último corte y sus ventas.\n\n¿Continuar?"
+      "⚠️ Se eliminará el último corte y sus ventas.\n\n"+
+      "¿Continuar?"
     )
   ){
 
@@ -5095,9 +4718,7 @@ async function borrarUltimoCorte(){
       );
 
 
-    if(
-      !cortes.length
-    ){
+    if(!cortes.length){
 
       alert(
         "No hay cortes."
@@ -5120,7 +4741,8 @@ async function borrarUltimoCorte(){
         {
           select:"id",
           corte_id:
-            "eq."+corte.id
+            "eq."+
+            corte.id
         }
       );
 
@@ -5135,7 +4757,8 @@ async function borrarUltimoCorte(){
         null,
         {
           venta_id:
-            "eq."+venta.id
+            "eq."+
+            venta.id
         }
       );
 
@@ -5146,7 +4769,8 @@ async function borrarUltimoCorte(){
         null,
         {
           id:
-            "eq."+venta.id
+            "eq."+
+            venta.id
         }
       );
 
@@ -5159,7 +4783,8 @@ async function borrarUltimoCorte(){
       null,
       {
         id:
-          "eq."+corte.id
+          "eq."+
+          corte.id
       }
     );
 
@@ -5175,6 +4800,7 @@ async function borrarUltimoCorte(){
 
     await verCortes();
 
+
   }catch(error){
 
     alert(
@@ -5187,10 +4813,6 @@ async function borrarUltimoCorte(){
 }
 
 
-/* ==================================================
-   BORRAR HISTORIAL
-================================================== */
-
 async function borrarHistorial(){
 
   const esAdmin=
@@ -5198,8 +4820,8 @@ async function borrarHistorial(){
     currentRole==="superadmin"||
     String(
       currentUser||""
-    )
-    .toLowerCase()==="christian";
+    ).toLowerCase()
+    ==="christian";
 
 
   if(!esAdmin){
@@ -5249,7 +4871,8 @@ async function borrarHistorial(){
         null,
         {
           venta_id:
-            "eq."+venta.id
+            "eq."+
+            venta.id
         }
       );
 
@@ -5260,7 +4883,8 @@ async function borrarHistorial(){
         null,
         {
           id:
-            "eq."+venta.id
+            "eq."+
+            venta.id
         }
       );
 
@@ -5288,7 +4912,8 @@ async function borrarHistorial(){
         null,
         {
           id:
-            "eq."+corte.id
+            "eq."+
+            corte.id
         }
       );
 
@@ -5304,6 +4929,7 @@ async function borrarHistorial(){
 
     await verCortes();
 
+
   }catch(error){
 
     alert(
@@ -5315,10 +4941,6 @@ async function borrarHistorial(){
 
 }
 
-
-/* ==================================================
-   ESTADÍSTICAS
-================================================== */
 
 async function actualizarEstadisticas(){
 
@@ -5340,15 +4962,14 @@ async function actualizarEstadisticas(){
         "ventasHoy"
       )
       .textContent=
-      ventas.length;
+        ventas.length;
 
 
     const clientesUnicos=
       new Set(
         ventas
           .map(
-            v =>
-              v.cliente_id
+            v=>v.cliente_id
           )
           .filter(Boolean)
       );
@@ -5359,15 +4980,12 @@ async function actualizarEstadisticas(){
         "clientesHoy"
       )
       .textContent=
-      clientesUnicos.size;
+        clientesUnicos.size;
 
 
     const utilidad=
       ventas.reduce(
-        (
-          s,
-          v
-        ) =>
+        (s,v)=>
           s+
           Number(
             v.utilidad||0
@@ -5376,18 +4994,12 @@ async function actualizarEstadisticas(){
       );
 
 
-    /*
-      La utilidad solamente
-      se muestra después de
-      iniciar sesión como Christian.
-    */
-
     if(
       currentRole==="superadmin"||
       String(
         currentUser||""
-      )
-      .toLowerCase()==="christian"
+      ).toLowerCase()
+      ==="christian"
     ){
 
       document
@@ -5395,10 +5007,13 @@ async function actualizarEstadisticas(){
           "utilidadHoy"
         )
         .textContent=
-        "$"+
-        dinero(utilidad);
+          "$"+
+          dinero(
+            utilidad
+          );
 
     }
+
 
   }catch(error){
 
@@ -5408,10 +5023,6 @@ async function actualizarEstadisticas(){
 
 }
 
-
-/* ==================================================
-   FUNCIONES GENERALES
-================================================== */
 
 function dinero(valor){
 
@@ -5426,11 +5037,8 @@ function formatearFecha(
   fecha
 ){
 
-  if(!fecha){
-
+  if(!fecha)
     return "Sin fecha";
-
-  }
 
 
   const d=
@@ -5443,7 +5051,9 @@ function formatearFecha(
     )
   ){
 
-    return String(fecha);
+    return String(
+      fecha
+    );
 
   }
 
@@ -5490,12 +5100,9 @@ function escapeHtml(
 }
 
 
-/* ==================================================
-   SERVICE WORKER
-================================================== */
-
 if(
-  "serviceWorker" in navigator
+  "serviceWorker"
+  in navigator
 ){
 
   window.addEventListener(
@@ -5507,7 +5114,7 @@ if(
           "/sw.js"
         )
         .catch(
-          error =>
+          error=>
             console.error(
               error
             )
