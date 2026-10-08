@@ -2,253 +2,52 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Elotemanía POS</title>
-
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#d4af37">
 
 <style>
-
-*{
- box-sizing:border-box
-}
-
-body{
- margin:0;
- font-family:Arial,Helvetica,sans-serif;
- background:#111;
- color:white;
-}
-
-header{
- background:#000;
- padding:18px;
- text-align:center;
- border-bottom:2px solid #d4af37;
-}
-
-header h1{
- margin:0;
- color:#d4af37;
- font-size:28px;
-}
-
-header p{
- margin:5px 0 0;
- color:#ddd;
-}
-
-.container{
- max-width:1100px;
- margin:auto;
- padding:15px;
-}
-
-.stats{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:10px;
- margin-bottom:15px;
-}
-
-.stat{
- background:#1d1d1d;
- border:1px solid #333;
- border-radius:12px;
- padding:15px;
- text-align:center;
-}
-
-.stat b{
- display:block;
- font-size:24px;
- color:#d4af37;
-}
-
-.tabs{
- display:flex;
- gap:8px;
- margin-bottom:15px;
-}
-
-.tabs button{
- flex:1;
-}
-
-button{
- border:0;
- border-radius:10px;
- padding:13px;
- font-weight:bold;
- cursor:pointer;
-}
-
-.btn-gold{
- background:#d4af37;
- color:#000;
-}
-
-.btn-dark{
- background:#292929;
- color:white;
-}
-
-.btn-green{
- background:#25D366;
- color:white;
-}
-
-.btn-red{
- background:#c62828;
- color:white;
-}
-
-.btn-blue{
- background:#1976d2;
- color:white;
-}
-
-.btn-purple{
- background:#7b1fa2;
- color:white;
-}
-
-.card{
- background:#1b1b1b;
- border:1px solid #333;
- border-radius:14px;
- padding:15px;
- margin-bottom:15px;
-}
-
-h2{
- color:#d4af37;
- margin-top:0;
-}
-
-input,select{
- width:100%;
- padding:13px;
- border-radius:9px;
- border:1px solid #444;
- background:#101010;
- color:white;
- margin:6px 0 10px;
- font-size:16px;
-}
-
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
- gap:10px;
-}
-
-.producto{
- background:#242424;
- border:1px solid #444;
- border-radius:12px;
- padding:12px;
-}
-
-.producto strong{
- display:block;
- margin-bottom:6px;
-}
-
-.producto button{
- width:100%;
- margin-top:8px;
-}
-
-.item{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:10px;
- border-bottom:1px solid #333;
- padding:10px 0;
-}
-
-.total{
- font-size:24px;
- color:#d4af37;
- text-align:right;
- margin-top:15px;
-}
-
-.hidden{
- display:none;
-}
-
-.alerta{
- padding:12px;
- border-radius:10px;
- background:#332b00;
- border:1px solid #d4af37;
- margin-top:10px;
-}
-
-.premio{
- padding:14px;
- border-radius:10px;
- background:#153d1d;
- border:1px solid #25D366;
- margin-top:10px;
-}
-
-.resultado{
- padding:15px;
- background:#202020;
- border-radius:12px;
- margin-top:12px;
-}
-
-.corte{
- background:#242424;
- border:1px solid #444;
- border-radius:12px;
- padding:15px;
- margin-top:10px;
-}
-
-.venta-corte{
- background:#191919;
- border:1px solid #333;
- border-radius:10px;
- padding:12px;
- margin-top:10px;
-}
-
-.separador{
- border:0;
- border-top:1px solid #333;
- margin:18px 0;
-}
-
-.ganancia{
- color:#25D366;
- font-weight:bold;
-}
-
-.perdida{
- color:#ff5252;
- font-weight:bold;
-}
-
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#111;color:#fff}
+header{background:#000;padding:18px;text-align:center;border-bottom:2px solid #d4af37}
+header h1{margin:0;color:#d4af37;font-size:28px}
+header p{margin:5px 0;color:#ddd}
+.container{max-width:1100px;margin:auto;padding:15px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px}
+.stat{background:#1d1d1d;border:1px solid #333;border-radius:12px;padding:15px;text-align:center}
+.stat b{display:block;font-size:24px;color:#d4af37}
+.tabs{display:flex;gap:8px;margin-bottom:15px}
+button{border:0;border-radius:10px;padding:13px;font-weight:bold;cursor:pointer}
+.tabs button{flex:1}
+.btn-gold{background:#d4af37;color:#000}
+.btn-dark{background:#292929;color:#fff}
+.btn-green{background:#25d366;color:#fff}
+.btn-red{background:#c62828;color:#fff}
+.btn-blue{background:#1976d2;color:#fff}
+.btn-purple{background:#7b1fa2;color:#fff}
+.card{background:#1b1b1b;border:1px solid #333;border-radius:14px;padding:15px;margin-bottom:15px}
+h2{color:#d4af37;margin-top:0}
+input,select{width:100%;padding:13px;border-radius:9px;border:1px solid #444;background:#101010;color:#fff;margin:6px 0 10px;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.producto{background:#242424;border:1px solid #444;border-radius:12px;padding:12px}
+.producto strong{display:block;margin-bottom:6px}
+.producto button{width:100%;margin-top:8px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid #333;padding:10px 0}
+.total{font-size:24px;color:#d4af37;text-align:right;margin-top:15px}
+.hidden{display:none}
+.alerta{padding:12px;border-radius:10px;background:#332b00;border:1px solid #d4af37;margin-top:10px}
+.premio{padding:14px;border-radius:10px;background:#153d1d;border:1px solid #25d366;margin-top:10px}
+.resultado{padding:15px;background:#202020;border-radius:12px;margin-top:12px}
+.corte{background:#242424;border:1px solid #444;border-radius:12px;padding:15px;margin-top:10px}
+.venta-corte{background:#191919;border:1px solid #333;border-radius:10px;padding:12px;margin-top:10px}
+.separador{border:0;border-top:1px solid #333;margin:18px 0}
+.ganancia{color:#25d366;font-weight:bold}
+.perdida{color:#ff5252;font-weight:bold}
 @media(max-width:700px){
-
- .stats{
-  grid-template-columns:1fr 1fr;
- }
-
- .tabs{
-  flex-direction:column;
- }
-
+.stats{grid-template-columns:1fr 1fr}
+.tabs{flex-direction:column}
 }
-
 </style>
 </head>
 
@@ -262,102 +61,45 @@ input,select{
 <div class="container">
 
 <div class="stats">
-
-<div class="stat">
-<span>Ventas</span>
-<b id="ventasHoy">0</b>
-</div>
-
-<div class="stat">
-<span>Clientes</span>
-<b id="clientesHoy">0</b>
-</div>
-
-<div class="stat">
-<span>Utilidad</span>
-<b id="utilidadHoy">$0</b>
-</div>
-
-<div class="stat">
-<span>Turno</span>
-<b>1</b>
-</div>
-
+<div class="stat"><span>Ventas</span><b id="ventasHoy">0</b></div>
+<div class="stat"><span>Clientes</span><b id="clientesHoy">0</b></div>
+<div class="stat"><span>Utilidad</span><b id="utilidadHoy">$0</b></div>
+<div class="stat"><span>Turno</span><b>1</b></div>
 </div>
 
 <div class="tabs">
-
-<button class="btn-gold" onclick="mostrarVenta()">
-🛒 Venta
-</button>
-
-<button class="btn-dark" onclick="mostrarAcceso()">
-🔐 Acceso
-</button>
-
+<button class="btn-gold" onclick="mostrarVenta()">🛒 Venta</button>
+<button class="btn-dark" onclick="mostrarAcceso()">🔐 Acceso</button>
 </div>
 
 <section id="ventaSection">
 
 <div class="card">
-
 <h2>🛒 Productos</h2>
-
-<div id="productos" class="grid">
-Cargando productos...
-</div>
-
+<div id="productos" class="grid">Cargando productos...</div>
 </div>
 
 <div class="card">
-
 <h2>🧾 Venta</h2>
-
-<div id="carrito">
-No hay productos.
-</div>
-
-<div class="total">
-Total:
-$<span id="total">0.00</span>
-</div>
-
+<div id="carrito">No hay productos.</div>
+<div class="total">Total: $<span id="total">0.00</span></div>
 </div>
 
 <div class="card">
-
 <h2>👤 Cliente</h2>
 
-<input
-id="nombreCliente"
-type="text"
-placeholder="Nombre del cliente"
->
+<input id="nombreCliente" placeholder="Nombre del cliente">
+<input id="whatsappCliente" type="tel" placeholder="10 dígitos">
 
-<input
-id="whatsappCliente"
-type="tel"
-placeholder="10 dígitos"
->
-
-<button
-class="btn-blue"
-style="width:100%"
-onclick="buscarCliente()"
->
+<button class="btn-blue" style="width:100%" onclick="buscarCliente()">
 🔎 Buscar cliente
 </button>
 
 <div id="clienteResultado"></div>
 
-<button
-class="btn-gold"
-style="width:100%;margin-top:10px"
-onclick="registrarVenta()"
->
+<button class="btn-gold" style="width:100%;margin-top:10px" onclick="registrarVenta()">
 💰 Registrar venta
 </button>
-
 </div>
 
 </section>
@@ -365,211 +107,109 @@ onclick="registrarVenta()"
 <section id="accesoSection" class="hidden">
 
 <div class="card">
-
 <h2>🔐 Acceso</h2>
 
-<input
-id="usuario"
-placeholder="Usuario"
->
+<input id="usuario" placeholder="Usuario">
+<input id="pin" type="password" placeholder="PIN">
 
-<input
-id="pin"
-type="password"
-placeholder="PIN"
->
-
-<button
-class="btn-gold"
-style="width:100%"
-onclick="login()"
->
+<button class="btn-gold" style="width:100%" onclick="login()">
 Entrar
 </button>
 
 <div id="accesoResultado"></div>
-
 </div>
 
 <div id="adminSection" class="hidden">
 
 <div class="card">
-
 <h2>👑 Administrador de Christian</h2>
-
 <div id="usuarioActual"></div>
-
 </div>
 
 <div id="productosAdmin" class="card hidden">
-
 <h2>💰 Productos y ganancias</h2>
 
-<input
-id="nuevoProductoNombre"
-placeholder="Nombre del producto"
->
-
-<input
-id="nuevoProductoCategoria"
-placeholder="Categoría"
->
+<input id="nuevoProductoNombre" placeholder="Nombre del producto">
+<input id="nuevoProductoCategoria" placeholder="Categoría">
 
 <label>Costo para Elotemanía</label>
-
-<input
-id="nuevoProductoCosto"
-type="number"
-step="0.01"
-min="0"
-placeholder="Ej. 25"
->
+<input id="nuevoProductoCosto" type="number" step="0.01" min="0" placeholder="Ej. 25">
 
 <label>Precio de venta</label>
+<input id="nuevoProductoPrecio" type="number" step="0.01" min="0" placeholder="Ej. 60">
 
-<input
-id="nuevoProductoPrecio"
-type="number"
-step="0.01"
-min="0"
-placeholder="Ej. 60"
->
-
-<button
-class="btn-gold"
-style="width:100%"
-onclick="agregarProductoNuevo()"
->
+<button class="btn-gold" style="width:100%" onclick="agregarProductoNuevo()">
 ➕ Guardar producto
 </button>
 
 <div id="productoResultado"></div>
-
 <hr class="separador">
-
 <div id="listaProductosAdmin"></div>
-
 </div>
 
 <div id="usuariosAdmin" class="card hidden">
 
 <h2>👥 Usuarios</h2>
 
-<input
-id="nuevoUsuario"
-placeholder="Nuevo usuario"
->
-
-<input
-id="nuevoUsuarioNombre"
-placeholder="Nombre"
->
-
-<input
-id="nuevoUsuarioPin"
-type="password"
-placeholder="PIN"
->
+<input id="nuevoUsuario" placeholder="Nuevo usuario">
+<input id="nuevoUsuarioNombre" placeholder="Nombre">
+<input id="nuevoUsuarioPin" type="password" placeholder="PIN">
 
 <select id="nuevoUsuarioRol">
-
-<option value="empleado">
-Empleado
-</option>
-
-<option value="admin">
-Administrador
-</option>
-
+<option value="empleado">Empleado</option>
+<option value="admin">Administrador</option>
 </select>
 
-<button
-class="btn-gold"
-style="width:100%"
-onclick="crearUsuario()"
->
+<button class="btn-gold" style="width:100%" onclick="crearUsuario()">
 ➕ Crear usuario
 </button>
 
 <div id="usuarioResultado"></div>
 
 <hr class="separador">
-
 <div id="listaUsuarios"></div>
-
 </div>
 
 <div class="card">
-
 <h2>🎁 Cliente / Premio</h2>
 
-<input
-id="buscarAdmin"
-placeholder="WhatsApp del cliente"
->
+<input id="buscarAdmin" placeholder="WhatsApp del cliente">
 
-<button
-class="btn-blue"
-style="width:100%"
-onclick="buscarClienteAdmin()"
->
+<button class="btn-blue" style="width:100%" onclick="buscarClienteAdmin()">
 🔎 Buscar cliente
 </button>
 
 <div id="adminClienteResultado"></div>
-
 </div>
 
 <div class="card">
-
 <h2>📊 Cortes</h2>
 
-<button
-class="btn-purple"
-style="width:100%"
-onclick="verCortes()"
->
+<button class="btn-purple" style="width:100%" onclick="verCortes()">
 📊 Ver cortes
 </button>
 
 <div id="listaCortes"></div>
-
 </div>
 
 <div class="card">
-
 <h2>⚙️ Turno</h2>
 
-<button
-class="btn-gold"
-style="width:100%"
-onclick="hacerCorte()"
->
+<button class="btn-gold" style="width:100%" onclick="hacerCorte()">
 💰 Cerrar turno
 </button>
 
-<button
-class="btn-red"
-style="width:100%;margin-top:10px"
-onclick="borrarUltimoCorte()"
->
+<button class="btn-red" style="width:100%;margin-top:10px" onclick="borrarUltimoCorte()">
 🗑️ Borrar último corte
 </button>
 
-<button
-class="btn-red"
-style="width:100%;margin-top:10px"
-onclick="borrarHistorial()"
->
+<button class="btn-red" style="width:100%;margin-top:10px" onclick="borrarHistorial()">
 🗑️ Borrar todo el historial
 </button>
-
 </div>
 
 </div>
-
 </section>
-
 </div>
 
 <script>
@@ -579,268 +219,159 @@ const API="/api/supabase";
 let productos=[];
 let carrito=[];
 let clientes=[];
+let currentUser=null;
+let currentRole=null;
+let clienteSeleccionado=null;
 
 let configuracion={
  puntos_para_premio:10,
  premio:"Premio"
 };
 
-let currentUser=null;
-let currentRole=null;
-let clienteSeleccionado=null;
+async function api(tabla,metodo="GET",cuerpo=null,params={}){
 
-async function api(
- tabla,
- metodo="GET",
- cuerpo=null,
- params={}
-){
+ const url=new URL(API,window.location.origin);
 
- let url=new URL(
-  API,
-  window.location.origin
- );
-
- url.searchParams.set(
-  "table",
-  tabla
- );
+ url.searchParams.set("table",tabla);
 
  Object.keys(params).forEach(k=>{
-
-  if(
-   params[k]!==undefined &&
-   params[k]!==null
-  ){
-
-   url.searchParams.set(
-    k,
-    params[k]
-   );
-
+  if(params[k]!==undefined&&params[k]!==null){
+   url.searchParams.set(k,params[k]);
   }
-
  });
 
- let opciones={
+ const opciones={
   method:metodo,
-  headers:{
-   "Content-Type":"application/json"
-  }
+  headers:{"Content-Type":"application/json"}
  };
 
  if(cuerpo!==null){
-
-  opciones.body=
-   JSON.stringify(cuerpo);
-
+  opciones.body=JSON.stringify(cuerpo);
  }
 
- const respuesta=
-  await fetch(
-   url.toString(),
-   opciones
-  );
-
- const texto=
-  await respuesta.text();
+ const respuesta=await fetch(url.toString(),opciones);
+ const texto=await respuesta.text();
 
  let datos;
 
  try{
-
-  datos=
-   texto
-    ? JSON.parse(texto)
-    : null;
-
+  datos=texto?JSON.parse(texto):null;
  }catch{
-
-  throw new Error(
-   texto||"Respuesta inválida"
-  );
-
+  throw new Error(texto||"Respuesta inválida");
  }
 
  if(!respuesta.ok){
-
   throw new Error(
    datos?.message||
    datos?.error||
    datos?.details||
    "Error en Supabase"
   );
-
  }
 
  return datos;
-
 }
 
 async function iniciar(){
 
  try{
-
   await cargarConfiguracion();
   await cargarProductos();
   await cargarClientes();
   await actualizarEstadisticas();
-
  }catch(error){
-
   console.error(error);
-
-  alert(
-   "Error al iniciar:\n"+
-   error.message
-  );
-
+  alert("Error al iniciar:\n"+error.message);
  }
-
 }
 
 iniciar();
 
 function mostrarVenta(){
-
- document
-  .getElementById("ventaSection")
-  .classList.remove("hidden");
-
- document
-  .getElementById("accesoSection")
-  .classList.add("hidden");
-
+ document.getElementById("ventaSection").classList.remove("hidden");
+ document.getElementById("accesoSection").classList.add("hidden");
 }
 
 function mostrarAcceso(){
-
- document
-  .getElementById("ventaSection")
-  .classList.add("hidden");
-
- document
-  .getElementById("accesoSection")
-  .classList.remove("hidden");
-
+ document.getElementById("ventaSection").classList.add("hidden");
+ document.getElementById("accesoSection").classList.remove("hidden");
 }
 
 async function cargarConfiguracion(){
 
  try{
 
-  const datos=
-   await api(
-    "configuracion",
-    "GET",
-    null,
-    {
-     select:"*",
-     limit:1
-    }
-   );
+  const datos=await api("configuracion","GET",null,{
+   select:"*",
+   limit:1
+  });
 
   if(datos?.length){
-
    configuracion.puntos_para_premio=
-    Number(
-     datos[0].puntos_para_premio
-    )||10;
-
+    Number(datos[0].puntos_para_premio)||10;
   }
 
  }catch(error){
-
   console.log(error);
-
  }
-
 }
 
 async function cargarProductos(){
 
- productos=
-  await api(
-   "productos",
-   "GET",
-   null,
-   {
-    select:"*",
-    activo:"eq.true",
-    order:"nombre.asc"
-   }
-  );
+ productos=await api("productos","GET",null,{
+  select:"*",
+  activo:"eq.true",
+  order:"nombre.asc"
+ });
 
  renderProductos();
-
 }
 
 function renderProductos(){
 
- const contenedor=
-  document.getElementById("productos");
+ const contenedor=document.getElementById("productos");
 
  if(!productos.length){
-
-  contenedor.innerHTML=
-   "No hay productos activos.";
-
+  contenedor.innerHTML="No hay productos activos.";
   return;
-
  }
 
  contenedor.innerHTML="";
 
  productos.forEach(producto=>{
 
-  const div=
-   document.createElement("div");
-
+  const div=document.createElement("div");
   div.className="producto";
 
   div.innerHTML=`
-   <strong>
-    ${escapeHtml(producto.nombre)}
-   </strong>
+   <strong>${escapeHtml(producto.nombre)}</strong>
+   <div>$${dinero(producto.precio)}</div>
 
-   <div>
-    $${dinero(producto.precio)}
-   </div>
-
-   <button
-    class="btn-gold"
-    onclick="agregarProducto(${producto.id})"
-   >
+   <button class="btn-gold"
+    onclick="agregarProducto(${producto.id})">
     Agregar
    </button>
   `;
 
   contenedor.appendChild(div);
-
  });
-
 }
 
 function agregarProducto(id){
 
- const producto=
-  productos.find(
-   p=>Number(p.id)===Number(id)
-  );
+ const producto=productos.find(
+  p=>Number(p.id)===Number(id)
+ );
 
  if(!producto)return;
 
- const existente=
-  carrito.find(
-   p=>Number(p.id)===Number(id)
-  );
+ const existente=carrito.find(
+  p=>Number(p.id)===Number(id)
+ );
 
  if(existente){
-
   existente.cantidad++;
-
  }else{
-
   carrito.push({
    id:producto.id,
    nombre:producto.nombre,
@@ -848,51 +379,37 @@ function agregarProducto(id){
    costo:Number(producto.costo||0),
    cantidad:1
   });
-
  }
 
  renderCarrito();
-
 }
 
 function quitarProducto(id){
 
- const index=
-  carrito.findIndex(
-   p=>Number(p.id)===Number(id)
-  );
+ const index=carrito.findIndex(
+  p=>Number(p.id)===Number(id)
+ );
 
  if(index===-1)return;
 
  if(carrito[index].cantidad>1){
-
   carrito[index].cantidad--;
-
  }else{
-
   carrito.splice(index,1);
-
  }
 
  renderCarrito();
-
 }
 
 function renderCarrito(){
 
- const contenedor=
-  document.getElementById("carrito");
+ const contenedor=document.getElementById("carrito");
 
  if(!carrito.length){
 
-  contenedor.innerHTML=
-   "No hay productos.";
-
-  document.getElementById("total")
-   .textContent="0.00";
-
+  contenedor.innerHTML="No hay productos.";
+  document.getElementById("total").textContent="0.00";
   return;
-
  }
 
  contenedor.innerHTML="";
@@ -901,196 +418,126 @@ function renderCarrito(){
 
  carrito.forEach(item=>{
 
-  const subtotal=
-   item.precio*
-   item.cantidad;
-
+  const subtotal=item.precio*item.cantidad;
   total+=subtotal;
 
-  const div=
-   document.createElement("div");
-
+  const div=document.createElement("div");
   div.className="item";
 
   div.innerHTML=`
    <div>
-    <strong>
-     ${escapeHtml(item.nombre)}
-    </strong>
-
+    <strong>${escapeHtml(item.nombre)}</strong>
     <br>
-
-    ${item.cantidad}
-    × $${dinero(item.precio)}
+    ${item.cantidad} × $${dinero(item.precio)}
    </div>
 
-   <button
-    class="btn-red"
-    onclick="quitarProducto(${item.id})"
-   >
+   <button class="btn-red"
+    onclick="quitarProducto(${item.id})">
     −
    </button>
   `;
 
   contenedor.appendChild(div);
-
  });
 
- document.getElementById("total")
-  .textContent=dinero(total);
-
+ document.getElementById("total").textContent=dinero(total);
 }
 
 function obtenerTotal(){
 
  return carrito.reduce(
-  (total,item)=>
-   total+
-   item.precio*
-   item.cantidad,
+  (total,item)=>total+item.precio*item.cantidad,
   0
  );
-
 }
 
 function obtenerUtilidad(){
 
  return carrito.reduce(
   (total,item)=>
-   total+
-   (item.precio-item.costo)*
-   item.cantidad,
+   total+(item.precio-item.costo)*item.cantidad,
   0
  );
-
 }
 
 async function cargarClientes(){
 
- clientes=
-  await api(
-   "clientes",
-   "GET",
-   null,
-   {
-    select:"*",
-    order:"nombre.asc"
-   }
-  );
-
+ clientes=await api("clientes","GET",null,{
+  select:"*",
+  order:"nombre.asc"
+ });
 }
 
 function normalizarWhatsapp(numero){
-
- return String(numero||"")
-  .replace(/\D/g,"");
-
+ return String(numero||"").replace(/\D/g,"");
 }
 
 function numeroWhatsapp(numero){
 
- let n=
-  normalizarWhatsapp(numero);
+ let n=normalizarWhatsapp(numero);
 
  if(n.length===10)n="52"+n;
 
  return n;
-
 }
 
 async function buscarCliente(){
 
- const whatsapp=
-  normalizarWhatsapp(
-   document.getElementById(
-    "whatsappCliente"
-   ).value
-  );
+ const whatsapp=normalizarWhatsapp(
+  document.getElementById("whatsappCliente").value
+ );
 
  if(!whatsapp){
-
   alert("Escribe el número de WhatsApp.");
-
   return;
-
  }
 
  try{
 
-  const encontrados=
-   await api(
-    "clientes",
-    "GET",
-    null,
-    {
-     select:"*",
-     whatsapp:"eq."+whatsapp,
-     limit:1
-    }
-   );
+  const encontrados=await api("clientes","GET",null,{
+   select:"*",
+   whatsapp:"eq."+whatsapp,
+   limit:1
+  });
 
   if(encontrados.length){
 
-   clienteSeleccionado=
-    encontrados[0];
+   clienteSeleccionado=encontrados[0];
 
-   document.getElementById(
-    "nombreCliente"
-   ).value=
+   document.getElementById("nombreCliente").value=
     clienteSeleccionado.nombre||"";
 
-   mostrarClienteResultado(
-    clienteSeleccionado
-   );
+   mostrarClienteResultado(clienteSeleccionado);
 
   }else{
 
    clienteSeleccionado=null;
 
-   document.getElementById(
-    "clienteResultado"
-   ).innerHTML=`
+   document.getElementById("clienteResultado").innerHTML=`
     <div class="alerta">
      👤 Cliente nuevo.<br><br>
      Empezará con
-     <strong>
-      ${configuracion.puntos_para_premio}
-     </strong>
+     <strong>${configuracion.puntos_para_premio}</strong>
      compras restantes.
     </div>
    `;
-
   }
 
  }catch(error){
-
-  alert(
-   "No se pudo buscar:\n"+
-   error.message
-  );
-
+  alert("No se pudo buscar:\n"+error.message);
  }
-
 }
 
 function mostrarClienteResultado(cliente){
 
- const puntos=
-  Number(cliente.puntos);
+ const puntos=Number(cliente.puntos);
 
  let html=`
   <div class="resultado">
-
-   <strong>
-    👤 ${escapeHtml(cliente.nombre)}
-   </strong>
-
+   <strong>👤 ${escapeHtml(cliente.nombre)}</strong>
    <br><br>
-
    📱 ${escapeHtml(cliente.whatsapp)}
-
    <br><br>
-
    ⭐ Compras restantes:
    <strong>${puntos}</strong>
  `;
@@ -1107,80 +554,52 @@ function mostrarClienteResultado(cliente){
 
   html+=`
    <div class="alerta">
-    ⭐ Le faltan
-    <strong>${puntos}</strong>
+    ⭐ Le faltan <strong>${puntos}</strong>
     compras para su Premio.
    </div>
   `;
-
  }
 
- html+=`</div>`;
+ html+="</div>";
 
- document.getElementById(
-  "clienteResultado"
- ).innerHTML=html;
-
+ document.getElementById("clienteResultado").innerHTML=html;
 }
 
 async function registrarVenta(){
 
  if(!carrito.length){
-
   alert("Agrega al menos un producto.");
-
   return;
-
  }
 
- const nombre=
-  document.getElementById(
-   "nombreCliente"
-  ).value.trim();
+ const nombre=document.getElementById("nombreCliente").value.trim();
 
- const whatsapp=
-  normalizarWhatsapp(
-   document.getElementById(
-    "whatsappCliente"
-   ).value
-  );
+ const whatsapp=normalizarWhatsapp(
+  document.getElementById("whatsappCliente").value
+ );
 
  if(!nombre){
-
   alert("Escribe el nombre del cliente.");
-
   return;
-
  }
 
  if(!whatsapp){
-
   alert("Escribe el WhatsApp del cliente.");
-
   return;
-
  }
 
  try{
 
   let clienteActual=null;
 
-  const encontrados=
-   await api(
-    "clientes",
-    "GET",
-    null,
-    {
-     select:"*",
-     whatsapp:"eq."+whatsapp,
-     limit:1
-    }
-   );
+  const encontrados=await api("clientes","GET",null,{
+   select:"*",
+   whatsapp:"eq."+whatsapp,
+   limit:1
+  });
 
   if(encontrados.length){
-
    clienteActual=encontrados[0];
-
   }
 
   let puntosAntes;
@@ -1188,109 +607,77 @@ async function registrarVenta(){
 
   if(clienteActual){
 
-   puntosAntes=
-    Number(clienteActual.puntos);
+   puntosAntes=Number(clienteActual.puntos);
 
-   if(
-    !Number.isFinite(puntosAntes)||
-    puntosAntes<0
-   ){
-
-    puntosAntes=
-     configuracion.puntos_para_premio;
-
+   if(!Number.isFinite(puntosAntes)||puntosAntes<0){
+    puntosAntes=configuracion.puntos_para_premio;
    }
 
-   puntosDespues=
-    Math.max(0,puntosAntes-1);
+   puntosDespues=Math.max(0,puntosAntes-1);
 
   }else{
 
-   puntosAntes=
-    configuracion.puntos_para_premio;
-
-   puntosDespues=
-    Math.max(0,puntosAntes-1);
-
+   puntosAntes=configuracion.puntos_para_premio;
+   puntosDespues=Math.max(0,puntosAntes-1);
   }
 
   if(clienteActual){
 
-   const actualizado=
-    await api(
-     "clientes",
-     "PATCH",
-     {
-      nombre:nombre,
-      whatsapp:whatsapp,
-      puntos:puntosDespues
-     },
-     {
-      id:"eq."+clienteActual.id
-     }
-    );
+   const actualizado=await api("clientes","PATCH",{
+    nombre:nombre,
+    whatsapp:whatsapp,
+    puntos:puntosDespues
+   },{
+    id:"eq."+clienteActual.id
+   });
 
    clienteActual=actualizado[0];
 
   }else{
 
-   const nuevo=
-    await api(
-     "clientes",
-     "POST",
-     {
-      nombre:nombre,
-      whatsapp:whatsapp,
-      puntos:puntosDespues,
-      premios_obtenidos:0
-     }
-    );
+   const nuevo=await api("clientes","POST",{
+    nombre:nombre,
+    whatsapp:whatsapp,
+    puntos:puntosDespues,
+    premios_obtenidos:0
+   });
 
    clienteActual=nuevo[0];
-
   }
 
-  const total=
-   obtenerTotal();
+  const total=obtenerTotal();
+  const utilidad=obtenerUtilidad();
 
-  const utilidad=
-   obtenerUtilidad();
+  const venta=await api("ventas","POST",{
+   cliente_id:clienteActual.id,
+   total:total,
+   utilidad:utilidad,
+   puntos_ganados:1,
+   corte_id:null
+  });
 
-  const venta=
-   await api(
-    "ventas",
-    "POST",
-    {
-     cliente_id:clienteActual.id,
-     total:total,
-     utilidad:utilidad,
-     puntos_ganados:1,
-     corte_id:null
-    }
-   );
-
-  const ventaId=
-   venta[0].id;
+  const ventaId=venta[0].id;
 
   for(const item of carrito){
 
-   await api(
-    "detalle_ventas",
-    "POST",
-    {
-     venta_id:ventaId,
-     producto_id:item.id,
-     nombre_producto:item.nombre,
-     cantidad:item.cantidad,
-     precio:item.precio,
-     costo:item.costo
-    }
-   );
-
+   await api("detalle_ventas","POST",{
+    venta_id:ventaId,
+    producto_id:item.id,
+    nombre_producto:item.nombre,
+    cantidad:item.cantidad,
+    precio:item.precio,
+    costo:item.costo
+   });
   }
 
-  let mensaje=
-`🌽 *ELOTEMANÍA* 🌽
+  let botonWhatsApp="";
+
+  if(whatsapp){
+
+   const numero=numeroWhatsapp(whatsapp);
+
+   const mensaje=
+`🌽 ELOTEMANÍA 🌽
 
 Hola ${nombre}!
 Gracias por tu compra.
@@ -1301,51 +688,20 @@ Gracias por tu compra.
 
 🎁 Premio`;
 
-  if(puntosDespues===0){
-
-   mensaje+=
-   "\n🎉 ¡Ya puedes solicitar tu Premio!";
-
-  }
-
-  let botonWhatsApp="";
-
-  if(whatsapp){
-
-   const numero=
-    numeroWhatsapp(whatsapp);
-
    const url=
-    "https://wa.me/"+
-    numero+
-    "?text="+
-    encodeURIComponent(mensaje);
+    "https://wa.me/"+numero+
+    "?text="+encodeURIComponent(mensaje);
 
    botonWhatsApp=`
     <br>
-    <a
-     href="${url}"
-     target="_blank"
-     style="
-      display:block;
-      text-align:center;
-      background:#25D366;
-      color:white;
-      padding:14px;
-      border-radius:10px;
-      text-decoration:none;
-      font-weight:bold;
-     "
-    >
+    <a href="${url}" target="_blank"
+     style="display:block;text-align:center;background:#25D366;color:white;padding:14px;border-radius:10px;text-decoration:none;font-weight:bold">
      📲 Abrir WhatsApp
     </a>
    `;
-
   }
 
-  document.getElementById(
-   "clienteResultado"
-  ).innerHTML=`
+  document.getElementById("clienteResultado").innerHTML=`
    <div class="resultado">
 
     <h3>✅ Venta registrada</h3>
@@ -1365,9 +721,7 @@ Gracias por tu compra.
     ${
      puntosDespues===0
      ?
-     `<div class="premio">
-       🎉 ¡Ya puede solicitar su Premio!
-      </div>`
+     `<div class="premio">🎉 ¡Ya puede solicitar su Premio!</div>`
      :""
     }
 
@@ -1377,7 +731,6 @@ Gracias por tu compra.
   `;
 
   carrito=[];
-
   renderCarrito();
 
   await cargarClientes();
@@ -1391,81 +744,88 @@ Gracias por tu compra.
    "No se pudo registrar la venta:\n"+
    error.message
   );
-
  }
-
 }
+
+/* =========================
+   LOGIN CORREGIDO
+========================= */
 
 async function login(){
 
- const usuario=
-  document.getElementById(
-   "usuario"
-  ).value.trim().toLowerCase();
+ const usuario=document.getElementById("usuario")
+  .value.trim().toLowerCase();
 
- const pin=
-  document.getElementById(
-   "pin"
-  ).value.trim();
+ const pin=document.getElementById("pin")
+  .value.trim();
 
  if(!usuario||!pin){
 
-  alert("Escribe usuario y PIN.");
+  document.getElementById("accesoResultado").innerHTML=`
+   <div class="alerta">
+    ⚠️ Escribe usuario y PIN.
+   </div>
+  `;
 
   return;
-
  }
 
  try{
 
-  const usuarios=
-   await api(
-    "usuarios",
-    "GET",
-    null,
-    {
-     select:"*",
-     usuario:"eq."+usuario,
-     activo:"eq.true",
-     limit:1
-    }
-   );
+  /*
+   * IMPORTANTE:
+   * Traemos los usuarios y comparamos aquí.
+   * Así no importa si Supabase guardó
+   * Christian con mayúscula o minúscula.
+   */
 
-  if(
-   !usuarios.length||
-   String(usuarios[0].pin)!==pin
-  ){
+  const usuarios=await api("usuarios","GET",null,{
+   select:"*",
+   activo:"eq.true"
+  });
 
-   document.getElementById(
-    "accesoResultado"
-   ).innerHTML=`
+  const user=usuarios.find(u=>
+   String(u.usuario||"").trim().toLowerCase()===usuario &&
+   String(u.pin||"").trim()===pin &&
+   u.activo===true
+  );
+
+  if(!user){
+
+   document.getElementById("accesoResultado").innerHTML=`
     <div class="alerta">
      ❌ Usuario o PIN incorrecto.
     </div>
    `;
 
    return;
-
   }
 
-  const user=usuarios[0];
-
   currentUser=user.usuario;
-  currentRole=user.rol;
+  currentRole=String(user.rol||"empleado").toLowerCase();
 
-  document.getElementById(
-   "adminSection"
-  ).classList.remove("hidden");
+  document.getElementById("adminSection")
+   .classList.remove("hidden");
 
-  document.getElementById(
-   "usuarioActual"
-  ).innerHTML=`
+  const esChristian=
+   currentRole==="superadmin"||
+   String(user.usuario).toLowerCase()==="christian";
+
+  const esAdmin=
+   esChristian||
+   currentRole==="admin";
+
+  document.getElementById("usuarioActual").innerHTML=`
    <div class="premio">
+
     ${
-     currentRole==="admin"
+     esChristian
      ?"👑"
+     :esAdmin
+     ?"🛡️"
      :"👤"
     }
+
     Bienvenido
     <strong>
      ${escapeHtml(user.nombre||user.usuario)}
@@ -1475,108 +835,111 @@ async function login(){
 
     Rol:
     <strong>
-     ${currentRole==="admin"
+     ${
+      esChristian
+      ?"Administrador de Christian"
+      :currentRole==="admin"
       ?"Administrador"
-      :"Empleado"}
+      :"Empleado"
+     }
     </strong>
+
    </div>
   `;
 
-  document.getElementById(
-   "accesoResultado"
-  ).innerHTML="";
+  document.getElementById("accesoResultado").innerHTML="";
 
   aplicarPermisos();
 
  }catch(error){
 
-  alert(
-   "No se pudo iniciar sesión:\n"+
-   error.message
-  );
+  console.error(error);
 
+  document.getElementById("accesoResultado").innerHTML=`
+   <div class="alerta">
+    ❌ No se pudo iniciar sesión.<br><br>
+    ${escapeHtml(error.message)}
+   </div>
+  `;
  }
-
 }
 
 function aplicarPermisos(){
 
+ const esChristian=
+  currentRole==="superadmin"||
+  String(currentUser).toLowerCase()==="christian";
+
  const esAdmin=
+  esChristian||
   currentRole==="admin";
 
- document
-  .getElementById("productosAdmin")
-  .classList.toggle(
-   "hidden",
-   !esAdmin
-  );
+ document.getElementById("productosAdmin")
+  .classList.toggle("hidden",!esAdmin);
 
- document
-  .getElementById("usuariosAdmin")
-  .classList.toggle(
-   "hidden",
-   !esAdmin
-  );
+ /*
+  * SOLO CHRISTIAN puede administrar usuarios.
+  */
+
+ document.getElementById("usuariosAdmin")
+  .classList.toggle("hidden",!esChristian);
+
+ /*
+  * Si es administrador puede ver costos,
+  * utilidades y cortes.
+  */
 
  if(esAdmin){
 
   cargarProductosAdmin();
-  cargarUsuarios();
 
  }
 
+ if(esChristian){
+
+  cargarUsuarios();
+
+ }
 }
+
+/* =========================
+   PRODUCTOS
+========================= */
 
 async function cargarProductosAdmin(){
 
- if(currentRole!=="admin")return;
+ const esAdmin=
+  currentRole==="superadmin"||
+  currentRole==="admin"||
+  String(currentUser).toLowerCase()==="christian";
+
+ if(!esAdmin)return;
 
  try{
 
-  const lista=
-   await api(
-    "productos",
-    "GET",
-    null,
-    {
-     select:"*",
-     activo:"eq.true",
-     order:"nombre.asc"
-    }
-   );
+  const lista=await api("productos","GET",null,{
+   select:"*",
+   activo:"eq.true",
+   order:"nombre.asc"
+  });
 
   const contenedor=
-   document.getElementById(
-    "listaProductosAdmin"
-   );
+   document.getElementById("listaProductosAdmin");
 
   contenedor.innerHTML="";
 
   lista.forEach(p=>{
 
-   const costo=
-    Number(p.costo||0);
+   const costo=Number(p.costo||0);
+   const precio=Number(p.precio||0);
+   const utilidad=precio-costo;
+   const margen=precio>0?(utilidad/precio)*100:0;
 
-   const precio=
-    Number(p.precio||0);
-
-   const utilidad=
-    precio-costo;
-
-   const margen=
-    precio>0
-    ?(utilidad/precio)*100
-    :0;
-
-   const div=
-    document.createElement("div");
-
+   const div=document.createElement("div");
    div.className="resultado";
 
    div.innerHTML=`
-    <strong>
-     ${escapeHtml(p.nombre)}
-    </strong>
+    <strong>${escapeHtml(p.nombre)}</strong>
 
     <br><br>
 
@@ -1598,81 +961,65 @@ async function cargarProductosAdmin(){
     <br><br>
 
     Margen:
-    <strong>
-     ${dinero(margen)}%
-    </strong>
+    <strong>${dinero(margen)}%</strong>
 
     <br><br>
 
-    <button
-     class="btn-blue"
+    <button class="btn-blue"
      style="width:100%"
-     onclick="editarCostoPrecio(${p.id})"
-    >
+     onclick="editarCostoPrecio(${p.id})">
      ✏️ Cambiar costo y precio
     </button>
    `;
 
    contenedor.appendChild(div);
-
   });
 
  }catch(error){
-
   console.error(error);
-
  }
-
 }
 
 async function editarCostoPrecio(id){
 
- if(currentRole!=="admin"){
+ const esAdmin=
+  currentRole==="superadmin"||
+  currentRole==="admin"||
+  String(currentUser).toLowerCase()==="christian";
 
-  alert("Solo el administrador puede hacer esto.");
-
+ if(!esAdmin){
+  alert("Sin permiso.");
   return;
-
  }
 
- const producto=
-  productos.find(
-   p=>Number(p.id)===Number(id)
-  );
+ let producto=productos.find(
+  p=>Number(p.id)===Number(id)
+ );
 
  if(!producto){
 
-  const lista=
-   await api(
-    "productos",
-    "GET",
-    null,
-    {
-     select:"*",
-     id:"eq."+id,
-     limit:1
-    }
-   );
+  const lista=await api("productos","GET",null,{
+   select:"*",
+   id:"eq."+id,
+   limit:1
+  });
 
   if(!lista.length)return;
 
   producto=lista[0];
-
  }
 
- const costo=
-  prompt(
-   "Costo para Elotemanía:",
-   Number(producto.costo||0)
-  );
+ const costo=prompt(
+  "Costo para Elotemanía:",
+  Number(producto.costo||0)
+ );
 
  if(costo===null)return;
 
- const precio=
-  prompt(
-   "Precio de venta:",
-   Number(producto.precio||0)
-  );
+ const precio=prompt(
+  "Precio de venta:",
+  Number(producto.precio||0)
+ );
 
  if(precio===null)return;
 
@@ -1685,134 +1032,72 @@ async function editarCostoPrecio(id){
   !Number.isFinite(nuevoPrecio)||
   nuevoPrecio<0
  ){
-
   alert("Valores inválidos.");
-
   return;
-
  }
 
- await api(
-  "productos",
-  "PATCH",
-  {
-   costo:nuevoCosto,
-   precio:nuevoPrecio
-  },
-  {
-   id:"eq."+id
-  }
- );
+ await api("productos","PATCH",{
+  costo:nuevoCosto,
+  precio:nuevoPrecio
+ },{
+  id:"eq."+id
+ });
 
  await cargarProductos();
  await cargarProductosAdmin();
 
  alert("✅ Producto actualizado.");
-
 }
 
 async function agregarProductoNuevo(){
 
- if(currentRole!=="admin"){
+ const esAdmin=
+  currentRole==="superadmin"||
+  currentRole==="admin"||
+  String(currentUser).toLowerCase()==="christian";
 
-  alert(
-   "Solo el administrador puede agregar productos."
-  );
-
+ if(!esAdmin){
+  alert("Sin permiso.");
   return;
-
  }
 
- const nombre=
-  document.getElementById(
-   "nuevoProductoNombre"
-  ).value.trim();
-
- const categoria=
-  document.getElementById(
-   "nuevoProductoCategoria"
-  ).value.trim();
-
- const costo=
-  Number(
-   document.getElementById(
-    "nuevoProductoCosto"
-   ).value
-  );
-
- const precio=
-  Number(
-   document.getElementById(
-    "nuevoProductoPrecio"
-   ).value
-  );
+ const nombre=document.getElementById("nuevoProductoNombre").value.trim();
+ const categoria=document.getElementById("nuevoProductoCategoria").value.trim();
+ const costo=Number(document.getElementById("nuevoProductoCosto").value);
+ const precio=Number(document.getElementById("nuevoProductoPrecio").value);
 
  if(!nombre){
-
   alert("Escribe el nombre.");
-
   return;
-
  }
 
- if(
-  !Number.isFinite(costo)||
-  costo<0
- ){
-
+ if(!Number.isFinite(costo)||costo<0){
   alert("Escribe un costo válido.");
-
   return;
-
  }
 
- if(
-  !Number.isFinite(precio)||
-  precio<0
- ){
-
+ if(!Number.isFinite(precio)||precio<0){
   alert("Escribe un precio válido.");
-
   return;
-
  }
 
  try{
 
-  await api(
-   "productos",
-   "POST",
-   {
-    nombre:nombre,
-    categoria:categoria||"General",
-    costo:costo,
-    precio:precio,
-    activo:true
-   }
-  );
+  await api("productos","POST",{
+   nombre:nombre,
+   categoria:categoria||"General",
+   costo:costo,
+   precio:precio,
+   activo:true
+  });
 
-  document.getElementById(
-   "nuevoProductoNombre"
-  ).value="";
+  document.getElementById("nuevoProductoNombre").value="";
+  document.getElementById("nuevoProductoCategoria").value="";
+  document.getElementById("nuevoProductoCosto").value="";
+  document.getElementById("nuevoProductoPrecio").value="";
 
-  document.getElementById(
-   "nuevoProductoCategoria"
-  ).value="";
-
-  document.getElementById(
-   "nuevoProductoCosto"
-  ).value="";
-
-  document.getElementById(
-   "nuevoProductoPrecio"
-  ).value="";
-
-  document.getElementById(
-   "productoResultado"
-  ).innerHTML=`
-   <div class="premio">
-    ✅ Producto agregado.
-   </div>
+  document.getElementById("productoResultado").innerHTML=`
+   <div class="premio">✅ Producto agregado.</div>
   `;
 
   await cargarProductos();
@@ -1824,41 +1109,39 @@ async function agregarProductoNuevo(){
    "No se pudo agregar:\n"+
    error.message
   );
-
  }
-
 }
+
+/* =========================
+   USUARIOS
+========================= */
 
 async function cargarUsuarios(){
 
- if(currentRole!=="admin")return;
+ if(
+  currentRole!=="superadmin"&&
+  String(currentUser).toLowerCase()!=="christian"
+ ){
+  return;
+ }
 
  try{
 
-  const usuarios=
-   await api(
-    "usuarios",
-    "GET",
-    null,
-    {
-     select:"*",
-     order:"id.asc"
-    }
-   );
+  const usuarios=await api("usuarios","GET",null,{
+   select:"*",
+   order:"id.asc"
+  });
 
-  const contenedor=
-   document.getElementById(
-    "listaUsuarios"
-   );
-
+  const contenedor=document.getElementById("listaUsuarios");
   contenedor.innerHTML="";
 
   usuarios.forEach(u=>{
 
-   const div=
-    document.createElement("div");
-
+   const div=document.createElement("div");
    div.className="resultado";
+
+   const esChristian=
+    String(u.usuario||"").toLowerCase()==="christian";
 
    div.innerHTML=`
     <strong>
@@ -1875,7 +1158,9 @@ async function cargarUsuarios(){
     Rol:
     <strong>
      ${
-      u.rol==="admin"
+      u.rol==="superadmin"
+      ?"Administrador de Christian"
+      :u.rol==="admin"
       ?"Administrador"
       :"Empleado"
      }
@@ -1884,32 +1169,18 @@ async function cargarUsuarios(){
     <br><br>
 
     Estado:
-    ${
-     u.activo
-     ?"🟢 Activo"
-     :"🔴 Inactivo"
-    }
+    ${u.activo?"🟢 Activo":"🔴 Inactivo"}
 
     ${
-     u.usuario.toLowerCase()!=="christian"
+     !esChristian
      ?
      `
       <br><br>
-
       <button
-       class="${
-        u.activo
-        ?"btn-red"
-        :"btn-green"
-       }"
+       class="${u.activo?"btn-red":"btn-green"}"
        style="width:100%"
-       onclick="cambiarEstadoUsuario(${u.id},${!u.activo})"
-      >
-       ${
-        u.activo
-        ?"🚫 Desactivar"
-        :"✅ Activar"
-       }
+       onclick="cambiarEstadoUsuario(${u.id},${!u.activo})">
+       ${u.activo?"🚫 Desactivar":"✅ Activar"}
       </button>
      `
      :""
@@ -1917,104 +1188,67 @@ async function cargarUsuarios(){
    `;
 
    contenedor.appendChild(div);
-
   });
 
  }catch(error){
-
   console.error(error);
-
  }
-
 }
 
 async function crearUsuario(){
 
- if(currentRole!=="admin"){
-
+ if(
+  currentRole!=="superadmin"&&
+  String(currentUser).toLowerCase()!=="christian"
+ ){
   alert("Solo Christian puede crear usuarios.");
-
   return;
-
  }
 
- const usuario=
-  document.getElementById(
-   "nuevoUsuario"
-  ).value.trim().toLowerCase();
+ const usuario=document.getElementById("nuevoUsuario")
+  .value.trim().toLowerCase();
 
- const nombre=
-  document.getElementById(
-   "nuevoUsuarioNombre"
-  ).value.trim();
+ const nombre=document.getElementById("nuevoUsuarioNombre")
+  .value.trim();
 
- const pin=
-  document.getElementById(
-   "nuevoUsuarioPin"
-  ).value.trim();
+ const pin=document.getElementById("nuevoUsuarioPin")
+  .value.trim();
 
- const rol=
-  document.getElementById(
-   "nuevoUsuarioRol"
-  ).value;
+ const rol=document.getElementById("nuevoUsuarioRol").value;
 
  if(!usuario||!nombre||!pin){
-
   alert("Completa todos los datos.");
-
   return;
-
  }
 
  try{
 
-  const existe=
-   await api(
-    "usuarios",
-    "GET",
-    null,
-    {
-     select:"id",
-     usuario:"eq."+usuario,
-     limit:1
-    }
-   );
+  const usuarios=await api("usuarios","GET",null,{
+   select:"*"
+  });
 
-  if(existe.length){
-
-   alert("Ese usuario ya existe.");
-
-   return;
-
-  }
-
-  await api(
-   "usuarios",
-   "POST",
-   {
-    usuario:usuario,
-    nombre:nombre,
-    pin:pin,
-    rol:rol,
-    activo:true
-   }
+  const existe=usuarios.some(
+   u=>String(u.usuario||"").toLowerCase()===usuario
   );
 
-  document.getElementById(
-   "nuevoUsuario"
-  ).value="";
+  if(existe){
+   alert("Ese usuario ya existe.");
+   return;
+  }
 
-  document.getElementById(
-   "nuevoUsuarioNombre"
-  ).value="";
+  await api("usuarios","POST",{
+   usuario:usuario,
+   nombre:nombre,
+   pin:pin,
+   rol:rol,
+   activo:true
+  });
 
-  document.getElementById(
-   "nuevoUsuarioPin"
-  ).value="";
+  document.getElementById("nuevoUsuario").value="";
+  document.getElementById("nuevoUsuarioNombre").value="";
+  document.getElementById("nuevoUsuarioPin").value="";
 
-  document.getElementById(
-   "usuarioResultado"
-  ).innerHTML=`
+  document.getElementById("usuarioResultado").innerHTML=`
    <div class="premio">
     ✅ Usuario creado correctamente.
    </div>
@@ -2028,27 +1262,25 @@ async function crearUsuario(){
    "No se pudo crear el usuario:\n"+
    error.message
   );
-
  }
-
 }
 
 async function cambiarEstadoUsuario(id,activo){
 
- if(currentRole!=="admin")return;
+ if(
+  currentRole!=="superadmin"&&
+  String(currentUser).toLowerCase()!=="christian"
+ ){
+  return;
+ }
 
  try{
 
-  await api(
-   "usuarios",
-   "PATCH",
-   {
-    activo:activo
-   },
-   {
-    id:"eq."+id
-   }
-  );
+  await api("usuarios","PATCH",{
+   activo:activo
+  },{
+   id:"eq."+id
+  });
 
   await cargarUsuarios();
 
@@ -2058,90 +1290,61 @@ async function cambiarEstadoUsuario(id,activo){
    "No se pudo cambiar el estado:\n"+
    error.message
   );
-
  }
-
 }
+
+/* =========================
+   CLIENTES / PREMIOS
+========================= */
 
 async function buscarClienteAdmin(){
 
  if(!currentUser){
-
   alert("Debes iniciar sesión.");
-
   return;
-
  }
 
- const whatsapp=
-  normalizarWhatsapp(
-   document.getElementById(
-    "buscarAdmin"
-   ).value
-  );
+ const whatsapp=normalizarWhatsapp(
+  document.getElementById("buscarAdmin").value
+ );
 
  if(!whatsapp){
-
   alert("Escribe el WhatsApp.");
-
   return;
-
  }
 
  try{
 
-  const encontrados=
-   await api(
-    "clientes",
-    "GET",
-    null,
-    {
-     select:"*",
-     whatsapp:"eq."+whatsapp,
-     limit:1
-    }
-   );
+  const encontrados=await api("clientes","GET",null,{
+   select:"*",
+   whatsapp:"eq."+whatsapp,
+   limit:1
+  });
 
   if(!encontrados.length){
 
-   document.getElementById(
-    "adminClienteResultado"
-   ).innerHTML=`
-    <div class="alerta">
-     ❌ Cliente no encontrado.
-    </div>
+   document.getElementById("adminClienteResultado").innerHTML=`
+    <div class="alerta">❌ Cliente no encontrado.</div>
    `;
 
    return;
-
   }
 
-  renderAdminCliente(
-   encontrados[0]
-  );
+  renderAdminCliente(encontrados[0]);
 
  }catch(error){
-
-  alert(
-   "Error:\n"+
-   error.message
-  );
-
+  alert("Error:\n"+error.message);
  }
-
 }
 
 function renderAdminCliente(cliente){
 
- const puntos=
-  Number(cliente.puntos);
+ const puntos=Number(cliente.puntos);
 
  let html=`
   <div class="resultado">
 
-   <h3>
-    👤 ${escapeHtml(cliente.nombre)}
-   </h3>
+   <h3>👤 ${escapeHtml(cliente.nombre)}</h3>
 
    📱 ${escapeHtml(cliente.whatsapp)}
 
@@ -2153,19 +1356,14 @@ function renderAdminCliente(cliente){
    <br><br>
 
    🎁 Premios obtenidos:
-   <strong>
-    ${Number(cliente.premios_obtenidos)||0}
-   </strong>
+   <strong>${Number(cliente.premios_obtenidos)||0}</strong>
 
    <br><br>
 
-   <button
-    class="btn-blue"
+   <button class="btn-blue"
     style="width:100%"
-    onclick="restaurarCliente(${cliente.id})"
-   >
-    🔄 Restaurar a
-    ${configuracion.puntos_para_premio}
+    onclick="restaurarCliente(${cliente.id})">
+    🔄 Restaurar a ${configuracion.puntos_para_premio}
    </button>
  `;
 
@@ -2173,12 +1371,9 @@ function renderAdminCliente(cliente){
 
   html+=`
    <br><br>
-
-   <button
-    class="btn-green"
+   <button class="btn-green"
     style="width:100%"
-    onclick="canjearPremio(${cliente.id})"
-   >
+    onclick="canjearPremio(${cliente.id})">
     🎁 Canjear Premio
    </button>
   `;
@@ -2187,272 +1382,168 @@ function renderAdminCliente(cliente){
 
   html+=`
    <div class="alerta">
-    Todavía necesita
-    <strong>${puntos}</strong>
-    compras.
+    Todavía necesita <strong>${puntos}</strong> compras.
    </div>
   `;
-
  }
 
- html+=`</div>`;
+ html+="</div>";
 
- document.getElementById(
-  "adminClienteResultado"
- ).innerHTML=html;
-
+ document.getElementById("adminClienteResultado").innerHTML=html;
 }
 
 async function restaurarCliente(id){
 
  if(!currentUser){
-
   alert("No tienes permiso.");
-
   return;
-
  }
 
- if(
-  !confirm(
-   "¿Restaurar este cliente?"
-  )
- )return;
+ if(!confirm("¿Restaurar este cliente?"))return;
 
  try{
 
-  const actualizado=
-   await api(
-    "clientes",
-    "PATCH",
-    {
-     puntos:
-      configuracion.puntos_para_premio
-    },
-    {
-     id:"eq."+id
-    }
-   );
+  const actualizado=await api("clientes","PATCH",{
+   puntos:configuracion.puntos_para_premio
+  },{
+   id:"eq."+id
+  });
 
-  renderAdminCliente(
-   actualizado[0]
-  );
+  renderAdminCliente(actualizado[0]);
 
   await cargarClientes();
 
   alert("✅ Cliente restaurado.");
 
  }catch(error){
-
-  alert(
-   "No se pudo restaurar:\n"+
-   error.message
-  );
-
+  alert("No se pudo restaurar:\n"+error.message);
  }
-
 }
 
 async function canjearPremio(id){
 
  if(!currentUser){
-
   alert("No tienes permiso.");
-
   return;
-
  }
 
  try{
 
-  const encontrados=
-   await api(
-    "clientes",
-    "GET",
-    null,
-    {
-     select:"*",
-     id:"eq."+id,
-     limit:1
-    }
-   );
+  const encontrados=await api("clientes","GET",null,{
+   select:"*",
+   id:"eq."+id,
+   limit:1
+  });
 
   if(!encontrados.length){
-
    alert("Cliente no encontrado.");
-
    return;
-
   }
 
   const cliente=encontrados[0];
 
   if(Number(cliente.puntos)>0){
-
-   alert(
-    "Todavía no puede canjear el Premio."
-   );
-
+   alert("Todavía no puede canjear el Premio.");
    return;
-
   }
 
-  if(
-   !confirm(
-    "¿Confirmar canje del Premio?"
-   )
-  )return;
+  if(!confirm("¿Confirmar canje del Premio?"))return;
 
   const premios=
    (Number(cliente.premios_obtenidos)||0)+1;
 
-  const actualizado=
-   await api(
-    "clientes",
-    "PATCH",
-    {
-     puntos:
-      configuracion.puntos_para_premio,
-     premios_obtenidos:
-      premios
-    },
-    {
-     id:"eq."+id
-    }
-   );
+  const actualizado=await api("clientes","PATCH",{
+   puntos:configuracion.puntos_para_premio,
+   premios_obtenidos:premios
+  },{
+   id:"eq."+id
+  });
 
-  renderAdminCliente(
-   actualizado[0]
-  );
+  renderAdminCliente(actualizado[0]);
 
   await cargarClientes();
 
   alert("🎉 Premio canjeado.");
 
  }catch(error){
-
-  alert(
-   "Error al canjear:\n"+
-   error.message
-  );
-
+  alert("Error al canjear:\n"+error.message);
  }
-
 }
+
+/* =========================
+   CORTES
+========================= */
 
 async function hacerCorte(){
 
  if(!currentUser){
-
   alert("Debes iniciar sesión.");
-
   return;
-
  }
 
  try{
 
-  const ventas=
-   await api(
-    "ventas",
-    "GET",
-    null,
-    {
-     select:"*"
-    }
-   );
+  const ventas=await api("ventas","GET",null,{
+   select:"*"
+  });
 
-  const pendientes=
-   ventas.filter(
-    v=>
-     v.corte_id===null||
-     v.corte_id===undefined
-   );
+  const pendientes=ventas.filter(
+   v=>v.corte_id===null||v.corte_id===undefined
+  );
 
-  const total=
-   pendientes.reduce(
-    (s,v)=>s+Number(v.total||0),
-    0
-   );
+  const total=pendientes.reduce(
+   (s,v)=>s+Number(v.total||0),0
+  );
 
-  const utilidad=
-   pendientes.reduce(
-    (s,v)=>s+Number(v.utilidad||0),
-    0
-   );
+  const utilidad=pendientes.reduce(
+   (s,v)=>s+Number(v.utilidad||0),0
+  );
 
   if(!pendientes.length){
-
-   alert(
-    "No hay ventas pendientes."
-   );
-
+   alert("No hay ventas pendientes.");
    return;
-
   }
 
-  const contado=
-   prompt(
-    "Efectivo contado:\n\n"+
-    "Esperado: $"+
-    dinero(total)
-   );
+  const contado=prompt(
+   "Efectivo contado:\n\nEsperado: $"+
+   dinero(total)
+  );
 
   if(contado===null)return;
 
-  const efectivoContado=
-   Number(contado);
+  const efectivoContado=Number(contado);
 
   if(
    !Number.isFinite(efectivoContado)||
    efectivoContado<0
   ){
-
    alert("Cantidad inválida.");
-
    return;
-
   }
 
-  const diferencia=
-   efectivoContado-total;
+  const diferencia=efectivoContado-total;
 
-  const clientesCorte=
-   new Set(
-    pendientes
-     .map(v=>v.cliente_id)
-     .filter(Boolean)
-   );
+  const clientesCorte=new Set(
+   pendientes.map(v=>v.cliente_id).filter(Boolean)
+  );
 
-  const corte=
-   await api(
-    "cierres_turno",
-    "POST",
-    {
-     ventas:pendientes.length,
-     clientes:clientesCorte.size,
-     efectivo_esperado:total,
-     efectivo_contado:efectivoContado,
-     diferencia:diferencia
-    }
-   );
+  const corte=await api("cierres_turno","POST",{
+   ventas:pendientes.length,
+   clientes:clientesCorte.size,
+   efectivo_esperado:total,
+   efectivo_contado:efectivoContado,
+   diferencia:diferencia
+  });
 
-  const corteId=
-   corte[0].id;
+  const corteId=corte[0].id;
 
   for(const venta of pendientes){
 
-   await api(
-    "ventas",
-    "PATCH",
-    {
-     corte_id:corteId
-    },
-    {
-     id:"eq."+venta.id
-    }
-   );
-
+   await api("ventas","PATCH",{
+    corte_id:corteId
+   },{
+    id:"eq."+venta.id
+   });
   }
 
   alert(
@@ -2468,74 +1559,48 @@ async function hacerCorte(){
   await verCortes();
 
  }catch(error){
-
-  alert(
-   "No se pudo cerrar:\n"+
-   error.message
-  );
-
+  alert("No se pudo cerrar:\n"+error.message);
  }
-
 }
 
 async function verCortes(){
 
  if(!currentUser){
-
   alert("Debes iniciar sesión.");
-
   return;
-
  }
 
- const contenedor=
-  document.getElementById(
-   "listaCortes"
-  );
+ const contenedor=document.getElementById("listaCortes");
 
  contenedor.innerHTML=
   `<div class="alerta">Cargando...</div>`;
 
  try{
 
-  const cortes=
-   await api(
-    "cierres_turno",
-    "GET",
-    null,
-    {
-     select:"*",
-     order:"id.desc"
-    }
-   );
+  const cortes=await api("cierres_turno","GET",null,{
+   select:"*",
+   order:"id.desc"
+  });
 
   if(!cortes.length){
 
    contenedor.innerHTML=
-    `<div class="alerta">
-     No hay cortes registrados.
-    </div>`;
+    `<div class="alerta">No hay cortes registrados.</div>`;
 
    return;
-
   }
 
   contenedor.innerHTML="";
 
   for(const corte of cortes){
 
-   const diferencia=
-    Number(corte.diferencia||0);
+   const diferencia=Number(corte.diferencia||0);
 
-   const div=
-    document.createElement("div");
-
+   const div=document.createElement("div");
    div.className="corte";
 
    div.innerHTML=`
-    <strong>
-     📊 Corte #${corte.id}
-    </strong>
+    <strong>📊 Corte #${corte.id}</strong>
 
     <br><br>
 
@@ -2554,251 +1619,170 @@ async function verCortes(){
     <br><br>
 
     💰 Esperado:
-    <strong>
-     $${dinero(corte.efectivo_esperado)}
-    </strong>
+    <strong>$${dinero(corte.efectivo_esperado)}</strong>
 
     <br><br>
 
     💵 Contado:
-    <strong>
-     $${dinero(corte.efectivo_contado)}
-    </strong>
+    <strong>$${dinero(corte.efectivo_contado)}</strong>
 
     <br><br>
 
     ${
      diferencia===0
      ?
-     `<span class="ganancia">
-      ✅ Diferencia: $0.00
-     </span>`
+     `<span class="ganancia">✅ Diferencia: $0.00</span>`
      :
      `<span class="perdida">
-      ⚠️ Diferencia:
-      $${dinero(diferencia)}
+      ⚠️ Diferencia: $${dinero(diferencia)}
      </span>`
     }
 
     <br><br>
 
-    <button
-     class="btn-dark"
+    <button class="btn-dark"
      style="width:100%"
-     onclick="mostrarVentasCorte(${corte.id})"
-    >
+     onclick="mostrarVentasCorte(${corte.id})">
      🧾 Ver ventas
     </button>
 
-    <div
-     id="ventasCorte${corte.id}"
-     class="hidden"
-    ></div>
+    <div id="ventasCorte${corte.id}" class="hidden"></div>
    `;
 
    contenedor.appendChild(div);
-
   }
 
  }catch(error){
 
   contenedor.innerHTML=
-   `<div class="alerta">
-    ❌ ${escapeHtml(error.message)}
-   </div>`;
-
+   `<div class="alerta">❌ ${escapeHtml(error.message)}</div>`;
  }
-
 }
 
 async function mostrarVentasCorte(corteId){
 
  const contenedor=
-  document.getElementById(
-   "ventasCorte"+corteId
-  );
+  document.getElementById("ventasCorte"+corteId);
 
  if(!contenedor)return;
 
- if(
-  !contenedor.classList.contains("hidden")
- ){
-
+ if(!contenedor.classList.contains("hidden")){
   contenedor.classList.add("hidden");
-
   return;
-
  }
 
  contenedor.classList.remove("hidden");
 
  contenedor.innerHTML=
-  `<div class="alerta">
-   Cargando ventas...
-  </div>`;
+  `<div class="alerta">Cargando ventas...</div>`;
 
  try{
 
-  const ventas=
-   await api(
-    "ventas",
-    "GET",
-    null,
-    {
-     select:"*",
-     corte_id:"eq."+corteId,
-     order:"id.asc"
-    }
-   );
+  const ventas=await api("ventas","GET",null,{
+   select:"*",
+   corte_id:"eq."+corteId,
+   order:"id.asc"
+  });
 
   contenedor.innerHTML="";
 
   for(const venta of ventas){
 
-   const cliente=
-    clientes.find(
-     c=>
-      Number(c.id)===
-      Number(venta.cliente_id)
-    );
+   const cliente=clientes.find(
+    c=>Number(c.id)===Number(venta.cliente_id)
+   );
 
-   const div=
-    document.createElement("div");
-
+   const div=document.createElement("div");
    div.className="venta-corte";
 
    div.innerHTML=`
-    <strong>
-     Venta #${venta.id}
-    </strong>
+    <strong>Venta #${venta.id}</strong>
 
     <br><br>
 
-    👤 ${escapeHtml(
-     cliente?.nombre||"Cliente"
-    )}
+    👤 ${escapeHtml(cliente?.nombre||"Cliente")}
 
     <br><br>
 
     💰 Venta:
-    <strong>
-     $${dinero(venta.total)}
-    </strong>
-
-    <br><br>
+    <strong>$${dinero(venta.total)}</strong>
 
     ${
-     currentRole==="admin"
+     currentRole==="admin"||
+     currentRole==="superadmin"||
+     String(currentUser).toLowerCase()==="christian"
      ?
      `
+      <br><br>
       📈 Utilidad:
       <strong class="ganancia">
        $${dinero(venta.utilidad)}
       </strong>
      `
-     :
-     ""
+     :""
     }
    `;
 
    contenedor.appendChild(div);
-
   }
 
  }catch(error){
 
   contenedor.innerHTML=
-   `<div class="alerta">
-    ❌ ${escapeHtml(error.message)}
-   </div>`;
-
+   `<div class="alerta">❌ ${escapeHtml(error.message)}</div>`;
  }
-
 }
 
 async function borrarUltimoCorte(){
 
- if(currentRole!=="admin"){
+ const esAdmin=
+  currentRole==="admin"||
+  currentRole==="superadmin"||
+  String(currentUser).toLowerCase()==="christian";
 
-  alert(
-   "Solo el administrador puede borrar cortes."
-  );
-
+ if(!esAdmin){
+  alert("Solo el administrador puede borrar cortes.");
   return;
-
  }
 
- if(
-  !confirm(
-   "⚠️ Se eliminará el último corte y sus ventas.\n\n¿Continuar?"
-  )
- )return;
+ if(!confirm(
+  "⚠️ Se eliminará el último corte y sus ventas.\n\n¿Continuar?"
+ ))return;
 
  try{
 
-  const cortes=
-   await api(
-    "cierres_turno",
-    "GET",
-    null,
-    {
-     select:"*",
-     order:"id.desc",
-     limit:1
-    }
-   );
+  const cortes=await api("cierres_turno","GET",null,{
+   select:"*",
+   order:"id.desc",
+   limit:1
+  });
 
   if(!cortes.length){
-
    alert("No hay cortes.");
-
    return;
-
   }
 
   const corte=cortes[0];
 
-  const ventas=
-   await api(
-    "ventas",
-    "GET",
-    null,
-    {
-     select:"id",
-     corte_id:"eq."+corte.id
-    }
-   );
+  const ventas=await api("ventas","GET",null,{
+   select:"id",
+   corte_id:"eq."+corte.id
+  });
 
   for(const venta of ventas){
 
-   await api(
-    "detalle_ventas",
-    "DELETE",
-    null,
-    {
-     venta_id:"eq."+venta.id
-    }
-   );
+   await api("detalle_ventas","DELETE",null,{
+    venta_id:"eq."+venta.id
+   });
 
-   await api(
-    "ventas",
-    "DELETE",
-    null,
-    {
-     id:"eq."+venta.id
-    }
-   );
-
+   await api("ventas","DELETE",null,{
+    id:"eq."+venta.id
+   });
   }
 
-  await api(
-   "cierres_turno",
-   "DELETE",
-   null,
-   {
-    id:"eq."+corte.id
-   }
-  );
+  await api("cierres_turno","DELETE",null,{
+   id:"eq."+corte.id
+  });
 
   alert("✅ Corte eliminado.");
 
@@ -2807,91 +1791,54 @@ async function borrarUltimoCorte(){
   await verCortes();
 
  }catch(error){
-
-  alert(
-   "Error:\n"+
-   error.message
-  );
-
+  alert("Error:\n"+error.message);
  }
-
 }
 
 async function borrarHistorial(){
 
- if(currentRole!=="admin"){
+ const esAdmin=
+  currentRole==="admin"||
+  currentRole==="superadmin"||
+  String(currentUser).toLowerCase()==="christian";
 
-  alert(
-   "Solo el administrador puede borrar el historial."
-  );
-
+ if(!esAdmin){
+  alert("Solo el administrador puede borrar el historial.");
   return;
-
  }
 
- if(
-  !confirm(
-   "⚠️ ATENCIÓN\n\n"+
-   "Se eliminarán TODAS las ventas, detalles y cortes.\n\n"+
-   "¿Continuar?"
-  )
- )return;
+ if(!confirm(
+  "⚠️ ATENCIÓN\n\n"+
+  "Se eliminarán TODAS las ventas, detalles y cortes.\n\n"+
+  "¿Continuar?"
+ ))return;
 
  try{
 
-  const ventas=
-   await api(
-    "ventas",
-    "GET",
-    null,
-    {
-     select:"id"
-    }
-   );
+  const ventas=await api("ventas","GET",null,{
+   select:"id"
+  });
 
   for(const venta of ventas){
 
-   await api(
-    "detalle_ventas",
-    "DELETE",
-    null,
-    {
-     venta_id:"eq."+venta.id
-    }
-   );
+   await api("detalle_ventas","DELETE",null,{
+    venta_id:"eq."+venta.id
+   });
 
-   await api(
-    "ventas",
-    "DELETE",
-    null,
-    {
-     id:"eq."+venta.id
-    }
-   );
-
+   await api("ventas","DELETE",null,{
+    id:"eq."+venta.id
+   });
   }
 
-  const cortes=
-   await api(
-    "cierres_turno",
-    "GET",
-    null,
-    {
-     select:"id"
-    }
-   );
+  const cortes=await api("cierres_turno","GET",null,{
+   select:"id"
+  });
 
   for(const corte of cortes){
 
-   await api(
-    "cierres_turno",
-    "DELETE",
-    null,
-    {
-     id:"eq."+corte.id
-    }
-   );
-
+   await api("cierres_turno","DELETE",null,{
+    id:"eq."+corte.id
+   });
   }
 
   alert("✅ Historial eliminado.");
@@ -2900,70 +1847,42 @@ async function borrarHistorial(){
   await verCortes();
 
  }catch(error){
-
-  alert(
-   "No se pudo borrar:\n"+
-   error.message
-  );
-
+  alert("No se pudo borrar:\n"+error.message);
  }
-
 }
 
 async function actualizarEstadisticas(){
 
  try{
 
-  const ventas=
-   await api(
-    "ventas",
-    "GET",
-    null,
-    {
-     select:"*"
-    }
-   );
+  const ventas=await api("ventas","GET",null,{
+   select:"*"
+  });
 
-  document.getElementById(
-   "ventasHoy"
-  ).textContent=
+  document.getElementById("ventasHoy").textContent=
    ventas.length;
 
-  const clientesUnicos=
-   new Set(
-    ventas
-     .map(v=>v.cliente_id)
-     .filter(Boolean)
-   );
+  const clientesUnicos=new Set(
+   ventas.map(v=>v.cliente_id).filter(Boolean)
+  );
 
-  document.getElementById(
-   "clientesHoy"
-  ).textContent=
+  document.getElementById("clientesHoy").textContent=
    clientesUnicos.size;
 
-  const utilidad=
-   ventas.reduce(
-    (s,v)=>s+Number(v.utilidad||0),
-    0
-   );
+  const utilidad=ventas.reduce(
+   (s,v)=>s+Number(v.utilidad||0),0
+  );
 
-  document.getElementById(
-   "utilidadHoy"
-  ).textContent=
+  document.getElementById("utilidadHoy").textContent=
    "$"+dinero(utilidad);
 
  }catch(error){
-
   console.log(error);
-
  }
-
 }
 
 function dinero(valor){
-
  return Number(valor||0).toFixed(2);
-
 }
 
 function formatearFecha(fecha){
@@ -2973,49 +1892,34 @@ function formatearFecha(fecha){
  const d=new Date(fecha);
 
  if(Number.isNaN(d.getTime())){
-
   return String(fecha);
-
  }
 
- return d.toLocaleString(
-  "es-MX",
-  {
-   dateStyle:"medium",
-   timeStyle:"short"
-  }
- );
-
+ return d.toLocaleString("es-MX",{
+  dateStyle:"medium",
+  timeStyle:"short"
+ });
 }
 
 function escapeHtml(text){
 
- return String(text||"")
+ return String(text??"")
   .replace(/&/g,"&amp;")
   .replace(/</g,"&lt;")
   .replace(/>/g,"&gt;")
   .replace(/"/g,"&quot;")
   .replace(/'/g,"&#039;");
-
 }
 
 if("serviceWorker" in navigator){
 
- window.addEventListener(
-  "load",
-  function(){
+ window.addEventListener("load",function(){
 
-   navigator.serviceWorker
-    .register("/sw.js")
-    .catch(function(error){
+  navigator.serviceWorker
+   .register("/sw.js")
+   .catch(error=>console.error(error));
 
-     console.error(error);
-
-    });
-
-  }
- );
-
+ });
 }
 
 </script>
